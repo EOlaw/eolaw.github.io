@@ -25,7 +25,7 @@ Feel free to connect with me on:
 
 ## Endpoint
 You can reach out to me for collaborations, discussions, or just to say hi!
-- Email: your@email.com
+- Email: Emmanuel.ao@outlook.com
 - Website: [www.yourwebsite.com](https://www.yourwebsite.com)
 
 ## About Me
