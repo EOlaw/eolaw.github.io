@@ -20,9 +20,8 @@ I utilize a variety of tools to streamline my development process and enhance pr
 
 ## Network
 Feel free to connect with me on:
-- [LinkedIn](https://www.linkedin.com/in/your-profile)
-- [Twitter](https://twitter.com/yourhandle)
-- [GitHub](https://github.com/yourusername)
+- [LinkedIn](https://www.linkedin.com/in/emmanuel-oyemosu/)
+- [GitHub](https://github.com/EOlaw)
 
 ## Endpoint
 You can reach out to me for collaborations, discussions, or just to say hi!
