@@ -29,6 +29,12 @@ You can reach out to me for collaborations, discussions, or just to say hi!
 - Email: Emmanuel.ao@outlook.com
 - Website: [www.yourwebsite.com](https://www.yourwebsite.com)
 
+## Certifications
+- **Foundations of Data Science**
+
+## Projects
+- Detection Lab
+- SOC Automation Project
 ## About Me
 Apart from coding, I have a passion for basketball and working out. I strongly believe in the philosophy of lifelong learning and enjoy teaching others the art and science of coding, embracing it as a way of life.
 
