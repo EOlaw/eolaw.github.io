@@ -2,7 +2,7 @@
 <a href="https://www.linkedin.com/in/emmanuel-oyemosu/"><img src="https://img.shields.io/badge/-LinkedIn-0072b1?&style=for-the-badge&logo=linkedin&logoColor=white" /></a>
 
 ## Professional Summary
-Leveraging my background in Mathematics and Mechanical Engineering to excel in the world of technology. I'm passionate about coding and aspire to contribute meaningfully to the tech industry. As a data scientist, I apply my analytical skills to derive insights from data and drive informed decision-making.
+I'm currently pursuing my Master's of Science in Management Information Systems (MS in MIS), Leveraging my background in Mathematics and Mechanical Engineering to excel in the world of technology. I'm passionate about coding and aspire to contribute meaningfully to the tech industry. As a data scientist, I apply my analytical skills to derive insights from data and drive informed decision-making.
 
 ## Skills
 - **Programming Languages**: JavaScript, Python, Java
