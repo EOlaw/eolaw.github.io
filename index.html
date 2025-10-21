@@ -1,0 +1,1634 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UK eCommerce Country Analysis - Presentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .slide-content {
+            display: none;
+        }
+
+        .slide-content.active {
+            display: block;
+        }
+
+        .dot {
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            width: 2rem;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-gray-50 to-gray-100">
+    <div class="min-h-screen flex flex-col">
+        <!-- Main Presentation Container -->
+        <div class="flex-1 flex flex-col items-center justify-center p-8">
+            <div class="relative w-full max-w-5xl">
+                <!-- Project Name Label -->
+                <div
+                    class="absolute -top-5 left-1/2 -translate-x-1/2 bg-white px-6 py-1 text-black-600 font-bold text-lg shadow-sm rounded-full border border-blue-300">
+                    UK eCommerce Country Analysis
+                </div>
+
+                <!-- Main Slide Box -->
+                <div class="bg-white rounded-2xl shadow-2xl w-full h-[600px] p-12 flex flex-col border border-gray-200">
+                    <!-- Slide Header -->
+                    <div class="mb-6 text-center">
+                        <h1 id="slideTitle" class="text-4xl font-bold text-gray-800 mb-2"></h1>
+                        <p id="slideSubtitle" class="text-xl text-gray-600"></p>
+                    </div>
+
+                    <!-- Slide Content Area -->
+                    <div id="slideContent" class="flex-1 overflow-auto"></div>
+
+                    <!-- Slide Counter -->
+                    <div class="mt-6 text-sm text-gray-500 text-right">
+                        <span id="slideCounter"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Controls -->
+        <div class="flex items-center justify-between p-6 bg-white border-t">
+            <button id="prevBtn"
+                class="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors">
+                <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                Previous
+            </button>
+
+            <div id="dotNavigation" class="flex gap-2"></div>
+
+            <button id="nextBtn"
+                class="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors">
+                Next
+                <i data-lucide="chevron-right" class="w-5 h-5"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Slide data
+        const slides = [
+            {
+                title: "UK eCommerce Country Analysis",
+                subtitle: "A Comprehensive Market Overview",
+                content: `
+                    <div class="text-center space-y-6">
+                        <div class="text-6xl">🇬🇧</div>
+                        <p class="text-xl text-gray-600">Exploring the Digital Marketplace of the United Kingdom</p>
+                        <p class="text-lg text-gray-500">2024-2025 Analysis</p>
+                    </div>
+                `
+            },
+            {
+                title: "Table of Contents",
+                subtitle: "",
+                content: `
+                    <div class="grid grid-cols-2 gap-3 text-left text-sm">
+                        <div class="space-y-2">
+                            <div class="flex items-start gap-2">
+                                <span class="text-blue-600 font-bold text-xs">01</span>
+                                <span>Market Overview & Global Position</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="text-blue-600 font-bold text-xs">02</span>
+                                <span>Market Size & Growth Trajectory</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="text-blue-600 font-bold text-xs">03</span>
+                                <span>Consumer Shopping Behavior</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="text-blue-600 font-bold text-xs">04</span>
+                                <span>Mobile Commerce Revolution</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="text-blue-600 font-bold text-xs">05</span>
+                                <span>Payment Methods & Preferences</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="text-blue-600 font-bold text-xs">06</span>
+                                <span>Key Market Players</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="text-blue-600 font-bold text-xs">07</span>
+                                <span>Infrastructure & Logistics</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="text-blue-600 font-bold text-xs">08</span>
+                                <span>Legal & Regulatory Framework</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="text-blue-600 font-bold text-xs">09</span>
+                                <span>Emerging Trends & Technologies</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="text-blue-600 font-bold text-xs">10</span>
+                                <span>UK vs Global: Similarities</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="text-blue-600 font-bold text-xs">11</span>
+                                <span>UK vs Global: Unique Features</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="text-blue-600 font-bold text-xs">12</span>
+                                <span>Future Outlook 2025-2030</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="text-blue-600 font-bold text-xs">13</span>
+                                <span>B2B eCommerce Growth</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="text-blue-600 font-bold text-xs">14</span>
+                                <span>Product Category Deep Dive</span>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex items-start gap-2">
+                                <span class="text-blue-600 font-bold text-xs">15</span>
+                                <span>Customer Journey & Conversion</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="text-blue-600 font-bold text-xs">16</span>
+                                <span>Omnichannel Retail Strategies</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="text-blue-600 font-bold text-xs">17</span>
+                                <span>Marketing Channels & ROI</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="text-blue-600 font-bold text-xs">18</span>
+                                <span>Customer Service Excellence</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="text-blue-600 font-bold text-xs">19</span>
+                                <span>Seasonal Shopping Patterns</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="text-blue-600 font-bold text-xs">20</span>
+                                <span>Cybersecurity & Fraud Prevention</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="text-blue-600 font-bold text-xs">21</span>
+                                <span>Cross-Border eCommerce</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="text-blue-600 font-bold text-xs">22</span>
+                                <span>Voice Commerce & Smart Devices</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="text-blue-600 font-bold text-xs">23</span>
+                                <span>Returns Management</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="text-blue-600 font-bold text-xs">24</span>
+                                <span>Brexit Impact Analysis</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="text-blue-600 font-bold text-xs">25</span>
+                                <span>Sustainability & ESG</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="text-blue-600 font-bold text-xs">26</span>
+                                <span>Key Takeaways</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="text-blue-600 font-bold text-xs">27</span>
+                                <span>Strategic Recommendations</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="text-blue-600 font-bold text-xs">28</span>
+                                <span>References</span>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Market Overview: UK's Position",
+                subtitle: "",
+                content: `
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="bg-gradient-to-br from-blue-500 to-blue-600 text-white p-6 rounded-lg text-center">
+                                <div class="text-4xl font-bold">#3</div>
+                                <div class="text-sm mt-2">Globally</div>
+                                <div class="text-xs mt-1 opacity-90">After China & USA</div>
+                            </div>
+                            <div class="bg-gradient-to-br from-green-500 to-green-600 text-white p-6 rounded-lg text-center">
+                                <div class="text-4xl font-bold">#1</div>
+                                <div class="text-sm mt-2">In Europe</div>
+                                <div class="text-xs mt-1 opacity-90">Largest EU Market</div>
+                            </div>
+                            <div class="bg-gradient-to-br from-purple-500 to-purple-600 text-white p-6 rounded-lg text-center">
+                                <div class="text-4xl font-bold">26%</div>
+                                <div class="text-sm mt-2">Retail Share</div>
+                                <div class="text-xs mt-1 opacity-90">Of Total Retail</div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <h4 class="font-semibold mb-3 text-lg">What This Means:</h4>
+                            <p class="text-gray-700 leading-relaxed">
+                                The United Kingdom represents one of the most mature and sophisticated eCommerce markets globally. 
+                                Its strong digital infrastructure, high internet penetration rate, and tech-savvy population 
+                                make it a leader in online retail adoption across Europe. The UK market demonstrates that online 
+                                shopping has moved beyond convenience to become the default shopping method for most consumers, 
+                                with over one quarter of all retail transactions now occurring through digital channels.
+                            </p>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Market Size & Growth Trajectory",
+                subtitle: "",
+                content: `
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="bg-blue-50 p-6 rounded-lg">
+                                <div class="text-sm text-blue-600 font-semibold mb-2">2024 Market Value</div>
+                                <div class="text-4xl font-bold text-blue-900">$144.2B</div>
+                                <div class="text-xs text-gray-600 mt-2">USD (≈£120B GBP)</div>
+                            </div>
+                            <div class="bg-green-50 p-6 rounded-lg">
+                                <div class="text-sm text-green-600 font-semibold mb-2">2029 Projection</div>
+                                <div class="text-4xl font-bold text-green-900">$188.8B</div>
+                                <div class="text-xs text-gray-600 mt-2">6.97% CAGR (2025-2029)</div>
+                            </div>
+                        </div>
+                        <div class="bg-purple-50 p-6 rounded-lg">
+                            <div class="text-sm text-purple-600 font-semibold mb-2">User Penetration</div>
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <div class="text-3xl font-bold text-purple-900">84.7%</div>
+                                    <div class="text-xs text-gray-600">Current (2025)</div>
+                                </div>
+                                <div class="text-2xl text-purple-400">→</div>
+                                <div>
+                                    <div class="text-3xl font-bold text-purple-900">97.2%</div>
+                                    <div class="text-xs text-gray-600">Projected (2029)</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <p class="text-sm text-gray-700">
+                                <strong>Market Analysis:</strong> The UK market demonstrates steady and sustainable growth with high penetration rates 
+                                indicating market maturity rather than explosive expansion. Nearly all UK residents will engage in online shopping by 2029, making digital 
+                                presence essential for all retailers.
+                            </p>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Consumer Shopping Behavior",
+                subtitle: "",
+                content: `
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-orange-50 p-5 rounded-lg">
+                                <div class="text-sm font-semibold text-orange-600 mb-2">Age Demographics</div>
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex justify-between">
+                                        <span>25-34 years</span>
+                                        <span class="font-bold">Most Active</span>
+                                    </div>
+                                    <div class="text-xs text-gray-600">Highest online shopping frequency and spend per transaction</div>
+                                </div>
+                            </div>
+                            <div class="bg-pink-50 p-5 rounded-lg">
+                                <div class="text-sm font-semibold text-pink-600 mb-2">Average Spend</div>
+                                <div class="text-2xl font-bold text-pink-900">$2,730</div>
+                                <div class="text-xs text-gray-600 mt-1">Per user annually (ARPU)</div>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 p-5 rounded-lg">
+                            <div class="text-sm font-semibold text-blue-600 mb-3">Top Product Categories by Purchase Frequency</div>
+                            <div class="space-y-2">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-32 text-sm">Fashion & Apparel</div>
+                                    <div class="flex-1 bg-blue-200 rounded-full h-6 relative">
+                                        <div class="bg-blue-600 h-6 rounded-full" style="width: 50.25%"></div>
+                                        <span class="absolute inset-0 flex items-center justify-center text-xs font-semibold text-white">50.25%</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-32 text-sm">Food & Grocery</div>
+                                    <div class="flex-1 bg-green-200 rounded-full h-6 relative">
+                                        <div class="bg-green-600 h-6 rounded-full" style="width: 36.22%"></div>
+                                        <span class="absolute inset-0 flex items-center justify-center text-xs font-semibold text-white">36.22%</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-32 text-sm">Footwear</div>
+                                    <div class="flex-1 bg-purple-200 rounded-full h-6 relative">
+                                        <div class="bg-purple-600 h-6 rounded-full" style="width: 33.98%"></div>
+                                        <span class="absolute inset-0 flex items-center justify-center text-xs font-semibold text-white">33.98%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg text-sm">
+                            <strong>Consumer Insight:</strong> UK shoppers demonstrate a strong preference for fashion and convenience-oriented 
+                            purchases through digital channels. The substantial penetration of grocery shopping online reflects fundamental behavioral shifts.
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Mobile Commerce Revolution",
+                subtitle: "",
+                content: `
+                    <div class="space-y-6">
+                        <div class="bg-gradient-to-r from-blue-500 to-purple-500 text-white p-6 rounded-lg text-center">
+                            <div class="text-5xl font-bold">55%</div>
+                            <div class="text-xl mt-2">of ALL eCommerce Sales</div>
+                            <div class="text-sm opacity-90 mt-1">Mobile devices dominate UK online shopping landscape</div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-green-50 p-5 rounded-lg">
+                                <div class="text-sm font-semibold text-green-600 mb-2">App vs Mobile Web Distribution</div>
+                                <div class="space-y-2">
+                                    <div>
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span>Shopping Apps</span>
+                                            <span class="font-bold">68%</span>
+                                        </div>
+                                        <div class="bg-green-200 rounded-full h-2">
+                                            <div class="bg-green-600 h-2 rounded-full" style="width: 68%"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span>Mobile Web</span>
+                                            <span class="font-bold">32%</span>
+                                        </div>
+                                        <div class="bg-gray-200 rounded-full h-2">
+                                            <div class="bg-gray-600 h-2 rounded-full" style="width: 32%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-orange-50 p-5 rounded-lg">
+                                <div class="text-sm font-semibold text-orange-600 mb-2">5G Technology Impact</div>
+                                <div class="text-xs text-gray-700 space-y-1">
+                                    <div>• Seventy percent faster page load times</div>
+                                    <div>• Fifteen percent reduction in cart abandonment</div>
+                                    <div>• Forty percent higher AR feature conversion</div>
+                                    <div>• Real-time inventory visibility enabled</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg text-sm">
+                            <strong>Mobile Commerce Strategy:</strong> UK retailers must adopt a mobile-first approach as smartphones have become 
+                            the primary shopping device for the majority of consumers.
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Payment Methods & Preferences",
+                subtitle: "",
+                content: `
+                    <div class="space-y-6">
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <div class="text-sm font-semibold text-blue-600 mb-4">Most Popular Payment Methods in UK eCommerce</div>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 bg-blue-600 rounded flex items-center justify-center text-white font-bold">1</div>
+                                        <span class="font-semibold">Debit Cards</span>
+                                    </div>
+                                    <span class="text-2xl font-bold text-blue-600">Primary Method</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 bg-green-600 rounded flex items-center justify-center text-white font-bold">2</div>
+                                        <span class="font-semibold">Digital Wallets</span>
+                                    </div>
+                                    <span class="text-xl font-bold text-green-600">35%</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 bg-purple-600 rounded flex items-center justify-center text-white font-bold">3</div>
+                                        <span class="font-semibold">Credit Cards</span>
+                                    </div>
+                                    <span class="text-xl font-bold text-purple-600">Steady Growth</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-green-50 p-5 rounded-lg">
+                                <div class="text-sm font-semibold text-green-600 mb-2">Mobile Payment Adoption</div>
+                                <div class="text-3xl font-bold text-green-900">74%</div>
+                                <div class="text-xs text-gray-600 mt-1">Mobile shoppers prefer digital wallet solutions</div>
+                            </div>
+                            <div class="bg-orange-50 p-5 rounded-lg">
+                                <div class="text-sm font-semibold text-orange-600 mb-2">Buy Now Pay Later Growth</div>
+                                <div class="text-sm text-gray-700 mt-2">
+                                    Klarna and Clearpay experiencing rapid adoption among younger demographic segments
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg text-sm">
+                            <strong>Payment Infrastructure Analysis:</strong> UK consumers prioritize convenience and security in payment processing.
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Key Market Players",
+                subtitle: "",
+                content: `
+                    <div class="space-y-6">
+                        <div class="bg-gradient-to-r from-orange-400 to-yellow-500 text-white p-6 rounded-lg">
+                            <div class="text-2xl font-bold mb-2">Amazon.co.uk - Market Leader</div>
+                            <div class="grid grid-cols-2 gap-4 text-sm">
+                                <div>
+                                    <div class="opacity-90">Market Share (Top 20)</div>
+                                    <div class="text-2xl font-bold">12.7%</div>
+                                </div>
+                                <div>
+                                    <div class="opacity-90">Monthly Visitors</div>
+                                    <div class="text-2xl font-bold">400M+</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="bg-blue-50 p-4 rounded-lg text-center">
+                                <div class="font-bold text-lg text-blue-900">eBay UK</div>
+                                <div class="text-xs text-gray-600 mt-1">200M visitors monthly</div>
+                                <div class="text-sm mt-2">Second largest marketplace</div>
+                            </div>
+                            <div class="bg-green-50 p-4 rounded-lg text-center">
+                                <div class="font-bold text-lg text-green-900">Tesco</div>
+                                <div class="text-xs text-gray-600 mt-1">Grocery market leader</div>
+                                <div class="text-sm mt-2">Third overall position</div>
+                            </div>
+                            <div class="bg-purple-50 p-4 rounded-lg text-center">
+                                <div class="font-bold text-lg text-purple-900">ASOS</div>
+                                <div class="text-xs text-gray-600 mt-1">Fashion specialist retailer</div>
+                                <div class="text-sm mt-2">UK native success</div>
+                            </div>
+                        </div>
+                        <div class="bg-pink-50 p-4 rounded-lg">
+                            <div class="text-sm font-semibold text-pink-600 mb-2">Emerging Competitive Threats</div>
+                            <div class="text-sm text-gray-700 space-y-1">
+                                <div>• <strong>Shein:</strong> Disrupting fast fashion with ultra-low prices</div>
+                                <div>• <strong>Temu:</strong> Chinese marketplace gaining significant market share</div>
+                                <div>• <strong>Sainsbury's:</strong> Maintaining strong position in online grocery</div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg text-sm">
+                            <strong>Competitive Landscape:</strong> Amazon maintains dominant market leadership but faces intensifying competition.
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Infrastructure & Logistics",
+                subtitle: "",
+                content: `
+                    <div class="space-y-6">
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <div class="text-sm font-semibold text-blue-600 mb-4">Leading Shipping and Delivery Providers</div>
+                            <div class="space-y-3">
+                                <div class="flex items-center gap-3">
+                                    <div class="text-2xl font-bold text-blue-900 w-8">1</div>
+                                    <div class="flex-1">
+                                        <div class="font-semibold">Royal Mail</div>
+                                        <div class="text-xs text-gray-600">Most widely offered by UK retailers</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="text-2xl font-bold text-blue-900 w-8">2</div>
+                                    <div class="flex-1">
+                                        <div class="font-semibold">DPD</div>
+                                        <div class="text-xs text-gray-600">Popular for tracking features</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="text-2xl font-bold text-blue-900 w-8">3</div>
+                                    <div class="flex-1">
+                                        <div class="font-semibold">Hermes / Evri</div>
+                                        <div class="text-xs text-gray-600">Cost-effective option</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-green-50 p-5 rounded-lg">
+                                <div class="text-sm font-semibold text-green-600 mb-2">Delivery Speed Expectations</div>
+                                <div class="text-3xl font-bold text-green-900">82%</div>
+                                <div class="text-xs text-gray-600 mt-1">UK consumers demand same-day delivery options</div>
+                            </div>
+                            <div class="bg-purple-50 p-5 rounded-lg">
+                                <div class="text-sm font-semibold text-purple-600 mb-2">Returns Processing</div>
+                                <div class="text-sm text-gray-700 mt-2">
+                                    Over half of consumers expect complimentary returns with rapid processing
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-orange-50 p-5 rounded-lg">
+                            <div class="text-sm font-semibold text-orange-600 mb-3">eCommerce Platform Market Leaders</div>
+                            <div class="flex justify-around text-center">
+                                <div>
+                                    <div class="font-bold text-lg">Shopify</div>
+                                    <div class="text-xs text-gray-600">Platform market leader</div>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-lg">WooCommerce</div>
+                                    <div class="text-xs text-gray-600">WordPress integration</div>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-lg">Magento</div>
+                                    <div class="text-xs text-gray-600">Enterprise solution</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Legal & Regulatory Framework",
+                subtitle: "",
+                content: `
+                    <div class="space-y-6">
+                        <div class="bg-red-50 p-6 rounded-lg border-l-4 border-red-500">
+                            <div class="font-bold text-red-900 mb-3 text-lg">Critical Regulatory Requirements</div>
+                            <div class="space-y-3 text-sm">
+                                <div>
+                                    <div class="font-semibold text-red-700">UK GDPR & Data Protection Act 2018</div>
+                                    <div class="text-gray-700">Fines up to £17.5M or 4% of global turnover</div>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-red-700">Digital Markets, Competition and Consumers Act 2024</div>
+                                    <div class="text-gray-700">New consumer protection measures (effective April 2025)</div>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-red-700">Consumer Rights Act 2015</div>
+                                    <div class="text-gray-700">14-day cooling-off period, right to refunds for faulty goods</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-blue-50 p-5 rounded-lg">
+                                <div class="text-sm font-semibold text-blue-600 mb-2">Cookie Compliance</div>
+                                <div class="text-xs text-gray-700">
+                                    Must obtain explicit consent. Cookie banners mandatory with clear opt-out options
+                                </div>
+                            </div>
+                            <div class="bg-green-50 p-5 rounded-lg">
+                                <div class="text-sm font-semibold text-green-600 mb-2">VAT Registration</div>
+                                <div class="text-xs text-gray-700">
+                                    Required if turnover exceeds £85,000 annually
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-yellow-50 p-5 rounded-lg border-l-4 border-yellow-500">
+                            <div class="text-sm font-semibold text-yellow-700 mb-2">⚠️ Payment Surcharges</div>
+                            <div class="text-xs text-gray-700">
+                                ILLEGAL to charge extra fees for card payments or payment services like PayPal
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Emerging Trends & Technologies",
+                subtitle: "",
+                content: `
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-purple-50 p-5 rounded-lg">
+                                <div class="text-lg font-bold text-purple-900 mb-2">🛍️ Social Commerce</div>
+                                <div class="text-3xl font-bold text-purple-600">56%</div>
+                                <div class="text-xs text-gray-600 mt-1">Make purchases via social media platforms</div>
+                            </div>
+                            <div class="bg-blue-50 p-5 rounded-lg">
+                                <div class="text-lg font-bold text-blue-900 mb-2">🎯 AR Shopping</div>
+                                <div class="text-sm text-gray-700 mt-2">
+                                    50%+ use AR for furniture/fashion. 40% higher conversion rates
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-green-50 p-6 rounded-lg">
+                            <div class="text-lg font-bold text-green-900 mb-3">🎥 Live Shopping Entertainment</div>
+                            <div class="text-sm text-gray-700 space-y-2">
+                                <div>• AliExpress & Vogue Business partnership launched 2024</div>
+                                <div>• Conversion rates 10x higher than traditional eCommerce</div>
+                                <div>• Growing rapidly in fashion and beauty sectors</div>
+                            </div>
+                        </div>
+                        <div class="bg-orange-50 p-6 rounded-lg">
+                            <div class="text-lg font-bold text-orange-900 mb-3">🤖 AI Personalization</div>
+                            <div class="text-sm text-gray-700">
+                                AI expected to add $24.1B to retail by 2028
+                            </div>
+                        </div>
+                        <div class="bg-pink-50 p-6 rounded-lg">
+                            <div class="text-lg font-bold text-pink-900 mb-3">🌱 Sustainability Focus</div>
+                            <div class="text-sm text-gray-700">
+                                70% prefer brands committed to sustainability
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "UK vs Global Markets: Similarities",
+                subtitle: "",
+                content: `
+                    <div class="space-y-6">
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <div class="font-bold text-blue-900 mb-4 text-lg">🌍 Shared Characteristics with Global Markets</div>
+                            <div class="space-y-4 text-sm">
+                                <div class="flex gap-3">
+                                    <div class="text-2xl">📱</div>
+                                    <div>
+                                        <div class="font-semibold">Mobile-First Shopping</div>
+                                        <div class="text-gray-700">Like US, China, and Germany - mobile dominates with 55%+ of sales</div>
+                                    </div>
+                                </div>
+                                <div class="flex gap-3">
+                                    <div class="text-2xl">🏆</div>
+                                    <div>
+                                        <div class="font-semibold">Amazon Dominance</div>
+                                        <div class="text-gray-700">Similar to US and Germany, Amazon leads market share</div>
+                                    </div>
+                                </div>
+                                <div class="flex gap-3">
+                                    <div class="text-2xl">💳</div>
+                                    <div>
+                                        <div class="font-semibold">Digital Payment Adoption</div>
+                                        <div class="text-gray-700">Digital wallets growing like in Asia-Pacific markets</div>
+                                    </div>
+                                </div>
+                                <div class="flex gap-3">
+                                    <div class="text-2xl">🎯</div>
+                                    <div>
+                                        <div class="font-semibold">Social Commerce Growth</div>
+                                        <div class="text-gray-700">TikTok and Instagram shopping mirrors global trends</div>
+                                    </div>
+                                </div>
+                                <div class="flex gap-3">
+                                    <div class="text-2xl">🔒</div>
+                                    <div>
+                                        <div class="font-semibold">Data Privacy Concerns</div>
+                                        <div class="text-gray-700">GDPR influence spreading globally</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "UK vs Global Markets: Unique Features",
+                subtitle: "",
+                content: `
+                    <div class="space-y-6">
+                        <div class="bg-purple-50 p-6 rounded-lg">
+                            <div class="font-bold text-purple-900 mb-4 text-lg">🇬🇧 Distinctive UK Market Characteristics</div>
+                            <div class="space-y-4 text-sm">
+                                <div class="flex gap-3">
+                                    <div class="text-2xl">🛡️</div>
+                                    <div>
+                                        <div class="font-semibold">Most Stringent Regulatory Environment</div>
+                                        <div class="text-gray-700">Exceeds US requirements with more rigorous enforcement</div>
+                                    </div>
+                                </div>
+                                <div class="flex gap-3">
+                                    <div class="text-2xl">🏪</div>
+                                    <div>
+                                        <div class="font-semibold">Grocery eCommerce Leadership</div>
+                                        <div class="text-gray-700">36% buy food online vs 19% globally</div>
+                                    </div>
+                                </div>
+                                <div class="flex gap-3">
+                                    <div class="text-2xl">💷</div>
+                                    <div>
+                                        <div class="font-semibold">Debit Card Preference</div>
+                                        <div class="text-gray-700">Unlike US (credit card heavy)</div>
+                                    </div>
+                                </div>
+                                <div class="flex gap-3">
+                                    <div class="text-2xl">🚚</div>
+                                    <div>
+                                        <div class="font-semibold">Higher Delivery Standards</div>
+                                        <div class="text-gray-700">82% demand same-day delivery vs 60% in US</div>
+                                    </div>
+                                </div>
+                                <div class="flex gap-3">
+                                    <div class="text-2xl">🔄</div>
+                                    <div>
+                                        <div class="font-semibold">Cross-Border Shopping Hub</div>
+                                        <div class="text-gray-700">Top destination for EU shoppers</div>
+                                    </div>
+                                </div>
+                                <div class="flex gap-3">
+                                    <div class="text-2xl">🏛️</div>
+                                    <div>
+                                        <div class="font-semibold">Post-Brexit Independence</div>
+                                        <div class="text-gray-700">Creating own digital commerce rules</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Future Outlook 2025-2030",
+                subtitle: "",
+                content: `
+                    <div class="space-y-6">
+                        <div class="bg-gradient-to-r from-blue-500 to-purple-500 text-white p-6 rounded-lg text-center">
+                            <div class="text-lg mb-2">Projected Growth to 2030</div>
+                            <div class="text-5xl font-bold">$906.25B</div>
+                            <div class="text-sm mt-2 opacity-90">22.73% CAGR (2025-2030)</div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-green-50 p-5 rounded-lg">
+                                <div class="text-sm font-semibold text-green-600 mb-2">🚀 Growth Drivers</div>
+                                <div class="text-xs text-gray-700 space-y-1">
+                                    <div>• 5G nationwide coverage</div>
+                                    <div>• AI-powered personalization</div>
+                                    <div>• Voice commerce adoption</div>
+                                    <div>• B2B eCommerce explosion</div>
+                                </div>
+                            </div>
+                            <div class="bg-orange-50 p-5 rounded-lg">
+                                <div class="text-sm font-semibold text-orange-600 mb-2">⚠️ Challenges</div>
+                                <div class="text-xs text-gray-700 space-y-1">
+                                    <div>• Rising customer expectations</div>
+                                    <div>• Increased competition</div>
+                                    <div>• Cybersecurity threats</div>
+                                    <div>• Regulatory complexity</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <div class="text-sm font-semibold text-blue-600 mb-3">💼 B2B eCommerce Boom</div>
+                            <div class="text-sm text-gray-700">
+                                B2B segment projected at 24.5% CAGR, reaching 56% of digital revenue by 2025
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "B2B eCommerce Growth",
+                subtitle: "",
+                content: `
+                    <div class="space-y-6">
+                        <div class="bg-gradient-to-r from-indigo-500 to-blue-500 text-white p-6 rounded-lg text-center">
+                            <div class="text-lg mb-2">B2B Revenue Share Projection</div>
+                            <div class="text-5xl font-bold">56%</div>
+                            <div class="text-sm mt-2 opacity-90">Expected digital revenue share by 2025</div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-blue-50 p-5 rounded-lg">
+                                <div class="text-sm font-semibold text-blue-600 mb-2">Growth Rate Comparison</div>
+                                <div class="space-y-2">
+                                    <div>
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span>B2B Segment</span>
+                                            <span class="font-bold">24.5% CAGR</span>
+                                        </div>
+                                        <div class="bg-blue-200 rounded-full h-3">
+                                            <div class="bg-blue-600 h-3 rounded-full" style="width: 100%"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span>Overall Market</span>
+                                            <span class="font-bold">6.97% CAGR</span>
+                                        </div>
+                                        <div class="bg-gray-200 rounded-full h-3">
+                                            <div class="bg-gray-600 h-3 rounded-full" style="width: 28%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-green-50 p-5 rounded-lg">
+                                <div class="text-sm font-semibold text-green-600 mb-2">2024 Revenue Distribution</div>
+                                <div class="text-xs text-gray-700 space-y-2">
+                                    <div class="flex justify-between">
+                                        <span>B2C Transactions:</span>
+                                        <span class="font-bold">88%</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>B2B Transactions:</span>
+                                        <span class="font-bold">12%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg text-sm">
+                            <strong>B2B eCommerce Analysis:</strong> The business-to-business segment represents the highest growth opportunity.
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Product Category Deep Dive",
+                subtitle: "",
+                content: `
+                    <div class="space-y-6">
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <div class="text-sm font-semibold text-blue-600 mb-3">Revenue Share by Category (2024)</div>
+                            <div class="space-y-3">
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="font-semibold">Fashion and Apparel</span>
+                                        <span class="font-bold text-blue-900">29%</span>
+                                    </div>
+                                    <div class="bg-blue-200 rounded-full h-4">
+                                        <div class="bg-blue-600 h-4 rounded-full" style="width: 29%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="font-semibold">Hobby and Leisure</span>
+                                        <span class="font-bold text-green-900">24%</span>
+                                    </div>
+                                    <div class="bg-green-200 rounded-full h-4">
+                                        <div class="bg-green-600 h-4 rounded-full" style="width: 24%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="font-semibold">Electronics</span>
+                                        <span class="font-bold text-purple-900">21%</span>
+                                    </div>
+                                    <div class="bg-purple-200 rounded-full h-4">
+                                        <div class="bg-purple-600 h-4 rounded-full" style="width: 21%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-green-50 p-5 rounded-lg">
+                                <div class="text-sm font-semibold text-green-600 mb-2">Fastest Growing Category</div>
+                                <div class="text-2xl font-bold text-green-900">Food & Beverage</div>
+                                <div class="text-xs text-gray-600 mt-1">Projected 23.5% CAGR through 2030</div>
+                            </div>
+                            <div class="bg-orange-50 p-5 rounded-lg">
+                                <div class="text-sm font-semibold text-orange-600 mb-2">Beauty & Personal Care</div>
+                                <div class="text-sm text-gray-700 mt-2">
+                                    Growth driven by virtual try-on technology
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Customer Journey & Conversion",
+                subtitle: "",
+                content: `
+                    <div class="space-y-6">
+                        <div class="bg-gradient-to-r from-purple-500 to-pink-500 text-white p-6 rounded-lg">
+                            <div class="text-lg mb-3 font-semibold">Average Customer Journey</div>
+                            <div class="grid grid-cols-3 gap-4 text-sm">
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold">3.2</div>
+                                    <div class="text-xs opacity-90 mt-1">visits before purchase</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold">68%</div>
+                                    <div class="text-xs opacity-90 mt-1">cart abandonment rate</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold">2.8%</div>
+                                    <div class="text-xs opacity-90 mt-1">average conversion rate</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 p-5 rounded-lg">
+                            <div class="text-sm font-semibold text-blue-600 mb-3">Primary Cart Abandonment Factors</div>
+                            <div class="space-y-2 text-xs text-gray-700">
+                                <div class="flex justify-between items-center">
+                                    <span>Unexpected shipping costs</span>
+                                    <span class="font-bold text-blue-900">48%</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span>Required account creation</span>
+                                    <span class="font-bold text-blue-900">24%</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span>Complicated checkout</span>
+                                    <span class="font-bold text-blue-900">18%</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span>Payment security concerns</span>
+                                    <span class="font-bold text-blue-900">17%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-green-50 p-5 rounded-lg">
+                            <div class="text-sm font-semibold text-green-600 mb-3">Conversion Optimization Strategies</div>
+                            <div class="text-xs text-gray-700 space-y-1">
+                                <div>• Transparent pricing throughout journey</div>
+                                <div>• Guest checkout option</div>
+                                <div>• Streamlined checkout process</div>
+                                <div>• Multiple payment methods</div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Omnichannel Retail Strategies",
+                subtitle: "",
+                content: `
+                    <div class="space-y-6">
+                        <div class="bg-gradient-to-r from-blue-500 to-teal-500 text-white p-6 rounded-lg text-center">
+                            <div class="text-lg mb-2">Omnichannel Customer Spending Premium</div>
+                            <div class="text-5xl font-bold">4X</div>
+                            <div class="text-sm mt-2 opacity-90">Higher lifetime value vs single-channel customers</div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-purple-50 p-5 rounded-lg">
+                                <div class="text-sm font-semibold text-purple-600 mb-2">Click and Collect Adoption</div>
+                                <div class="text-3xl font-bold text-purple-900">46%</div>
+                                <div class="text-xs text-gray-600 mt-1">UK shoppers use buy-online-pickup-in-store regularly</div>
+                            </div>
+                            <div class="bg-pink-50 p-5 rounded-lg">
+                                <div class="text-sm font-semibold text-pink-600 mb-2">Showrooming Behavior</div>
+                                <div class="text-sm text-gray-700 mt-2">
+                                    Consumers examine products in-store before purchasing online
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 p-5 rounded-lg">
+                            <div class="text-sm font-semibold text-blue-600 mb-3">Effective Omnichannel Elements</div>
+                            <div class="text-xs text-gray-700 space-y-1">
+                                <div>• Unified inventory visibility across channels</div>
+                                <div>• Consistent pricing and promotions</div>
+                                <div>• Seamless customer data integration</div>
+                                <div>• Flexible fulfillment options</div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Marketing Channels & ROI",
+                subtitle: "",
+                content: `
+                    <div class="space-y-6">
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <div class="text-sm font-semibold text-blue-600 mb-3">Digital Marketing Channel Effectiveness</div>
+                            <div class="space-y-3">
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="font-semibold">Organic Search (SEO)</span>
+                                        <span class="font-bold text-blue-900">£5.20 per £1</span>
+                                    </div>
+                                    <div class="text-xs text-gray-600">Highest ROI over extended timeframes</div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="font-semibold">Email Marketing</span>
+                                        <span class="font-bold text-green-900">£4.10 per £1</span>
+                                    </div>
+                                    <div class="text-xs text-gray-600">Excellent for retention and repeat purchases</div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="font-semibold">Paid Search (PPC)</span>
+                                        <span class="font-bold text-purple-900">£2.80 per £1</span>
+                                    </div>
+                                    <div class="text-xs text-gray-600">Immediate results with ongoing costs</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-green-50 p-5 rounded-lg">
+                                <div class="text-sm font-semibold text-green-600 mb-2">Influencer Marketing</div>
+                                <div class="text-3xl font-bold text-green-900">45%</div>
+                                <div class="text-xs text-gray-600 mt-1">UK shoppers influenced by social media creators</div>
+                            </div>
+                            <div class="bg-purple-50 p-5 rounded-lg">
+                                <div class="text-sm font-semibold text-purple-600 mb-2">Platform Preference</div>
+                                <div class="text-xs text-gray-700 mt-2">
+                                    Gen Z: Instagram, TikTok. Millennials: Instagram, Facebook
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Customer Service Excellence",
+                subtitle: "",
+                content: `
+                    <div class="space-y-6">
+                        <div class="bg-gradient-to-r from-teal-500 to-green-500 text-white p-6 rounded-lg">
+                            <div class="text-lg mb-3 font-semibold">Customer Service Impact</div>
+                            <div class="grid grid-cols-3 gap-4 text-sm">
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold">86%</div>
+                                    <div class="text-xs opacity-90 mt-1">expect 24hr response</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold">73%</div>
+                                    <div class="text-xs opacity-90 mt-1">prefer live chat</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold">61%</div>
+                                    <div class="text-xs opacity-90 mt-1">abandon after poor experience</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 p-5 rounded-lg">
+                            <div class="text-sm font-semibold text-blue-600 mb-3">Preferred Support Channels</div>
+                            <div class="space-y-2 text-xs text-gray-700">
+                                <div class="flex justify-between">
+                                    <span>Live chat for immediate assistance</span>
+                                    <span class="font-bold">73%</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Self-service knowledge base</span>
+                                    <span class="font-bold">67%</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Email support for non-urgent</span>
+                                    <span class="font-bold">58%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-green-50 p-5 rounded-lg">
+                            <div class="text-sm font-semibold text-green-600 mb-3">AI Chatbot Adoption</div>
+                            <div class="text-xs text-gray-700 space-y-1">
+                                <div>• 68% of simple queries resolved without human intervention</div>
+                                <div>• 24-hour availability increases satisfaction</div>
+                                <div>• Seamless escalation to humans essential</div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Seasonal Shopping Patterns",
+                subtitle: "",
+                content: `
+                    <div class="space-y-6">
+                        <div class="bg-purple-50 p-6 rounded-lg">
+                            <div class="text-sm font-semibold text-purple-600 mb-3">Peak Shopping Periods</div>
+                            <div class="space-y-3">
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="font-semibold">Black Friday Weekend</span>
+                                        <span class="font-bold text-purple-900">18% of November</span>
+                                    </div>
+                                    <div class="text-xs text-gray-600">Average 11% discount vs pre-Christmas</div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="font-semibold">December Holiday Season</span>
+                                        <span class="font-bold text-green-900">25% Annual Revenue</span>
+                                    </div>
+                                    <div class="text-xs text-gray-600">Highest monthly volume</div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="font-semibold">January Sales Event</span>
+                                        <span class="font-bold text-blue-900">15% Above Average</span>
+                                    </div>
+                                    <div class="text-xs text-gray-600">Post-holiday clearance surge</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-blue-50 p-5 rounded-lg">
+                                <div class="text-sm font-semibold text-blue-600 mb-2">August Revenue</div>
+                                <div class="text-2xl font-bold text-blue-900">$13.67B</div>
+                                <div class="text-xs text-gray-600 mt-1">Stable month for UK eCommerce</div>
+                            </div>
+                            <div class="bg-orange-50 p-5 rounded-lg">
+                                <div class="text-sm font-semibold text-orange-600 mb-2">Promotional Impact</div>
+                                <div class="text-sm text-gray-700 mt-2">
+                                    10% report promos don't influence purchases
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Cybersecurity & Fraud Prevention",
+                subtitle: "",
+                content: `
+                    <div class="space-y-6">
+                        <div class="bg-red-50 p-6 rounded-lg border-l-4 border-red-500">
+                            <div class="font-bold text-red-900 mb-3 text-lg">Cyber Threat Landscape</div>
+                            <div class="grid grid-cols-3 gap-4 text-sm">
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold text-red-900">22%</div>
+                                    <div class="text-xs text-gray-600 mt-1">UK businesses experienced cybercrime</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold text-red-900">45%</div>
+                                    <div class="text-xs text-gray-600 mt-1">medium businesses affected</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold text-red-900">58%</div>
+                                    <div class="text-xs text-gray-600 mt-1">large enterprises targeted</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 p-5 rounded-lg">
+                            <div class="text-sm font-semibold text-blue-600 mb-3">Consumer Trust</div>
+                            <div class="space-y-2 text-xs text-gray-700">
+                                <div class="flex justify-between">
+                                    <span>Consider brands untrustworthy after breach</span>
+                                    <span class="font-bold">58%</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Would cease shopping with breached retailer</span>
+                                    <span class="font-bold">70%</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Higher confidence with advanced security</span>
+                                    <span class="font-bold">64%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-green-50 p-5 rounded-lg">
+                            <div class="text-sm font-semibold text-green-600 mb-3">Essential Security Measures</div>
+                            <div class="text-xs text-gray-700 space-y-1">
+                                <div>• End-to-end encryption for all data</div>
+                                <div>• PCI DSS compliance required</div>
+                                <div>• Multi-factor authentication</div>
+                                <div>• Regular security audits</div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Cross-Border eCommerce",
+                subtitle: "",
+                content: `
+                    <div class="space-y-6">
+                        <div class="bg-gradient-to-r from-blue-500 to-indigo-500 text-white p-6 rounded-lg text-center">
+                            <div class="text-lg mb-2">UK Position in European Cross-Border</div>
+                            <div class="text-5xl font-bold">#1</div>
+                            <div class="text-sm mt-2 opacity-90">Top destination for EU cross-border purchases</div>
+                        </div>
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <div class="text-sm font-semibold text-blue-600 mb-3">Cross-Border Shopping to UK</div>
+                            <div class="space-y-2 text-xs text-gray-700">
+                                <div class="flex justify-between">
+                                    <span>German consumers purchasing from UK</span>
+                                    <span class="font-bold">19%</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Spanish consumers shopping UK</span>
+                                    <span class="font-bold">18%</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Italian consumers buying from UK</span>
+                                    <span class="font-bold">25%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-green-50 p-5 rounded-lg">
+                                <div class="text-sm font-semibold text-green-600 mb-2">Post-Brexit Considerations</div>
+                                <div class="text-xs text-gray-700 space-y-1">
+                                    <div>• Customs declarations required</div>
+                                    <div>• VAT handling complexity</div>
+                                    <div>• Potential duty charges</div>
+                                </div>
+                            </div>
+                            <div class="bg-orange-50 p-5 rounded-lg">
+                                <div class="text-sm font-semibold text-orange-600 mb-2">Competitive Advantages</div>
+                                <div class="text-xs text-gray-700 space-y-1">
+                                    <div>• Strong English prevalence</div>
+                                    <div>• Established brand recognition</div>
+                                    <div>• Competitive pricing</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Voice Commerce & Smart Devices",
+                subtitle: "",
+                content: `
+                    <div class="space-y-6">
+                        <div class="bg-gradient-to-r from-purple-500 to-blue-500 text-white p-6 rounded-lg text-center">
+                            <div class="text-lg mb-2">Voice Commerce Market Value (2025)</div>
+                            <div class="text-5xl font-bold">$151.39B</div>
+                            <div class="text-sm mt-2 opacity-90">Global market with UK as significant contributor</div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-blue-50 p-5 rounded-lg">
+                                <div class="text-sm font-semibold text-blue-600 mb-2">Voice Shopping Adoption</div>
+                                <div class="text-3xl font-bold text-blue-900">22%</div>
+                                <div class="text-xs text-gray-600 mt-1">Consumers make purchases using voice assistants</div>
+                            </div>
+                            <div class="bg-green-50 p-5 rounded-lg">
+                                <div class="text-sm font-semibold text-green-600 mb-2">UK and US Voice Sales</div>
+                                <div class="text-2xl font-bold text-green-900">$40B</div>
+                                <div class="text-xs text-gray-600 mt-1">Combined 2024 revenue</div>
+                            </div>
+                        </div>
+                        <div class="bg-purple-50 p-5 rounded-lg">
+                            <div class="text-sm font-semibold text-purple-600 mb-3">Voice Optimization Requirements</div>
+                            <div class="text-xs text-gray-700 space-y-1">
+                                <div>• Natural language product descriptions</div>
+                                <div>• Conversational keywords integrated</div>
+                                <div>• Streamlined voice ordering processes</div>
+                                <div>• Integration with Alexa, Google Assistant</div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Returns Management",
+                subtitle: "",
+                content: `
+                    <div class="space-y-6">
+                        <div class="bg-gradient-to-r from-orange-500 to-red-500 text-white p-6 rounded-lg">
+                            <div class="text-lg mb-3 font-semibold">UK eCommerce Returns Statistics</div>
+                            <div class="grid grid-cols-3 gap-4 text-sm">
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold">55.76%</div>
+                                    <div class="text-xs opacity-90 mt-1">expect free returns</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold">23.92%</div>
+                                    <div class="text-xs opacity-90 mt-1">prioritize cost transparency</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold">30-40%</div>
+                                    <div class="text-xs opacity-90 mt-1">fashion return rate</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 p-5 rounded-lg">
+                            <div class="text-sm font-semibold text-blue-600 mb-3">Consumer Returns Expectations</div>
+                            <div class="text-xs text-gray-700 space-y-2">
+                                <div>• Complimentary return shipping</div>
+                                <div>• Extended 30+ day return windows</div>
+                                <div>• Multiple return method options</div>
+                                <div>• Rapid refund processing (5-7 days)</div>
+                            </div>
+                        </div>
+                        <div class="bg-green-50 p-5 rounded-lg">
+                            <div class="text-sm font-semibold text-green-600 mb-3">Returns Best Practices</div>
+                            <div class="text-xs text-gray-700 space-y-1">
+                                <div>• Prepaid return labels included</div>
+                                <div>• Quality control processes</div>
+                                <div>• Detailed size guides</div>
+                                <div>• Customer feedback collection</div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Brexit Impact Analysis",
+                subtitle: "",
+                content: `
+                    <div class="space-y-6">
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <div class="text-sm font-semibold text-blue-600 mb-3">Primary Brexit Implications</div>
+                            <div class="space-y-3 text-xs text-gray-700">
+                                <div>
+                                    <div class="font-semibold text-blue-900 mb-1">Customs and Border Procedures</div>
+                                    <div>All UK-EU shipments require customs declarations, creating administrative burden</div>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-blue-900 mb-1">VAT Complexity</div>
+                                    <div>Changed treatment with varying registration thresholds across EU states</div>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-blue-900 mb-1">Regulatory Divergence</div>
+                                    <div>UK developing independent regulations separate from EU directives</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-green-50 p-5 rounded-lg">
+                                <div class="text-sm font-semibold text-green-600 mb-2">Opportunities Created</div>
+                                <div class="text-xs text-gray-700 space-y-1">
+                                    <div>• Regulatory flexibility for innovation</div>
+                                    <div>• Potential non-EU trade agreements</div>
+                                    <div>• Independent standards development</div>
+                                </div>
+                            </div>
+                            <div class="bg-orange-50 p-5 rounded-lg">
+                                <div class="text-sm font-semibold text-orange-600 mb-2">Ongoing Challenges</div>
+                                <div class="text-xs text-gray-700 space-y-1">
+                                    <div>• Increased shipping costs</div>
+                                    <div>• Complex VAT compliance</div>
+                                    <div>• Customer confusion on duties</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Sustainability & ESG",
+                subtitle: "",
+                content: `
+                    <div class="space-y-6">
+                        <div class="bg-gradient-to-r from-green-500 to-teal-500 text-white p-6 rounded-lg text-center">
+                            <div class="text-lg mb-2">Consumer Sustainability Preferences</div>
+                            <div class="text-5xl font-bold">70%</div>
+                            <div class="text-sm mt-2 opacity-90">Prefer brands committed to sustainability</div>
+                        </div>
+                        <div class="bg-green-50 p-6 rounded-lg">
+                            <div class="text-sm font-semibold text-green-600 mb-3">Key Sustainability Concerns</div>
+                            <div class="space-y-2 text-xs text-gray-700">
+                                <div class="flex justify-between">
+                                    <span>Excessive packaging reduction</span>
+                                    <span class="font-bold">Priority #1</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Carbon-neutral delivery options</span>
+                                    <span class="font-bold">Priority #2</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Ethical labor practices</span>
+                                    <span class="font-bold">Priority #3</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-blue-50 p-5 rounded-lg">
+                                <div class="text-sm font-semibold text-blue-600 mb-2">Secondhand Market Growth</div>
+                                <div class="text-3xl font-bold text-blue-900">44%</div>
+                                <div class="text-xs text-gray-600 mt-1">Shopping pre-owned more frequently</div>
+                            </div>
+                            <div class="bg-purple-50 p-5 rounded-lg">
+                                <div class="text-sm font-semibold text-purple-600 mb-2">Premium Pricing Acceptance</div>
+                                <div class="text-sm text-gray-700 mt-2">
+                                    30% of 35-44 age group willing to pay premium for eco-friendly
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Key Takeaways",
+                subtitle: "",
+                content: `
+                    <div class="space-y-4">
+                        <div class="bg-blue-50 p-5 rounded-lg border-l-4 border-blue-500">
+                            <div class="font-bold text-blue-900 mb-2">1. Mature & Sophisticated Market Leadership</div>
+                            <div class="text-sm text-gray-700">
+                                UK ranks third globally, first in Europe - highly competitive environment with elevated service expectations
+                            </div>
+                        </div>
+                        <div class="bg-green-50 p-5 rounded-lg border-l-4 border-green-500">
+                            <div class="font-bold text-green-900 mb-2">2. Mobile-First Experience Imperative</div>
+                            <div class="text-sm text-gray-700">
+                                55% of sales on mobile - optimized mobile experience is non-negotiable
+                            </div>
+                        </div>
+                        <div class="bg-purple-50 p-5 rounded-lg border-l-4 border-purple-500">
+                            <div class="font-bold text-purple-900 mb-2">3. Regulatory Compliance Critical</div>
+                            <div class="text-sm text-gray-700">
+                                Strictest data protection in Europe - GDPR compliance essential with severe penalties
+                            </div>
+                        </div>
+                        <div class="bg-orange-50 p-5 rounded-lg border-l-4 border-orange-500">
+                            <div class="font-bold text-orange-900 mb-2">4. High Service Expectations</div>
+                            <div class="text-sm text-gray-700">
+                                Same-day delivery, free returns, multiple payment options - meeting Amazon standards
+                            </div>
+                        </div>
+                        <div class="bg-pink-50 p-5 rounded-lg border-l-4 border-pink-500">
+                            <div class="font-bold text-pink-900 mb-2">5. Technology Innovation Leaders</div>
+                            <div class="text-sm text-gray-700">
+                                Early adopters of AR, AI, live shopping - must stay cutting-edge
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Strategic Recommendations",
+                subtitle: "",
+                content: `
+                    <div class="space-y-6">
+                        <div class="bg-gradient-to-r from-green-500 to-blue-500 text-white p-6 rounded-lg">
+                            <div class="text-2xl font-bold mb-3">Success in UK eCommerce Requires:</div>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex items-start gap-2">
+                                    <span>✓</span>
+                                    <span>Mobile-optimized platform with fast loading</span>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <span>✓</span>
+                                    <span>Multiple payment options including digital wallets</span>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <span>✓</span>
+                                    <span>Fast delivery with same-day options</span>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <span>✓</span>
+                                    <span>Seamless returns process</span>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <span>✓</span>
+                                    <span>Complete GDPR compliance</span>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <span>✓</span>
+                                    <span>Social commerce integration</span>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <span>✓</span>
+                                    <span>AI-powered personalization</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-yellow-50 p-6 rounded-lg border-l-4 border-yellow-500">
+                            <div class="font-bold text-yellow-900 mb-2">💡 Strategic Implementation Insight</div>
+                            <div class="text-sm text-gray-700">
+                                The UK eCommerce market rewards operational excellence and customer-centric innovation. Success requires viewing compliance and service excellence as essential investments in sustainable competitive advantage.
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "References",
+                subtitle: "",
+                content: `
+                    <div class="space-y-4 overflow-auto max-h-96">
+                        <div class="text-lg font-bold text-gray-800 mb-4">Data Sources and Citations</div>
+                        
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="font-semibold text-blue-900 mb-2">Market Size and Growth</div>
+                            <div class="text-xs text-gray-700 space-y-1">
+                                <div>• Statista Market Forecast - eCommerce UK (2024-2029)</div>
+                                <div>• Mordor Intelligence - UK E-Commerce Market (2025-2030)</div>
+                                <div>• IMARC Group - UK E-commerce Market (2024-2033)</div>
+                                <div>• Expert Market Research - UK E-Commerce (2025-2034)</div>
+                                <div>• ECDB.com - eCommerce Industry in UK (2017-2029)</div>
+                            </div>
+                        </div>
+
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <div class="font-semibold text-green-900 mb-2">Consumer Behavior</div>
+                            <div class="text-xs text-gray-700 space-y-1">
+                                <div>• McKinsey - State of Consumer Trends Report (2025)</div>
+                                <div>• Intelligence Node - Consumer Behavior Trends (2024-25)</div>
+                                <div>• StatsUp by Analyzify - UK Ecommerce Statistics (2025)</div>
+                            </div>
+                        </div>
+
+                        <div class="bg-purple-50 p-4 rounded-lg">
+                            <div class="font-semibold text-purple-900 mb-2">Mobile Commerce</div>
+                            <div class="text-xs text-gray-700 space-y-1">
+                                <div>• 8th Dial - Mobile Commerce in UK (2024)</div>
+                                <div>• Shopify UK - Mobile Commerce Trends (2024)</div>
+                            </div>
+                        </div>
+
+                        <div class="bg-orange-50 p-4 rounded-lg">
+                            <div class="font-semibold text-orange-900 mb-2">Regulatory Framework</div>
+                            <div class="text-xs text-gray-700 space-y-1">
+                                <div>• UK Government Trade Resources</div>
+                                <div>• GOV.UK - The eCommerce Directive and UK</div>
+                                <div>• AVASK - GDPR in 2025 and beyond</div>
+                                <div>• CookieYes - GDPR for Ecommerce Guide</div>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50 p-4 rounded-lg border-l-4 border-gray-400">
+                            <div class="text-xs text-gray-600">
+                                <strong>Note:</strong> All data current as of October 2025. Market conditions and regulations evolve rapidly. Verify critical data points for strategic decisions.
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Thank You",
+                subtitle: "",
+                content: `
+                    <div class="text-center space-y-8">
+                        <div class="text-6xl">🇬🇧</div>
+                        <div class="text-4xl font-bold text-gray-800">Questions?</div>
+                        <div class="text-xl text-gray-600">
+                            UK eCommerce Country Analysis
+                        </div>
+                        <div class="bg-gradient-to-r from-blue-500 to-purple-500 text-white p-6 rounded-lg mx-auto max-w-2xl">
+                            <div class="text-sm mb-2">Key Market Highlights</div>
+                            <div class="grid grid-cols-3 gap-4 text-xs">
+                                <div>
+                                    <div class="text-2xl font-bold">$144.2B</div>
+                                    <div class="opacity-90">Market Size 2024</div>
+                                </div>
+                                <div>
+                                    <div class="text-2xl font-bold">55%</div>
+                                    <div class="opacity-90">Mobile Commerce</div>
+                                </div>
+                                <div>
+                                    <div class="text-2xl font-bold">84.7%</div>
+                                    <div class="opacity-90">User Penetration</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-sm text-gray-500 mt-8">
+                            Data from: Statista, Mordor Intelligence, ECDB, IMARC Group, McKinsey, UK Government Trade Resources (2024-2025)
+                        </div>
+                        <div class="text-xs text-gray-400 mt-4">
+                            Presentation Date: October 2025
+                        </div>
+                    </div>
+                `
+            }
+        ];
+
+        let currentSlide = 0;
+
+        function renderSlide(index) {
+            const slide = slides[index];
+            document.getElementById('slideTitle').textContent = slide.title;
+            document.getElementById('slideSubtitle').textContent = slide.subtitle;
+            document.getElementById('slideContent').innerHTML = slide.content;
+            document.getElementById('slideCounter').textContent = `Slide ${index + 1} of ${slides.length}`;
+
+            // Update button states
+            document.getElementById('prevBtn').disabled = index === 0;
+            document.getElementById('nextBtn').disabled = index === slides.length - 1;
+
+            // Update dot navigation
+            updateDotNavigation();
+
+            // Re-initialize Lucide icons
+            lucide.createIcons();
+        }
+
+        function updateDotNavigation() {
+            const dotNav = document.getElementById('dotNavigation');
+            dotNav.innerHTML = '';
+
+            slides.forEach((_, index) => {
+                const dot = document.createElement('button');
+                dot.className = `dot w-2 h-2 rounded-full bg-gray-300 ${index === currentSlide ? 'active bg-blue-600' : ''}`;
+                dot.onclick = () => goToSlide(index);
+                dotNav.appendChild(dot);
+            });
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                renderSlide(currentSlide);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                renderSlide(currentSlide);
+            }
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            renderSlide(currentSlide);
+        }
+
+        // Event listeners
+        document.getElementById('nextBtn').addEventListener('click', nextSlide);
+        document.getElementById('prevBtn').addEventListener('click', prevSlide);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        // Initialize
+        renderSlide(0);
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
