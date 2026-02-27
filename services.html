@@ -1,107 +1,1204 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Services – Insightserenity</title>
-
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon_io/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon_io/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon_io/favicon-16x16.png">
-  <link rel="shortcut icon" href="assets/img/favicon_io/favicon.ico">
-  <link rel="manifest" href="assets/img/favicon_io/site.webmanifest">
-
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/lucide.min.js"></script>
-  <style>
-    :root { --accent: #ffc451; --dark: #000; }
-  </style>
-</head>
-
-<body class="bg-black text-white antialiased">
-  <nav class="bg-black border-b border-gray-800 sticky top-0 z-50">
-    <div class="container mx-auto flex items-center justify-between py-4 px-6">
-      <a href="index.html" class="flex items-center">
-        <img src="assets/img/favicon_io/apple-touch-icon.png" alt="Insightserenity logo" class="h-8 w-8 mr-2">
-        <span class="text-2xl font-bold" style="color: var(--accent);">Insightserenity</span>
-      </a>
-      <div class="space-x-6 text-sm flex items-center">
-        <a href="index.html" class="hover:text-[#ffc451] flex items-center"><i data-lucide="home" class="w-4 h-4 mr-1"></i>Home</a>
-        <a href="about.html" class="hover:text-[#ffc451] flex items-center"><i data-lucide="info" class="w-4 h-4 mr-1"></i>About</a>
-        <a href="services.html" class="hover:text-[#ffc451] font-semibold flex items-center" aria-current="page"><i data-lucide="briefcase" class="w-4 h-4 mr-1"></i>Services</a>
-        <a href="consultation.html" class="hover:text-[#ffc451] flex items-center"><i data-lucide="phone" class="w-4 h-4 mr-1"></i>Book</a>
-        <a href="privacy.html" class="hover:text-[#ffc451] flex items-center"><i data-lucide="shield" class="w-4 h-4 mr-1"></i>Privacy</a>
-        <a href="terms.html" class="hover:text-[#ffc451] flex items-center"><i data-lucide="file-text" class="w-4 h-4 mr-1"></i>Terms</a>
-      </div>
-    </div>
-  </nav>
-
-  <main class="container mx-auto py-20 px-6">
-    <div class="relative mb-8">
-      <div class="absolute inset-0 opacity-30" style="background-image: url('https://source.unsplash.com/1600x300/?services,consulting'); background-size: cover; background-position: center;"></div>
-      <h1 class="relative text-4xl font-extrabold text-center" style="color: var(--accent);">What We Offer</h1>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <div class="p-6 bg-gray-800 rounded-lg">        <i data-lucide="book-open" class="w-10 h-10 mb-4 text-[#ffc451]"></i>
-        <h2 class="text-2xl font-semibold mb-2">Bible Consulting (Free)</h2>
-        <p>Receive scripture-based guidance and encouragement at no cost. Open to anyone seeking spiritual insight.</p>
-      </div>
-      <div class="p-6 bg-gray-800 rounded-lg">        <i data-lucide="smartphone" class="w-10 h-10 mb-4 text-[#ffc451]"></i>
-        <h2 class="text-2xl font-semibold mb-2">Technical Consultation</h2>
-        <p>Deep dives into software systems, architecture, data strategies and infrastructure. Ideal for startups
-          and engineers seeking clarity.</p>
-      </div>
-      <div class="p-6 bg-gray-800 rounded-lg">
-        <i data-lucide="bar-chart" class="w-10 h-10 mb-4 text-[#ffc451]"></i>
-        <h2 class="text-2xl font-semibold mb-2">Business Strategy</h2>
-        <p>Planning, roadmaps, and competitive insights that help organisations grow, pivot or streamline operations.</p>
-      </div>
-      <div class="p-6 bg-gray-800 rounded-lg">
-        <i data-lucide="user-check" class="w-10 h-10 mb-4 text-[#ffc451]"></i>
-        <h2 class="text-2xl font-semibold mb-2">Personal Coaching</h2>
-        <p>One-on-one support for productivity, leadership, career advancement, or life transitions.</p>
-      </div>
-      <div class="p-6 bg-gray-800 rounded-lg">
-        <i data-lucide="message-square" class="w-10 h-10 mb-4 text-[#ffc451]"></i>
-        <h2 class="text-2xl font-semibold mb-2">Custom Requests</h2>
-        <p>If you have a unique problem or idea, just ask. We’ll propose an approach that fits your situation.</p>
-      </div>
-      <div class="p-6 bg-gray-800 rounded-lg">
-        <i data-lucide="globe" class="w-10 h-10 mb-4 text-[#ffc451]"></i>
-        <h2 class="text-2xl font-semibold mb-2">Remote Sessions</h2>
-        <p>Consultations can be conducted via email, phone or video – whichever you prefer.</p>
-      </div>
-      <div class="p-6 bg-gray-800 rounded-lg">
-        <i data-lucide="clock" class="w-10 h-10 mb-4 text-[#ffc451]"></i>
-        <h2 class="text-2xl font-semibold mb-2">Flexible Scheduling</h2>
-        <p>We work around your calendar; send your request anytime and we’ll respond promptly.</p>
-      </div>
-    </div>
-    <p class="mt-12 text-center">
-      All paid engagements are priced individually. Free Bible consulting is always available; simply submit a request
-      and indicate that you would like spiritual guidance. <a href="consultation.html" class="text-[#ffc451] underline">Contact us</a> or email directly.
-    </p>
-  </main>
-
-  <footer class="bg-black border-t border-gray-800 py-6">
-    <div class="container mx-auto text-center text-xs">
-      <p>&copy; 2026 Insightserenity</p>
-      <div class="mt-2 space-x-3">
-        <a href="#" class="hover:text-[#ffc451]"><i data-lucide="instagram"></i></a>
-        <a href="#" class="hover:text-[#ffc451]"><i data-lucide="linkedin"></i></a>
-        <a href="#" class="hover:text-[#ffc451]"><i data-lucide="github"></i></a>
-      </div>
-      <div class="mt-2 text-xs">
-        <a href="privacy.html" class="hover:text-[#ffc451]">Privacy</a> &bull;
-        <a href="terms.html" class="hover:text-[#ffc451]">Terms</a>
-      </div>
-    </div>
-  </footer>
-
+  <title>EOLAW Consulting | Services</title>
+  <meta name="description" content="Explore EOLAW Consulting's full range of expert services — Data Science, Full-Stack Development, AI/ML, System Architecture, eCommerce, and Technical Consulting.">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon_io/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="/assets/img/favicon_io/apple-touch-icon.png">
+  <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    window.addEventListener('DOMContentLoaded', () => lucide.createIcons());
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: { 300:'#ffe08a', 400:'#ffd27f', 500:'#ffc451', 600:'#e6b048', 700:'#cc9c3f' },
+            dark: { 950:'#050505', 900:'#0a0a0a', 800:'#111111', 700:'#1a1a1a', 600:'#222222', 500:'#2a2a2a', 400:'#333333' }
+          },
+          fontFamily: { sans:['Inter','sans-serif'], display:['Space Grotesk','sans-serif'] }
+        }
+      }
+    }
   </script>
-</body>
+  <link rel="stylesheet" href="/assets/css/business.css">
+</head>
+<body style="background:#0a0a0a;color:#fff;">
 
+<!-- ===================== NAVBAR ===================== -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 py-5 transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2.5">
+        <img src="/assets/img/favicon_io/android-chrome-192x192.png" alt="EOLAW" class="w-9 h-9 rounded-xl">
+        <span class="font-display font-bold text-lg"><span style="color:#ffc451">EOLAW</span> <span class="text-white">Consulting</span></span>
+      </a>
+      <div class="hidden md:flex items-center gap-1">
+        <a href="/" class="nav-link text-sm font-medium px-4 py-2 rounded-lg text-gray-300 hover:text-gold-500 hover:bg-dark-700 transition-all">Home</a>
+        <a href="/about.html" class="nav-link text-sm font-medium px-4 py-2 rounded-lg text-gray-300 hover:text-gold-500 hover:bg-dark-700 transition-all">About</a>
+        <a href="/services.html" class="nav-link text-sm font-medium px-4 py-2 rounded-lg hover:bg-dark-700 transition-all" style="color:#ffc451">Services</a>
+        <a href="/consultation.html" class="nav-link text-sm font-medium px-4 py-2 rounded-lg text-gray-300 hover:text-gold-500 hover:bg-dark-700 transition-all">Consultation</a>
+      </div>
+      <div class="hidden md:flex items-center gap-4">
+        <a href="tel:+10000000000" class="flex items-center gap-2 text-sm text-gray-400 hover:text-gold-500 transition-colors">
+          <i data-lucide="phone" class="w-4 h-4"></i><span>+1 (000) 000-0000</span>
+        </a>
+        <a href="/consultation.html" style="background:#ffc451;color:#000;font-weight:700;" class="px-5 py-2.5 rounded-xl text-sm transition-all hover:opacity-90">Book Consultation</a>
+      </div>
+      <button id="mobile-toggle" class="md:hidden p-2 rounded-lg text-gray-300 hover:bg-dark-700 transition-colors">
+        <i data-lucide="menu" class="w-5 h-5" id="menu-icon"></i>
+      </button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden mt-4 pt-4 border-t border-dark-500 space-y-1 pb-4">
+      <a href="/" class="block text-gray-300 hover:text-gold-500 px-4 py-2.5 rounded-lg hover:bg-dark-700 font-medium">Home</a>
+      <a href="/about.html" class="block text-gray-300 hover:text-gold-500 px-4 py-2.5 rounded-lg hover:bg-dark-700 font-medium">About</a>
+      <a href="/services.html" class="block px-4 py-2.5 rounded-lg hover:bg-dark-700 font-medium" style="color:#ffc451">Services</a>
+      <a href="/consultation.html" class="block text-gray-300 hover:text-gold-500 px-4 py-2.5 rounded-lg hover:bg-dark-700 font-medium">Consultation</a>
+      <div class="pt-3 mt-3 border-t border-dark-500">
+        <a href="/consultation.html" style="background:#ffc451;color:#000;font-weight:700;" class="block px-4 py-3 rounded-xl text-center text-sm">Book Consultation</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ===================== PAGE HERO ===================== -->
+<section class="pt-36 pb-20 bg-grid relative overflow-hidden" style="background-color:#0a0a0a;">
+  <!-- Decorative orbs -->
+  <div class="orb orb-gold" style="width:500px;height:500px;top:-200px;right:-100px;opacity:0.5;"></div>
+  <div class="orb orb-gold-dim" style="width:300px;height:300px;bottom:-100px;left:-100px;"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="text-center max-w-3xl mx-auto">
+      <div class="reveal" data-delay="0">
+        <span class="section-badge">
+          <i data-lucide="layers" class="w-3.5 h-3.5"></i>
+          Services
+        </span>
+      </div>
+      <h1 class="font-display font-bold text-5xl md:text-6xl leading-tight mt-4 reveal" data-delay="100">
+        <span class="text-white">Expert Solutions for</span><br>
+        <span style="color:#ffc451;" class="glow-text">Every Technical Challenge</span>
+      </h1>
+      <p class="mt-6 text-gray-400 text-lg leading-relaxed reveal" data-delay="200">
+        From data pipelines to full-stack applications — comprehensive consulting tailored to your goals.
+        Each engagement is built around measurable outcomes, transparent communication, and deep technical expertise.
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-4 mt-10 reveal" data-delay="300">
+        <a href="/consultation.html" style="background:#ffc451;color:#000;font-weight:700;" class="px-7 py-3.5 rounded-xl text-base hover:opacity-90 transition-all inline-flex items-center gap-2">
+          <i data-lucide="calendar" class="w-4 h-4"></i>
+          Book a Free Consultation
+        </a>
+        <a href="#data-science" class="px-7 py-3.5 rounded-xl text-base font-semibold text-gray-300 hover:text-white transition-all inline-flex items-center gap-2" style="border:1.5px solid #2a2a2a;background:#111;">
+          <i data-lucide="arrow-down" class="w-4 h-4"></i>
+          Explore Services
+        </a>
+      </div>
+    </div>
+
+    <!-- Quick-jump service pills -->
+    <div class="flex flex-wrap justify-center gap-3 mt-16 reveal" data-delay="400">
+      <a href="#data-science" class="skill-tag hover:border-gold-500 hover:text-gold-500 flex items-center gap-1.5">
+        <i data-lucide="bar-chart-2" class="w-3.5 h-3.5"></i> Data Science
+      </a>
+      <a href="#fullstack" class="skill-tag hover:border-gold-500 hover:text-gold-500 flex items-center gap-1.5">
+        <i data-lucide="code-2" class="w-3.5 h-3.5"></i> Full-Stack Dev
+      </a>
+      <a href="#ai-ml" class="skill-tag hover:border-gold-500 hover:text-gold-500 flex items-center gap-1.5">
+        <i data-lucide="brain" class="w-3.5 h-3.5"></i> AI &amp; ML
+      </a>
+      <a href="#architecture" class="skill-tag hover:border-gold-500 hover:text-gold-500 flex items-center gap-1.5">
+        <i data-lucide="server" class="w-3.5 h-3.5"></i> System Architecture
+      </a>
+      <a href="#ecommerce" class="skill-tag hover:border-gold-500 hover:text-gold-500 flex items-center gap-1.5">
+        <i data-lucide="shopping-bag" class="w-3.5 h-3.5"></i> eCommerce
+      </a>
+      <a href="#consulting" class="skill-tag hover:border-gold-500 hover:text-gold-500 flex items-center gap-1.5">
+        <i data-lucide="lightbulb" class="w-3.5 h-3.5"></i> Consulting
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SERVICE 1: DATA SCIENCE ===================== -->
+<section id="data-science" style="background:#111111;" class="py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <!-- Left: Info -->
+      <div class="reveal-left">
+        <span class="section-badge">
+          <i data-lucide="bar-chart-2" class="w-3.5 h-3.5"></i>
+          Data Science &amp; Analytics
+        </span>
+        <h2 class="font-display font-bold text-3xl md:text-4xl text-white mt-4 mb-5 leading-tight">
+          Turn Raw Data Into<br>Actionable Insights
+        </h2>
+        <p class="text-gray-400 leading-relaxed mb-8">
+          Comprehensive data science services to help businesses make smarter decisions. From ETL pipelines to executive dashboards,
+          I transform messy data into clarity — delivering models that predict, dashboards that reveal, and pipelines that run reliably.
+        </p>
+        <ul class="space-y-3 mb-8">
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>Exploratory Data Analysis (EDA)</span>
+          </li>
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>Predictive Modeling &amp; Forecasting</span>
+          </li>
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>BI Dashboard Development (Tableau, Power BI)</span>
+          </li>
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>Statistical Analysis &amp; Reporting</span>
+          </li>
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>Data Pipeline &amp; ETL Architecture</span>
+          </li>
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>Customer Segmentation &amp; Behavior Analysis</span>
+          </li>
+        </ul>
+        <div class="flex flex-wrap gap-2 mb-8">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">R</span>
+          <span class="skill-tag">Pandas</span>
+          <span class="skill-tag">NumPy</span>
+          <span class="skill-tag">Scikit-learn</span>
+          <span class="skill-tag">Tableau</span>
+          <span class="skill-tag">Power BI</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">Spark</span>
+        </div>
+        <a href="/consultation.html?service=data-science" style="background:#ffc451;color:#000;font-weight:700;" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl hover:opacity-90 transition-all">
+          <i data-lucide="calendar" class="w-4 h-4"></i>
+          Book Data Science Consultation
+        </a>
+      </div>
+
+      <!-- Right: Decorative card -->
+      <div class="reveal-right">
+        <div style="background:#0a0a0a;border:1px solid #2a2a2a;border-radius:1.5rem;padding:2rem;" class="shadow-gold-sm">
+          <div class="flex items-center justify-center mb-8">
+            <div style="background:rgba(255,196,81,0.1);border:2px solid rgba(255,196,81,0.25);border-radius:1.25rem;padding:1.75rem;">
+              <i data-lucide="bar-chart-2" style="width:4rem;height:4rem;color:#ffc451;"></i>
+            </div>
+          </div>
+          <div class="space-y-4">
+            <div style="background:#111;border:1px solid #1f1f1f;border-radius:1rem;padding:1rem;" class="flex items-center gap-3">
+              <div style="background:rgba(255,196,81,0.1);border-radius:.5rem;padding:.5rem;flex-shrink:0;">
+                <i data-lucide="trending-up" style="width:1.25rem;height:1.25rem;color:#ffc451;"></i>
+              </div>
+              <div>
+                <p class="text-white font-semibold text-sm">Predictive Analytics</p>
+                <p class="text-gray-500 text-xs">Forecast trends before they happen</p>
+              </div>
+            </div>
+            <div style="background:#111;border:1px solid #1f1f1f;border-radius:1rem;padding:1rem;" class="flex items-center gap-3">
+              <div style="background:rgba(255,196,81,0.1);border-radius:.5rem;padding:.5rem;flex-shrink:0;">
+                <i data-lucide="layout-dashboard" style="width:1.25rem;height:1.25rem;color:#ffc451;"></i>
+              </div>
+              <div>
+                <p class="text-white font-semibold text-sm">Executive Dashboards</p>
+                <p class="text-gray-500 text-xs">Real-time KPIs at a glance</p>
+              </div>
+            </div>
+            <div style="background:#111;border:1px solid #1f1f1f;border-radius:1rem;padding:1rem;" class="flex items-center gap-3">
+              <div style="background:rgba(255,196,81,0.1);border-radius:.5rem;padding:.5rem;flex-shrink:0;">
+                <i data-lucide="database" style="width:1.25rem;height:1.25rem;color:#ffc451;"></i>
+              </div>
+              <div>
+                <p class="text-white font-semibold text-sm">ETL Pipelines</p>
+                <p class="text-gray-500 text-xs">Reliable data flow end-to-end</p>
+              </div>
+            </div>
+            <div style="background:#111;border:1px solid #1f1f1f;border-radius:1rem;padding:1rem;" class="flex items-center gap-3">
+              <div style="background:rgba(255,196,81,0.1);border-radius:.5rem;padding:.5rem;flex-shrink:0;">
+                <i data-lucide="users" style="width:1.25rem;height:1.25rem;color:#ffc451;"></i>
+              </div>
+              <div>
+                <p class="text-white font-semibold text-sm">Customer Segmentation</p>
+                <p class="text-gray-500 text-xs">Understand your audience deeply</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SERVICE 2: FULL-STACK ===================== -->
+<section id="fullstack" style="background:#0a0a0a;" class="py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <!-- Right: Decorative card (first on mobile, second on desktop) -->
+      <div class="reveal-left order-2 lg:order-1">
+        <div style="background:#111111;border:1px solid #2a2a2a;border-radius:1.5rem;padding:2rem;" class="shadow-gold-sm">
+          <div class="flex items-center justify-center mb-8">
+            <div style="background:rgba(255,196,81,0.1);border:2px solid rgba(255,196,81,0.25);border-radius:1.25rem;padding:1.75rem;">
+              <i data-lucide="code-2" style="width:4rem;height:4rem;color:#ffc451;"></i>
+            </div>
+          </div>
+          <div class="space-y-4">
+            <div style="background:#0a0a0a;border:1px solid #1f1f1f;border-radius:1rem;padding:1rem;" class="flex items-center gap-3">
+              <div style="background:rgba(255,196,81,0.1);border-radius:.5rem;padding:.5rem;flex-shrink:0;">
+                <i data-lucide="monitor" style="width:1.25rem;height:1.25rem;color:#ffc451;"></i>
+              </div>
+              <div>
+                <p class="text-white font-semibold text-sm">React &amp; Next.js Frontend</p>
+                <p class="text-gray-500 text-xs">Fast, responsive, beautiful UIs</p>
+              </div>
+            </div>
+            <div style="background:#0a0a0a;border:1px solid #1f1f1f;border-radius:1rem;padding:1rem;" class="flex items-center gap-3">
+              <div style="background:rgba(255,196,81,0.1);border-radius:.5rem;padding:.5rem;flex-shrink:0;">
+                <i data-lucide="server" style="width:1.25rem;height:1.25rem;color:#ffc451;"></i>
+              </div>
+              <div>
+                <p class="text-white font-semibold text-sm">Node.js Backend APIs</p>
+                <p class="text-gray-500 text-xs">Scalable REST &amp; GraphQL services</p>
+              </div>
+            </div>
+            <div style="background:#0a0a0a;border:1px solid #1f1f1f;border-radius:1rem;padding:1rem;" class="flex items-center gap-3">
+              <div style="background:rgba(255,196,81,0.1);border-radius:.5rem;padding:.5rem;flex-shrink:0;">
+                <i data-lucide="shield-check" style="width:1.25rem;height:1.25rem;color:#ffc451;"></i>
+              </div>
+              <div>
+                <p class="text-white font-semibold text-sm">Auth &amp; Security</p>
+                <p class="text-gray-500 text-xs">JWT, OAuth, role-based access</p>
+              </div>
+            </div>
+            <div style="background:#0a0a0a;border:1px solid #1f1f1f;border-radius:1rem;padding:1rem;" class="flex items-center gap-3">
+              <div style="background:rgba(255,196,81,0.1);border-radius:.5rem;padding:.5rem;flex-shrink:0;">
+                <i data-lucide="credit-card" style="width:1.25rem;height:1.25rem;color:#ffc451;"></i>
+              </div>
+              <div>
+                <p class="text-white font-semibold text-sm">Payment Integration</p>
+                <p class="text-gray-500 text-xs">Stripe, PayPal &amp; more</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Left: Info -->
+      <div class="reveal-right order-1 lg:order-2">
+        <span class="section-badge">
+          <i data-lucide="code-2" class="w-3.5 h-3.5"></i>
+          Full-Stack Development
+        </span>
+        <h2 class="font-display font-bold text-3xl md:text-4xl text-white mt-4 mb-5 leading-tight">
+          Web Applications<br>Built to Scale
+        </h2>
+        <p class="text-gray-400 leading-relaxed mb-8">
+          End-to-end web application development using modern frameworks, cloud-ready architecture, and performance-first
+          engineering practices. From MVP to production — built right the first time.
+        </p>
+        <ul class="space-y-3 mb-8">
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>Custom Web Application Development</span>
+          </li>
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>RESTful API &amp; GraphQL Design</span>
+          </li>
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>Database Architecture (SQL + NoSQL)</span>
+          </li>
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>React / Next.js Frontend Development</span>
+          </li>
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>Node.js / Express Backend Systems</span>
+          </li>
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>Authentication, Security &amp; Payment Integration</span>
+          </li>
+        </ul>
+        <div class="flex flex-wrap gap-2 mb-8">
+          <span class="skill-tag">React</span>
+          <span class="skill-tag">Next.js</span>
+          <span class="skill-tag">Node.js</span>
+          <span class="skill-tag">Express</span>
+          <span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag">MongoDB</span>
+          <span class="skill-tag">TypeScript</span>
+          <span class="skill-tag">Redis</span>
+          <span class="skill-tag">Stripe</span>
+        </div>
+        <a href="/consultation.html?service=fullstack" style="background:#ffc451;color:#000;font-weight:700;" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl hover:opacity-90 transition-all">
+          <i data-lucide="calendar" class="w-4 h-4"></i>
+          Book Development Consultation
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SERVICE 3: AI & ML ===================== -->
+<section id="ai-ml" style="background:#111111;" class="py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <!-- Left: Info -->
+      <div class="reveal-left">
+        <span class="section-badge">
+          <i data-lucide="brain" class="w-3.5 h-3.5"></i>
+          AI &amp; Machine Learning
+        </span>
+        <h2 class="font-display font-bold text-3xl md:text-4xl text-white mt-4 mb-5 leading-tight">
+          Intelligent Systems<br>That Learn &amp; Adapt
+        </h2>
+        <p class="text-gray-400 leading-relaxed mb-8">
+          Custom AI and ML solutions that automate workflows, unlock predictions, and embed intelligence into your products.
+          From custom model training to LLM integrations — applied AI that solves real problems.
+        </p>
+        <ul class="space-y-3 mb-8">
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>Custom ML Model Development</span>
+          </li>
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>Natural Language Processing (NLP)</span>
+          </li>
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>Computer Vision Solutions</span>
+          </li>
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>Workflow Automation with AI</span>
+          </li>
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>LLM Integration &amp; Prompt Engineering</span>
+          </li>
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>Recommendation Systems</span>
+          </li>
+        </ul>
+        <div class="flex flex-wrap gap-2 mb-8">
+          <span class="skill-tag">TensorFlow</span>
+          <span class="skill-tag">PyTorch</span>
+          <span class="skill-tag">Scikit-learn</span>
+          <span class="skill-tag">OpenAI API</span>
+          <span class="skill-tag">Hugging Face</span>
+          <span class="skill-tag">LangChain</span>
+          <span class="skill-tag">NLTK</span>
+          <span class="skill-tag">Keras</span>
+        </div>
+        <a href="/consultation.html?service=ai-ml" style="background:#ffc451;color:#000;font-weight:700;" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl hover:opacity-90 transition-all">
+          <i data-lucide="calendar" class="w-4 h-4"></i>
+          Book AI/ML Consultation
+        </a>
+      </div>
+
+      <!-- Right: Decorative card -->
+      <div class="reveal-right">
+        <div style="background:#0a0a0a;border:1px solid #2a2a2a;border-radius:1.5rem;padding:2rem;" class="shadow-gold-sm">
+          <div class="flex items-center justify-center mb-8">
+            <div style="background:rgba(255,196,81,0.1);border:2px solid rgba(255,196,81,0.25);border-radius:1.25rem;padding:1.75rem;">
+              <i data-lucide="brain" style="width:4rem;height:4rem;color:#ffc451;"></i>
+            </div>
+          </div>
+          <div class="space-y-4">
+            <div style="background:#111;border:1px solid #1f1f1f;border-radius:1rem;padding:1rem;" class="flex items-center gap-3">
+              <div style="background:rgba(255,196,81,0.1);border-radius:.5rem;padding:.5rem;flex-shrink:0;">
+                <i data-lucide="message-square" style="width:1.25rem;height:1.25rem;color:#ffc451;"></i>
+              </div>
+              <div>
+                <p class="text-white font-semibold text-sm">NLP &amp; Text Intelligence</p>
+                <p class="text-gray-500 text-xs">Sentiment, classification, extraction</p>
+              </div>
+            </div>
+            <div style="background:#111;border:1px solid #1f1f1f;border-radius:1rem;padding:1rem;" class="flex items-center gap-3">
+              <div style="background:rgba(255,196,81,0.1);border-radius:.5rem;padding:.5rem;flex-shrink:0;">
+                <i data-lucide="eye" style="width:1.25rem;height:1.25rem;color:#ffc451;"></i>
+              </div>
+              <div>
+                <p class="text-white font-semibold text-sm">Computer Vision</p>
+                <p class="text-gray-500 text-xs">Object detection, image classification</p>
+              </div>
+            </div>
+            <div style="background:#111;border:1px solid #1f1f1f;border-radius:1rem;padding:1rem;" class="flex items-center gap-3">
+              <div style="background:rgba(255,196,81,0.1);border-radius:.5rem;padding:.5rem;flex-shrink:0;">
+                <i data-lucide="zap" style="width:1.25rem;height:1.25rem;color:#ffc451;"></i>
+              </div>
+              <div>
+                <p class="text-white font-semibold text-sm">LLM Integration</p>
+                <p class="text-gray-500 text-xs">GPT, Claude, Llama into your stack</p>
+              </div>
+            </div>
+            <div style="background:#111;border:1px solid #1f1f1f;border-radius:1rem;padding:1rem;" class="flex items-center gap-3">
+              <div style="background:rgba(255,196,81,0.1);border-radius:.5rem;padding:.5rem;flex-shrink:0;">
+                <i data-lucide="star" style="width:1.25rem;height:1.25rem;color:#ffc451;"></i>
+              </div>
+              <div>
+                <p class="text-white font-semibold text-sm">Recommendation Engines</p>
+                <p class="text-gray-500 text-xs">Personalization at scale</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SERVICE 4: SYSTEM ARCHITECTURE ===================== -->
+<section id="architecture" style="background:#0a0a0a;" class="py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <!-- Left: Decorative card -->
+      <div class="reveal-left order-2 lg:order-1">
+        <div style="background:#111111;border:1px solid #2a2a2a;border-radius:1.5rem;padding:2rem;" class="shadow-gold-sm">
+          <div class="flex items-center justify-center mb-8">
+            <div style="background:rgba(255,196,81,0.1);border:2px solid rgba(255,196,81,0.25);border-radius:1.25rem;padding:1.75rem;">
+              <i data-lucide="server" style="width:4rem;height:4rem;color:#ffc451;"></i>
+            </div>
+          </div>
+          <div class="space-y-4">
+            <div style="background:#0a0a0a;border:1px solid #1f1f1f;border-radius:1rem;padding:1rem;" class="flex items-center gap-3">
+              <div style="background:rgba(255,196,81,0.1);border-radius:.5rem;padding:.5rem;flex-shrink:0;">
+                <i data-lucide="cloud" style="width:1.25rem;height:1.25rem;color:#ffc451;"></i>
+              </div>
+              <div>
+                <p class="text-white font-semibold text-sm">Cloud Infrastructure</p>
+                <p class="text-gray-500 text-xs">AWS, GCP, Azure architecture</p>
+              </div>
+            </div>
+            <div style="background:#0a0a0a;border:1px solid #1f1f1f;border-radius:1rem;padding:1rem;" class="flex items-center gap-3">
+              <div style="background:rgba(255,196,81,0.1);border-radius:.5rem;padding:.5rem;flex-shrink:0;">
+                <i data-lucide="git-branch" style="width:1.25rem;height:1.25rem;color:#ffc451;"></i>
+              </div>
+              <div>
+                <p class="text-white font-semibold text-sm">CI/CD Pipelines</p>
+                <p class="text-gray-500 text-xs">Automated testing and deployment</p>
+              </div>
+            </div>
+            <div style="background:#0a0a0a;border:1px solid #1f1f1f;border-radius:1rem;padding:1rem;" class="flex items-center gap-3">
+              <div style="background:rgba(255,196,81,0.1);border-radius:.5rem;padding:.5rem;flex-shrink:0;">
+                <i data-lucide="layers" style="width:1.25rem;height:1.25rem;color:#ffc451;"></i>
+              </div>
+              <div>
+                <p class="text-white font-semibold text-sm">Microservices Design</p>
+                <p class="text-gray-500 text-xs">Scalable, decoupled systems</p>
+              </div>
+            </div>
+            <div style="background:#0a0a0a;border:1px solid #1f1f1f;border-radius:1rem;padding:1rem;" class="flex items-center gap-3">
+              <div style="background:rgba(255,196,81,0.1);border-radius:.5rem;padding:.5rem;flex-shrink:0;">
+                <i data-lucide="activity" style="width:1.25rem;height:1.25rem;color:#ffc451;"></i>
+              </div>
+              <div>
+                <p class="text-white font-semibold text-sm">Monitoring &amp; Alerting</p>
+                <p class="text-gray-500 text-xs">Uptime, performance, and health</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Info -->
+      <div class="reveal-right order-1 lg:order-2">
+        <span class="section-badge">
+          <i data-lucide="server" class="w-3.5 h-3.5"></i>
+          System Architecture
+        </span>
+        <h2 class="font-display font-bold text-3xl md:text-4xl text-white mt-4 mb-5 leading-tight">
+          Design Systems<br>That Handle Growth
+        </h2>
+        <p class="text-gray-400 leading-relaxed mb-8">
+          Scalable infrastructure design, microservices architecture, and cloud strategy that keeps your systems
+          reliable at any scale. Whether you're launching or scaling, build it right from the start.
+        </p>
+        <ul class="space-y-3 mb-8">
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>Cloud Infrastructure Design (AWS, GCP, Azure)</span>
+          </li>
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>Microservices &amp; Event-Driven Architecture</span>
+          </li>
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>DevOps &amp; CI/CD Pipeline Setup</span>
+          </li>
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>Database Optimization &amp; Caching</span>
+          </li>
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>Performance Monitoring &amp; Alerting</span>
+          </li>
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>Security Architecture &amp; Compliance</span>
+          </li>
+        </ul>
+        <div class="flex flex-wrap gap-2 mb-8">
+          <span class="skill-tag">AWS</span>
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">Kubernetes</span>
+          <span class="skill-tag">Terraform</span>
+          <span class="skill-tag">Nginx</span>
+          <span class="skill-tag">GitHub Actions</span>
+          <span class="skill-tag">Redis</span>
+          <span class="skill-tag">Elasticsearch</span>
+        </div>
+        <a href="/consultation.html?service=architecture" style="background:#ffc451;color:#000;font-weight:700;" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl hover:opacity-90 transition-all">
+          <i data-lucide="calendar" class="w-4 h-4"></i>
+          Book Architecture Consultation
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SERVICE 5: ECOMMERCE ===================== -->
+<section id="ecommerce" style="background:#111111;" class="py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <!-- Left: Info -->
+      <div class="reveal-left">
+        <span class="section-badge">
+          <i data-lucide="shopping-bag" class="w-3.5 h-3.5"></i>
+          eCommerce Solutions
+        </span>
+        <h2 class="font-display font-bold text-3xl md:text-4xl text-white mt-4 mb-5 leading-tight">
+          Online Stores That<br>Convert &amp; Scale
+        </h2>
+        <p class="text-gray-400 leading-relaxed mb-8">
+          Full-featured eCommerce platforms built for performance, conversions, and seamless customer experiences.
+          From product catalog to checkout — every touchpoint optimized for revenue.
+        </p>
+        <ul class="space-y-3 mb-8">
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>Custom eCommerce Store Development</span>
+          </li>
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>Payment Gateway Integration (Stripe, PayPal)</span>
+          </li>
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>Inventory &amp; Order Management Systems</span>
+          </li>
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>Shopping Cart &amp; Checkout Optimization</span>
+          </li>
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>eCommerce Analytics &amp; Reporting</span>
+          </li>
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>Multi-vendor Marketplace Development</span>
+          </li>
+        </ul>
+        <div class="flex flex-wrap gap-2 mb-8">
+          <span class="skill-tag">Next.js</span>
+          <span class="skill-tag">Stripe</span>
+          <span class="skill-tag">PayPal</span>
+          <span class="skill-tag">Shopify API</span>
+          <span class="skill-tag">MongoDB</span>
+          <span class="skill-tag">Redis</span>
+          <span class="skill-tag">Cloudinary</span>
+          <span class="skill-tag">Vercel</span>
+        </div>
+        <a href="/consultation.html?service=ecommerce" style="background:#ffc451;color:#000;font-weight:700;" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl hover:opacity-90 transition-all">
+          <i data-lucide="calendar" class="w-4 h-4"></i>
+          Book eCommerce Consultation
+        </a>
+      </div>
+
+      <!-- Right: Decorative card -->
+      <div class="reveal-right">
+        <div style="background:#0a0a0a;border:1px solid #2a2a2a;border-radius:1.5rem;padding:2rem;" class="shadow-gold-sm">
+          <div class="flex items-center justify-center mb-8">
+            <div style="background:rgba(255,196,81,0.1);border:2px solid rgba(255,196,81,0.25);border-radius:1.25rem;padding:1.75rem;">
+              <i data-lucide="shopping-bag" style="width:4rem;height:4rem;color:#ffc451;"></i>
+            </div>
+          </div>
+          <div class="space-y-4">
+            <div style="background:#111;border:1px solid #1f1f1f;border-radius:1rem;padding:1rem;" class="flex items-center gap-3">
+              <div style="background:rgba(255,196,81,0.1);border-radius:.5rem;padding:.5rem;flex-shrink:0;">
+                <i data-lucide="credit-card" style="width:1.25rem;height:1.25rem;color:#ffc451;"></i>
+              </div>
+              <div>
+                <p class="text-white font-semibold text-sm">Secure Payments</p>
+                <p class="text-gray-500 text-xs">PCI-compliant checkout flows</p>
+              </div>
+            </div>
+            <div style="background:#111;border:1px solid #1f1f1f;border-radius:1rem;padding:1rem;" class="flex items-center gap-3">
+              <div style="background:rgba(255,196,81,0.1);border-radius:.5rem;padding:.5rem;flex-shrink:0;">
+                <i data-lucide="package" style="width:1.25rem;height:1.25rem;color:#ffc451;"></i>
+              </div>
+              <div>
+                <p class="text-white font-semibold text-sm">Inventory Management</p>
+                <p class="text-gray-500 text-xs">Real-time stock and order tracking</p>
+              </div>
+            </div>
+            <div style="background:#111;border:1px solid #1f1f1f;border-radius:1rem;padding:1rem;" class="flex items-center gap-3">
+              <div style="background:rgba(255,196,81,0.1);border-radius:.5rem;padding:.5rem;flex-shrink:0;">
+                <i data-lucide="pie-chart" style="width:1.25rem;height:1.25rem;color:#ffc451;"></i>
+              </div>
+              <div>
+                <p class="text-white font-semibold text-sm">Sales Analytics</p>
+                <p class="text-gray-500 text-xs">Revenue insights and forecasting</p>
+              </div>
+            </div>
+            <div style="background:#111;border:1px solid #1f1f1f;border-radius:1rem;padding:1rem;" class="flex items-center gap-3">
+              <div style="background:rgba(255,196,81,0.1);border-radius:.5rem;padding:.5rem;flex-shrink:0;">
+                <i data-lucide="store" style="width:1.25rem;height:1.25rem;color:#ffc451;"></i>
+              </div>
+              <div>
+                <p class="text-white font-semibold text-sm">Multi-vendor Marketplace</p>
+                <p class="text-gray-500 text-xs">Scalable seller ecosystems</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SERVICE 6: TECHNICAL CONSULTING ===================== -->
+<section id="consulting" style="background:#0a0a0a;" class="py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <!-- Left: Decorative card -->
+      <div class="reveal-left order-2 lg:order-1">
+        <div style="background:#111111;border:1px solid #2a2a2a;border-radius:1.5rem;padding:2rem;" class="shadow-gold-sm">
+          <div class="flex items-center justify-center mb-8">
+            <div style="background:rgba(255,196,81,0.1);border:2px solid rgba(255,196,81,0.25);border-radius:1.25rem;padding:1.75rem;">
+              <i data-lucide="lightbulb" style="width:4rem;height:4rem;color:#ffc451;"></i>
+            </div>
+          </div>
+          <div class="space-y-4">
+            <div style="background:#0a0a0a;border:1px solid #1f1f1f;border-radius:1rem;padding:1rem;" class="flex items-center gap-3">
+              <div style="background:rgba(255,196,81,0.1);border-radius:.5rem;padding:.5rem;flex-shrink:0;">
+                <i data-lucide="map" style="width:1.25rem;height:1.25rem;color:#ffc451;"></i>
+              </div>
+              <div>
+                <p class="text-white font-semibold text-sm">Tech Roadmap Planning</p>
+                <p class="text-gray-500 text-xs">Align technology with business goals</p>
+              </div>
+            </div>
+            <div style="background:#0a0a0a;border:1px solid #1f1f1f;border-radius:1rem;padding:1rem;" class="flex items-center gap-3">
+              <div style="background:rgba(255,196,81,0.1);border-radius:.5rem;padding:.5rem;flex-shrink:0;">
+                <i data-lucide="search" style="width:1.25rem;height:1.25rem;color:#ffc451;"></i>
+              </div>
+              <div>
+                <p class="text-white font-semibold text-sm">Architecture Audits</p>
+                <p class="text-gray-500 text-xs">Deep code and system reviews</p>
+              </div>
+            </div>
+            <div style="background:#0a0a0a;border:1px solid #1f1f1f;border-radius:1rem;padding:1rem;" class="flex items-center gap-3">
+              <div style="background:rgba(255,196,81,0.1);border-radius:.5rem;padding:.5rem;flex-shrink:0;">
+                <i data-lucide="users" style="width:1.25rem;height:1.25rem;color:#ffc451;"></i>
+              </div>
+              <div>
+                <p class="text-white font-semibold text-sm">Team Mentoring</p>
+                <p class="text-gray-500 text-xs">Elevate your engineering team</p>
+              </div>
+            </div>
+            <div style="background:#0a0a0a;border:1px solid #1f1f1f;border-radius:1rem;padding:1rem;" class="flex items-center gap-3">
+              <div style="background:rgba(255,196,81,0.1);border-radius:.5rem;padding:.5rem;flex-shrink:0;">
+                <i data-lucide="refresh-cw" style="width:1.25rem;height:1.25rem;color:#ffc451;"></i>
+              </div>
+              <div>
+                <p class="text-white font-semibold text-sm">Legacy Modernization</p>
+                <p class="text-gray-500 text-xs">Migrate without disruption</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Info -->
+      <div class="reveal-right order-1 lg:order-2">
+        <span class="section-badge">
+          <i data-lucide="lightbulb" class="w-3.5 h-3.5"></i>
+          Technical Consulting
+        </span>
+        <h2 class="font-display font-bold text-3xl md:text-4xl text-white mt-4 mb-5 leading-tight">
+          Strategic Guidance<br>for Technical Leaders
+        </h2>
+        <p class="text-gray-400 leading-relaxed mb-8">
+          Technology-agnostic consulting to help businesses make better technical decisions, build stronger teams,
+          and modernize legacy systems. Clarity and direction when it matters most.
+        </p>
+        <ul class="space-y-3 mb-8">
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>Technology Strategy &amp; Roadmap Planning</span>
+          </li>
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>Code Review &amp; Architecture Audits</span>
+          </li>
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>Team Mentoring &amp; Technical Training</span>
+          </li>
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>Legacy System Modernization</span>
+          </li>
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>Vendor Selection &amp; Due Diligence</span>
+          </li>
+          <li class="flex items-start gap-3 text-gray-300">
+            <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            <span>CTO Advisory Services</span>
+          </li>
+        </ul>
+        <div class="flex flex-wrap gap-2 mb-8">
+          <span class="skill-tag">Agile</span>
+          <span class="skill-tag">SCRUM</span>
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">Code Review</span>
+          <span class="skill-tag">System Design</span>
+          <span class="skill-tag">Tech Strategy</span>
+          <span class="skill-tag">Architecture Review</span>
+        </div>
+        <a href="/consultation.html?service=consulting" style="background:#ffc451;color:#000;font-weight:700;" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl hover:opacity-90 transition-all">
+          <i data-lucide="calendar" class="w-4 h-4"></i>
+          Book Consulting Session
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TECHNOLOGY STACK ===================== -->
+<section style="background:#111111;" class="py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-14">
+      <span class="section-badge reveal" data-delay="0">
+        <i data-lucide="cpu" class="w-3.5 h-3.5"></i>
+        Tech Stack
+      </span>
+      <h2 class="font-display font-bold text-3xl md:text-4xl text-white mt-4 reveal" data-delay="100">
+        Tools &amp; Technologies
+      </h2>
+      <p class="text-gray-400 mt-3 max-w-xl mx-auto reveal" data-delay="200">
+        A curated, battle-tested stack — chosen for performance, reliability, and scalability across every discipline.
+      </p>
+    </div>
+
+    <div class="space-y-6 max-w-4xl mx-auto">
+      <!-- Languages -->
+      <div style="background:#0a0a0a;border:1px solid #1f1f1f;border-radius:1.25rem;padding:1.5rem 2rem;" class="reveal" data-delay="0">
+        <div class="flex flex-wrap items-center gap-4">
+          <span class="font-display font-bold text-sm text-white w-28 flex-shrink-0" style="color:#ffc451">Languages</span>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">TypeScript</span>
+            <span class="skill-tag">R</span>
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">Bash</span>
+          </div>
+        </div>
+      </div>
+      <!-- Frameworks -->
+      <div style="background:#0a0a0a;border:1px solid #1f1f1f;border-radius:1.25rem;padding:1.5rem 2rem;" class="reveal" data-delay="100">
+        <div class="flex flex-wrap items-center gap-4">
+          <span class="font-display font-bold text-sm text-white w-28 flex-shrink-0" style="color:#ffc451">Frameworks</span>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">Next.js</span>
+            <span class="skill-tag">Node.js</span>
+            <span class="skill-tag">Express</span>
+            <span class="skill-tag">Django</span>
+            <span class="skill-tag">FastAPI</span>
+          </div>
+        </div>
+      </div>
+      <!-- Data & ML -->
+      <div style="background:#0a0a0a;border:1px solid #1f1f1f;border-radius:1.25rem;padding:1.5rem 2rem;" class="reveal" data-delay="200">
+        <div class="flex flex-wrap items-center gap-4">
+          <span class="font-display font-bold text-sm text-white w-28 flex-shrink-0" style="color:#ffc451">Data &amp; ML</span>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-tag">TensorFlow</span>
+            <span class="skill-tag">PyTorch</span>
+            <span class="skill-tag">Pandas</span>
+            <span class="skill-tag">Scikit-learn</span>
+            <span class="skill-tag">Spark</span>
+          </div>
+        </div>
+      </div>
+      <!-- Cloud & DevOps -->
+      <div style="background:#0a0a0a;border:1px solid #1f1f1f;border-radius:1.25rem;padding:1.5rem 2rem;" class="reveal" data-delay="300">
+        <div class="flex flex-wrap items-center gap-4">
+          <span class="font-display font-bold text-sm text-white w-28 flex-shrink-0" style="color:#ffc451">Cloud &amp; DevOps</span>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-tag">AWS</span>
+            <span class="skill-tag">Docker</span>
+            <span class="skill-tag">Kubernetes</span>
+            <span class="skill-tag">GitHub Actions</span>
+            <span class="skill-tag">Vercel</span>
+          </div>
+        </div>
+      </div>
+      <!-- Databases -->
+      <div style="background:#0a0a0a;border:1px solid #1f1f1f;border-radius:1.25rem;padding:1.5rem 2rem;" class="reveal" data-delay="400">
+        <div class="flex flex-wrap items-center gap-4">
+          <span class="font-display font-bold text-sm text-white w-28 flex-shrink-0" style="color:#ffc451">Databases</span>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-tag">PostgreSQL</span>
+            <span class="skill-tag">MongoDB</span>
+            <span class="skill-tag">Redis</span>
+            <span class="skill-tag">MySQL</span>
+            <span class="skill-tag">Elasticsearch</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PRICING ===================== -->
+<section id="pricing" style="background:#0a0a0a;" class="py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-14">
+      <span class="section-badge reveal" data-delay="0">
+        <i data-lucide="tag" class="w-3.5 h-3.5"></i>
+        Pricing
+      </span>
+      <h2 class="font-display font-bold text-3xl md:text-4xl text-white mt-4 reveal" data-delay="100">
+        Transparent Pricing
+      </h2>
+      <p class="text-gray-400 mt-3 max-w-xl mx-auto reveal" data-delay="200">
+        Flexible engagement models to fit your project size and budget.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+      <!-- Starter -->
+      <div style="background:#111;border:1.5px solid #1f1f1f;border-radius:1.5rem;padding:2rem;" class="reveal hover-scale" data-delay="0">
+        <div class="mb-6">
+          <div style="background:rgba(255,196,81,0.08);border-radius:.75rem;width:3rem;height:3rem;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;">
+            <i data-lucide="zap" style="width:1.5rem;height:1.5rem;color:#ffc451;"></i>
+          </div>
+          <h3 class="font-display font-bold text-xl text-white">Starter</h3>
+          <p class="text-gray-500 text-sm mt-1">Quick consultations &amp; small fixes</p>
+        </div>
+        <div class="mb-6">
+          <p class="text-3xl font-bold text-white">$150<span class="text-gray-500 text-base font-normal">/hr</span></p>
+          <p class="text-gray-500 text-sm mt-1">or from $500/project</p>
+        </div>
+        <ul class="space-y-3 mb-8">
+          <li class="flex items-start gap-2.5 text-gray-300 text-sm">
+            <i data-lucide="check" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            Initial consultation call
+          </li>
+          <li class="flex items-start gap-2.5 text-gray-300 text-sm">
+            <i data-lucide="check" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            Project scoping &amp; estimation
+          </li>
+          <li class="flex items-start gap-2.5 text-gray-300 text-sm">
+            <i data-lucide="check" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            1 revision round
+          </li>
+          <li class="flex items-start gap-2.5 text-gray-300 text-sm">
+            <i data-lucide="check" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            Email support
+          </li>
+        </ul>
+        <a href="/consultation.html" style="display:block;text-align:center;border:1.5px solid #2a2a2a;color:#ccc;font-weight:600;padding:.75rem 1.25rem;border-radius:.875rem;transition:all 0.2s;font-size:.9375rem;" onmouseover="this.style.borderColor='#ffc451';this.style.color='#ffc451'" onmouseout="this.style.borderColor='#2a2a2a';this.style.color='#ccc'">
+          Get Started
+        </a>
+      </div>
+
+      <!-- Professional (Most Popular) -->
+      <div style="background:#111;border-radius:1.5rem;padding:2rem;position:relative;margin-top:-0.5rem;" class="pricing-popular reveal hover-scale" data-delay="100">
+        <div class="pricing-badge">Most Popular</div>
+        <div class="mb-6 mt-4">
+          <div style="background:rgba(255,196,81,0.15);border-radius:.75rem;width:3rem;height:3rem;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;">
+            <i data-lucide="star" style="width:1.5rem;height:1.5rem;color:#ffc451;"></i>
+          </div>
+          <h3 class="font-display font-bold text-xl text-white">Professional</h3>
+          <p class="text-gray-500 text-sm mt-1">Full feature development &amp; data science</p>
+        </div>
+        <div class="mb-6">
+          <p class="text-3xl font-bold text-white">$250<span class="text-gray-500 text-base font-normal">/hr</span></p>
+          <p class="text-gray-500 text-sm mt-1">or from $2,000/project</p>
+        </div>
+        <ul class="space-y-3 mb-8">
+          <li class="flex items-start gap-2.5 text-gray-300 text-sm">
+            <i data-lucide="check" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            Discovery &amp; strategy session
+          </li>
+          <li class="flex items-start gap-2.5 text-gray-300 text-sm">
+            <i data-lucide="check" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            Full project development
+          </li>
+          <li class="flex items-start gap-2.5 text-gray-300 text-sm">
+            <i data-lucide="check" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            Unlimited revisions
+          </li>
+          <li class="flex items-start gap-2.5 text-gray-300 text-sm">
+            <i data-lucide="check" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            Weekly progress calls
+          </li>
+          <li class="flex items-start gap-2.5 text-gray-300 text-sm">
+            <i data-lucide="check" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            30-day post-launch support
+          </li>
+        </ul>
+        <a href="/consultation.html" style="display:block;text-align:center;background:#ffc451;color:#000;font-weight:700;padding:.875rem 1.25rem;border-radius:.875rem;transition:opacity 0.2s;font-size:.9375rem;" onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">
+          Book Now
+        </a>
+      </div>
+
+      <!-- Enterprise -->
+      <div style="background:#111;border:1.5px solid #1f1f1f;border-radius:1.5rem;padding:2rem;" class="reveal hover-scale" data-delay="200">
+        <div class="mb-6">
+          <div style="background:rgba(255,196,81,0.08);border-radius:.75rem;width:3rem;height:3rem;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;">
+            <i data-lucide="building-2" style="width:1.5rem;height:1.5rem;color:#ffc451;"></i>
+          </div>
+          <h3 class="font-display font-bold text-xl text-white">Enterprise</h3>
+          <p class="text-gray-500 text-sm mt-1">Large-scale systems &amp; ongoing partnerships</p>
+        </div>
+        <div class="mb-6">
+          <p class="text-3xl font-bold text-white">Custom</p>
+          <p class="text-gray-500 text-sm mt-1">Tailored to your scope &amp; timeline</p>
+        </div>
+        <ul class="space-y-3 mb-8">
+          <li class="flex items-start gap-2.5 text-gray-300 text-sm">
+            <i data-lucide="check" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            Dedicated engagement
+          </li>
+          <li class="flex items-start gap-2.5 text-gray-300 text-sm">
+            <i data-lucide="check" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            Multi-project contracts
+          </li>
+          <li class="flex items-start gap-2.5 text-gray-300 text-sm">
+            <i data-lucide="check" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            Team training &amp; mentoring
+          </li>
+          <li class="flex items-start gap-2.5 text-gray-300 text-sm">
+            <i data-lucide="check" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            Priority support (24hr response)
+          </li>
+          <li class="flex items-start gap-2.5 text-gray-300 text-sm">
+            <i data-lucide="check" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            Monthly strategy sessions
+          </li>
+          <li class="flex items-start gap-2.5 text-gray-300 text-sm">
+            <i data-lucide="check" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#ffc451"></i>
+            NDA &amp; contracts
+          </li>
+        </ul>
+        <a href="/consultation.html" style="display:block;text-align:center;border:1.5px solid #2a2a2a;color:#ccc;font-weight:600;padding:.75rem 1.25rem;border-radius:.875rem;transition:all 0.2s;font-size:.9375rem;" onmouseover="this.style.borderColor='#ffc451';this.style.color='#ffc451'" onmouseout="this.style.borderColor='#2a2a2a';this.style.color='#ccc'">
+          Contact for Pricing
+        </a>
+      </div>
+    </div>
+
+    <!-- Pricing note -->
+    <p class="text-center text-gray-500 text-sm mt-10 reveal" data-delay="300">
+      <i data-lucide="info" class="w-3.5 h-3.5 inline-block mr-1.5 align-middle" style="color:#ffc451"></i>
+      All projects begin with a free 30-minute discovery call. No commitment required.
+    </p>
+  </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section style="background:#111111;" class="py-20">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-14">
+      <span class="section-badge reveal" data-delay="0">
+        <i data-lucide="help-circle" class="w-3.5 h-3.5"></i>
+        FAQ
+      </span>
+      <h2 class="font-display font-bold text-3xl md:text-4xl text-white mt-4 reveal" data-delay="100">
+        Frequently Asked Questions
+      </h2>
+    </div>
+
+    <div class="space-y-3">
+      <!-- FAQ 1 -->
+      <div style="background:#0a0a0a;border:1px solid #1f1f1f;border-radius:1rem;overflow:hidden;" class="reveal" data-delay="0">
+        <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left">
+          <span class="font-semibold text-white text-sm">How long does a typical project take?</span>
+          <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 flex-shrink-0" style="color:#ffc451"></i>
+        </button>
+        <div class="faq-answer px-6 text-gray-400 text-sm leading-relaxed">
+          <div class="pb-5">
+            Project timelines vary based on complexity. A data dashboard might take 1–2 weeks, while a full web application
+            could take 4–12 weeks. I provide detailed timelines during the discovery call so you always know what to expect.
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ 2 -->
+      <div style="background:#0a0a0a;border:1px solid #1f1f1f;border-radius:1rem;overflow:hidden;" class="reveal" data-delay="100">
+        <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left">
+          <span class="font-semibold text-white text-sm">Do you work with startups or only established companies?</span>
+          <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 flex-shrink-0" style="color:#ffc451"></i>
+        </button>
+        <div class="faq-answer px-6 text-gray-400 text-sm leading-relaxed">
+          <div class="pb-5">
+            Both. I love working with early-stage startups to build MVPs, and I equally enjoy helping established businesses
+            scale or modernize their systems. Each engagement is tailored to your specific stage and goals.
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ 3 -->
+      <div style="background:#0a0a0a;border:1px solid #1f1f1f;border-radius:1rem;overflow:hidden;" class="reveal" data-delay="200">
+        <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left">
+          <span class="font-semibold text-white text-sm">How do you handle project communication?</span>
+          <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 flex-shrink-0" style="color:#ffc451"></i>
+        </button>
+        <div class="faq-answer px-6 text-gray-400 text-sm leading-relaxed">
+          <div class="pb-5">
+            I use async communication (email, Slack) for daily updates and schedule weekly video calls for progress reviews.
+            You'll always know where your project stands — no surprises, no radio silence.
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ 4 -->
+      <div style="background:#0a0a0a;border:1px solid #1f1f1f;border-radius:1rem;overflow:hidden;" class="reveal" data-delay="300">
+        <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left">
+          <span class="font-semibold text-white text-sm">Can you work with my existing development team?</span>
+          <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 flex-shrink-0" style="color:#ffc451"></i>
+        </button>
+        <div class="faq-answer px-6 text-gray-400 text-sm leading-relaxed">
+          <div class="pb-5">
+            Absolutely. I frequently collaborate with in-house teams, filling skill gaps or providing architectural guidance
+            as needed. I integrate into your existing workflow — Jira, Linear, Notion, whatever you use.
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ 5 -->
+      <div style="background:#0a0a0a;border:1px solid #1f1f1f;border-radius:1rem;overflow:hidden;" class="reveal" data-delay="400">
+        <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left">
+          <span class="font-semibold text-white text-sm">Do you sign NDAs?</span>
+          <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 flex-shrink-0" style="color:#ffc451"></i>
+        </button>
+        <div class="faq-answer px-6 text-gray-400 text-sm leading-relaxed">
+          <div class="pb-5">
+            Yes. I'm happy to sign NDAs before discussing sensitive project details. Client confidentiality is a priority —
+            your ideas, data, and business information are safe.
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ 6 -->
+      <div style="background:#0a0a0a;border:1px solid #1f1f1f;border-radius:1rem;overflow:hidden;" class="reveal" data-delay="500">
+        <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left">
+          <span class="font-semibold text-white text-sm">What if I'm not satisfied with the work?</span>
+          <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 flex-shrink-0" style="color:#ffc451"></i>
+        </button>
+        <div class="faq-answer px-6 text-gray-400 text-sm leading-relaxed">
+          <div class="pb-5">
+            Satisfaction is guaranteed within the agreed scope. I offer revision rounds and will work until the deliverables
+            meet your expectations. Clear scope, clear outcomes — that's the commitment.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CTA BANNER ===================== -->
+<section class="cta-section py-20 text-center">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="orb orb-gold" style="width:350px;height:350px;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;"></div>
+    <div class="relative z-10">
+      <h2 class="font-display font-bold text-4xl md:text-5xl text-white mb-5 reveal" data-delay="0">
+        Ready to Start<br>Your Project?
+      </h2>
+      <p class="text-gray-400 text-lg mb-10 reveal" data-delay="100">
+        Schedule a free discovery call — no commitment, just clarity on what's possible.
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-4 reveal" data-delay="200">
+        <a href="/consultation.html" style="background:#ffc451;color:#000;font-weight:700;" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl text-base hover:opacity-90 transition-all">
+          <i data-lucide="calendar" class="w-5 h-5"></i>
+          Book Free Consultation
+        </a>
+        <a href="#pricing" style="border:1.5px solid #2a2a2a;color:#ccc;" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl text-base font-semibold hover:border-gold-500 hover:text-white transition-all">
+          <i data-lucide="tag" class="w-5 h-5"></i>
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer style="background:#050505;border-top:1px solid #1f1f1f;">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <div class="lg:col-span-2">
+        <a href="/" class="flex items-center gap-2.5 mb-5">
+          <img src="/assets/img/favicon_io/android-chrome-192x192.png" alt="EOLAW" class="w-10 h-10 rounded-xl">
+          <span class="font-display font-bold text-xl"><span style="color:#ffc451">EOLAW</span> <span class="text-white">Consulting</span></span>
+        </a>
+        <p class="text-gray-500 text-sm leading-relaxed max-w-sm mb-6">Expert consulting in Data Science, Software Engineering, and AI/ML solutions. Transforming complex challenges into measurable business outcomes.</p>
+        <div class="flex items-center gap-3">
+          <a href="https://www.linkedin.com/in/emmanuel-oyemosu/" target="_blank" class="w-10 h-10 rounded-lg flex items-center justify-center text-gray-500 transition-all" style="background:#1a1a1a;border:1px solid #2a2a2a;"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+          <a href="https://github.com/EOlaw" target="_blank" class="w-10 h-10 rounded-lg flex items-center justify-center text-gray-500 transition-all" style="background:#1a1a1a;border:1px solid #2a2a2a;"><i data-lucide="github" class="w-4 h-4"></i></a>
+          <a href="https://www.instagram.com/e_olawalee/" target="_blank" class="w-10 h-10 rounded-lg flex items-center justify-center text-gray-500 transition-all" style="background:#1a1a1a;border:1px solid #2a2a2a;"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+          <a href="mailto:your.email@domain.com" class="w-10 h-10 rounded-lg flex items-center justify-center text-gray-500 transition-all" style="background:#1a1a1a;border:1px solid #2a2a2a;"><i data-lucide="mail" class="w-4 h-4"></i></a>
+        </div>
+      </div>
+      <div>
+        <h4 class="font-display font-bold text-white mb-5 text-sm uppercase tracking-widest">Navigation</h4>
+        <ul class="space-y-3">
+          <li><a href="/" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Home</a></li>
+          <li><a href="/about.html" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">About</a></li>
+          <li><a href="/services.html" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Services</a></li>
+          <li><a href="/consultation.html" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Book Consultation</a></li>
+          <li><a href="/privacy.html" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Privacy Policy</a></li>
+          <li><a href="/terms.html" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Terms of Service</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-display font-bold text-white mb-5 text-sm uppercase tracking-widest">Services</h4>
+        <ul class="space-y-3">
+          <li><a href="/services.html#data-science" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Data Science &amp; Analytics</a></li>
+          <li><a href="/services.html#fullstack" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Full-Stack Development</a></li>
+          <li><a href="/services.html#ai-ml" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">AI &amp; Machine Learning</a></li>
+          <li><a href="/services.html#architecture" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">System Architecture</a></li>
+          <li><a href="/services.html#ecommerce" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">eCommerce Solutions</a></li>
+          <li><a href="/services.html#consulting" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Technical Consulting</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="mt-12 pt-8 border-t border-dark-500 flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="text-gray-600 text-sm">© 2025 EOLAW Consulting. All rights reserved.</p>
+      <div class="flex items-center gap-2 text-gray-600 text-sm"><i data-lucide="map-pin" class="w-3.5 h-3.5" style="color:#ffc451"></i><span>Available Worldwide · Remote Consulting</span></div>
+      <div class="flex items-center gap-4">
+        <a href="/privacy.html" class="text-gray-600 hover:text-gold-500 text-sm transition-colors">Privacy</a>
+        <a href="/terms.html" class="text-gray-600 hover:text-gold-500 text-sm transition-colors">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="/assets/js/main.js"></script>
+</body>
 </html>

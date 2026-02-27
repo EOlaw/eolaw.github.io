@@ -1,138 +1,530 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Insightserenity – Consultations & Biblical Guidance</title>
-
-  <!-- favicons -->
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon_io/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon_io/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon_io/favicon-16x16.png">
-  <link rel="shortcut icon" href="assets/img/favicon_io/favicon.ico">
-  <link rel="manifest" href="assets/img/favicon_io/site.webmanifest">
-
-  <!-- Tailwind CDN -->
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-
-  <!-- Lucide icons -->
-  <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/lucide.min.js"></script>
-
-  <style>
-    :root {
-      --accent: #ffc451;
-      --dark: #000;
+  <title>EOLAW Consulting | Data Science & Software Engineering</title>
+  <meta name="description" content="Expert consulting in Data Science, Software Engineering, and AI/ML Solutions. Transform your data into actionable business intelligence with EOLAW Consulting.">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon_io/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="/assets/img/favicon_io/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/img/favicon_io/site.webmanifest">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: { 300:'#ffe08a', 400:'#ffd27f', 500:'#ffc451', 600:'#e6b048', 700:'#cc9c3f' },
+            dark: { 950:'#050505', 900:'#0a0a0a', 800:'#111111', 700:'#1a1a1a', 600:'#222222', 500:'#2a2a2a', 400:'#333333' }
+          },
+          fontFamily: { sans:['Inter','sans-serif'], display:['Space Grotesk','sans-serif'] }
+        }
+      }
     }
-  </style>
+  </script>
+  <link rel="stylesheet" href="/assets/css/business.css">
 </head>
+<body style="background:#0a0a0a;color:#e5e5e5;font-family:'Inter',sans-serif;">
 
-<body class="bg-black text-white antialiased">
-  <!-- navigation -->
-  <nav class="bg-black border-b border-gray-800 sticky top-0 z-50">
-    <div class="container mx-auto flex items-center justify-between py-4 px-6">
-      <a href="index.html" class="flex items-center">
-        <img src="assets/img/favicon_io/apple-touch-icon.png" alt="Insightserenity logo" class="h-8 w-8 mr-2">
-        <span class="text-2xl font-bold" style="color: var(--accent);">Insightserenity</span>
-      </a>
-      <div class="space-x-6 text-sm flex items-center">
-        <a href="index.html" class="hover:text-[#ffc451] flex items-center"><i data-lucide="home" class="w-4 h-4 mr-1"></i>Home</a>
-        <a href="about.html" class="hover:text-[#ffc451] flex items-center"><i data-lucide="info" class="w-4 h-4 mr-1"></i>About</a>
-        <a href="services.html" class="hover:text-[#ffc451] flex items-center"><i data-lucide="briefcase" class="w-4 h-4 mr-1"></i>Services</a>
-        <a href="consultation.html" class="hover:text-[#ffc451] flex items-center"><i data-lucide="phone" class="w-4 h-4 mr-1"></i>Book</a>
-        <a href="privacy.html" class="hover:text-[#ffc451] flex items-center"><i data-lucide="shield" class="w-4 h-4 mr-1"></i>Privacy</a>
-        <a href="terms.html" class="hover:text-[#ffc451] flex items-center"><i data-lucide="file-text" class="w-4 h-4 mr-1"></i>Terms</a>
+  <!-- NAVBAR -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 py-5 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between">
+        <a href="/" class="flex items-center gap-2.5">
+          <img src="/assets/img/favicon_io/android-chrome-192x192.png" alt="EOLAW" class="w-9 h-9 rounded-xl">
+          <span class="font-display font-bold text-lg"><span style="color:#ffc451">EOLAW</span> <span class="text-white">Consulting</span></span>
+        </a>
+        <div class="hidden md:flex items-center gap-1">
+          <a href="/" class="nav-link text-sm font-medium px-4 py-2 rounded-lg hover:bg-dark-700 transition-all" style="color:#ffc451;">Home</a>
+          <a href="/about.html" class="nav-link text-sm font-medium px-4 py-2 rounded-lg text-gray-300 hover:text-gold-500 hover:bg-dark-700 transition-all">About</a>
+          <a href="/services.html" class="nav-link text-sm font-medium px-4 py-2 rounded-lg text-gray-300 hover:text-gold-500 hover:bg-dark-700 transition-all">Services</a>
+          <a href="/consultation.html" class="nav-link text-sm font-medium px-4 py-2 rounded-lg text-gray-300 hover:text-gold-500 hover:bg-dark-700 transition-all">Consultation</a>
+        </div>
+        <div class="hidden md:flex items-center gap-4">
+          <a href="tel:+10000000000" class="flex items-center gap-2 text-sm text-gray-400 hover:text-gold-500 transition-colors">
+            <i data-lucide="phone" class="w-4 h-4"></i><span>+1 (000) 000-0000</span>
+          </a>
+          <a href="/consultation.html" style="background:#ffc451;color:#000;font-weight:700;" class="px-5 py-2.5 rounded-xl text-sm transition-all hover:opacity-90">Book Consultation</a>
+        </div>
+        <button id="mobile-toggle" class="md:hidden p-2 rounded-lg text-gray-300 hover:bg-dark-700 transition-colors">
+          <i data-lucide="menu" class="w-5 h-5" id="menu-icon"></i>
+        </button>
+      </div>
+      <div id="mobile-menu" class="hidden md:hidden mt-4 pt-4 border-t border-dark-500 space-y-1 pb-4">
+        <a href="/" class="block text-gray-300 hover:text-gold-500 px-4 py-2.5 rounded-lg hover:bg-dark-700 font-medium">Home</a>
+        <a href="/about.html" class="block text-gray-300 hover:text-gold-500 px-4 py-2.5 rounded-lg hover:bg-dark-700 font-medium">About</a>
+        <a href="/services.html" class="block text-gray-300 hover:text-gold-500 px-4 py-2.5 rounded-lg hover:bg-dark-700 font-medium">Services</a>
+        <a href="/consultation.html" class="block text-gray-300 hover:text-gold-500 px-4 py-2.5 rounded-lg hover:bg-dark-700 font-medium">Consultation</a>
+        <div class="pt-3 mt-3 border-t border-dark-500">
+          <a href="/consultation.html" style="background:#ffc451;color:#000;font-weight:700;" class="block px-4 py-3 rounded-xl text-center text-sm">Book Consultation</a>
+        </div>
       </div>
     </div>
   </nav>
 
-  <!-- hero -->
-  <section class="relative bg-black overflow-hidden" style="background-image: url('https://source.unsplash.com/1600x900/?consulting,office'); background-size: cover; background-position: center;">
-    <div class="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black"></div>
-    <div class="container mx-auto relative z-10 flex flex-col items-center justify-center py-32 px-6 text-center">
-      <h1 class="text-5xl md:text-6xl font-extrabold mb-4" style="color: var(--accent);">
-        Insightserenity: Business & Biblical Guidance
-      </h1>
-      <p class="max-w-2xl mb-8 text-lg">
-        We offer paid consulting for technology, strategy and personal development alongside free
-        Bible-based advice. Send us a message by email or phone and receive thoughtful, scripture‑informed
-        responses from experienced professionals.
+  <!-- HERO SECTION -->
+  <section class="bg-grid" style="min-height:100vh;background-color:#0a0a0a;position:relative;display:flex;align-items:center;overflow:hidden;">
+    <!-- Decorative gold orbs -->
+    <div style="position:absolute;top:15%;left:8%;width:380px;height:380px;background:radial-gradient(circle,rgba(255,196,81,0.12) 0%,transparent 70%);border-radius:50%;pointer-events:none;filter:blur(40px);"></div>
+    <div style="position:absolute;bottom:15%;right:6%;width:300px;height:300px;background:radial-gradient(circle,rgba(255,196,81,0.08) 0%,transparent 70%);border-radius:50%;pointer-events:none;filter:blur(40px);"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full" style="padding-top:6rem;padding-bottom:6rem;">
+      <div class="max-w-4xl mx-auto text-center">
+
+        <!-- Badge -->
+        <div class="reveal inline-flex items-center gap-2.5 px-4 py-2 rounded-full mb-8" style="background:rgba(255,196,81,0.08);border:1px solid rgba(255,196,81,0.2);">
+          <span style="width:8px;height:8px;background:#ffc451;border-radius:50%;display:inline-block;animation:pulse 2s infinite;"></span>
+          <span style="color:#ffc451;font-size:0.8rem;font-weight:600;letter-spacing:0.05em;">Available for Consulting</span>
+        </div>
+
+        <!-- Headline -->
+        <h1 class="reveal font-display font-bold mb-6" style="font-size:clamp(2.5rem,6vw,4.5rem);line-height:1.1;letter-spacing:-0.02em;" data-delay="100">
+          <span class="text-white">Transform Data Into</span><br>
+          <span style="color:#ffc451;">Business Intelligence</span>
+        </h1>
+
+        <!-- Subtext -->
+        <p class="reveal text-gray-400 mb-10 max-w-2xl mx-auto" style="font-size:1.125rem;line-height:1.75;" data-delay="200">
+          Expert consulting in Data Science, Software Engineering, and AI/ML Solutions. I help organizations unlock the full potential of their data and build systems that scale.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="reveal flex flex-col sm:flex-row items-center justify-center gap-4 mb-20" data-delay="300">
+          <a href="/consultation.html" style="background:#ffc451;color:#000;font-weight:700;display:inline-flex;align-items:center;gap:0.5rem;" class="px-8 py-3.5 rounded-xl text-sm transition-all hover:opacity-90">
+            <i data-lucide="calendar" class="w-4 h-4"></i>
+            Book a Consultation
+          </a>
+          <a href="/services.html" style="border:1px solid rgba(255,196,81,0.35);color:#ffc451;display:inline-flex;align-items:center;gap:0.5rem;" class="px-8 py-3.5 rounded-xl text-sm font-semibold transition-all hover:bg-opacity-10" onmouseover="this.style.background='rgba(255,196,81,0.08)'" onmouseout="this.style.background='transparent'">
+            Explore Services
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="reveal grid grid-cols-2 md:grid-cols-4 gap-4" data-delay="400">
+          <div class="stat-card rounded-2xl p-6 text-center" style="background:#111111;border:1px solid #1f1f1f;">
+            <div class="font-display font-bold mb-1" style="font-size:2rem;color:#ffc451;">
+              <span class="counter" data-target="50" data-suffix="+">50+</span>
+            </div>
+            <div class="text-gray-500 text-xs uppercase tracking-widest font-medium">Projects Delivered</div>
+          </div>
+          <div class="stat-card rounded-2xl p-6 text-center" style="background:#111111;border:1px solid #1f1f1f;">
+            <div class="font-display font-bold mb-1" style="font-size:2rem;color:#ffc451;">
+              <span class="counter" data-target="100" data-suffix="%">100%</span>
+            </div>
+            <div class="text-gray-500 text-xs uppercase tracking-widest font-medium">Client Satisfaction</div>
+          </div>
+          <div class="stat-card rounded-2xl p-6 text-center" style="background:#111111;border:1px solid #1f1f1f;">
+            <div class="font-display font-bold mb-1" style="font-size:2rem;color:#ffc451;">
+              <span class="counter" data-target="5" data-suffix="+">5+</span>
+            </div>
+            <div class="text-gray-500 text-xs uppercase tracking-widest font-medium">Years Experience</div>
+          </div>
+          <div class="stat-card rounded-2xl p-6 text-center" style="background:#111111;border:1px solid #1f1f1f;">
+            <div class="font-display font-bold mb-1" style="font-size:2rem;color:#ffc451;">
+              <span class="counter" data-target="20" data-suffix="+">20+</span>
+            </div>
+            <div class="text-gray-500 text-xs uppercase tracking-widest font-medium">Technologies</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <div class="absolute bottom-8 left-1/2" style="transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:4px;opacity:0.5;">
+        <span class="text-gray-500 text-xs uppercase tracking-widest mb-1">Scroll</span>
+        <i data-lucide="chevrons-down" class="w-5 h-5 text-gray-500" style="animation:bounce 2s infinite;"></i>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES OVERVIEW SECTION -->
+  <section style="background:#111111;padding:6rem 0;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <div class="reveal inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-4" style="background:rgba(255,196,81,0.08);border:1px solid rgba(255,196,81,0.2);">
+          <span style="color:#ffc451;font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">What I Offer</span>
+        </div>
+        <h2 class="reveal font-display font-bold text-white mb-4" style="font-size:clamp(1.75rem,4vw,2.75rem);letter-spacing:-0.02em;" data-delay="100">Core Services</h2>
+        <p class="reveal text-gray-400 max-w-xl mx-auto" style="line-height:1.7;" data-delay="200">
+          From raw data to deployable solutions — I deliver end-to-end consulting that drives real, measurable business outcomes.
+        </p>
+      </div>
+
+      <!-- Services Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+
+        <!-- Data Science -->
+        <div class="service-card reveal rounded-2xl p-8 transition-all cursor-pointer" style="background:#1a1a1a;border:1px solid #2a2a2a;" data-delay="0">
+          <div class="flex items-center justify-center w-14 h-14 rounded-xl mb-6" style="background:rgba(255,196,81,0.1);">
+            <i data-lucide="bar-chart-2" class="w-6 h-6" style="color:#ffc451;"></i>
+          </div>
+          <h3 class="font-display font-bold text-white text-lg mb-3">Data Science & Analytics</h3>
+          <p class="text-gray-500 text-sm leading-relaxed mb-5">Transform raw data into strategic insights. From predictive modeling to executive dashboards — I turn complexity into clarity.</p>
+          <a href="/services.html#data-science" style="color:#ffc451;font-size:0.875rem;font-weight:600;">Learn More &rarr;</a>
+        </div>
+
+        <!-- Full-Stack Development -->
+        <div class="service-card reveal rounded-2xl p-8 transition-all cursor-pointer" style="background:#1a1a1a;border:1px solid #2a2a2a;" data-delay="100">
+          <div class="flex items-center justify-center w-14 h-14 rounded-xl mb-6" style="background:rgba(255,196,81,0.1);">
+            <i data-lucide="code-2" class="w-6 h-6" style="color:#ffc451;"></i>
+          </div>
+          <h3 class="font-display font-bold text-white text-lg mb-3">Full-Stack Development</h3>
+          <p class="text-gray-500 text-sm leading-relaxed mb-5">End-to-end web application development using React, Next.js, Node.js, and modern databases. Scalable, performant, and production-ready.</p>
+          <a href="/services.html#fullstack" style="color:#ffc451;font-size:0.875rem;font-weight:600;">Learn More &rarr;</a>
+        </div>
+
+        <!-- AI & Machine Learning -->
+        <div class="service-card reveal rounded-2xl p-8 transition-all cursor-pointer" style="background:#1a1a1a;border:1px solid #2a2a2a;" data-delay="200">
+          <div class="flex items-center justify-center w-14 h-14 rounded-xl mb-6" style="background:rgba(255,196,81,0.1);">
+            <i data-lucide="brain" class="w-6 h-6" style="color:#ffc451;"></i>
+          </div>
+          <h3 class="font-display font-bold text-white text-lg mb-3">AI & Machine Learning</h3>
+          <p class="text-gray-500 text-sm leading-relaxed mb-5">Custom ML models, NLP pipelines, and intelligent automation systems. Bringing cutting-edge AI capabilities into your workflow.</p>
+          <a href="/services.html#ai-ml" style="color:#ffc451;font-size:0.875rem;font-weight:600;">Learn More &rarr;</a>
+        </div>
+
+        <!-- System Architecture -->
+        <div class="service-card reveal rounded-2xl p-8 transition-all cursor-pointer" style="background:#1a1a1a;border:1px solid #2a2a2a;" data-delay="0">
+          <div class="flex items-center justify-center w-14 h-14 rounded-xl mb-6" style="background:rgba(255,196,81,0.1);">
+            <i data-lucide="server" class="w-6 h-6" style="color:#ffc451;"></i>
+          </div>
+          <h3 class="font-display font-bold text-white text-lg mb-3">System Architecture</h3>
+          <p class="text-gray-500 text-sm leading-relaxed mb-5">Design and implementation of robust, scalable system architectures. Microservices, cloud infrastructure, and API design that grows with your business.</p>
+          <a href="/services.html#architecture" style="color:#ffc451;font-size:0.875rem;font-weight:600;">Learn More &rarr;</a>
+        </div>
+
+        <!-- eCommerce Solutions -->
+        <div class="service-card reveal rounded-2xl p-8 transition-all cursor-pointer" style="background:#1a1a1a;border:1px solid #2a2a2a;" data-delay="100">
+          <div class="flex items-center justify-center w-14 h-14 rounded-xl mb-6" style="background:rgba(255,196,81,0.1);">
+            <i data-lucide="shopping-bag" class="w-6 h-6" style="color:#ffc451;"></i>
+          </div>
+          <h3 class="font-display font-bold text-white text-lg mb-3">eCommerce Solutions</h3>
+          <p class="text-gray-500 text-sm leading-relaxed mb-5">High-performance eCommerce platforms built for scale. From custom storefronts to payment integration and inventory management systems.</p>
+          <a href="/services.html#ecommerce" style="color:#ffc451;font-size:0.875rem;font-weight:600;">Learn More &rarr;</a>
+        </div>
+
+        <!-- Technical Consulting -->
+        <div class="service-card reveal rounded-2xl p-8 transition-all cursor-pointer" style="background:#1a1a1a;border:1px solid #2a2a2a;" data-delay="200">
+          <div class="flex items-center justify-center w-14 h-14 rounded-xl mb-6" style="background:rgba(255,196,81,0.1);">
+            <i data-lucide="lightbulb" class="w-6 h-6" style="color:#ffc451;"></i>
+          </div>
+          <h3 class="font-display font-bold text-white text-lg mb-3">Technical Consulting</h3>
+          <p class="text-gray-500 text-sm leading-relaxed mb-5">Strategic technology advisory for startups and enterprises. Technology audits, stack selection, team mentoring, and roadmap planning.</p>
+          <a href="/services.html#consulting" style="color:#ffc451;font-size:0.875rem;font-weight:600;">Learn More &rarr;</a>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="text-center reveal" data-delay="300">
+        <a href="/services.html" style="border:1px solid rgba(255,196,81,0.35);color:#ffc451;display:inline-flex;align-items:center;gap:0.5rem;" class="px-8 py-3.5 rounded-xl text-sm font-semibold transition-all" onmouseover="this.style.background='rgba(255,196,81,0.08)'" onmouseout="this.style.background='transparent'">
+          View All Services
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT SNIPPET SECTION -->
+  <section style="background:#0a0a0a;padding:6rem 0;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+        <!-- Photo Column -->
+        <div class="reveal relative" data-delay="0">
+          <div class="relative inline-block">
+            <!-- Gold glow wrapper -->
+            <div style="position:absolute;inset:-12px;background:radial-gradient(circle at 50% 50%,rgba(255,196,81,0.15),transparent 70%);border-radius:1.5rem;filter:blur(20px);pointer-events:none;"></div>
+            <div style="position:relative;border-radius:1.25rem;overflow:hidden;border:1px solid rgba(255,196,81,0.2);">
+              <img src="/assets/img/emmanuel.jpeg" alt="Emmanuel Oyemosu" style="width:100%;max-width:460px;display:block;aspect-ratio:4/5;object-fit:cover;">
+              <!-- Gold overlay gradient at bottom -->
+              <div style="position:absolute;bottom:0;left:0;right:0;height:35%;background:linear-gradient(to top,rgba(255,196,81,0.08),transparent);pointer-events:none;"></div>
+            </div>
+            <!-- Floating badge -->
+            <div style="position:absolute;bottom:-1.5rem;right:-1.5rem;background:#1a1a1a;border:1px solid rgba(255,196,81,0.3);border-radius:1rem;padding:0.875rem 1.25rem;display:flex;align-items:center;gap:0.625rem;box-shadow:0 20px 40px rgba(0,0,0,0.6);">
+              <i data-lucide="award" class="w-5 h-5" style="color:#ffc451;"></i>
+              <div>
+                <div style="color:#ffc451;font-weight:700;font-size:0.8rem;">MIS Graduate</div>
+                <div style="color:#888;font-size:0.7rem;">Business Intelligence</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Text Column -->
+        <div class="reveal" data-delay="150">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-5" style="background:rgba(255,196,81,0.08);border:1px solid rgba(255,196,81,0.2);">
+            <span style="color:#ffc451;font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">About Me</span>
+          </div>
+
+          <h2 class="font-display font-bold text-white mb-6" style="font-size:clamp(1.75rem,4vw,2.75rem);letter-spacing:-0.02em;">Emmanuel Oyemosu</h2>
+
+          <p class="text-gray-400 mb-4" style="line-height:1.8;">
+            A dynamic data scientist and software engineer with a foundation in mathematics and a growing mastery of modern systems and technologies. Currently pursuing a Master's in Management Information Systems (MIS), I combine academic rigor with hands-on execution to deliver real-world results.
+          </p>
+          <p class="text-gray-400 mb-8" style="line-height:1.8;">
+            Recognized for delivering scalable solutions that align data, strategy, and automation — turning ideas into systems, data into insight, and performance into measurable outcomes. I blend analytical precision with creative engineering to tackle complex challenges.
+          </p>
+
+          <!-- Skill Tags -->
+          <div class="flex flex-wrap gap-2 mb-8">
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">Python</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">React</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">Next.js</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">Node.js</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">MongoDB</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">TensorFlow</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">AWS</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">PostgreSQL</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">Django</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">Power BI</span>
+          </div>
+
+          <a href="/about.html" style="background:#ffc451;color:#000;font-weight:700;display:inline-flex;align-items:center;gap:0.5rem;" class="px-7 py-3 rounded-xl text-sm transition-all hover:opacity-90">
+            Read Full Bio
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS SECTION -->
+  <section style="background:#111111;padding:6rem 0;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <div class="reveal inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-4" style="background:rgba(255,196,81,0.08);border:1px solid rgba(255,196,81,0.2);">
+          <span style="color:#ffc451;font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">How We Work</span>
+        </div>
+        <h2 class="reveal font-display font-bold text-white mb-4" style="font-size:clamp(1.75rem,4vw,2.75rem);letter-spacing:-0.02em;" data-delay="100">Simple 4-Step Process</h2>
+        <p class="reveal text-gray-400 max-w-xl mx-auto" style="line-height:1.7;" data-delay="200">
+          A clear, transparent workflow from first conversation to final delivery — so you always know what's happening.
+        </p>
+      </div>
+
+      <!-- Steps Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <!-- Step 01 -->
+        <div class="reveal rounded-2xl p-8 relative" style="background:#1a1a1a;border:1px solid #2a2a2a;" data-delay="0">
+          <div class="font-display font-bold mb-5" style="font-size:2.5rem;color:rgba(255,196,81,0.2);line-height:1;">01</div>
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(255,196,81,0.1);">
+            <i data-lucide="message-square" class="w-5 h-5" style="color:#ffc451;"></i>
+          </div>
+          <h3 class="font-display font-bold text-white text-lg mb-3">Consultation</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Discuss your project goals and requirements. We align on vision, scope, and success metrics before a single line of code is written.</p>
+        </div>
+
+        <!-- Step 02 -->
+        <div class="reveal rounded-2xl p-8 relative" style="background:#1a1a1a;border:1px solid #2a2a2a;" data-delay="100">
+          <div class="font-display font-bold mb-5" style="font-size:2.5rem;color:rgba(255,196,81,0.2);line-height:1;">02</div>
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(255,196,81,0.1);">
+            <i data-lucide="map" class="w-5 h-5" style="color:#ffc451;"></i>
+          </div>
+          <h3 class="font-display font-bold text-white text-lg mb-3">Strategy</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Develop a tailored plan and technology roadmap. Clear milestones, stack recommendations, and timeline so you know exactly what to expect.</p>
+        </div>
+
+        <!-- Step 03 -->
+        <div class="reveal rounded-2xl p-8 relative" style="background:#1a1a1a;border:1px solid #2a2a2a;" data-delay="200">
+          <div class="font-display font-bold mb-5" style="font-size:2.5rem;color:rgba(255,196,81,0.2);line-height:1;">03</div>
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(255,196,81,0.1);">
+            <i data-lucide="zap" class="w-5 h-5" style="color:#ffc451;"></i>
+          </div>
+          <h3 class="font-display font-bold text-white text-lg mb-3">Execution</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Build, test, and iterate with full transparency. Regular updates, demos, and open communication at every stage of development.</p>
+        </div>
+
+        <!-- Step 04 -->
+        <div class="reveal rounded-2xl p-8 relative" style="background:#1a1a1a;border:1px solid #2a2a2a;" data-delay="300">
+          <div class="font-display font-bold mb-5" style="font-size:2.5rem;color:rgba(255,196,81,0.2);line-height:1;">04</div>
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(255,196,81,0.1);">
+            <i data-lucide="check-circle" class="w-5 h-5" style="color:#ffc451;"></i>
+          </div>
+          <h3 class="font-display font-bold text-white text-lg mb-3">Delivery</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Deploy, document, and provide ongoing support. Clean handoff with comprehensive documentation and post-launch assistance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS SECTION -->
+  <section style="background:#0a0a0a;padding:6rem 0;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <div class="reveal inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-4" style="background:rgba(255,196,81,0.08);border:1px solid rgba(255,196,81,0.2);">
+          <span style="color:#ffc451;font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">Client Reviews</span>
+        </div>
+        <h2 class="reveal font-display font-bold text-white mb-4" style="font-size:clamp(1.75rem,4vw,2.75rem);letter-spacing:-0.02em;" data-delay="100">What Clients Say</h2>
+        <p class="reveal text-gray-400 max-w-xl mx-auto" style="line-height:1.7;" data-delay="200">
+          Real results from real partnerships. Every engagement is driven by trust, transparency, and measurable impact.
+        </p>
+      </div>
+
+      <!-- Testimonials Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Testimonial 1 -->
+        <div class="testimonial-card reveal rounded-2xl p-8" style="background:#111111;border:1px solid #1f1f1f;" data-delay="0">
+          <div class="flex items-center gap-1 mb-6">
+            <i data-lucide="star" class="w-4 h-4" style="color:#ffc451;fill:#ffc451;"></i>
+            <i data-lucide="star" class="w-4 h-4" style="color:#ffc451;fill:#ffc451;"></i>
+            <i data-lucide="star" class="w-4 h-4" style="color:#ffc451;fill:#ffc451;"></i>
+            <i data-lucide="star" class="w-4 h-4" style="color:#ffc451;fill:#ffc451;"></i>
+            <i data-lucide="star" class="w-4 h-4" style="color:#ffc451;fill:#ffc451;"></i>
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed mb-8 italic">"Emmanuel transformed our messy data into a crystal-clear dashboard that our executives actually use daily. His ability to understand business context alongside the technical requirements is rare."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm" style="background:rgba(255,196,81,0.15);color:#ffc451;">SM</div>
+            <div>
+              <div class="text-white font-semibold text-sm">Sarah Mitchell</div>
+              <div class="text-gray-600 text-xs">VP of Operations, TechFlow Inc</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="testimonial-card reveal rounded-2xl p-8" style="background:#111111;border:1px solid #1f1f1f;" data-delay="100">
+          <div class="flex items-center gap-1 mb-6">
+            <i data-lucide="star" class="w-4 h-4" style="color:#ffc451;fill:#ffc451;"></i>
+            <i data-lucide="star" class="w-4 h-4" style="color:#ffc451;fill:#ffc451;"></i>
+            <i data-lucide="star" class="w-4 h-4" style="color:#ffc451;fill:#ffc451;"></i>
+            <i data-lucide="star" class="w-4 h-4" style="color:#ffc451;fill:#ffc451;"></i>
+            <i data-lucide="star" class="w-4 h-4" style="color:#ffc451;fill:#ffc451;"></i>
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed mb-8 italic">"The e-commerce platform he built for us handles 10x the traffic we originally planned for. Scalable, fast, and beautifully designed. Delivered ahead of schedule."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm" style="background:rgba(255,196,81,0.15);color:#ffc451;">MJ</div>
+            <div>
+              <div class="text-white font-semibold text-sm">Marcus Johnson</div>
+              <div class="text-gray-600 text-xs">Founder, Luxe Retail Co</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="testimonial-card reveal rounded-2xl p-8" style="background:#111111;border:1px solid #1f1f1f;" data-delay="200">
+          <div class="flex items-center gap-1 mb-6">
+            <i data-lucide="star" class="w-4 h-4" style="color:#ffc451;fill:#ffc451;"></i>
+            <i data-lucide="star" class="w-4 h-4" style="color:#ffc451;fill:#ffc451;"></i>
+            <i data-lucide="star" class="w-4 h-4" style="color:#ffc451;fill:#ffc451;"></i>
+            <i data-lucide="star" class="w-4 h-4" style="color:#ffc451;fill:#ffc451;"></i>
+            <i data-lucide="star" class="w-4 h-4" style="color:#ffc451;fill:#ffc451;"></i>
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed mb-8 italic">"His AI automation reduced our customer support workload by 60%. Emmanuel doesn't just code — he thinks strategically about the whole business."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm" style="background:rgba(255,196,81,0.15);color:#ffc451;">PS</div>
+            <div>
+              <div class="text-white font-semibold text-sm">Priya Sharma</div>
+              <div class="text-gray-600 text-xs">CTO, DataBridge Solutions</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER SECTION -->
+  <section class="cta-section" style="padding:5rem 0;position:relative;overflow:hidden;">
+    <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,196,81,0.06) 0%,transparent 50%,rgba(255,196,81,0.04) 100%);pointer-events:none;"></div>
+    <div style="position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:500px;height:300px;background:radial-gradient(ellipse,rgba(255,196,81,0.08),transparent 70%);pointer-events:none;"></div>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center" style="position:relative;z-index:1;">
+      <div class="reveal inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6" style="background:rgba(255,196,81,0.08);border:1px solid rgba(255,196,81,0.2);">
+        <i data-lucide="sparkles" class="w-3.5 h-3.5" style="color:#ffc451;"></i>
+        <span style="color:#ffc451;font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">Let's Get Started</span>
+      </div>
+
+      <h2 class="reveal font-display font-bold text-white mb-4" style="font-size:clamp(2rem,5vw,3.25rem);letter-spacing:-0.02em;" data-delay="100">
+        Ready to Transform<br>Your Business?
+      </h2>
+      <p class="reveal text-gray-400 mb-10 max-w-lg mx-auto" style="line-height:1.75;font-size:1.05rem;" data-delay="200">
+        Schedule a free discovery call — no commitment, just clarity. Let's explore how data and technology can drive your next big outcome.
       </p>
-      <a href="consultation.html"
-        class="px-8 py-3 bg-[#ffc451] text-black rounded-lg font-semibold hover:bg-yellow-500">
-        Request a Consultation
-      </a>
-      <p class="mt-4 text-sm">*Bible consulting is offered free of charge; paid services are billed individually.</p>
-    </div>
-  </section>
 
-  <!-- about snippet -->
-  <section class="container mx-auto py-20 px-6">
-    <h2 class="text-3xl font-bold mb-4" style="color: var(--accent);">Who We Are</h2>
-    <p class="mb-4">
-      We are a collective of seasoned consultants with backgrounds in software engineering, data science, business
-      strategy and personal development. Over the past decade we’ve helped hundreds of clients tackle complex
-      challenges and seize new opportunities. In addition to our paid business services, we provide free
-      Bible-based guidance to anyone who seeks spiritual insight.
-    </p>
-    <p>
-      Whether you need a quick piece of advice or a deeper conversation, we adapt our approach to suit your
-      requirements. Transparency, responsiveness and practicality are at the heart of everything we do.
-    </p>
-  </section>
+      <div class="reveal flex flex-col sm:flex-row items-center justify-center gap-4 mb-10" data-delay="300">
+        <a href="/consultation.html" style="background:#ffc451;color:#000;font-weight:700;display:inline-flex;align-items:center;gap:0.5rem;" class="px-8 py-3.5 rounded-xl text-sm transition-all hover:opacity-90">
+          <i data-lucide="calendar" class="w-4 h-4"></i>
+          Book Free Consultation
+        </a>
+        <a href="tel:+10000000000" style="border:1px solid rgba(255,196,81,0.35);color:#ffc451;display:inline-flex;align-items:center;gap:0.5rem;" class="px-8 py-3.5 rounded-xl text-sm font-semibold transition-all" onmouseover="this.style.background='rgba(255,196,81,0.08)'" onmouseout="this.style.background='transparent'">
+          <i data-lucide="phone" class="w-4 h-4"></i>
+          Call Us
+        </a>
+      </div>
 
-  <!-- services list -->
-  <section class="bg-gray-900 py-20">
-    <div class="container mx-auto px-6">
-      <h2 class="text-3xl font-bold mb-8 text-center" style="color: var(--accent);">Our Services</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="p-6 bg-gray-800 rounded-lg">
-          <i data-lucide="smartphone" class="w-8 h-8 mb-4 text-[#ffc451]"></i>
-          <h3 class="text-xl font-semibold mb-2">Technical Consultation</h3>
-          <p>Software, infrastructure and data advice tailored to your needs.</p>
+      <!-- Contact Info Row -->
+      <div class="reveal flex flex-col sm:flex-row items-center justify-center gap-6" data-delay="400">
+        <div class="flex items-center gap-2 text-sm text-gray-500">
+          <i data-lucide="mail" class="w-4 h-4" style="color:#ffc451;"></i>
+          <span>your.email@domain.com</span>
         </div>
-        <div class="p-6 bg-gray-800 rounded-lg">
-          <i data-lucide="bar-chart" class="w-8 h-8 mb-4 text-[#ffc451]"></i>
-          <h3 class="text-xl font-semibold mb-2">Business Strategy</h3>
-          <p>Plans, roadmaps and insight to help you grow or pivot effectively.</p>
-        </div>
-        <div class="p-6 bg-gray-800 rounded-lg">
-          <i data-lucide="user-check" class="w-8 h-8 mb-4 text-[#ffc451]"></i>
-          <h3 class="text-xl font-semibold mb-2">Personal Coaching</h3>
-          <p>Productivity, career and leadership coaching designed for real results.</p>
+        <div class="hidden sm:block w-px h-4" style="background:#2a2a2a;"></div>
+        <div class="flex items-center gap-2 text-sm text-gray-500">
+          <i data-lucide="phone" class="w-4 h-4" style="color:#ffc451;"></i>
+          <span>+1 (000) 000-0000</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- call to action -->
-  <section class="container mx-auto py-12 px-6 text-center">
-    <p class="mb-4 text-lg">Ready to move forward? We’re just a message away.</p>
-    <a href="consultation.html"
-      class="inline-block px-8 py-3 bg-[#ffc451] text-black rounded-lg font-semibold hover:bg-yellow-500">
-      Book a Session
-    </a>
-  </section>
-
-  <!-- footer -->
-  <footer class="bg-black border-t border-gray-800 py-6">
-    <div class="container mx-auto text-center text-xs">
-      <p>&copy; 2026 Insightserenity</p>
-      <div class="mt-2 space-x-3">
-        <a href="#" class="hover:text-[#ffc451]"><i data-lucide="instagram"></i></a>
-        <a href="#" class="hover:text-[#ffc451]"><i data-lucide="linkedin"></i></a>
-        <a href="#" class="hover:text-[#ffc451]"><i data-lucide="github"></i></a>
+  <!-- FOOTER -->
+  <footer style="background:#050505;border-top:1px solid #1f1f1f;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div class="lg:col-span-2">
+          <a href="/" class="flex items-center gap-2.5 mb-5">
+            <img src="/assets/img/favicon_io/android-chrome-192x192.png" alt="EOLAW" class="w-10 h-10 rounded-xl">
+            <span class="font-display font-bold text-xl"><span style="color:#ffc451">EOLAW</span> <span class="text-white">Consulting</span></span>
+          </a>
+          <p class="text-gray-500 text-sm leading-relaxed max-w-sm mb-6">Expert consulting in Data Science, Software Engineering, and AI/ML solutions. Transforming complex challenges into measurable business outcomes.</p>
+          <div class="flex items-center gap-3">
+            <a href="https://www.linkedin.com/in/emmanuel-oyemosu/" target="_blank" class="w-10 h-10 rounded-lg flex items-center justify-center text-gray-500 hover:text-black transition-all" style="background:#1a1a1a;border:1px solid #2a2a2a;" onmouseover="this.style.background='#ffc451'" onmouseout="this.style.background='#1a1a1a'"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+            <a href="https://github.com/EOlaw" target="_blank" class="w-10 h-10 rounded-lg flex items-center justify-center text-gray-500 hover:text-black transition-all" style="background:#1a1a1a;border:1px solid #2a2a2a;" onmouseover="this.style.background='#ffc451'" onmouseout="this.style.background='#1a1a1a'"><i data-lucide="github" class="w-4 h-4"></i></a>
+            <a href="https://www.instagram.com/e_olawalee/" target="_blank" class="w-10 h-10 rounded-lg flex items-center justify-center text-gray-500 hover:text-black transition-all" style="background:#1a1a1a;border:1px solid #2a2a2a;" onmouseover="this.style.background='#ffc451'" onmouseout="this.style.background='#1a1a1a'"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+            <a href="mailto:your.email@domain.com" class="w-10 h-10 rounded-lg flex items-center justify-center text-gray-500 hover:text-black transition-all" style="background:#1a1a1a;border:1px solid #2a2a2a;" onmouseover="this.style.background='#ffc451'" onmouseout="this.style.background='#1a1a1a'"><i data-lucide="mail" class="w-4 h-4"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-display font-bold text-white mb-5 text-sm uppercase tracking-widest">Navigation</h4>
+          <ul class="space-y-3">
+            <li><a href="/" class="text-gray-500 hover:text-gold-500 text-sm transition-colors" style="">Home</a></li>
+            <li><a href="/about.html" class="text-gray-500 text-sm transition-colors" style="color:#ffc451;">About</a></li>
+            <li><a href="/services.html" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Services</a></li>
+            <li><a href="/consultation.html" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Book Consultation</a></li>
+            <li><a href="/privacy.html" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Privacy Policy</a></li>
+            <li><a href="/terms.html" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-display font-bold text-white mb-5 text-sm uppercase tracking-widest">Services</h4>
+          <ul class="space-y-3">
+            <li><a href="/services.html#data-science" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Data Science & Analytics</a></li>
+            <li><a href="/services.html#fullstack" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Full-Stack Development</a></li>
+            <li><a href="/services.html#ai-ml" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">AI & Machine Learning</a></li>
+            <li><a href="/services.html#architecture" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">System Architecture</a></li>
+            <li><a href="/services.html#ecommerce" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">eCommerce Solutions</a></li>
+            <li><a href="/services.html#consulting" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Technical Consulting</a></li>
+          </ul>
+        </div>
       </div>
-      <div class="mt-2 text-xs">
-        <a href="privacy.html" class="hover:text-[#ffc451]">Privacy</a> &bull;
-        <a href="terms.html" class="hover:text-[#ffc451]">Terms</a>
+      <div class="mt-12 pt-8 border-t border-dark-500 flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-gray-600 text-sm">© 2025 EOLAW Consulting. All rights reserved.</p>
+        <div class="flex items-center gap-2 text-gray-600 text-sm"><i data-lucide="map-pin" class="w-3.5 h-3.5" style="color:#ffc451"></i><span>Available Worldwide · Remote Consulting</span></div>
+        <div class="flex items-center gap-4">
+          <a href="/privacy.html" class="text-gray-600 hover:text-gold-500 text-sm transition-colors">Privacy</a>
+          <a href="/terms.html" class="text-gray-600 hover:text-gold-500 text-sm transition-colors">Terms</a>
+        </div>
       </div>
     </div>
   </footer>
 
-  <script>
-    window.addEventListener('DOMContentLoaded', () => lucide.createIcons());
-  </script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="/assets/js/main.js"></script>
 </body>
-
 </html>

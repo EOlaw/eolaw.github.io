@@ -1,113 +1,603 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Insightserenity</title>
-
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon_io/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon_io/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon_io/favicon-16x16.png">
-  <link rel="shortcut icon" href="assets/img/favicon_io/favicon.ico">
-  <link rel="manifest" href="assets/img/favicon_io/site.webmanifest">
-
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/lucide.min.js"></script>
-  <style>
-    :root { --accent: #ffc451; --dark: #000; }
-  </style>
+  <title>EOLAW Consulting | About Emmanuel Oyemosu</title>
+  <meta name="description" content="Learn about Emmanuel Oyemosu — Data Scientist, Software Engineer, and Technical Consultant. Discover his background, skills, experience, and the values that drive EOLAW Consulting.">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon_io/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="/assets/img/favicon_io/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/img/favicon_io/site.webmanifest">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: { 300:'#ffe08a', 400:'#ffd27f', 500:'#ffc451', 600:'#e6b048', 700:'#cc9c3f' },
+            dark: { 950:'#050505', 900:'#0a0a0a', 800:'#111111', 700:'#1a1a1a', 600:'#222222', 500:'#2a2a2a', 400:'#333333' }
+          },
+          fontFamily: { sans:['Inter','sans-serif'], display:['Space Grotesk','sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/business.css">
 </head>
+<body style="background:#0a0a0a;color:#e5e5e5;font-family:'Inter',sans-serif;">
 
-<body class="bg-black text-white antialiased">
-  <nav class="bg-black border-b border-gray-800 sticky top-0 z-50">
-    <div class="container mx-auto flex items-center justify-between py-4 px-6">
-      <a href="index.html" class="flex items-center">
-        <img src="assets/img/favicon_io/apple-touch-icon.png" alt="Insightserenity logo" class="h-8 w-8 mr-2">
-        <span class="text-2xl font-bold" style="color: var(--accent);">Insightserenity</span>
-      </a>
-      <div class="space-x-6 text-sm flex items-center">
-        <a href="index.html" class="hover:text-[#ffc451] flex items-center"><i data-lucide="home" class="w-4 h-4 mr-1"></i>Home</a>
-        <a href="about.html" class="hover:text-[#ffc451] font-semibold flex items-center" aria-current="page"><i data-lucide="info" class="w-4 h-4 mr-1"></i>About</a>
-        <a href="services.html" class="hover:text-[#ffc451] flex items-center"><i data-lucide="briefcase" class="w-4 h-4 mr-1"></i>Services</a>
-        <a href="consultation.html" class="hover:text-[#ffc451] flex items-center"><i data-lucide="phone" class="w-4 h-4 mr-1"></i>Book</a>
-        <a href="privacy.html" class="hover:text-[#ffc451] flex items-center"><i data-lucide="shield" class="w-4 h-4 mr-1"></i>Privacy</a>
-        <a href="terms.html" class="hover:text-[#ffc451] flex items-center"><i data-lucide="file-text" class="w-4 h-4 mr-1"></i>Terms</a>
+  <!-- NAVBAR -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 py-5 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between">
+        <a href="/" class="flex items-center gap-2.5">
+          <img src="/assets/img/favicon_io/android-chrome-192x192.png" alt="EOLAW" class="w-9 h-9 rounded-xl">
+          <span class="font-display font-bold text-lg"><span style="color:#ffc451">EOLAW</span> <span class="text-white">Consulting</span></span>
+        </a>
+        <div class="hidden md:flex items-center gap-1">
+          <a href="/" class="nav-link text-sm font-medium px-4 py-2 rounded-lg text-gray-300 hover:text-gold-500 hover:bg-dark-700 transition-all">Home</a>
+          <a href="/about.html" class="nav-link text-sm font-medium px-4 py-2 rounded-lg hover:bg-dark-700 transition-all" style="color:#ffc451;">About</a>
+          <a href="/services.html" class="nav-link text-sm font-medium px-4 py-2 rounded-lg text-gray-300 hover:text-gold-500 hover:bg-dark-700 transition-all">Services</a>
+          <a href="/consultation.html" class="nav-link text-sm font-medium px-4 py-2 rounded-lg text-gray-300 hover:text-gold-500 hover:bg-dark-700 transition-all">Consultation</a>
+        </div>
+        <div class="hidden md:flex items-center gap-4">
+          <a href="tel:+10000000000" class="flex items-center gap-2 text-sm text-gray-400 hover:text-gold-500 transition-colors">
+            <i data-lucide="phone" class="w-4 h-4"></i><span>+1 (000) 000-0000</span>
+          </a>
+          <a href="/consultation.html" style="background:#ffc451;color:#000;font-weight:700;" class="px-5 py-2.5 rounded-xl text-sm transition-all hover:opacity-90">Book Consultation</a>
+        </div>
+        <button id="mobile-toggle" class="md:hidden p-2 rounded-lg text-gray-300 hover:bg-dark-700 transition-colors">
+          <i data-lucide="menu" class="w-5 h-5" id="menu-icon"></i>
+        </button>
+      </div>
+      <div id="mobile-menu" class="hidden md:hidden mt-4 pt-4 border-t border-dark-500 space-y-1 pb-4">
+        <a href="/" class="block text-gray-300 hover:text-gold-500 px-4 py-2.5 rounded-lg hover:bg-dark-700 font-medium">Home</a>
+        <a href="/about.html" class="block text-gray-300 hover:text-gold-500 px-4 py-2.5 rounded-lg hover:bg-dark-700 font-medium">About</a>
+        <a href="/services.html" class="block text-gray-300 hover:text-gold-500 px-4 py-2.5 rounded-lg hover:bg-dark-700 font-medium">Services</a>
+        <a href="/consultation.html" class="block text-gray-300 hover:text-gold-500 px-4 py-2.5 rounded-lg hover:bg-dark-700 font-medium">Consultation</a>
+        <div class="pt-3 mt-3 border-t border-dark-500">
+          <a href="/consultation.html" style="background:#ffc451;color:#000;font-weight:700;" class="block px-4 py-3 rounded-xl text-center text-sm">Book Consultation</a>
+        </div>
       </div>
     </div>
   </nav>
 
-  <!-- hero section -->
-  <section class="bg-black py-24" style="background-image: url('https://source.unsplash.com/1600x400/?meeting,team'); background-size: cover; background-position: center;">
-    <div class="container mx-auto px-6 text-center">
-      <h1 class="text-4xl md:text-5xl font-extrabold" style="color: var(--accent);">About Insightserenity</h1>
-      <p class="mt-4 max-w-2xl mx-auto text-lg">
-        Decades of combined experience delivering actionable advice to startups, enterprises and individuals. We
-        also extend free Bible consulting to help people grow spiritually alongside their professional lives.
+  <!-- PAGE HERO SECTION -->
+  <section class="bg-grid" style="background:#0a0a0a;padding-top:8rem;padding-bottom:5rem;position:relative;overflow:hidden;">
+    <!-- Decorative gold orb -->
+    <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(255,196,81,0.07),transparent 70%);pointer-events:none;filter:blur(30px);"></div>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center" style="position:relative;z-index:1;">
+      <div class="reveal inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6" style="background:rgba(255,196,81,0.08);border:1px solid rgba(255,196,81,0.2);">
+        <span style="color:#ffc451;font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">About</span>
+      </div>
+
+      <h1 class="reveal font-display font-bold text-white mb-5" style="font-size:clamp(2.5rem,6vw,4rem);letter-spacing:-0.02em;line-height:1.1;" data-delay="100">
+        Emmanuel Oyemosu
+      </h1>
+
+      <p class="reveal text-gray-400" style="font-size:1.1rem;line-height:1.7;" data-delay="200">
+        Data Scientist &amp; Software Engineer | Technical Consultant
       </p>
     </div>
   </section>
 
-  <!-- content grid -->
-  <section class="container mx-auto py-20 px-6">
-    <div class="md:flex md:items-center md:space-x-12">
-      <div class="md:w-1/2">
-        <h2 class="text-2xl font-semibold mb-4">Our Story</h2>
-        <p class="mb-4">
-          Founded by industry veterans, we started as a small team helping friends and colleagues solve technical
-          challenges. Word spread quickly and today we assist clients worldwide across technology, business, and
-          personal domains.
-        </p>
-        <p>
-          Our commitment is simple: listen first, respond clearly, and follow through. Every interaction is treated
-          with the care it deserves.
-        </p>
-      </div>
-      <div class="md:w-1/2 mt-8 md:mt-0">
-        <img src="https://source.unsplash.com/600x400/?meeting" alt="Team meeting" class="rounded-lg">
+  <!-- BIO SECTION -->
+  <section style="background:#111111;padding:5rem 0;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+        <!-- Photo Column -->
+        <div class="reveal relative" data-delay="0">
+          <div class="relative inline-block">
+            <!-- Gold glow wrapper -->
+            <div style="position:absolute;inset:-12px;background:radial-gradient(circle at 50% 50%,rgba(255,196,81,0.15),transparent 70%);border-radius:1.5rem;filter:blur(20px);pointer-events:none;"></div>
+            <div style="position:relative;border-radius:1.25rem;overflow:hidden;border:1px solid rgba(255,196,81,0.2);">
+              <img src="/assets/img/emmanuel.jpeg" alt="Emmanuel Oyemosu" style="width:100%;max-width:460px;display:block;aspect-ratio:4/5;object-fit:cover;">
+              <div style="position:absolute;bottom:0;left:0;right:0;height:35%;background:linear-gradient(to top,rgba(255,196,81,0.08),transparent);pointer-events:none;"></div>
+            </div>
+            <!-- Floating availability badge -->
+            <div style="position:absolute;top:-1rem;right:-1rem;background:#1a1a1a;border:1px solid rgba(255,196,81,0.3);border-radius:1rem;padding:0.75rem 1.25rem;display:flex;align-items:center;gap:0.625rem;box-shadow:0 20px 40px rgba(0,0,0,0.6);">
+              <span style="width:8px;height:8px;background:#22c55e;border-radius:50%;display:inline-block;animation:pulse 2s infinite;flex-shrink:0;"></span>
+              <div>
+                <div style="color:#e5e5e5;font-weight:600;font-size:0.8rem;">Available for Consulting</div>
+                <div style="color:#888;font-size:0.7rem;">Remote · Worldwide</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Text Column -->
+        <div class="reveal" data-delay="150">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-5" style="background:rgba(255,196,81,0.08);border:1px solid rgba(255,196,81,0.2);">
+            <span style="color:#ffc451;font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">My Story</span>
+          </div>
+
+          <h2 class="font-display font-bold text-white mb-6" style="font-size:clamp(1.5rem,3.5vw,2.25rem);letter-spacing:-0.02em;">Who I Am</h2>
+
+          <div style="display:flex;flex-direction:column;gap:1.25rem;margin-bottom:2rem;">
+            <p class="text-gray-400" style="line-height:1.85;">
+              A dynamic data scientist and software engineer with a foundation in mathematics and a growing mastery of modern systems and technologies. Currently pursuing a Master's in Management Information Systems (MIS), supported by self-driven learning through platforms like Coursera and Udemy to stay ahead of emerging trends.
+            </p>
+            <p class="text-gray-400" style="line-height:1.85;">
+              Recognized for delivering scalable solutions that align data, strategy, and automation. Known for turning ideas into systems, data into insight, and performance into measurable outcomes. Adept at full-stack development, back-end architecture, and workflow automation — blending analytical precision with real-world execution.
+            </p>
+            <p class="text-gray-400" style="line-height:1.85;">
+              A lifelong athlete with a team-first mindset, bringing discipline, resilience, and leadership to every technical challenge. Passionate about solving meaningful problems — whether optimizing enterprise systems, decoding large datasets, or designing seamless user experiences.
+            </p>
+          </div>
+
+          <!-- Quick Stat Chips -->
+          <div class="flex flex-wrap gap-3">
+            <div class="flex items-center gap-2 px-4 py-2 rounded-xl" style="background:#1a1a1a;border:1px solid #2a2a2a;">
+              <i data-lucide="briefcase" class="w-4 h-4" style="color:#ffc451;"></i>
+              <span class="text-white font-bold text-sm">50+</span>
+              <span class="text-gray-500 text-sm">Projects</span>
+            </div>
+            <div class="flex items-center gap-2 px-4 py-2 rounded-xl" style="background:#1a1a1a;border:1px solid #2a2a2a;">
+              <i data-lucide="clock" class="w-4 h-4" style="color:#ffc451;"></i>
+              <span class="text-white font-bold text-sm">5+</span>
+              <span class="text-gray-500 text-sm">Years Experience</span>
+            </div>
+            <div class="flex items-center gap-2 px-4 py-2 rounded-xl" style="background:#1a1a1a;border:1px solid #2a2a2a;">
+              <i data-lucide="cpu" class="w-4 h-4" style="color:#ffc451;"></i>
+              <span class="text-white font-bold text-sm">20+</span>
+              <span class="text-gray-500 text-sm">Technologies</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- values -->
-  <section class="bg-gray-900 py-20">
-    <div class="container mx-auto px-6">
-      <h3 class="text-2xl font-semibold mb-8 text-center" style="color: var(--accent);">Core Values</h3>
-      <ul class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-        <li>
-          <i data-lucide="headphones" class="w-10 h-10 mx-auto mb-2 text-[#ffc451]"></i>
-          <strong>Listen</strong>
-        </li>
-        <li>
-          <i data-lucide="lightbulb" class="w-10 h-10 mx-auto mb-2 text-[#ffc451]"></i>
-          <strong>Innovate</strong>
-        </li>
-        <li>
-          <i data-lucide="shield" class="w-10 h-10 mx-auto mb-2 text-[#ffc451]"></i>
-          <strong>Deliver</strong>
-        </li>
-      </ul>
+  <!-- SKILLS SECTION -->
+  <section style="background:#0a0a0a;padding:5rem 0;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Section Header -->
+      <div class="text-center mb-14">
+        <div class="reveal inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-4" style="background:rgba(255,196,81,0.08);border:1px solid rgba(255,196,81,0.2);">
+          <span style="color:#ffc451;font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">Expertise</span>
+        </div>
+        <h2 class="reveal font-display font-bold text-white mb-4" style="font-size:clamp(1.75rem,4vw,2.75rem);letter-spacing:-0.02em;" data-delay="100">Skills &amp; Technologies</h2>
+        <p class="reveal text-gray-400 max-w-xl mx-auto" style="line-height:1.7;" data-delay="200">
+          A broad, deep toolkit built over years of hands-on client work, self-study, and continuous learning.
+        </p>
+      </div>
+
+      <!-- Skills 2x2 Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Data Science -->
+        <div class="reveal rounded-2xl p-8" style="background:#111111;border:1px solid #1f1f1f;" data-delay="0">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-11 h-11 rounded-xl flex items-center justify-center" style="background:rgba(255,196,81,0.1);">
+              <i data-lucide="bar-chart-2" class="w-5 h-5" style="color:#ffc451;"></i>
+            </div>
+            <h3 class="font-display font-bold text-white text-lg">Data Science</h3>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">Python</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">R</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">Pandas</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">NumPy</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">Scikit-learn</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">TensorFlow</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">PyTorch</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">Matplotlib</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">Tableau</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">Power BI</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">SQL</span>
+          </div>
+        </div>
+
+        <!-- Backend -->
+        <div class="reveal rounded-2xl p-8" style="background:#111111;border:1px solid #1f1f1f;" data-delay="100">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-11 h-11 rounded-xl flex items-center justify-center" style="background:rgba(255,196,81,0.1);">
+              <i data-lucide="server" class="w-5 h-5" style="color:#ffc451;"></i>
+            </div>
+            <h3 class="font-display font-bold text-white text-lg">Backend</h3>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">Node.js</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">Express.js</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">Django</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">FastAPI</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">PostgreSQL</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">MongoDB</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">Redis</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">Mongoose</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">REST APIs</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">GraphQL</span>
+          </div>
+        </div>
+
+        <!-- Frontend -->
+        <div class="reveal rounded-2xl p-8" style="background:#111111;border:1px solid #1f1f1f;" data-delay="0">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-11 h-11 rounded-xl flex items-center justify-center" style="background:rgba(255,196,81,0.1);">
+              <i data-lucide="monitor" class="w-5 h-5" style="color:#ffc451;"></i>
+            </div>
+            <h3 class="font-display font-bold text-white text-lg">Frontend</h3>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">React</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">Next.js</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">TypeScript</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">Tailwind CSS</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">HTML5</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">CSS3</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">JavaScript</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">Vue.js</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">Framer Motion</span>
+          </div>
+        </div>
+
+        <!-- DevOps & Cloud -->
+        <div class="reveal rounded-2xl p-8" style="background:#111111;border:1px solid #1f1f1f;" data-delay="100">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-11 h-11 rounded-xl flex items-center justify-center" style="background:rgba(255,196,81,0.1);">
+              <i data-lucide="cloud" class="w-5 h-5" style="color:#ffc451;"></i>
+            </div>
+            <h3 class="font-display font-bold text-white text-lg">DevOps &amp; Cloud</h3>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">AWS</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">Docker</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">Kubernetes</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">GitHub Actions</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">Nginx</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">Vercel</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">Heroku</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">CI/CD</span>
+            <span class="skill-tag px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc;">Linux</span>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <footer class="bg-black border-t border-gray-800 py-6">
-    <div class="container mx-auto text-center text-xs">
-      <p>&copy; 2026 Insightserenity</p>
-      <div class="mt-2 space-x-3">
-        <a href="#" class="hover:text-[#ffc451]"><i data-lucide="instagram"></i></a>
-        <a href="#" class="hover:text-[#ffc451]"><i data-lucide="linkedin"></i></a>
-        <a href="#" class="hover:text-[#ffc451]"><i data-lucide="github"></i></a>
+  <!-- EXPERIENCE SECTION -->
+  <section style="background:#111111;padding:5rem 0;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Section Header -->
+      <div class="text-center mb-14">
+        <div class="reveal inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-4" style="background:rgba(255,196,81,0.08);border:1px solid rgba(255,196,81,0.2);">
+          <span style="color:#ffc451;font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">Experience</span>
+        </div>
+        <h2 class="reveal font-display font-bold text-white mb-4" style="font-size:clamp(1.75rem,4vw,2.75rem);letter-spacing:-0.02em;" data-delay="100">Professional Journey</h2>
+        <p class="reveal text-gray-400 max-w-xl mx-auto" style="line-height:1.7;" data-delay="200">
+          A track record of progressive roles and growing impact across data, engineering, and consulting.
+        </p>
       </div>
-      <div class="mt-2 text-xs">
-        <a href="privacy.html" class="hover:text-[#ffc451]">Privacy</a> &bull;
-        <a href="terms.html" class="hover:text-[#ffc451]">Terms</a>
+
+      <!-- Timeline -->
+      <div class="timeline-container max-w-3xl mx-auto" style="position:relative;">
+        <!-- Vertical line -->
+        <div style="position:absolute;left:2rem;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,rgba(255,196,81,0.3),rgba(255,196,81,0.05));display:none;" class="md:block"></div>
+
+        <!-- Entry 1: 2023–Present -->
+        <div class="reveal relative flex gap-8 mb-10 items-start" data-delay="0">
+          <div class="flex-shrink-0 flex flex-col items-center" style="width:4rem;">
+            <div style="width:1rem;height:1rem;background:#ffc451;border-radius:50%;border:3px solid #111111;box-shadow:0 0 0 4px rgba(255,196,81,0.15);flex-shrink:0;margin-top:0.25rem;"></div>
+          </div>
+          <div class="flex-1 rounded-2xl p-8" style="background:#1a1a1a;border:1px solid #2a2a2a;">
+            <div class="flex flex-wrap items-center gap-3 mb-3">
+              <span class="px-3 py-1 rounded-lg text-xs font-bold" style="background:rgba(255,196,81,0.12);color:#ffc451;border:1px solid rgba(255,196,81,0.25);">2023 – Present</span>
+              <span class="text-gray-600 text-xs uppercase tracking-wider font-medium">Current Role</span>
+            </div>
+            <h3 class="font-display font-bold text-white text-lg mb-1">Technical Consultant &amp; Software Engineer</h3>
+            <p class="text-sm mb-4" style="color:#ffc451;">Freelance / EOLAW Consulting</p>
+            <ul class="space-y-2">
+              <li class="flex items-start gap-2.5 text-gray-400 text-sm">
+                <i data-lucide="chevron-right" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#ffc451;"></i>
+                <span>Delivering full-stack web applications, data science solutions, and AI/ML implementations for diverse clients across industries.</span>
+              </li>
+              <li class="flex items-start gap-2.5 text-gray-400 text-sm">
+                <i data-lucide="chevron-right" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#ffc451;"></i>
+                <span>Managing end-to-end project lifecycles from discovery and architecture to deployment and ongoing support.</span>
+              </li>
+              <li class="flex items-start gap-2.5 text-gray-400 text-sm">
+                <i data-lucide="chevron-right" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#ffc451;"></i>
+                <span>Building eCommerce platforms, automation systems, and business intelligence dashboards that drive measurable ROI.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Entry 2: 2022–2023 -->
+        <div class="reveal relative flex gap-8 mb-10 items-start" data-delay="100">
+          <div class="flex-shrink-0 flex flex-col items-center" style="width:4rem;">
+            <div style="width:1rem;height:1rem;background:#2a2a2a;border:3px solid rgba(255,196,81,0.4);border-radius:50%;flex-shrink:0;margin-top:0.25rem;"></div>
+          </div>
+          <div class="flex-1 rounded-2xl p-8" style="background:#1a1a1a;border:1px solid #2a2a2a;">
+            <div class="flex flex-wrap items-center gap-3 mb-3">
+              <span class="px-3 py-1 rounded-lg text-xs font-bold" style="background:rgba(255,196,81,0.08);color:#ffc451;border:1px solid rgba(255,196,81,0.15);">2022 – 2023</span>
+            </div>
+            <h3 class="font-display font-bold text-white text-lg mb-1">Data Science &amp; Analytics Lead</h3>
+            <p class="text-sm mb-4" style="color:#888;">Enterprise Analytics</p>
+            <ul class="space-y-2">
+              <li class="flex items-start gap-2.5 text-gray-400 text-sm">
+                <i data-lucide="chevron-right" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#ffc451;"></i>
+                <span>Designed and deployed predictive models and BI dashboards for enterprise clients, reducing reporting time by 40%.</span>
+              </li>
+              <li class="flex items-start gap-2.5 text-gray-400 text-sm">
+                <i data-lucide="chevron-right" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#ffc451;"></i>
+                <span>Led a team of analysts in transforming raw data pipelines into executive-ready visualizations using Tableau and Power BI.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Entry 3: 2021–2022 -->
+        <div class="reveal relative flex gap-8 mb-10 items-start" data-delay="200">
+          <div class="flex-shrink-0 flex flex-col items-center" style="width:4rem;">
+            <div style="width:1rem;height:1rem;background:#2a2a2a;border:3px solid rgba(255,196,81,0.4);border-radius:50%;flex-shrink:0;margin-top:0.25rem;"></div>
+          </div>
+          <div class="flex-1 rounded-2xl p-8" style="background:#1a1a1a;border:1px solid #2a2a2a;">
+            <div class="flex flex-wrap items-center gap-3 mb-3">
+              <span class="px-3 py-1 rounded-lg text-xs font-bold" style="background:rgba(255,196,81,0.08);color:#ffc451;border:1px solid rgba(255,196,81,0.15);">2021 – 2022</span>
+            </div>
+            <h3 class="font-display font-bold text-white text-lg mb-1">Backend Engineer</h3>
+            <p class="text-sm mb-4" style="color:#888;">SaaS Platforms</p>
+            <ul class="space-y-2">
+              <li class="flex items-start gap-2.5 text-gray-400 text-sm">
+                <i data-lucide="chevron-right" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#ffc451;"></i>
+                <span>Built scalable microservices and RESTful APIs using Node.js and PostgreSQL for high-traffic SaaS platforms.</span>
+              </li>
+              <li class="flex items-start gap-2.5 text-gray-400 text-sm">
+                <i data-lucide="chevron-right" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#ffc451;"></i>
+                <span>Implemented authentication, authorization, and data integrity systems ensuring security and compliance.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Entry 4: 2020–2021 -->
+        <div class="reveal relative flex gap-8 items-start" data-delay="300">
+          <div class="flex-shrink-0 flex flex-col items-center" style="width:4rem;">
+            <div style="width:1rem;height:1rem;background:#2a2a2a;border:3px solid rgba(255,196,81,0.4);border-radius:50%;flex-shrink:0;margin-top:0.25rem;"></div>
+          </div>
+          <div class="flex-1 rounded-2xl p-8" style="background:#1a1a1a;border:1px solid #2a2a2a;">
+            <div class="flex flex-wrap items-center gap-3 mb-3">
+              <span class="px-3 py-1 rounded-lg text-xs font-bold" style="background:rgba(255,196,81,0.08);color:#ffc451;border:1px solid rgba(255,196,81,0.15);">2020 – 2021</span>
+            </div>
+            <h3 class="font-display font-bold text-white text-lg mb-1">Junior Full-Stack Developer</h3>
+            <p class="text-sm mb-4" style="color:#888;">Web Development</p>
+            <ul class="space-y-2">
+              <li class="flex items-start gap-2.5 text-gray-400 text-sm">
+                <i data-lucide="chevron-right" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#ffc451;"></i>
+                <span>Developed responsive web applications using React and Express.js for clients across retail and service industries.</span>
+              </li>
+              <li class="flex items-start gap-2.5 text-gray-400 text-sm">
+                <i data-lucide="chevron-right" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#ffc451;"></i>
+                <span>Collaborated on UI/UX design and iterative prototyping, building a strong foundation in modern web development practices.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION SECTION -->
+  <section style="background:#0a0a0a;padding:5rem 0;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Section Header -->
+      <div class="text-center mb-14">
+        <div class="reveal inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-4" style="background:rgba(255,196,81,0.08);border:1px solid rgba(255,196,81,0.2);">
+          <span style="color:#ffc451;font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">Education</span>
+        </div>
+        <h2 class="reveal font-display font-bold text-white mb-4" style="font-size:clamp(1.75rem,4vw,2.75rem);letter-spacing:-0.02em;" data-delay="100">Academic Background</h2>
+        <p class="reveal text-gray-400 max-w-xl mx-auto" style="line-height:1.7;" data-delay="200">
+          A rigorous academic foundation combined with continuous professional development across top learning platforms.
+        </p>
+      </div>
+
+      <!-- Education Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Master's -->
+        <div class="reveal rounded-2xl p-8 relative overflow-hidden" style="background:#111111;border:1px solid #1f1f1f;" data-delay="0">
+          <div style="position:absolute;top:0;right:0;width:80px;height:80px;background:radial-gradient(circle,rgba(255,196,81,0.08),transparent 70%);pointer-events:none;"></div>
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-6" style="background:rgba(255,196,81,0.1);">
+            <i data-lucide="graduation-cap" class="w-5 h-5" style="color:#ffc451;"></i>
+          </div>
+          <div class="flex items-center gap-2 mb-3">
+            <span class="px-2.5 py-0.5 rounded-md text-xs font-bold" style="background:rgba(34,197,94,0.1);color:#22c55e;border:1px solid rgba(34,197,94,0.2);">In Progress</span>
+          </div>
+          <h3 class="font-display font-bold text-white text-lg mb-2">Master's in Management Information Systems</h3>
+          <p class="text-sm mb-4" style="color:#ffc451;">MIS Program</p>
+          <p class="text-gray-500 text-sm leading-relaxed">Focus: Business Intelligence, Data Strategy, Technology Management. Bridging the gap between technical execution and business leadership.</p>
+        </div>
+
+        <!-- Bachelor's -->
+        <div class="reveal rounded-2xl p-8 relative overflow-hidden" style="background:#111111;border:1px solid #1f1f1f;" data-delay="100">
+          <div style="position:absolute;top:0;right:0;width:80px;height:80px;background:radial-gradient(circle,rgba(255,196,81,0.08),transparent 70%);pointer-events:none;"></div>
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-6" style="background:rgba(255,196,81,0.1);">
+            <i data-lucide="book-open" class="w-5 h-5" style="color:#ffc451;"></i>
+          </div>
+          <div class="flex items-center gap-2 mb-3">
+            <span class="px-2.5 py-0.5 rounded-md text-xs font-bold" style="background:rgba(255,196,81,0.1);color:#ffc451;border:1px solid rgba(255,196,81,0.2);">Completed</span>
+          </div>
+          <h3 class="font-display font-bold text-white text-lg mb-2">Bachelor of Science in Mathematics</h3>
+          <p class="text-sm mb-4" style="color:#ffc451;">Undergraduate Degree</p>
+          <p class="text-gray-500 text-sm leading-relaxed">Analytical foundation for data science and algorithm design. Strong grounding in statistics, linear algebra, calculus, and discrete mathematics.</p>
+        </div>
+
+        <!-- Certifications -->
+        <div class="reveal rounded-2xl p-8 relative overflow-hidden" style="background:#111111;border:1px solid #1f1f1f;" data-delay="200">
+          <div style="position:absolute;top:0;right:0;width:80px;height:80px;background:radial-gradient(circle,rgba(255,196,81,0.08),transparent 70%);pointer-events:none;"></div>
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-6" style="background:rgba(255,196,81,0.1);">
+            <i data-lucide="award" class="w-5 h-5" style="color:#ffc451;"></i>
+          </div>
+          <div class="flex items-center gap-2 mb-3">
+            <span class="px-2.5 py-0.5 rounded-md text-xs font-bold" style="background:rgba(255,196,81,0.1);color:#ffc451;border:1px solid rgba(255,196,81,0.2);">Continuous</span>
+          </div>
+          <h3 class="font-display font-bold text-white text-lg mb-2">Professional Certifications</h3>
+          <p class="text-sm mb-4" style="color:#ffc451;">Coursera, Udemy, Google, AWS</p>
+          <p class="text-gray-500 text-sm leading-relaxed">Machine Learning, Cloud Architecture, Data Engineering. Committed to staying current with evolving technologies and industry best practices.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES SECTION -->
+  <section style="background:#111111;padding:5rem 0;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Section Header -->
+      <div class="text-center mb-14">
+        <div class="reveal inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-4" style="background:rgba(255,196,81,0.08);border:1px solid rgba(255,196,81,0.2);">
+          <span style="color:#ffc451;font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">Core Values</span>
+        </div>
+        <h2 class="reveal font-display font-bold text-white mb-4" style="font-size:clamp(1.75rem,4vw,2.75rem);letter-spacing:-0.02em;" data-delay="100">What Drives Me</h2>
+        <p class="reveal text-gray-400 max-w-xl mx-auto" style="line-height:1.7;" data-delay="200">
+          The principles that guide every engagement, every decision, and every line of code.
+        </p>
+      </div>
+
+      <!-- Values Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <!-- Integrity -->
+        <div class="reveal rounded-2xl p-8 text-center" style="background:#1a1a1a;border:1px solid #2a2a2a;" data-delay="0">
+          <div class="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-5" style="background:rgba(255,196,81,0.1);">
+            <i data-lucide="shield-check" class="w-6 h-6" style="color:#ffc451;"></i>
+          </div>
+          <h3 class="font-display font-bold text-white text-lg mb-3">Integrity</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Transparent communication, honest timelines, and code I'm proud to put my name on. No hidden agendas — ever.</p>
+        </div>
+
+        <!-- Innovation -->
+        <div class="reveal rounded-2xl p-8 text-center" style="background:#1a1a1a;border:1px solid #2a2a2a;" data-delay="100">
+          <div class="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-5" style="background:rgba(255,196,81,0.1);">
+            <i data-lucide="zap" class="w-6 h-6" style="color:#ffc451;"></i>
+          </div>
+          <h3 class="font-display font-bold text-white text-lg mb-3">Innovation</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Always exploring cutting-edge tools and approaches to deliver future-proof solutions that keep clients ahead of the curve.</p>
+        </div>
+
+        <!-- Excellence -->
+        <div class="reveal rounded-2xl p-8 text-center" style="background:#1a1a1a;border:1px solid #2a2a2a;" data-delay="200">
+          <div class="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-5" style="background:rgba(255,196,81,0.1);">
+            <i data-lucide="star" class="w-6 h-6" style="color:#ffc451;"></i>
+          </div>
+          <h3 class="font-display font-bold text-white text-lg mb-3">Excellence</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">No shortcuts. Every project receives the same level of rigor and attention to detail, regardless of size or scope.</p>
+        </div>
+
+        <!-- Impact -->
+        <div class="reveal rounded-2xl p-8 text-center" style="background:#1a1a1a;border:1px solid #2a2a2a;" data-delay="300">
+          <div class="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-5" style="background:rgba(255,196,81,0.1);">
+            <i data-lucide="target" class="w-6 h-6" style="color:#ffc451;"></i>
+          </div>
+          <h3 class="font-display font-bold text-white text-lg mb-3">Impact</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Technology should solve real problems and create measurable results. Every solution is purpose-built for real-world outcomes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER SECTION -->
+  <section class="cta-section" style="padding:5rem 0;position:relative;overflow:hidden;">
+    <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,196,81,0.06) 0%,transparent 50%,rgba(255,196,81,0.04) 100%);pointer-events:none;"></div>
+    <div style="position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:500px;height:300px;background:radial-gradient(ellipse,rgba(255,196,81,0.08),transparent 70%);pointer-events:none;"></div>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center" style="position:relative;z-index:1;">
+      <div class="reveal inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6" style="background:rgba(255,196,81,0.08);border:1px solid rgba(255,196,81,0.2);">
+        <i data-lucide="sparkles" class="w-3.5 h-3.5" style="color:#ffc451;"></i>
+        <span style="color:#ffc451;font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">Let's Get Started</span>
+      </div>
+
+      <h2 class="reveal font-display font-bold text-white mb-4" style="font-size:clamp(2rem,5vw,3.25rem);letter-spacing:-0.02em;" data-delay="100">
+        Ready to Transform<br>Your Business?
+      </h2>
+      <p class="reveal text-gray-400 mb-10 max-w-lg mx-auto" style="line-height:1.75;font-size:1.05rem;" data-delay="200">
+        Schedule a free discovery call — no commitment, just clarity. Let's explore how data and technology can drive your next big outcome.
+      </p>
+
+      <div class="reveal flex flex-col sm:flex-row items-center justify-center gap-4 mb-10" data-delay="300">
+        <a href="/consultation.html" style="background:#ffc451;color:#000;font-weight:700;display:inline-flex;align-items:center;gap:0.5rem;" class="px-8 py-3.5 rounded-xl text-sm transition-all hover:opacity-90">
+          <i data-lucide="calendar" class="w-4 h-4"></i>
+          Book Free Consultation
+        </a>
+        <a href="tel:+10000000000" style="border:1px solid rgba(255,196,81,0.35);color:#ffc451;display:inline-flex;align-items:center;gap:0.5rem;" class="px-8 py-3.5 rounded-xl text-sm font-semibold transition-all" onmouseover="this.style.background='rgba(255,196,81,0.08)'" onmouseout="this.style.background='transparent'">
+          <i data-lucide="phone" class="w-4 h-4"></i>
+          Call Us
+        </a>
+      </div>
+
+      <!-- Contact Info Row -->
+      <div class="reveal flex flex-col sm:flex-row items-center justify-center gap-6" data-delay="400">
+        <div class="flex items-center gap-2 text-sm text-gray-500">
+          <i data-lucide="mail" class="w-4 h-4" style="color:#ffc451;"></i>
+          <span>your.email@domain.com</span>
+        </div>
+        <div class="hidden sm:block w-px h-4" style="background:#2a2a2a;"></div>
+        <div class="flex items-center gap-2 text-sm text-gray-500">
+          <i data-lucide="phone" class="w-4 h-4" style="color:#ffc451;"></i>
+          <span>+1 (000) 000-0000</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="background:#050505;border-top:1px solid #1f1f1f;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div class="lg:col-span-2">
+          <a href="/" class="flex items-center gap-2.5 mb-5">
+            <img src="/assets/img/favicon_io/android-chrome-192x192.png" alt="EOLAW" class="w-10 h-10 rounded-xl">
+            <span class="font-display font-bold text-xl"><span style="color:#ffc451">EOLAW</span> <span class="text-white">Consulting</span></span>
+          </a>
+          <p class="text-gray-500 text-sm leading-relaxed max-w-sm mb-6">Expert consulting in Data Science, Software Engineering, and AI/ML solutions. Transforming complex challenges into measurable business outcomes.</p>
+          <div class="flex items-center gap-3">
+            <a href="https://www.linkedin.com/in/emmanuel-oyemosu/" target="_blank" class="w-10 h-10 rounded-lg flex items-center justify-center text-gray-500 hover:text-black transition-all" style="background:#1a1a1a;border:1px solid #2a2a2a;" onmouseover="this.style.background='#ffc451'" onmouseout="this.style.background='#1a1a1a'"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+            <a href="https://github.com/EOlaw" target="_blank" class="w-10 h-10 rounded-lg flex items-center justify-center text-gray-500 hover:text-black transition-all" style="background:#1a1a1a;border:1px solid #2a2a2a;" onmouseover="this.style.background='#ffc451'" onmouseout="this.style.background='#1a1a1a'"><i data-lucide="github" class="w-4 h-4"></i></a>
+            <a href="https://www.instagram.com/e_olawalee/" target="_blank" class="w-10 h-10 rounded-lg flex items-center justify-center text-gray-500 hover:text-black transition-all" style="background:#1a1a1a;border:1px solid #2a2a2a;" onmouseover="this.style.background='#ffc451'" onmouseout="this.style.background='#1a1a1a'"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+            <a href="mailto:your.email@domain.com" class="w-10 h-10 rounded-lg flex items-center justify-center text-gray-500 hover:text-black transition-all" style="background:#1a1a1a;border:1px solid #2a2a2a;" onmouseover="this.style.background='#ffc451'" onmouseout="this.style.background='#1a1a1a'"><i data-lucide="mail" class="w-4 h-4"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-display font-bold text-white mb-5 text-sm uppercase tracking-widest">Navigation</h4>
+          <ul class="space-y-3">
+            <li><a href="/" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Home</a></li>
+            <li><a href="/about.html" class="text-sm transition-colors" style="color:#ffc451;">About</a></li>
+            <li><a href="/services.html" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Services</a></li>
+            <li><a href="/consultation.html" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Book Consultation</a></li>
+            <li><a href="/privacy.html" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Privacy Policy</a></li>
+            <li><a href="/terms.html" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-display font-bold text-white mb-5 text-sm uppercase tracking-widest">Services</h4>
+          <ul class="space-y-3">
+            <li><a href="/services.html#data-science" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Data Science & Analytics</a></li>
+            <li><a href="/services.html#fullstack" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Full-Stack Development</a></li>
+            <li><a href="/services.html#ai-ml" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">AI & Machine Learning</a></li>
+            <li><a href="/services.html#architecture" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">System Architecture</a></li>
+            <li><a href="/services.html#ecommerce" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">eCommerce Solutions</a></li>
+            <li><a href="/services.html#consulting" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Technical Consulting</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-12 pt-8 border-t border-dark-500 flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-gray-600 text-sm">© 2025 EOLAW Consulting. All rights reserved.</p>
+        <div class="flex items-center gap-2 text-gray-600 text-sm"><i data-lucide="map-pin" class="w-3.5 h-3.5" style="color:#ffc451"></i><span>Available Worldwide · Remote Consulting</span></div>
+        <div class="flex items-center gap-4">
+          <a href="/privacy.html" class="text-gray-600 hover:text-gold-500 text-sm transition-colors">Privacy</a>
+          <a href="/terms.html" class="text-gray-600 hover:text-gold-500 text-sm transition-colors">Terms</a>
+        </div>
       </div>
     </div>
   </footer>
 
-  <script>
-    window.addEventListener('DOMContentLoaded', () => lucide.createIcons());
-  </script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="/assets/js/main.js"></script>
 </body>
-
 </html>

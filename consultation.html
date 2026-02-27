@@ -1,101 +1,603 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Request a Consultation – Insightserenity</title>
-
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon_io/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon_io/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon_io/favicon-16x16.png">
-  <link rel="shortcut icon" href="assets/img/favicon_io/favicon.ico">
-  <link rel="manifest" href="assets/img/favicon_io/site.webmanifest">
-
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/lucide.min.js"></script>
-  <style>
-    :root { --accent: #ffc451; --dark: #000; }
-  </style>
-</head>
-
-<body class="bg-black text-white antialiased">
-  <nav class="bg-black border-b border-gray-800 sticky top-0 z-50">
-    <div class="container mx-auto flex items-center justify-between py-4 px-6">
-      <a href="index.html" class="flex items-center">
-        <img src="assets/img/favicon_io/apple-touch-icon.png" alt="Insightserenity logo" class="h-8 w-8 mr-2">
-        <span class="text-2xl font-bold" style="color: var(--accent);">Insightserenity</span>
-      </a>
-      <div class="space-x-6 text-sm flex items-center">
-        <a href="index.html" class="hover:text-[#ffc451] flex items-center"><i data-lucide="home" class="w-4 h-4 mr-1"></i>Home</a>
-        <a href="about.html" class="hover:text-[#ffc451] flex items-center"><i data-lucide="info" class="w-4 h-4 mr-1"></i>About</a>
-        <a href="services.html" class="hover:text-[#ffc451] flex items-center"><i data-lucide="briefcase" class="w-4 h-4 mr-1"></i>Services</a>
-        <a href="consultation.html" class="hover:text-[#ffc451] font-semibold flex items-center" aria-current="page"><i data-lucide="phone" class="w-4 h-4 mr-1"></i>Book</a>
-        <a href="privacy.html" class="hover:text-[#ffc451] flex items-center"><i data-lucide="shield" class="w-4 h-4 mr-1"></i>Privacy</a>
-        <a href="terms.html" class="hover:text-[#ffc451] flex items-center"><i data-lucide="file-text" class="w-4 h-4 mr-1"></i>Terms</a>
-      </div>
-    </div>
-  </nav>
-
-  <main class="container mx-auto py-20 px-6">
-    <h1 class="text-4xl font-extrabold mb-6 text-center" style="color: var(--accent);">Request a Consultation</h1>
-    <p class="max-w-2xl mx-auto mb-8 text-center">
-      Fill in the form below with as much detail as you can. Required fields are marked with an asterisk. Use the
-      message field to specify whether your request is for our free Bible consulting or for paid business/technical
-      advice. We’ll review your submission and follow up via email or phone.
-    </p>
-    <form id="consultation-form" class="max-w-lg mx-auto space-y-4 bg-gray-900 p-6 rounded-lg">
-      <div>
-        <label for="name" class="block mb-1">Name <span class="text-red-400">*</span></label>
-        <input id="name" name="name" type="text" required
-          class="w-full px-3 py-2 rounded bg-gray-800 border border-gray-700 focus:outline-none">
-      </div>
-      <div>
-        <label for="email" class="block mb-1">Email <span class="text-red-400">*</span></label>
-        <input id="email" name="email" type="email" required
-          class="w-full px-3 py-2 rounded bg-gray-800 border border-gray-700 focus:outline-none">
-      </div>
-      <div>
-        <label for="phone" class="block mb-1">Phone</label>
-        <input id="phone" name="phone" type="tel"
-          class="w-full px-3 py-2 rounded bg-gray-800 border border-gray-700 focus:outline-none">
-      </div>
-      <div>
-        <label for="message" class="block mb-1">Message / Details</label>
-        <textarea id="message" name="message" rows="4"
-          class="w-full px-3 py-2 rounded bg-gray-800 border border-gray-700 focus:outline-none"></textarea>
-      </div>
-      <div class="text-center">
-        <button type="submit"
-          class="px-6 py-2 bg-[#ffc451] text-black rounded font-semibold hover:bg-yellow-500">Send
-          Request</button>
-      </div>
-    </form>
-    <p class="mt-4 text-xs text-gray-400 text-center">
-      By submitting you agree to our <a href="terms.html" class="underline">terms</a> and acknowledge our
-      <a href="privacy.html" class="underline">privacy policy</a>. This request is not a binding agreement.
-    </p>
-  </main>
-
-  <footer class="bg-black border-t border-gray-800 py-6">
-    <div class="container mx-auto text-center text-xs">
-      <p>&copy; 2026 Insightserenity</p>
-      <div class="mt-2 space-x-3">
-        <a href="#" class="hover:text-[#ffc451]"><i data-lucide="instagram"></i></a>
-        <a href="#" class="hover:text-[#ffc451]"><i data-lucide="linkedin"></i></a>
-        <a href="#" class="hover:text-[#ffc451]"><i data-lucide="github"></i></a>
-      </div>
-      <div class="mt-2 text-xs">
-        <a href="privacy.html" class="hover:text-[#ffc451]">Privacy</a> &bull;
-        <a href="terms.html" class="hover:text-[#ffc451]">Terms</a>
-      </div>
-    </div>
-  </footer>
-
-  <script src="assets/js/booking.js"></script>
+  <title>EOLAW Consulting | Book a Consultation</title>
+  <meta name="description" content="Schedule a free 30-minute discovery call with Emmanuel Oyemosu — Data Scientist & Software Engineer. No commitment, just clarity on your project.">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon_io/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="/assets/img/favicon_io/apple-touch-icon.png">
+  <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    window.addEventListener('DOMContentLoaded', () => lucide.createIcons());
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: { 300:'#ffe08a', 400:'#ffd27f', 500:'#ffc451', 600:'#e6b048', 700:'#cc9c3f' },
+            dark: { 950:'#050505', 900:'#0a0a0a', 800:'#111111', 700:'#1a1a1a', 600:'#222222', 500:'#2a2a2a', 400:'#333333' }
+          },
+          fontFamily: { sans:['Inter','sans-serif'], display:['Space Grotesk','sans-serif'] }
+        }
+      }
+    }
   </script>
-</body>
+  <link rel="stylesheet" href="/assets/css/business.css">
+</head>
+<body style="background:#0a0a0a;color:#fff;">
 
+<!-- ===================== NAVBAR ===================== -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 py-5 transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2.5">
+        <img src="/assets/img/favicon_io/android-chrome-192x192.png" alt="EOLAW" class="w-9 h-9 rounded-xl">
+        <span class="font-display font-bold text-lg"><span style="color:#ffc451">EOLAW</span> <span class="text-white">Consulting</span></span>
+      </a>
+      <div class="hidden md:flex items-center gap-1">
+        <a href="/" class="nav-link text-sm font-medium px-4 py-2 rounded-lg text-gray-300 hover:text-gold-500 hover:bg-dark-700 transition-all">Home</a>
+        <a href="/about.html" class="nav-link text-sm font-medium px-4 py-2 rounded-lg text-gray-300 hover:text-gold-500 hover:bg-dark-700 transition-all">About</a>
+        <a href="/services.html" class="nav-link text-sm font-medium px-4 py-2 rounded-lg text-gray-300 hover:text-gold-500 hover:bg-dark-700 transition-all">Services</a>
+        <a href="/consultation.html" class="nav-link text-sm font-medium px-4 py-2 rounded-lg hover:bg-dark-700 transition-all" style="color:#ffc451">Consultation</a>
+      </div>
+      <div class="hidden md:flex items-center gap-4">
+        <a href="tel:+10000000000" class="flex items-center gap-2 text-sm text-gray-400 hover:text-gold-500 transition-colors">
+          <i data-lucide="phone" class="w-4 h-4"></i><span>+1 (000) 000-0000</span>
+        </a>
+        <a href="/consultation.html" style="background:#ffc451;color:#000;font-weight:700;" class="px-5 py-2.5 rounded-xl text-sm transition-all hover:opacity-90">Book Consultation</a>
+      </div>
+      <button id="mobile-toggle" class="md:hidden p-2 rounded-lg text-gray-300 hover:bg-dark-700 transition-colors">
+        <i data-lucide="menu" class="w-5 h-5" id="menu-icon"></i>
+      </button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden mt-4 pt-4 border-t border-dark-500 space-y-1 pb-4">
+      <a href="/" class="block text-gray-300 hover:text-gold-500 px-4 py-2.5 rounded-lg hover:bg-dark-700 font-medium">Home</a>
+      <a href="/about.html" class="block text-gray-300 hover:text-gold-500 px-4 py-2.5 rounded-lg hover:bg-dark-700 font-medium">About</a>
+      <a href="/services.html" class="block text-gray-300 hover:text-gold-500 px-4 py-2.5 rounded-lg hover:bg-dark-700 font-medium">Services</a>
+      <a href="/consultation.html" class="block px-4 py-2.5 rounded-lg hover:bg-dark-700 font-medium" style="color:#ffc451">Consultation</a>
+      <div class="pt-3 mt-3 border-t border-dark-500">
+        <a href="/consultation.html" style="background:#ffc451;color:#000;font-weight:700;" class="block px-4 py-3 rounded-xl text-center text-sm">Book Consultation</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ===================== PAGE HERO ===================== -->
+<section class="pt-36 pb-16 relative overflow-hidden" style="background:#0a0a0a;">
+  <div class="orb orb-gold" style="width:400px;height:400px;top:-150px;right:-100px;opacity:0.5;"></div>
+  <div class="orb orb-gold-dim" style="width:250px;height:250px;bottom:0;left:-80px;"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="text-center max-w-2xl mx-auto">
+      <div class="reveal" data-delay="0">
+        <span class="section-badge">
+          <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+          Book a Consultation
+        </span>
+      </div>
+      <h1 class="font-display font-bold text-5xl md:text-6xl leading-tight mt-4 reveal" data-delay="100">
+        <span class="text-white">Let's Discuss Your</span><br>
+        <span style="color:#ffc451;" class="glow-text">Project Goals</span>
+      </h1>
+      <p class="mt-6 text-gray-400 text-lg leading-relaxed reveal" data-delay="200">
+        Schedule a free 30-minute discovery call — no commitment, just clarity on what's possible
+        and whether we're the right fit for your project.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT QUICK-ACCESS ===================== -->
+<section style="background:#111111;" class="py-8">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <!-- Phone -->
+      <div class="contact-method reveal" data-delay="0">
+        <div style="background:rgba(255,196,81,0.1);border-radius:.875rem;width:3rem;height:3rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">
+          <i data-lucide="phone" style="width:1.5rem;height:1.5rem;color:#ffc451;"></i>
+        </div>
+        <h3 class="font-display font-bold text-white mb-1">Call Directly</h3>
+        <p class="font-semibold mb-1" style="color:#ffc451;">+1 (000) 000-0000</p>
+        <p class="text-gray-500 text-xs mb-4">Available Mon–Fri, 9AM–6PM EST</p>
+        <button id="contact-phone-btn" style="background:none;border:1.5px solid #2a2a2a;color:#ccc;padding:.625rem 1.25rem;border-radius:.75rem;cursor:pointer;font-family:Inter,sans-serif;font-size:.875rem;font-weight:600;width:100%;transition:all 0.2s;" onmouseover="this.style.borderColor='#ffc451';this.style.color='#ffc451'" onmouseout="this.style.borderColor='#2a2a2a';this.style.color='#ccc'">
+          Call Now
+        </button>
+      </div>
+
+      <!-- Email -->
+      <div class="contact-method reveal" data-delay="100">
+        <div style="background:rgba(255,196,81,0.1);border-radius:.875rem;width:3rem;height:3rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">
+          <i data-lucide="mail" style="width:1.5rem;height:1.5rem;color:#ffc451;"></i>
+        </div>
+        <h3 class="font-display font-bold text-white mb-1">Send an Email</h3>
+        <p class="font-semibold mb-1" style="color:#ffc451;font-size:.875rem;">your.email@domain.com</p>
+        <p class="text-gray-500 text-xs mb-4">Typically responds within 24 hours</p>
+        <button id="contact-email-btn" style="background:none;border:1.5px solid #2a2a2a;color:#ccc;padding:.625rem 1.25rem;border-radius:.75rem;cursor:pointer;font-family:Inter,sans-serif;font-size:.875rem;font-weight:600;width:100%;transition:all 0.2s;" onmouseover="this.style.borderColor='#ffc451';this.style.color='#ffc451'" onmouseout="this.style.borderColor='#2a2a2a';this.style.color='#ccc'">
+          Send Email
+        </button>
+      </div>
+
+      <!-- WhatsApp -->
+      <div class="contact-method reveal" data-delay="200">
+        <div style="background:rgba(37,211,102,0.1);border-radius:.875rem;width:3rem;height:3rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">
+          <i data-lucide="message-circle" style="width:1.5rem;height:1.5rem;color:#25D366;"></i>
+        </div>
+        <h3 class="font-display font-bold text-white mb-1">WhatsApp Message</h3>
+        <p class="font-semibold mb-1" style="color:#25D366;">Quick response via WhatsApp</p>
+        <p class="text-gray-500 text-xs mb-4">Usually responds within 2 hours</p>
+        <button id="contact-wa-btn" style="background:none;border:1.5px solid #1a4d2b;color:#25D366;padding:.625rem 1.25rem;border-radius:.75rem;cursor:pointer;font-family:Inter,sans-serif;font-size:.875rem;font-weight:600;width:100%;transition:all 0.2s;" onmouseover="this.style.background='rgba(37,211,102,0.1)'" onmouseout="this.style.background='none'">
+          Message on WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BOOKING FORM ===================== -->
+<section class="py-16" style="background:#0a0a0a;">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-5 gap-12 items-start">
+
+      <!-- LEFT: Form column -->
+      <div class="lg:col-span-3 reveal-left">
+        <div id="booking-form" style="background:#111;border:1px solid #1f1f1f;border-radius:1.5rem;padding:2rem;">
+          <h2 class="font-display font-bold text-2xl text-white mb-6">Book Your Consultation</h2>
+
+          <!-- Step progress -->
+          <div class="flex items-center mb-2">
+            <div class="step-dot active">1</div>
+            <div class="step-line"></div>
+            <div class="step-dot">2</div>
+            <div class="step-line"></div>
+            <div class="step-dot">3</div>
+          </div>
+
+          <!-- Progress bar -->
+          <div style="height:3px;background:#1a1a1a;border-radius:999px;margin-bottom:1rem;overflow:hidden;">
+            <div id="form-progress" style="height:100%;background:#ffc451;width:0%;border-radius:999px;transition:width 0.4s ease;"></div>
+          </div>
+
+          <p id="step-label" class="text-gray-500 text-sm mb-8">Step 1 of 3 — Select Service</p>
+
+          <!-- STEP 1 -->
+          <div id="step-1" class="form-step">
+            <h3 class="font-display font-semibold text-lg text-white mb-6">What do you need help with?</h3>
+            <div class="space-y-5">
+              <div>
+                <label class="block text-sm font-medium text-gray-300 mb-2">Service Type <span style="color:#ffc451">*</span></label>
+                <select id="service-type" class="form-input">
+                  <option value="">Select a service...</option>
+                  <option value="Data Science &amp; Analytics">Data Science &amp; Analytics</option>
+                  <option value="Full-Stack Development">Full-Stack Development</option>
+                  <option value="AI &amp; Machine Learning">AI &amp; Machine Learning</option>
+                  <option value="System Architecture">System Architecture</option>
+                  <option value="eCommerce Development">eCommerce Development</option>
+                  <option value="Technical Consulting">Technical Consulting</option>
+                  <option value="Other">Other</option>
+                </select>
+                <span id="service-type-error" class="field-error"></span>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-300 mb-2">Consultation Type <span style="color:#ffc451">*</span></label>
+                <select id="consultation-type" class="form-input">
+                  <option value="">Select consultation type...</option>
+                  <option value="Free 30-min Discovery Call">Free 30-min Discovery Call</option>
+                  <option value="Paid 1-Hour Deep Dive ($150)">Paid 1-Hour Deep Dive ($150)</option>
+                  <option value="Project Scoping Session">Project Scoping Session</option>
+                  <option value="Ongoing Monthly Retainer">Ongoing Monthly Retainer</option>
+                  <option value="One-time Code Review">One-time Code Review</option>
+                  <option value="Strategy Session">Strategy Session</option>
+                </select>
+                <span id="consultation-type-error" class="field-error"></span>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-300 mb-2">Preferred Date</label>
+                <input type="date" id="preferred-date" class="form-input" style="color-scheme:dark;">
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-300 mb-2">Budget Range</label>
+                <select id="budget" class="form-input">
+                  <option value="">Select a budget range...</option>
+                  <option value="Under $500">Under $500</option>
+                  <option value="$500 – $2,000">$500 – $2,000</option>
+                  <option value="$2,000 – $5,000">$2,000 – $5,000</option>
+                  <option value="$5,000 – $10,000">$5,000 – $10,000</option>
+                  <option value="$10,000+">$10,000+</option>
+                  <option value="Let's discuss">Let's discuss</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-300 mb-2">Your Timezone</label>
+                <select id="timezone" class="form-input">
+                  <option value="">Select your timezone...</option>
+                  <option value="EST (UTC-5)">EST (UTC-5)</option>
+                  <option value="CST (UTC-6)">CST (UTC-6)</option>
+                  <option value="MST (UTC-7)">MST (UTC-7)</option>
+                  <option value="PST (UTC-8)">PST (UTC-8)</option>
+                  <option value="GMT (UTC+0)">GMT (UTC+0)</option>
+                  <option value="CET (UTC+1)">CET (UTC+1)</option>
+                  <option value="IST (UTC+5:30)">IST (UTC+5:30)</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 2 -->
+          <div id="step-2" class="form-step hidden">
+            <h3 class="font-display font-semibold text-lg text-white mb-6">Tell me about yourself</h3>
+            <div class="space-y-5">
+              <div>
+                <label class="block text-sm font-medium text-gray-300 mb-2">Full Name <span style="color:#ffc451">*</span></label>
+                <input type="text" id="client-name" class="form-input" placeholder="John Smith" autocomplete="name">
+                <span id="name-error" class="field-error"></span>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-300 mb-2">Email Address <span style="color:#ffc451">*</span></label>
+                <input type="email" id="client-email" class="form-input" placeholder="john@company.com" autocomplete="email">
+                <span id="email-error" class="field-error"></span>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-300 mb-2">Phone Number</label>
+                <input type="tel" id="client-phone" class="form-input" placeholder="+1 (555) 000-0000" autocomplete="tel">
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-300 mb-2">Company / Organization</label>
+                <input type="text" id="client-company" class="form-input" placeholder="Your Company (optional)" autocomplete="organization">
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-300 mb-2">Preferred Contact Method</label>
+                <select id="preferred-contact" class="form-input">
+                  <option value="Email">Email</option>
+                  <option value="Phone">Phone</option>
+                  <option value="WhatsApp">WhatsApp</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-300 mb-2">How did you hear about us?</label>
+                <select id="how-heard" class="form-input">
+                  <option value="">Select an option...</option>
+                  <option value="Google Search">Google Search</option>
+                  <option value="LinkedIn">LinkedIn</option>
+                  <option value="GitHub">GitHub</option>
+                  <option value="Referral from friend">Referral from friend</option>
+                  <option value="Instagram">Instagram</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-300 mb-2">Project Description <span style="color:#ffc451">*</span></label>
+                <textarea id="client-message" class="form-input" rows="5" placeholder="Describe your project, goals, current challenges, and what success looks like..."></textarea>
+                <span id="message-error" class="field-error"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 3 -->
+          <div id="step-3" class="form-step hidden">
+            <h3 class="font-display font-semibold text-lg text-white mb-6">Review Your Request</h3>
+            <div id="review-content" style="background:#0a0a0a;border:1px solid #1f1f1f;border-radius:1rem;padding:1.25rem 1.5rem;margin-bottom:1.5rem;">
+              <!-- Populated by consultation.js -->
+            </div>
+            <button onclick="goToStep(1)" style="background:none;border:none;color:#ffc451;cursor:pointer;font-family:Inter,sans-serif;font-size:.875rem;font-weight:600;padding:0;margin-bottom:1.5rem;display:inline-flex;align-items:center;gap:.375rem;">
+              <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
+              Edit Details
+            </button>
+            <div style="background:#111;border:1px solid #1f1f1f;border-radius:1rem;padding:1rem 1.25rem;display:flex;align-items:start;gap:.875rem;">
+              <i data-lucide="shield-check" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451;"></i>
+              <p class="text-gray-500 text-sm leading-relaxed">Your information is never shared with third parties. It is used solely to respond to your consultation request and schedule a call.</p>
+            </div>
+          </div>
+
+          <!-- Navigation buttons -->
+          <div class="flex items-center gap-3 mt-8">
+            <button id="prev-btn" class="hidden" style="background:none;border:1.5px solid #2a2a2a;color:#ccc;padding:.875rem 1.75rem;border-radius:.875rem;cursor:pointer;font-family:Inter,sans-serif;font-size:.9375rem;font-weight:600;transition:all 0.2s;display:inline-flex;align-items:center;gap:.5rem;" onmouseover="this.style.borderColor='#ffc451';this.style.color='#ffc451'" onmouseout="this.style.borderColor='#2a2a2a';this.style.color='#ccc'">
+              <i data-lucide="arrow-left" class="w-4 h-4"></i>
+              Previous
+            </button>
+            <button id="next-btn" style="background:#ffc451;color:#000;font-weight:700;padding:.875rem 2rem;border-radius:.875rem;cursor:pointer;font-family:Inter,sans-serif;font-size:.9375rem;border:none;transition:opacity 0.2s;display:inline-flex;align-items:center;gap:.5rem;margin-left:auto;" onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">
+              Continue
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+            <button id="submit-btn" class="hidden" style="background:#ffc451;color:#000;font-weight:700;padding:.875rem 2.5rem;border-radius:.875rem;cursor:pointer;font-family:Inter,sans-serif;font-size:1rem;border:none;transition:opacity 0.2s;display:inline-flex;align-items:center;gap:.5rem;margin-left:auto;" onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">
+              <i data-lucide="send" class="w-5 h-5"></i>
+              Submit Request
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Info panel (sticky) -->
+      <div class="lg:col-span-2 space-y-5 reveal-right lg:sticky lg:top-28">
+
+        <!-- What to Expect -->
+        <div style="background:#111;border:1px solid #1f1f1f;border-radius:1.25rem;padding:1.75rem;">
+          <h3 class="font-display font-bold text-white mb-5 flex items-center gap-2">
+            <i data-lucide="list-checks" class="w-5 h-5" style="color:#ffc451;"></i>
+            What to Expect
+          </h3>
+          <ul class="space-y-3.5">
+            <li class="flex items-start gap-3 text-gray-300 text-sm">
+              <i data-lucide="check-circle" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#ffc451;"></i>
+              Free 30-min discovery call included
+            </li>
+            <li class="flex items-start gap-3 text-gray-300 text-sm">
+              <i data-lucide="check-circle" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#ffc451;"></i>
+              Response within 24 hours guaranteed
+            </li>
+            <li class="flex items-start gap-3 text-gray-300 text-sm">
+              <i data-lucide="check-circle" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#ffc451;"></i>
+              No commitment until you're ready
+            </li>
+            <li class="flex items-start gap-3 text-gray-300 text-sm">
+              <i data-lucide="check-circle" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#ffc451;"></i>
+              Flexible scheduling across time zones
+            </li>
+            <li class="flex items-start gap-3 text-gray-300 text-sm">
+              <i data-lucide="check-circle" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#ffc451;"></i>
+              NDA available upon request
+            </li>
+          </ul>
+        </div>
+
+        <!-- Why EOLAW -->
+        <div style="background:#111;border:1px solid #1f1f1f;border-radius:1.25rem;padding:1.75rem;">
+          <h3 class="font-display font-bold text-white mb-5 flex items-center gap-2">
+            <i data-lucide="award" class="w-5 h-5" style="color:#ffc451;"></i>
+            Why EOLAW Consulting?
+          </h3>
+          <ul class="space-y-3.5">
+            <li class="flex items-start gap-3 text-gray-300 text-sm">
+              <div style="background:rgba(255,196,81,0.1);border-radius:.375rem;padding:.25rem;flex-shrink:0;margin-top:.1rem;">
+                <i data-lucide="briefcase" class="w-3.5 h-3.5" style="color:#ffc451;"></i>
+              </div>
+              5+ years industry experience
+            </li>
+            <li class="flex items-start gap-3 text-gray-300 text-sm">
+              <div style="background:rgba(255,196,81,0.1);border-radius:.375rem;padding:.25rem;flex-shrink:0;margin-top:.1rem;">
+                <i data-lucide="package-check" class="w-3.5 h-3.5" style="color:#ffc451;"></i>
+              </div>
+              50+ projects successfully delivered
+            </li>
+            <li class="flex items-start gap-3 text-gray-300 text-sm">
+              <div style="background:rgba(255,196,81,0.1);border-radius:.375rem;padding:.25rem;flex-shrink:0;margin-top:.1rem;">
+                <i data-lucide="git-merge" class="w-3.5 h-3.5" style="color:#ffc451;"></i>
+              </div>
+              End-to-end technical ownership
+            </li>
+            <li class="flex items-start gap-3 text-gray-300 text-sm">
+              <div style="background:rgba(255,196,81,0.1);border-radius:.375rem;padding:.25rem;flex-shrink:0;margin-top:.1rem;">
+                <i data-lucide="message-square" class="w-3.5 h-3.5" style="color:#ffc451;"></i>
+              </div>
+              Transparent communication always
+            </li>
+          </ul>
+        </div>
+
+        <!-- Contact info -->
+        <div style="background:#111;border:1px solid #1f1f1f;border-radius:1.25rem;padding:1.75rem;">
+          <h3 class="font-display font-bold text-white mb-5 flex items-center gap-2">
+            <i data-lucide="contact" class="w-5 h-5" style="color:#ffc451;"></i>
+            Contact Info
+          </h3>
+          <div class="space-y-4">
+            <div class="flex items-center gap-3">
+              <div style="background:rgba(255,196,81,0.1);border-radius:.5rem;width:2.25rem;height:2.25rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <i data-lucide="mail" class="w-4 h-4" style="color:#ffc451;"></i>
+              </div>
+              <div>
+                <p class="text-gray-500 text-xs mb-0.5">Email</p>
+                <a href="mailto:your.email@domain.com" class="text-white text-sm font-medium hover:text-gold-500 transition-colors">your.email@domain.com</a>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div style="background:rgba(255,196,81,0.1);border-radius:.5rem;width:2.25rem;height:2.25rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <i data-lucide="phone" class="w-4 h-4" style="color:#ffc451;"></i>
+              </div>
+              <div>
+                <p class="text-gray-500 text-xs mb-0.5">Phone</p>
+                <a href="tel:+10000000000" class="text-white text-sm font-medium hover:text-gold-500 transition-colors">+1 (000) 000-0000</a>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div style="background:rgba(255,196,81,0.1);border-radius:.5rem;width:2.25rem;height:2.25rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <i data-lucide="clock" class="w-4 h-4" style="color:#ffc451;"></i>
+              </div>
+              <div>
+                <p class="text-gray-500 text-xs mb-0.5">Availability</p>
+                <p class="text-white text-sm font-medium">Mon–Fri, 9AM–6PM EST</p>
+                <p class="text-gray-500 text-xs mt-0.5">Remote &amp; Worldwide</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SUCCESS MODAL ===================== -->
+<div id="success-modal" class="hidden fixed inset-0 z-[9000] flex items-center justify-center p-4" style="background:rgba(0,0,0,0.8);backdrop-filter:blur(8px);">
+  <div style="background:#111;border:1px solid #2a2a2a;border-radius:1.5rem;padding:2rem;max-width:30rem;width:100%;position:relative;">
+    <button onclick="closeSuccessModal()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:#666;cursor:pointer;">
+      <i data-lucide="x" class="w-5 h-5"></i>
+    </button>
+    <!-- Gold checkmark circle -->
+    <div style="width:4rem;height:4rem;background:rgba(255,196,81,0.1);border:2px solid #ffc451;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;">
+      <i data-lucide="check" style="width:2rem;height:2rem;color:#ffc451;"></i>
+    </div>
+    <h3 class="font-display font-bold text-2xl text-white text-center mb-2">Request Received!</h3>
+    <p class="text-gray-400 text-center text-sm mb-6">Thank you, <span id="modal-name" class="text-white font-medium"></span>! Choose how you'd like to send your request:</p>
+
+    <!-- Email option -->
+    <a id="modal-email-btn" href="#" target="_blank" style="display:flex;align-items:center;gap:.75rem;background:#ffc451;color:#000;font-weight:700;padding:1rem 1.25rem;border-radius:.875rem;margin-bottom:.75rem;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+      <i data-lucide="mail" class="w-5 h-5 flex-shrink-0"></i>
+      <div>
+        <div style="font-size:.9375rem;">Send via Email</div>
+        <div style="font-size:.8125rem;font-weight:400;opacity:.7;">Opens your email client with form pre-filled</div>
+      </div>
+    </a>
+
+    <!-- WhatsApp option -->
+    <a id="modal-whatsapp-btn" href="#" target="_blank" style="display:flex;align-items:center;gap:.75rem;background:#25D366;color:#fff;font-weight:700;padding:1rem 1.25rem;border-radius:.875rem;margin-bottom:.75rem;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+      <i data-lucide="message-circle" class="w-5 h-5 flex-shrink-0"></i>
+      <div>
+        <div style="font-size:.9375rem;">Send via WhatsApp</div>
+        <div style="font-size:.8125rem;font-weight:400;opacity:.8;">Quick response — usually within 2 hours</div>
+      </div>
+    </a>
+
+    <!-- Phone option -->
+    <div style="display:flex;align-items:center;gap:.75rem;background:#1a1a1a;border:1px solid #2a2a2a;padding:1rem 1.25rem;border-radius:.875rem;margin-bottom:1.5rem;">
+      <i data-lucide="phone" class="w-5 h-5 flex-shrink-0" style="color:#ffc451;"></i>
+      <div>
+        <div style="color:#fff;font-weight:600;font-size:.9375rem;">Call Directly</div>
+        <div id="modal-phone" style="color:#ffc451;font-size:.9375rem;"></div>
+      </div>
+    </div>
+
+    <button onclick="closeSuccessModal()" style="width:100%;background:none;border:1px solid #2a2a2a;color:#999;padding:.75rem;border-radius:.875rem;cursor:pointer;font-family:Inter,sans-serif;font-size:.875rem;transition:border-color 0.2s;" onmouseover="this.style.borderColor='#ffc451'" onmouseout="this.style.borderColor='#2a2a2a'">
+      Done — Go to Thank You Page
+    </button>
+  </div>
+</div>
+
+<!-- ===================== FAQ ===================== -->
+<section style="background:#111111;" class="py-16">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <span class="section-badge reveal" data-delay="0">
+        <i data-lucide="help-circle" class="w-3.5 h-3.5"></i>
+        FAQ
+      </span>
+      <h2 class="font-display font-bold text-3xl md:text-4xl text-white mt-4 reveal" data-delay="100">
+        Common Questions
+      </h2>
+    </div>
+
+    <div class="space-y-3">
+      <!-- FAQ 1 -->
+      <div style="background:#0a0a0a;border:1px solid #1f1f1f;border-radius:1rem;overflow:hidden;" class="reveal" data-delay="0">
+        <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left">
+          <span class="font-semibold text-white text-sm">Is the initial consultation really free?</span>
+          <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 flex-shrink-0" style="color:#ffc451"></i>
+        </button>
+        <div class="faq-answer px-6 text-gray-400 text-sm leading-relaxed">
+          <div class="pb-5">
+            Yes. The 30-minute discovery call is completely free. It helps me understand your project and helps you understand
+            if I'm the right fit — no strings attached. You'll leave with clarity regardless of whether we move forward.
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ 2 -->
+      <div style="background:#0a0a0a;border:1px solid #1f1f1f;border-radius:1rem;overflow:hidden;" class="reveal" data-delay="100">
+        <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left">
+          <span class="font-semibold text-white text-sm">How quickly will you respond to my request?</span>
+          <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 flex-shrink-0" style="color:#ffc451"></i>
+        </button>
+        <div class="faq-answer px-6 text-gray-400 text-sm leading-relaxed">
+          <div class="pb-5">
+            I typically respond within 24 hours. If you choose WhatsApp, usually within 2 hours during business hours
+            (Mon–Fri, 9AM–6PM EST). For urgent inquiries, calling directly is always the fastest option.
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ 3 -->
+      <div style="background:#0a0a0a;border:1px solid #1f1f1f;border-radius:1rem;overflow:hidden;" class="reveal" data-delay="200">
+        <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left">
+          <span class="font-semibold text-white text-sm">What happens after I submit this form?</span>
+          <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 flex-shrink-0" style="color:#ffc451"></i>
+        </button>
+        <div class="faq-answer px-6 text-gray-400 text-sm leading-relaxed">
+          <div class="pb-5">
+            I'll review your request and reach out to schedule a discovery call. We'll discuss your project in detail and
+            I'll prepare a custom proposal with timeline, approach, and pricing — all tailored to your specific needs.
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ 4 -->
+      <div style="background:#0a0a0a;border:1px solid #1f1f1f;border-radius:1rem;overflow:hidden;" class="reveal" data-delay="300">
+        <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left">
+          <span class="font-semibold text-white text-sm">Can we have the consultation over Zoom, Google Meet, or phone?</span>
+          <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 flex-shrink-0" style="color:#ffc451"></i>
+        </button>
+        <div class="faq-answer px-6 text-gray-400 text-sm leading-relaxed">
+          <div class="pb-5">
+            Absolutely. I use Zoom, Google Meet, MS Teams, or plain phone calls — whatever works best for you.
+            Just mention your preference when we confirm the call time and I'll send the appropriate invite.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer style="background:#050505;border-top:1px solid #1f1f1f;">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <div class="lg:col-span-2">
+        <a href="/" class="flex items-center gap-2.5 mb-5">
+          <img src="/assets/img/favicon_io/android-chrome-192x192.png" alt="EOLAW" class="w-10 h-10 rounded-xl">
+          <span class="font-display font-bold text-xl"><span style="color:#ffc451">EOLAW</span> <span class="text-white">Consulting</span></span>
+        </a>
+        <p class="text-gray-500 text-sm leading-relaxed max-w-sm mb-6">Expert consulting in Data Science, Software Engineering, and AI/ML solutions. Transforming complex challenges into measurable business outcomes.</p>
+        <div class="flex items-center gap-3">
+          <a href="https://www.linkedin.com/in/emmanuel-oyemosu/" target="_blank" class="w-10 h-10 rounded-lg flex items-center justify-center text-gray-500 transition-all" style="background:#1a1a1a;border:1px solid #2a2a2a;"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+          <a href="https://github.com/EOlaw" target="_blank" class="w-10 h-10 rounded-lg flex items-center justify-center text-gray-500 transition-all" style="background:#1a1a1a;border:1px solid #2a2a2a;"><i data-lucide="github" class="w-4 h-4"></i></a>
+          <a href="https://www.instagram.com/e_olawalee/" target="_blank" class="w-10 h-10 rounded-lg flex items-center justify-center text-gray-500 transition-all" style="background:#1a1a1a;border:1px solid #2a2a2a;"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+          <a href="mailto:your.email@domain.com" class="w-10 h-10 rounded-lg flex items-center justify-center text-gray-500 transition-all" style="background:#1a1a1a;border:1px solid #2a2a2a;"><i data-lucide="mail" class="w-4 h-4"></i></a>
+        </div>
+      </div>
+      <div>
+        <h4 class="font-display font-bold text-white mb-5 text-sm uppercase tracking-widest">Navigation</h4>
+        <ul class="space-y-3">
+          <li><a href="/" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Home</a></li>
+          <li><a href="/about.html" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">About</a></li>
+          <li><a href="/services.html" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Services</a></li>
+          <li><a href="/consultation.html" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Book Consultation</a></li>
+          <li><a href="/privacy.html" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Privacy Policy</a></li>
+          <li><a href="/terms.html" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Terms of Service</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-display font-bold text-white mb-5 text-sm uppercase tracking-widest">Services</h4>
+        <ul class="space-y-3">
+          <li><a href="/services.html#data-science" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Data Science &amp; Analytics</a></li>
+          <li><a href="/services.html#fullstack" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Full-Stack Development</a></li>
+          <li><a href="/services.html#ai-ml" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">AI &amp; Machine Learning</a></li>
+          <li><a href="/services.html#architecture" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">System Architecture</a></li>
+          <li><a href="/services.html#ecommerce" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">eCommerce Solutions</a></li>
+          <li><a href="/services.html#consulting" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Technical Consulting</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="mt-12 pt-8 border-t border-dark-500 flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="text-gray-600 text-sm">© 2025 EOLAW Consulting. All rights reserved.</p>
+      <div class="flex items-center gap-2 text-gray-600 text-sm"><i data-lucide="map-pin" class="w-3.5 h-3.5" style="color:#ffc451"></i><span>Available Worldwide · Remote Consulting</span></div>
+      <div class="flex items-center gap-4">
+        <a href="/privacy.html" class="text-gray-600 hover:text-gold-500 text-sm transition-colors">Privacy</a>
+        <a href="/terms.html" class="text-gray-600 hover:text-gold-500 text-sm transition-colors">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="/assets/js/main.js"></script>
+<script src="/assets/js/consultation.js"></script>
+</body>
 </html>
