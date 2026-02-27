@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Insightserenity</title>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon_io/favicon-16x16.png">
+  <link rel="shortcut icon" href="assets/img/favicon_io/favicon.ico">
+  <link rel="manifest" href="assets/img/favicon_io/site.webmanifest">
+
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/lucide.min.js"></script>
+  <style>
+    :root { --accent: #ffc451; --dark: #000; }
+  </style>
+</head>
+
+<body class="bg-black text-white antialiased">
+  <nav class="bg-black border-b border-gray-800 sticky top-0 z-50">
+    <div class="container mx-auto flex items-center justify-between py-4 px-6">
+      <a href="index.html" class="flex items-center">
+        <img src="assets/img/favicon_io/apple-touch-icon.png" alt="Insightserenity logo" class="h-8 w-8 mr-2">
+        <span class="text-2xl font-bold" style="color: var(--accent);">Insightserenity</span>
+      </a>
+      <div class="space-x-6 text-sm flex items-center">
+        <a href="index.html" class="hover:text-[#ffc451] flex items-center"><i data-lucide="home" class="w-4 h-4 mr-1"></i>Home</a>
+        <a href="about.html" class="hover:text-[#ffc451] font-semibold flex items-center" aria-current="page"><i data-lucide="info" class="w-4 h-4 mr-1"></i>About</a>
+        <a href="services.html" class="hover:text-[#ffc451] flex items-center"><i data-lucide="briefcase" class="w-4 h-4 mr-1"></i>Services</a>
+        <a href="consultation.html" class="hover:text-[#ffc451] flex items-center"><i data-lucide="phone" class="w-4 h-4 mr-1"></i>Book</a>
+        <a href="privacy.html" class="hover:text-[#ffc451] flex items-center"><i data-lucide="shield" class="w-4 h-4 mr-1"></i>Privacy</a>
+        <a href="terms.html" class="hover:text-[#ffc451] flex items-center"><i data-lucide="file-text" class="w-4 h-4 mr-1"></i>Terms</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- hero section -->
+  <section class="bg-black py-24" style="background-image: url('https://source.unsplash.com/1600x400/?meeting,team'); background-size: cover; background-position: center;">
+    <div class="container mx-auto px-6 text-center">
+      <h1 class="text-4xl md:text-5xl font-extrabold" style="color: var(--accent);">About Insightserenity</h1>
+      <p class="mt-4 max-w-2xl mx-auto text-lg">
+        Decades of combined experience delivering actionable advice to startups, enterprises and individuals. We
+        also extend free Bible consulting to help people grow spiritually alongside their professional lives.
+      </p>
+    </div>
+  </section>
+
+  <!-- content grid -->
+  <section class="container mx-auto py-20 px-6">
+    <div class="md:flex md:items-center md:space-x-12">
+      <div class="md:w-1/2">
+        <h2 class="text-2xl font-semibold mb-4">Our Story</h2>
+        <p class="mb-4">
+          Founded by industry veterans, we started as a small team helping friends and colleagues solve technical
+          challenges. Word spread quickly and today we assist clients worldwide across technology, business, and
+          personal domains.
+        </p>
+        <p>
+          Our commitment is simple: listen first, respond clearly, and follow through. Every interaction is treated
+          with the care it deserves.
+        </p>
+      </div>
+      <div class="md:w-1/2 mt-8 md:mt-0">
+        <img src="https://source.unsplash.com/600x400/?meeting" alt="Team meeting" class="rounded-lg">
+      </div>
+    </div>
+  </section>
+
+  <!-- values -->
+  <section class="bg-gray-900 py-20">
+    <div class="container mx-auto px-6">
+      <h3 class="text-2xl font-semibold mb-8 text-center" style="color: var(--accent);">Core Values</h3>
+      <ul class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+        <li>
+          <i data-lucide="headphones" class="w-10 h-10 mx-auto mb-2 text-[#ffc451]"></i>
+          <strong>Listen</strong>
+        </li>
+        <li>
+          <i data-lucide="lightbulb" class="w-10 h-10 mx-auto mb-2 text-[#ffc451]"></i>
+          <strong>Innovate</strong>
+        </li>
+        <li>
+          <i data-lucide="shield" class="w-10 h-10 mx-auto mb-2 text-[#ffc451]"></i>
+          <strong>Deliver</strong>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="bg-black border-t border-gray-800 py-6">
+    <div class="container mx-auto text-center text-xs">
+      <p>&copy; 2026 Insightserenity</p>
+      <div class="mt-2 space-x-3">
+        <a href="#" class="hover:text-[#ffc451]"><i data-lucide="instagram"></i></a>
+        <a href="#" class="hover:text-[#ffc451]"><i data-lucide="linkedin"></i></a>
+        <a href="#" class="hover:text-[#ffc451]"><i data-lucide="github"></i></a>
+      </div>
+      <div class="mt-2 text-xs">
+        <a href="privacy.html" class="hover:text-[#ffc451]">Privacy</a> &bull;
+        <a href="terms.html" class="hover:text-[#ffc451]">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => lucide.createIcons());
+  </script>
+</body>
+
+</html>

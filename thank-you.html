@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank You – Insightserenity</title>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon_io/favicon-16x16.png">
+  <link rel="shortcut icon" href="assets/img/favicon_io/favicon.ico">
+  <link rel="manifest" href="assets/img/favicon_io/site.webmanifest">
+
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/lucide.min.js"></script>
+  <style>
+    :root { --accent: #ffc451; --dark: #000; }
+  </style>
+</head>
+
+<body class="bg-black text-white">
+  <nav class="bg-black border-b border-gray-800">
+    <div class="container mx-auto flex items-center justify-between py-4 px-6">
+      <a href="index.html" class="text-2xl font-bold flex items-center" style="color: var(--accent);">
+        <img src="logo.png" alt="Insightserenity logo" class="h-8 mr-2">
+        Insightserenity
+      </a>
+      <div class="space-x-4 text-sm">
+        <a href="about.html" class="hover:text-[#ffc451]">About</a>
+        <a href="services.html" class="hover:text-[#ffc451]">Services</a>
+        <a href="consultation.html" class="hover:text-[#ffc451]">Book</a>
+        <a href="privacy.html" class="hover:text-[#ffc451]">Privacy</a>
+        <a href="terms.html" class="hover:text-[#ffc451]">Terms</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container mx-auto py-20 px-6 text-center">
+    <h1 class="text-4xl font-extrabold mb-6" style="color: var(--accent);">Thank You!</h1>
+    <p class="mb-4">We’ve received your request and will get back to you by email or phone as soon as possible.</p>
+    <p id="summary" class="text-sm text-gray-300"></p>
+    <a href="index.html" class="inline-block mt-8 px-6 py-3 bg-[#ffc451] text-black rounded-lg hover:bg-yellow-500">Return to home</a>
+  </main>
+
+  <footer class="bg-black border-t border-gray-800 py-6">
+    <div class="container mx-auto text-center text-xs">
+      &copy; 2026 Insightserenity &bull; <a href="privacy.html" class="hover:text-[#ffc451]">Privacy</a> &bull;
+      <a href="terms.html" class="hover:text-[#ffc451]">Terms</a>
+    </div>
+  </footer>
+
+  <script>
+    // show last stored request (fake backend state)
+    const data = JSON.parse(localStorage.getItem('lastRequest') || '{}');
+    if (data.name) {
+      document.getElementById('summary').textContent =
+        `Name: ${data.name}, Email: ${data.email}` +
+        (data.phone ? `, Phone: ${data.phone}` : '');
+    }
+    window.addEventListener('DOMContentLoaded', () => lucide.createIcons());
+  </script>
+</body>
+
+</html>
