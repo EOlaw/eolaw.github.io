@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bible Reader — The Word of God (KJV)</title>
+  <meta name="description" content="Read the King James Bible — browse books, chapters, and verses. KJV Bible, 1611 Edition, Public Domain.">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon_io/favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400;1,600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background: #0a0a12; color: #fff; font-family: 'Inter', sans-serif; }
+
+    /* Navbar */
+    #reader-nav { background: rgba(10,10,18,0.9); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,.06); position: fixed; top:0;left:0;right:0;z-index:50; padding:.875rem 0; }
+
+    /* Sidebar */
+    .sidebar { width:260px; flex-shrink:0; height:calc(100vh - 60px); overflow-y:auto; position:sticky;top:60px; background:#0d0d16; border-right:1px solid rgba(255,255,255,.06); }
+    .sidebar::-webkit-scrollbar { width:4px; }
+    .sidebar::-webkit-scrollbar-track { background:transparent; }
+    .sidebar::-webkit-scrollbar-thumb { background:#2a2a38; border-radius:2px; }
+
+    /* Book button */
+    .book-btn { display:block;width:100%;text-align:left;padding:.5rem .875rem;font-size:.8125rem;color:#aaa;cursor:pointer;background:none;border:none;font-family:'Inter',sans-serif;transition:all .15s; border-radius:.375rem; }
+    .book-btn:hover { background:rgba(255,196,81,.05);color:#ffc451; }
+    .book-btn.active { background:rgba(255,196,81,.1);color:#ffc451;font-weight:600; }
+
+    /* Chapter selector */
+    .chapter-pill { display:inline-flex;align-items:center;justify-content:center;width:2.25rem;height:2.25rem;border-radius:.5rem;border:1px solid rgba(255,255,255,.1);color:#aaa;font-size:.8125rem;font-weight:500;cursor:pointer;transition:all .2s;background:none;font-family:'Inter',sans-serif; }
+    .chapter-pill:hover { border-color:#ffc451;color:#ffc451;background:rgba(255,196,81,.06); }
+    .chapter-pill.active { background:#ffc451;color:#000;border-color:#ffc451;font-weight:700; }
+
+    /* Verse display */
+    .verse-item { display:flex;gap:1rem;padding:.625rem 0;cursor:pointer;transition:background .15s;border-radius:.5rem;padding-left:.75rem;padding-right:.75rem; }
+    .verse-item:hover { background:rgba(255,196,81,.04); }
+    .verse-num { color:#ffc451;font-size:.8125rem;font-weight:700;min-width:1.75rem;flex-shrink:0;padding-top:.2rem; }
+    .verse-text { font-family:'Crimson Pro',Georgia,serif;font-size:1.125rem;color:#e8e8e8;line-height:1.75; }
+    .verse-item.highlighted { background:rgba(255,196,81,.08);border-left:2px solid #ffc451; }
+
+    /* Loading */
+    .skeleton { background: linear-gradient(90deg, #1a1a24 25%, #222230 50%, #1a1a24 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: .5rem; }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+    /* Quick select */
+    .form-select { background:#111118;border:1.5px solid rgba(255,255,255,.12);color:#fff;padding:.5rem .875rem;border-radius:.75rem;font-size:.875rem;font-family:'Inter',sans-serif;outline:none;cursor:pointer;transition:border-color .2s; }
+    .form-select:focus { border-color:#ffc451; }
+    .form-select option { background:#111118; }
+
+    /* Mobile sidebar */
+    .sidebar-mobile { display:none; }
+    @media(max-width:767px) {
+      .sidebar { display:none; }
+      .sidebar-mobile { display:block; }
+      .main-reader { margin-left:0 !important; }
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0a0a12; }
+    ::-webkit-scrollbar-thumb { background: #2a2a38; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #ffc451; }
+
+    /* Toast */
+    .reader-toast { position:fixed;bottom:1.5rem;right:1.5rem;z-index:9999;transform:translateX(120%);transition:transform .4s cubic-bezier(.175,.885,.32,1.275); }
+    .reader-toast.show { transform:translateX(0); }
+
+    /* Fade */
+    @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+    .fade-in { animation:fadeIn .35s ease both; }
+  </style>
+</head>
+<body>
+
+<!-- ===================== NAVBAR ===================== -->
+<nav id="reader-nav">
+  <div class="max-w-7xl mx-auto px-4 flex items-center justify-between gap-4">
+    <!-- Logo -->
+    <a href="/scripture/" style="display:flex;align-items:center;gap:.625rem;text-decoration:none;flex-shrink:0;">
+      <div style="width:1.875rem;height:1.875rem;background:linear-gradient(135deg,#ffc451,#e6b048);border-radius:.5rem;display:flex;align-items:center;justify-content:center;">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      </div>
+      <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.875rem;white-space:nowrap;">
+        <span style="color:#ffc451;">The Word</span><span style="color:#fff;"> of God</span>
+      </span>
+    </a>
+
+    <!-- Mobile book/chapter selectors -->
+    <div class="sidebar-mobile flex items-center gap-2 flex-1">
+      <select id="mobile-book-select" class="form-select" style="flex:1;" onchange="mobileBookChange()">
+        <option value="">Select Book...</option>
+      </select>
+      <select id="mobile-chapter-select" class="form-select" style="width:80px;" onchange="mobileChapterChange()">
+        <option value="">Ch...</option>
+      </select>
+    </div>
+
+    <!-- Desktop: current location breadcrumb -->
+    <div id="breadcrumb" class="hidden md:flex items-center gap-2 text-sm" style="color:#888;">
+      <span id="bc-book" style="color:#ffc451;font-weight:600;"></span>
+      <span id="bc-chapter" style="color:#666;"></span>
+    </div>
+
+    <!-- Actions -->
+    <div class="flex items-center gap-2 flex-shrink-0">
+      <button onclick="shuffleVerse()" title="Random verse" style="background:rgba(255,196,81,.08);border:1px solid rgba(255,196,81,.2);color:#ffc451;padding:.4rem .75rem;border-radius:.625rem;font-size:.75rem;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;white-space:nowrap;" onmouseover="this.style.background='#ffc451';this.style.color='#000'" onmouseout="this.style.background='rgba(255,196,81,.08)';this.style.color='#ffc451'">
+        &#x21ba; Random
+      </button>
+      <a href="/" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#aaa;padding:.4rem .75rem;border-radius:.625rem;font-size:.75rem;font-family:'Inter',sans-serif;text-decoration:none;transition:all .2s;white-space:nowrap;" onmouseover="this.style.color='#ffc451'" onmouseout="this.style.color='#aaa'">
+        &#8592; Consulting
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===================== LAYOUT ===================== -->
+<div style="display:flex;padding-top:60px;min-height:100vh;">
+
+  <!-- SIDEBAR (desktop) -->
+  <aside class="sidebar">
+    <!-- Testament tabs -->
+    <div style="padding:.75rem;border-bottom:1px solid rgba(255,255,255,.06);">
+      <div style="display:flex;gap:.375rem;">
+        <button id="tab-ot" onclick="switchTestament('old')" style="flex:1;padding:.4rem .5rem;border-radius:.5rem;font-size:.75rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;background:rgba(255,196,81,.1);color:#ffc451;border:1px solid rgba(255,196,81,.2);transition:all .2s;">OT (39)</button>
+        <button id="tab-nt" onclick="switchTestament('new')" style="flex:1;padding:.4rem .5rem;border-radius:.5rem;font-size:.75rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;background:none;color:#666;border:1px solid rgba(255,255,255,.1);transition:all .2s;">NT (27)</button>
+      </div>
+    </div>
+
+    <!-- Book list -->
+    <div id="sidebar-books" style="padding:.5rem .375rem;"></div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main id="main-reader" style="flex:1;min-width:0;padding:1.5rem;max-width:760px;margin:0 auto;" class="main-reader">
+
+    <!-- Welcome state -->
+    <div id="welcome-state" style="text-align:center;padding:4rem 1rem;">
+      <div style="font-size:3rem;margin-bottom:1rem;">📖</div>
+      <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.5rem;color:#fff;margin-bottom:.75rem;">Choose a Book to Begin Reading</h2>
+      <p style="color:#666;font-size:.9rem;max-width:400px;margin:0 auto 2rem;">Select any book from the sidebar, or use the quick-jump below.</p>
+      <!-- Quick popular books -->
+      <div style="display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;max-width:480px;margin:0 auto;">
+        <button class="quick-book-btn" onclick="loadBook('Psalms')">Psalms</button>
+        <button class="quick-book-btn" onclick="loadBook('Proverbs')">Proverbs</button>
+        <button class="quick-book-btn" onclick="loadBook('John')">John</button>
+        <button class="quick-book-btn" onclick="loadBook('Matthew')">Matthew</button>
+        <button class="quick-book-btn" onclick="loadBook('Romans')">Romans</button>
+        <button class="quick-book-btn" onclick="loadBook('Isaiah')">Isaiah</button>
+        <button class="quick-book-btn" onclick="loadBook('Genesis')">Genesis</button>
+        <button class="quick-book-btn" onclick="loadBook('Philippians')">Philippians</button>
+        <button class="quick-book-btn" onclick="loadBook('Hebrews')">Hebrews</button>
+        <button class="quick-book-btn" onclick="loadBook('1 Corinthians')">1 Corinthians</button>
+      </div>
+    </div>
+
+    <!-- Loading state -->
+    <div id="loading-state" style="display:none;padding:3rem 1rem;">
+      <div class="skeleton" style="height:2rem;width:40%;margin-bottom:1.5rem;"></div>
+      <div class="skeleton" style="height:1rem;width:70%;margin-bottom:.75rem;"></div>
+      <div class="skeleton" style="height:1rem;width:90%;margin-bottom:.75rem;"></div>
+      <div class="skeleton" style="height:1rem;width:60%;margin-bottom:.75rem;"></div>
+      <div class="skeleton" style="height:1rem;width:80%;margin-bottom:.75rem;"></div>
+      <div class="skeleton" style="height:1rem;width:55%;"></div>
+    </div>
+
+    <!-- Reader content -->
+    <div id="reader-content" style="display:none;">
+      <!-- Book header -->
+      <div style="margin-bottom:1.75rem;">
+        <p style="color:#ffc451;font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.375rem;" id="reader-testament"></p>
+        <h1 id="reader-book-title" style="font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:2rem;color:#fff;margin-bottom:.25rem;"></h1>
+        <p id="reader-chapter-label" style="color:#888;font-size:.9rem;"></p>
+      </div>
+
+      <!-- Chapter selector -->
+      <div id="chapter-selector" style="margin-bottom:1.75rem;">
+        <p style="color:#666;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.625rem;">Chapter</p>
+        <div id="chapter-pills" style="display:flex;flex-wrap:wrap;gap:.375rem;"></div>
+      </div>
+
+      <!-- No verses note (for books not in JSON) -->
+      <div id="no-verses-note" style="display:none;background:rgba(255,196,81,.05);border:1px solid rgba(255,196,81,.15);border-radius:1rem;padding:1.5rem;margin-bottom:1.5rem;">
+        <p style="color:#ffc451;font-weight:600;margin-bottom:.375rem;">📖 Full chapter coming soon</p>
+        <p style="color:#888;font-size:.875rem;">This book is in our collection but not all chapters are in the curated verse database yet. Browse our <a href="/scripture/" style="color:#ffc451;text-decoration:none;">featured verses</a> or explore the topics above.</p>
+      </div>
+
+      <!-- Verses -->
+      <div id="verses-container" class="fade-in"></div>
+
+      <!-- Chapter navigation -->
+      <div id="chapter-nav" style="display:flex;justify-content:space-between;align-items:center;margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.06);">
+        <button id="prev-chapter-btn" onclick="navigateChapter(-1)" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#aaa;padding:.625rem 1.25rem;border-radius:.75rem;cursor:pointer;font-family:'Inter',sans-serif;font-size:.875rem;transition:all .2s;" onmouseover="this.style.borderColor='#ffc451';this.style.color='#ffc451'" onmouseout="this.style.borderColor='rgba(255,255,255,.1)';this.style.color='#aaa'">
+          &#8592; Previous Chapter
+        </button>
+        <span id="chapter-nav-label" style="color:#555;font-size:.8125rem;"></span>
+        <button id="next-chapter-btn" onclick="navigateChapter(1)" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#aaa;padding:.625rem 1.25rem;border-radius:.75rem;cursor:pointer;font-family:'Inter',sans-serif;font-size:.875rem;transition:all .2s;" onmouseover="this.style.borderColor='#ffc451';this.style.color='#ffc451'" onmouseout="this.style.borderColor='rgba(255,255,255,.1)';this.style.color='#aaa'">
+          Next Chapter &#8594;
+        </button>
+      </div>
+
+      <!-- Share/Back -->
+      <div style="margin-top:2rem;text-align:center;">
+        <a href="/scripture/" style="color:#666;font-size:.8125rem;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#ffc451'" onmouseout="this.style.color='#666'">
+          &#8592; Back to The Word of God
+        </a>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<style>
+.quick-book-btn {
+  background:rgba(255,196,81,.08);border:1px solid rgba(255,196,81,.2);color:#ffc451;
+  padding:.5rem 1rem;border-radius:.625rem;font-size:.8125rem;font-weight:600;
+  cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;
+}
+.quick-book-btn:hover { background:#ffc451;color:#000; }
+</style>
+
+<!-- ===================== SCRIPTS ===================== -->
+<script src="/scripture/data/books-metadata.js"></script>
+<script src="/scripture/js/bible.js"></script>
+<script>
+/* =====================
+   Bible Reader Logic
+   ===================== */
+
+var _currentBook = null;
+var _currentChapter = 1;
+var _availableChapters = [];
+var _currentTestament = 'old';
+var _bibleLoaded = false;
+
+/* ---- Init ---- */
+window.addEventListener('DOMContentLoaded', function () {
+  renderSidebar('old');
+  populateMobileBookSelect();
+
+  BibleAPI.init().then(function () {
+    _bibleLoaded = true;
+
+    // URL params
+    var params = new URLSearchParams(window.location.search);
+    var book    = params.get('book');
+    var chapter = parseInt(params.get('chapter'), 10) || 1;
+    var verse   = parseInt(params.get('verse'), 10) || null;
+
+    if (book) {
+      loadBook(book, chapter, verse);
+    }
+  });
+});
+
+/* ---- Sidebar ---- */
+function renderSidebar(testament) {
+  _currentTestament = testament;
+  var books = BIBLE_BOOKS.filter(function (b) { return b.testament === testament; });
+  var el = document.getElementById('sidebar-books');
+  el.innerHTML = '';
+  books.forEach(function (b) {
+    var btn = document.createElement('button');
+    btn.className = 'book-btn' + (_currentBook === b.book ? ' active' : '');
+    btn.textContent = b.book;
+    btn.onclick = function () { loadBook(b.book); };
+    el.appendChild(btn);
+  });
+
+  // Tab styles
+  var otTab = document.getElementById('tab-ot');
+  var ntTab = document.getElementById('tab-nt');
+  if (testament === 'old') {
+    otTab.style.cssText = 'flex:1;padding:.4rem .5rem;border-radius:.5rem;font-size:.75rem;font-weight:600;cursor:pointer;font-family:Inter,sans-serif;background:rgba(255,196,81,.1);color:#ffc451;border:1px solid rgba(255,196,81,.2);transition:all .2s;';
+    ntTab.style.cssText = 'flex:1;padding:.4rem .5rem;border-radius:.5rem;font-size:.75rem;font-weight:600;cursor:pointer;font-family:Inter,sans-serif;background:none;color:#666;border:1px solid rgba(255,255,255,.1);transition:all .2s;';
+  } else {
+    ntTab.style.cssText = 'flex:1;padding:.4rem .5rem;border-radius:.5rem;font-size:.75rem;font-weight:600;cursor:pointer;font-family:Inter,sans-serif;background:rgba(255,196,81,.1);color:#ffc451;border:1px solid rgba(255,196,81,.2);transition:all .2s;';
+    otTab.style.cssText = 'flex:1;padding:.4rem .5rem;border-radius:.5rem;font-size:.75rem;font-weight:600;cursor:pointer;font-family:Inter,sans-serif;background:none;color:#666;border:1px solid rgba(255,255,255,.1);transition:all .2s;';
+  }
+}
+
+function switchTestament(testament) { renderSidebar(testament); }
+
+/* ---- Mobile selects ---- */
+function populateMobileBookSelect() {
+  var sel = document.getElementById('mobile-book-select');
+  var ot = BIBLE_BOOKS.filter(function(b){return b.testament==='old';});
+  var nt = BIBLE_BOOKS.filter(function(b){return b.testament==='new';});
+
+  var otGroup = document.createElement('optgroup');
+  otGroup.label = '— Old Testament —';
+  ot.forEach(function(b){ var o=document.createElement('option');o.value=b.book;o.textContent=b.book;otGroup.appendChild(o); });
+  sel.appendChild(otGroup);
+
+  var ntGroup = document.createElement('optgroup');
+  ntGroup.label = '— New Testament —';
+  nt.forEach(function(b){ var o=document.createElement('option');o.value=b.book;o.textContent=b.book;ntGroup.appendChild(o); });
+  sel.appendChild(ntGroup);
+}
+
+function mobileBookChange() {
+  var book = document.getElementById('mobile-book-select').value;
+  if (book) loadBook(book);
+}
+
+function mobileChapterChange() {
+  var ch = parseInt(document.getElementById('mobile-chapter-select').value, 10);
+  if (ch && _currentBook) loadChapter(_currentBook, ch);
+}
+
+/* ---- Load Book ---- */
+function loadBook(bookName, chapter, highlightVerse) {
+  chapter = chapter || 1;
+  _currentBook = bookName;
+  _currentChapter = chapter;
+
+  // Find metadata
+  var meta = BIBLE_BOOKS.find(function (b) { return b.book === bookName; });
+  if (!meta) return;
+
+  // Determine testament and update sidebar
+  if (meta.testament !== _currentTestament) renderSidebar(meta.testament);
+
+  // Update active button in sidebar
+  document.querySelectorAll('.book-btn').forEach(function (b) {
+    b.classList.toggle('active', b.textContent === bookName);
+  });
+
+  // Update mobile select
+  document.getElementById('mobile-book-select').value = bookName;
+
+  // Show loading
+  document.getElementById('welcome-state').style.display = 'none';
+  document.getElementById('reader-content').style.display = 'none';
+  document.getElementById('loading-state').style.display = 'block';
+
+  // Get chapters available in JSON data
+  var chaptersInData = BibleAPI.loaded ? BibleAPI.getChaptersForBook(bookName) : [];
+
+  // Generate chapter list (full book chapters from metadata)
+  _availableChapters = [];
+  for (var i = 1; i <= meta.chapters; i++) { _availableChapters.push(i); }
+
+  // Render
+  setTimeout(function () {
+    document.getElementById('loading-state').style.display = 'none';
+    document.getElementById('reader-content').style.display = 'block';
+
+    // Header
+    document.getElementById('reader-testament').textContent = meta.testament === 'old' ? 'Old Testament' : 'New Testament';
+    document.getElementById('reader-book-title').textContent = bookName;
+    document.getElementById('reader-chapter-label').textContent = meta.chapters + ' chapters';
+
+    // Breadcrumb
+    document.getElementById('bc-book').textContent = bookName;
+
+    // Chapter pills
+    var pillsEl = document.getElementById('chapter-pills');
+    pillsEl.innerHTML = '';
+    _availableChapters.forEach(function (ch) {
+      var pill = document.createElement('button');
+      pill.className = 'chapter-pill' + (ch === chapter ? ' active' : '');
+      pill.textContent = ch;
+      var hasData = chaptersInData.indexOf(ch) !== -1;
+      if (hasData) pill.style.borderColor = 'rgba(255,196,81,.3)';
+      pill.onclick = (function(c){ return function(){ loadChapter(bookName, c); }; })(ch);
+      pillsEl.appendChild(pill);
+    });
+
+    // Mobile chapter select
+    var mChSel = document.getElementById('mobile-chapter-select');
+    mChSel.innerHTML = '';
+    _availableChapters.forEach(function(ch){
+      var o = document.createElement('option');
+      o.value = ch; o.textContent = 'Ch ' + ch;
+      if (ch === chapter) o.selected = true;
+      mChSel.appendChild(o);
+    });
+
+    loadChapter(bookName, chapter, highlightVerse);
+  }, 200);
+}
+
+/* ---- Load Chapter ---- */
+function loadChapter(bookName, chapter, highlightVerse) {
+  _currentBook = bookName;
+  _currentChapter = chapter;
+
+  // Update pill states
+  document.querySelectorAll('.chapter-pill').forEach(function (p) {
+    p.classList.toggle('active', parseInt(p.textContent, 10) === chapter);
+  });
+
+  // Update mobile chapter select
+  document.getElementById('mobile-chapter-select').value = chapter;
+
+  // Breadcrumb
+  document.getElementById('bc-chapter').textContent = '· Chapter ' + chapter;
+  document.getElementById('reader-chapter-label').textContent = 'Chapter ' + chapter;
+  document.title = bookName + ' ' + chapter + ' — The Word of God (KJV)';
+
+  // Update URL without reload
+  var newUrl = '/scripture/read.html?book=' + encodeURIComponent(bookName) + '&chapter=' + chapter;
+  history.replaceState(null, '', newUrl);
+
+  // Chapter navigation label
+  document.getElementById('chapter-nav-label').textContent = bookName + ' · Chapter ' + chapter;
+
+  // Prev/next visibility
+  var meta = BIBLE_BOOKS.find(function(b){ return b.book === bookName; });
+  document.getElementById('prev-chapter-btn').style.visibility = chapter > 1 ? 'visible' : 'hidden';
+  document.getElementById('next-chapter-btn').style.visibility = (meta && chapter < meta.chapters) ? 'visible' : 'hidden';
+
+  // Get verses
+  var verses = BibleAPI.loaded ? BibleAPI.getChapter(bookName, chapter) : [];
+  var container = document.getElementById('verses-container');
+  var noNote = document.getElementById('no-verses-note');
+
+  container.innerHTML = '';
+  container.className = 'fade-in';
+  // Trigger reflow for animation
+  void container.offsetWidth;
+
+  if (!verses.length) {
+    noNote.style.display = 'block';
+    container.innerHTML = '<div style="text-align:center;padding:3rem 1rem;color:#555;"><p style="font-size:2rem;margin-bottom:.75rem;">📖</p><p style="font-size:.9rem;">No verses loaded for ' + bookName + ' ' + chapter + ' in the curated database.</p><p style="font-size:.8125rem;margin-top:.5rem;color:#444;">Our database contains selected verses. More chapters will be added over time.</p></div>';
+  } else {
+    noNote.style.display = 'none';
+    verses.forEach(function (v) {
+      var row = document.createElement('div');
+      row.className = 'verse-item' + (highlightVerse && v.verse === highlightVerse ? ' highlighted' : '');
+      row.id = 'verse-' + v.verse;
+      row.innerHTML =
+        '<span class="verse-num">' + v.verse + '</span>' +
+        '<span class="verse-text">' + v.text + '</span>';
+      row.onclick = function () { copyVerse(v); };
+      row.title = 'Click to copy';
+      container.appendChild(row);
+    });
+
+    // Scroll to highlighted verse
+    if (highlightVerse) {
+      setTimeout(function () {
+        var el = document.getElementById('verse-' + highlightVerse);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 300);
+    }
+  }
+}
+
+/* ---- Chapter Navigation ---- */
+function navigateChapter(dir) {
+  var meta = BIBLE_BOOKS.find(function(b){ return b.book === _currentBook; });
+  if (!meta) return;
+  var next = _currentChapter + dir;
+  if (next >= 1 && next <= meta.chapters) {
+    loadChapter(_currentBook, next);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+/* ---- Random Verse ---- */
+function shuffleVerse() {
+  if (!BibleAPI.loaded) return;
+  var v = BibleAPI.getRandom();
+  if (v) loadBook(v.book, v.chapter, v.verse);
+}
+
+/* ---- Copy verse ---- */
+function copyVerse(v) {
+  var text = '\u201c' + v.text + '\u201d \u2014 ' + BibleAPI.formatRef(v) + ' (KJV)';
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(function () {
+      showReaderToast('Verse copied! \u201c' + BibleAPI.formatRef(v) + '\u201d');
+    });
+  }
+}
+
+/* ---- Toast ---- */
+function showReaderToast(msg) {
+  var existing = document.getElementById('reader-toast-el');
+  if (existing) existing.remove();
+  var t = document.createElement('div');
+  t.id = 'reader-toast-el';
+  t.className = 'reader-toast';
+  t.innerHTML = '<div style="background:#111118;border:1.5px solid #22c55e;border-radius:.875rem;padding:.875rem 1.25rem;display:flex;align-items:center;gap:.75rem;box-shadow:0 8px 32px rgba(0,0,0,.6);"><span>✅</span><p style="color:#fff;font-size:.875rem;margin:0;font-family:Inter,sans-serif;">' + msg + '</p></div>';
+  document.body.appendChild(t);
+  setTimeout(function(){ t.classList.add('show'); }, 10);
+  setTimeout(function(){ t.classList.remove('show'); setTimeout(function(){ t.remove(); }, 400); }, 3000);
+}
+</script>
+</body>
+</html>

@@ -5,9 +5,9 @@
 
 /* !! UPDATE THESE WITH YOUR ACTUAL CONTACT DETAILS !! */
 var CONFIG = {
-  EMAIL:     'your.email@domain.com',   // <-- replace with your email
-  PHONE:     '+1 (000) 000-0000',       // <-- replace with your phone
-  WHATSAPP:  '10000000000',             // <-- country code + number, digits only
+  EMAIL:     'emmanuel.ao@outlook.com',
+  PHONE:     '+1 (346) 383-9529',
+  WHATSAPP:  '13463839529',
 };
 
 /* ======================================================

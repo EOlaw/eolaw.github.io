@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Word of God — KJV Scripture Community</title>
+  <meta name="description" content="A community gathering around the Word of God. Daily scripture, browse the KJV Bible, explore topics, and connect with others who love the Lord.">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon_io/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="/assets/img/favicon_io/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&family=Crimson+Pro:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: { 300:'#ffe08a', 400:'#ffd27f', 500:'#ffc451', 600:'#e6b048' },
+            dark: { 950:'#05050a', 900:'#0a0a12', 800:'#111118', 700:'#1a1a24', 600:'#22222e', 500:'#2a2a38' }
+          },
+          fontFamily: {
+            sans: ['Inter','sans-serif'],
+            display: ['Space Grotesk','sans-serif'],
+            serif: ['Crimson Pro','Georgia','serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background: #0a0a12; color: #fff; font-family: 'Inter', sans-serif; }
+
+    /* Hero gradient */
+    .hero-bg {
+      background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(255,196,81,0.12) 0%, transparent 70%),
+                  radial-gradient(ellipse 60% 40% at 80% 80%, rgba(100,80,255,0.06) 0%, transparent 60%),
+                  #0a0a12;
+    }
+
+    /* Book icon */
+    .book-icon {
+      width: 4rem; height: 4rem;
+      background: linear-gradient(135deg, #ffc451, #e6b048);
+      border-radius: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 8px 32px rgba(255,196,81,0.35);
+      margin: 0 auto 1.5rem;
+    }
+
+    /* Featured verse text */
+    .verse-text { font-family: 'Crimson Pro', Georgia, serif; font-style: italic; }
+
+    /* Stat item */
+    .stat-divider { border-left: 1px solid rgba(255,255,255,0.1); }
+
+    /* Quick nav buttons */
+    .quick-btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .5rem 1.1rem;
+      border: 1.5px solid rgba(255,255,255,0.15);
+      border-radius: 999px;
+      font-size: .8125rem; font-weight: 500; color: #ccc;
+      background: rgba(255,255,255,0.04);
+      cursor: pointer; transition: all .2s;
+    }
+    .quick-btn:hover { border-color: #ffc451; color: #ffc451; background: rgba(255,196,81,.07); }
+    .quick-btn.active { border-color: #ffc451; color: #000; background: #ffc451; }
+
+    /* Search */
+    .search-input {
+      width: 100%; padding: .875rem 1rem .875rem 2.75rem;
+      background: rgba(255,255,255,0.06); border: 1.5px solid rgba(255,255,255,0.12);
+      border-radius: .875rem; color: #fff; font-size: .9375rem; font-family: 'Inter',sans-serif;
+      outline: none; transition: border-color .2s, background .2s;
+    }
+    .search-input:focus { border-color: #ffc451; background: rgba(255,196,81,.05); }
+    .search-input::placeholder { color: #666; }
+
+    /* Section headers */
+    .section-emoji { font-size: 1.125rem; margin-right: .5rem; }
+
+    /* Today's word card */
+    .daily-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 1.25rem; padding: 2rem;
+    }
+
+    /* Topic cards */
+    .topic-card {
+      border-radius: 1rem; padding: 1.5rem 1rem;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: .5rem; cursor: pointer; text-decoration: none;
+      transition: transform .2s, box-shadow .2s, opacity .2s;
+      min-height: 100px;
+    }
+    .topic-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,.4); opacity: .92; }
+    .topic-card .topic-emoji { font-size: 1.75rem; line-height: 1; }
+    .topic-card .topic-name { color: #fff; font-weight: 700; font-size: .9375rem; text-align: center; }
+
+    /* Bible book list */
+    .book-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .75rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.06);
+      cursor: pointer; transition: background .15s, color .15s;
+      text-decoration: none; border-radius: .5rem;
+    }
+    .book-row:hover { background: rgba(255,196,81,.05); color: #ffc451; }
+    .book-row:hover .book-chevron { color: #ffc451; }
+    .book-name { font-size: .9375rem; font-weight: 500; color: #e0e0e0; }
+    .book-row:hover .book-name { color: #ffc451; }
+    .book-chevron { color: #444; font-size: .875rem; }
+
+    /* Search results */
+    .result-card {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,.08);
+      border-radius: 1rem; padding: 1.25rem; cursor: pointer; transition: border-color .2s;
+    }
+    .result-card:hover { border-color: rgba(255,196,81,.3); }
+
+    /* Subscribe card */
+    .subscribe-card {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      border: 1px solid rgba(255,196,81,.2); border-radius: 1.5rem; padding: 2rem;
+    }
+    .subscribe-input {
+      width: 100%; padding: .75rem 1rem; background: rgba(255,255,255,.06);
+      border: 1.5px solid rgba(255,255,255,.12); border-radius: .75rem;
+      color: #fff; font-family: 'Inter',sans-serif; font-size: .875rem; outline: none;
+      transition: border-color .2s;
+    }
+    .subscribe-input:focus { border-color: #ffc451; }
+    .subscribe-input::placeholder { color: #555; }
+    .checkbox-row { display: flex; align-items: flex-start; gap: .75rem; cursor: pointer; }
+    .checkbox-row input[type=checkbox] { accent-color: #ffc451; width: 1rem; height: 1rem; margin-top: .125rem; flex-shrink: 0; }
+
+    /* Verse modal */
+    .verse-modal-backdrop {
+      position: fixed; inset: 0; z-index: 9000;
+      background: rgba(0,0,0,.85); backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center; padding: 1rem;
+    }
+    .verse-modal {
+      background: #111118; border: 1px solid rgba(255,196,81,.2);
+      border-radius: 1.5rem; padding: 2rem; max-width: 32rem; width: 100%; position: relative;
+    }
+
+    /* Navbar */
+    #scripture-nav { background: rgba(10,10,18,0.8); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,.06); }
+
+    /* Loading state */
+    .skeleton { background: linear-gradient(90deg, #1a1a24 25%, #222230 50%, #1a1a24 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: .5rem; }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+    /* Toast */
+    .word-toast { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 9999; transform: translateX(120%); transition: transform .4s cubic-bezier(.175,.885,.32,1.275); }
+    .word-toast.show { transform: translateX(0); }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0a0a12; }
+    ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #ffc451; }
+
+    /* Fade-in */
+    @keyframes fadeInUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+    .fade-in { animation: fadeInUp .5s ease both; }
+  </style>
+</head>
+<body>
+
+<!-- ===================== NAVBAR ===================== -->
+<nav id="scripture-nav" class="fixed top-0 left-0 right-0 z-50 py-3.5">
+  <div class="max-w-5xl mx-auto px-4 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="/scripture/" class="flex items-center gap-2.5">
+      <div style="width:2rem;height:2rem;background:linear-gradient(135deg,#ffc451,#e6b048);border-radius:.625rem;display:flex;align-items:center;justify-content:center;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      </div>
+      <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.9375rem;">
+        <span style="color:#ffc451">The Word</span><span class="text-white"> of God</span>
+      </span>
+    </a>
+
+    <!-- Desktop nav -->
+    <div class="hidden md:flex items-center gap-1">
+      <a href="#daily" class="quick-btn text-sm">⭐ Today's Word</a>
+      <a href="#topics" class="quick-btn text-sm">🔖 Browse Topics</a>
+      <a href="#bible" class="quick-btn text-sm">📖 All 66 Books</a>
+      <a href="#community" class="quick-btn text-sm">🤝 Community</a>
+    </div>
+
+    <!-- Back to main site -->
+    <a href="/" style="background:rgba(255,196,81,.1);border:1.5px solid rgba(255,196,81,.3);color:#ffc451;font-size:.8125rem;font-weight:600;padding:.4rem .9rem;border-radius:.625rem;transition:all .2s;" onmouseover="this.style.background='#ffc451';this.style.color='#000'" onmouseout="this.style.background='rgba(255,196,81,.1)';this.style.color='#ffc451'">
+      ← EOLAW Consulting
+    </a>
+  </div>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero-bg pt-28 pb-16 text-center relative overflow-hidden">
+  <!-- Subtle cross/glow -->
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(255,196,81,0.07) 0%,transparent 70%);pointer-events:none;"></div>
+
+  <div class="relative max-w-3xl mx-auto px-4">
+    <!-- Book icon -->
+    <div class="book-icon">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+    </div>
+
+    <h1 style="font-family:'Space Grotesk',sans-serif;font-size:clamp(2rem,5vw,3rem);font-weight:800;color:#fff;margin-bottom:.75rem;">The Word of God</h1>
+    <p style="font-size:.8125rem;letter-spacing:.2em;text-transform:uppercase;color:#666;margin-bottom:1.25rem;">King James Bible &middot; 1611 Edition &middot; Public Domain</p>
+
+    <!-- Hero verse (changes daily) -->
+    <div id="hero-verse" style="margin-bottom:1.75rem;">
+      <p class="verse-text" style="font-size:1.25rem;color:#e0e0e0;max-width:540px;margin:0 auto .5rem;">"Thy word is a lamp unto my feet, and a light unto my path."</p>
+      <p style="color:#ffc451;font-size:.875rem;font-weight:600;">&mdash; Psalm 119:105</p>
+    </div>
+
+    <!-- Search -->
+    <div style="position:relative;max-width:540px;margin:0 auto 1.5rem;">
+      <svg style="position:absolute;left:.875rem;top:50%;transform:translateY(-50%);color:#666;" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input id="hero-search" type="text" class="search-input" placeholder="Search scriptures... try 'peace', 'faith', or 'John 3:16'" autocomplete="off">
+      <button id="hero-search-clear" onclick="clearSearch()" style="display:none;position:absolute;right:.875rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#666;cursor:pointer;font-size:1.1rem;">&#x2715;</button>
+    </div>
+
+    <!-- Quick nav buttons -->
+    <div class="flex flex-wrap items-center justify-center gap-2 mb-8">
+      <a href="#daily" class="quick-btn">⭐ Today's Word</a>
+      <a href="#motivational" class="quick-btn" onclick="showMotivational(); return false;">✏️ Motivational</a>
+      <a href="#community" class="quick-btn">❤️ Subscribe</a>
+      <a href="#bible" class="quick-btn">📋 All 66 Books</a>
+    </div>
+
+    <!-- Stats -->
+    <div class="flex items-center justify-center gap-0 flex-wrap">
+      <div style="padding:.5rem 1.75rem;text-align:center;">
+        <div style="font-size:1.375rem;font-weight:800;color:#ffc451;">200+</div>
+        <div style="font-size:.75rem;color:#666;">KJV Verses</div>
+      </div>
+      <div class="stat-divider" style="padding:.5rem 1.75rem;text-align:center;">
+        <div style="font-size:1.375rem;font-weight:800;color:#ffc451;">66</div>
+        <div style="font-size:.75rem;color:#666;">Books</div>
+      </div>
+      <div class="stat-divider" style="padding:.5rem 1.75rem;text-align:center;">
+        <div style="font-size:1.375rem;font-weight:800;color:#ffc451;">1611</div>
+        <div style="font-size:.75rem;color:#666;">Edition</div>
+      </div>
+      <div class="stat-divider" style="padding:.5rem 1.75rem;text-align:center;">
+        <div style="font-size:1.375rem;font-weight:800;color:#ffc451;">&#x221e;</div>
+        <div style="font-size:.75rem;color:#666;">Free</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SEARCH RESULTS ===================== -->
+<section id="search-results-section" style="display:none;background:#0a0a12;padding:2rem 0;">
+  <div class="max-w-3xl mx-auto px-4">
+    <div class="flex items-center justify-between mb-4">
+      <h2 style="font-family:'Space Grotesk',sans-serif;font-size:1.125rem;font-weight:700;color:#fff;">
+        Search Results <span id="result-count" style="color:#666;font-weight:400;font-size:.875rem;"></span>
+      </h2>
+      <button onclick="clearSearch()" style="background:none;border:none;color:#ffc451;font-size:.875rem;cursor:pointer;font-family:'Inter',sans-serif;">Clear &#x2715;</button>
+    </div>
+    <div id="search-results" class="space-y-3"></div>
+  </div>
+</section>
+
+<!-- ===================== TODAY'S DAILY WORD ===================== -->
+<section id="daily" style="background:#0a0a12;padding:3rem 0;">
+  <div class="max-w-3xl mx-auto px-4">
+    <div class="flex items-center justify-between mb-4">
+      <h2 style="font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:700;color:#fff;">
+        <span class="section-emoji">📖</span>Today's Daily Word
+      </h2>
+      <a href="#motivational" onclick="showMotivational(); return false;" style="color:#ffc451;font-size:.8125rem;font-weight:600;text-decoration:none;">Full devotional &rarr;</a>
+    </div>
+
+    <!-- Daily verse card -->
+    <div class="daily-card" id="daily-card">
+      <div id="daily-loading" class="text-center py-8">
+        <div class="skeleton" style="height:1.25rem;width:60%;margin:0 auto 1rem;"></div>
+        <div class="skeleton" style="height:1rem;width:80%;margin:0 auto .75rem;"></div>
+        <div class="skeleton" style="height:1rem;width:50%;margin:0 auto;"></div>
+      </div>
+      <div id="daily-content" style="display:none;">
+        <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem;">
+          <div style="width:2.5rem;height:2.5rem;background:rgba(255,196,81,.12);border-radius:.625rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffc451" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <div>
+            <p style="color:#888;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;">Daily Scripture</p>
+            <p id="daily-date" style="color:#fff;font-size:.875rem;font-weight:600;"></p>
+          </div>
+          <button id="daily-share-btn" onclick="shareDailyVerse()" style="margin-left:auto;background:rgba(255,196,81,.1);border:1px solid rgba(255,196,81,.2);color:#ffc451;padding:.4rem .875rem;border-radius:.625rem;font-size:.8125rem;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;" onmouseover="this.style.background='#ffc451';this.style.color='#000'" onmouseout="this.style.background='rgba(255,196,81,.1)';this.style.color='#ffc451'">
+            Share &#x2197;
+          </button>
+        </div>
+        <blockquote id="daily-verse-text" class="verse-text" style="font-size:1.375rem;color:#f0f0f0;line-height:1.7;margin:0 0 1rem;border-left:3px solid #ffc451;padding-left:1.25rem;"></blockquote>
+        <p id="daily-verse-ref" style="color:#ffc451;font-weight:600;font-size:.9375rem;"></p>
+        <div id="daily-tags" style="margin-top:.875rem;display:flex;flex-wrap:wrap;gap:.5rem;"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MOTIVATIONAL SECTION (hidden by default) ===================== -->
+<section id="motivational" style="background:#0a0a12;display:none;padding:1rem 0 2rem;">
+  <div class="max-w-3xl mx-auto px-4">
+    <div class="flex items-center justify-between mb-4">
+      <h2 style="font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:700;color:#fff;">
+        <span class="section-emoji">✏️</span>Motivational Verses
+      </h2>
+      <button onclick="document.getElementById('motivational').style.display='none'" style="background:none;border:none;color:#666;cursor:pointer;font-size:.875rem;font-family:'Inter',sans-serif;">Collapse &#8593;</button>
+    </div>
+    <div id="motivational-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+  </div>
+</section>
+
+<!-- ===================== BROWSE BY TOPIC ===================== -->
+<section id="topics" style="background:#0a0a12;padding:2rem 0 3rem;">
+  <div class="max-w-3xl mx-auto px-4">
+    <div class="mb-5">
+      <h2 style="font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:700;color:#fff;margin-bottom:.25rem;">
+        <span class="section-emoji">🔖</span>Browse by Topic
+        <span style="color:#666;font-size:.875rem;font-weight:400;margin-left:.5rem;">&mdash; find scriptures that speak to your heart</span>
+      </h2>
+    </div>
+
+    <!-- 12 topic cards, 6 per row -->
+    <div class="grid grid-cols-3 sm:grid-cols-6 gap-3 mb-3">
+      <a href="#topic-results" onclick="loadTopic('faith','✝️'); return false;" class="topic-card" style="background:linear-gradient(135deg,#3b82f6,#6366f1);">
+        <span class="topic-emoji">✝️</span><span class="topic-name">Faith</span>
+      </a>
+      <a href="#topic-results" onclick="loadTopic('love','❤️'); return false;" class="topic-card" style="background:linear-gradient(135deg,#ec4899,#f43f5e);">
+        <span class="topic-emoji">❤️</span><span class="topic-name">Love</span>
+      </a>
+      <a href="#topic-results" onclick="loadTopic('hope','🌟'); return false;" class="topic-card" style="background:linear-gradient(135deg,#f59e0b,#f97316);">
+        <span class="topic-emoji">🌟</span><span class="topic-name">Hope</span>
+      </a>
+      <a href="#topic-results" onclick="loadTopic('strength','💪'); return false;" class="topic-card" style="background:linear-gradient(135deg,#ef4444,#f97316);">
+        <span class="topic-emoji">💪</span><span class="topic-name">Strength</span>
+      </a>
+      <a href="#topic-results" onclick="loadTopic('peace','🕊️'); return false;" class="topic-card" style="background:linear-gradient(135deg,#06b6d4,#14b8a6);">
+        <span class="topic-emoji">🕊️</span><span class="topic-name">Peace</span>
+      </a>
+      <a href="#topic-results" onclick="loadTopic('healing','✨'); return false;" class="topic-card" style="background:linear-gradient(135deg,#22c55e,#16a34a);">
+        <span class="topic-emoji">✨</span><span class="topic-name">Healing</span>
+      </a>
+    </div>
+    <div class="grid grid-cols-3 sm:grid-cols-6 gap-3">
+      <a href="#topic-results" onclick="loadTopic('prayer','🙏'); return false;" class="topic-card" style="background:linear-gradient(135deg,#a855f7,#8b5cf6);">
+        <span class="topic-emoji">🙏</span><span class="topic-name">Prayer</span>
+      </a>
+      <a href="#topic-results" onclick="loadTopic('wisdom','📖'); return false;" class="topic-card" style="background:linear-gradient(135deg,#0ea5e9,#6366f1);">
+        <span class="topic-emoji">📖</span><span class="topic-name">Wisdom</span>
+      </a>
+      <a href="#topic-results" onclick="loadTopic('protection','🛡️'); return false;" class="topic-card" style="background:linear-gradient(135deg,#f97316,#dc2626);">
+        <span class="topic-emoji">🛡️</span><span class="topic-name">Protection</span>
+      </a>
+      <a href="#topic-results" onclick="loadTopic('salvation','⭐'); return false;" class="topic-card" style="background:linear-gradient(135deg,#eab308,#f59e0b);">
+        <span class="topic-emoji">⭐</span><span class="topic-name">Salvation</span>
+      </a>
+      <a href="#topic-results" onclick="loadTopic('joy','😊'); return false;" class="topic-card" style="background:linear-gradient(135deg,#ec4899,#a855f7);">
+        <span class="topic-emoji">😊</span><span class="topic-name">Joy</span>
+      </a>
+      <a href="#topic-results" onclick="loadTopic('courage','🦁'); return false;" class="topic-card" style="background:linear-gradient(135deg,#84cc16,#22c55e);">
+        <span class="topic-emoji">🦁</span><span class="topic-name">Courage</span>
+      </a>
+    </div>
+
+    <!-- Topic results -->
+    <div id="topic-results" style="display:none;margin-top:1.75rem;">
+      <div class="flex items-center justify-between mb-3">
+        <h3 id="topic-title" style="font-family:'Space Grotesk',sans-serif;font-weight:700;color:#fff;font-size:.9375rem;"></h3>
+        <button onclick="document.getElementById('topic-results').style.display='none'" style="background:none;border:none;color:#666;cursor:pointer;font-size:.875rem;font-family:'Inter',sans-serif;">&#x2715; Close</button>
+      </div>
+      <div id="topic-verses" class="space-y-3"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BROWSE THE BIBLE ===================== -->
+<section id="bible" style="background:#111118;padding:3rem 0;">
+  <div class="max-w-3xl mx-auto px-4">
+    <div class="mb-5">
+      <h2 style="font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:700;color:#fff;margin-bottom:.25rem;">
+        <span class="section-emoji">📋</span>Browse the Bible
+        <span style="color:#666;font-size:.875rem;font-weight:400;margin-left:.5rem;">&mdash; 66 books, Genesis to Revelation</span>
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- OLD TESTAMENT -->
+      <div>
+        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1rem;padding-bottom:.75rem;border-bottom:1px solid rgba(255,255,255,.08);">
+          <div style="width:1.25rem;height:1.25rem;background:#ffc451;border-radius:.25rem;display:flex;align-items:center;justify-content:center;font-size:.625rem;font-weight:800;color:#000;">OT</div>
+          <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;color:#fff;font-size:.875rem;">OLD TESTAMENT</span>
+          <span style="color:#666;font-size:.8125rem;margin-left:auto;">39 books</span>
+        </div>
+        <div id="ot-books-list"></div>
+        <button id="ot-toggle" onclick="toggleBooks('old')" style="background:none;border:none;color:#ffc451;font-size:.8125rem;font-weight:600;cursor:pointer;margin-top:.75rem;font-family:'Inter',sans-serif;">
+          View all 39 books &rarr;
+        </button>
+      </div>
+
+      <!-- NEW TESTAMENT -->
+      <div>
+        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1rem;padding-bottom:.75rem;border-bottom:1px solid rgba(255,255,255,.08);">
+          <div style="width:1.25rem;height:1.25rem;background:#ffc451;border-radius:.25rem;display:flex;align-items:center;justify-content:center;font-size:.625rem;font-weight:800;color:#000;">NT</div>
+          <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;color:#fff;font-size:.875rem;">NEW TESTAMENT</span>
+          <span style="color:#666;font-size:.8125rem;margin-left:auto;">27 books</span>
+        </div>
+        <div id="nt-books-list"></div>
+        <button id="nt-toggle" onclick="toggleBooks('new')" style="background:none;border:none;color:#ffc451;font-size:.8125rem;font-weight:600;cursor:pointer;margin-top:.75rem;font-family:'Inter',sans-serif;">
+          View all 27 books &rarr;
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SEARCH GOD'S WORD ===================== -->
+<section style="background:#0a0a12;padding:2.5rem 0;">
+  <div class="max-w-3xl mx-auto px-4">
+    <div style="background:linear-gradient(135deg,#1a1a24,#111118);border:1px solid rgba(255,255,255,.08);border-radius:1.25rem;padding:1.75rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+      <div>
+        <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:700;color:#fff;font-size:1rem;margin-bottom:.25rem;">Search God's Word</h3>
+        <p style="color:#666;font-size:.8125rem;">Try: "strength", "Psalm 23", "John 3:16", "love"</p>
+      </div>
+      <button onclick="document.getElementById('hero-search').focus();window.scrollTo({top:0,behavior:'smooth'});" style="background:#ffc451;color:#000;font-weight:700;padding:.75rem 1.5rem;border-radius:.875rem;border:none;cursor:pointer;font-family:'Inter',sans-serif;font-size:.9rem;display:inline-flex;align-items:center;gap:.5rem;transition:opacity .2s;white-space:nowrap;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        Open Search
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== COMMUNITY / SUBSCRIBE ===================== -->
+<section id="community" style="background:#111118;padding:3rem 0;">
+  <div class="max-w-3xl mx-auto px-4">
+    <div class="grid md:grid-cols-2 gap-8 items-start">
+      <!-- Left: About -->
+      <div>
+        <div style="display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,196,81,.08);border:1px solid rgba(255,196,81,.2);padding:.375rem .875rem;border-radius:999px;margin-bottom:1rem;">
+          <span style="font-size:.875rem;">🌟</span>
+          <span style="color:#ffc451;font-size:.8rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;">Get God's Word Daily</span>
+        </div>
+        <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.5rem;color:#fff;margin-bottom:.875rem;line-height:1.3;">
+          Start Every Morning With Scripture
+        </h2>
+        <p style="color:#888;font-size:.9rem;line-height:1.7;margin-bottom:1.25rem;">
+          A fresh scripture, reflection, and prayer delivered straight to your inbox &mdash; completely free. Join a community that gathers around the Word of God.
+        </p>
+        <ul style="space-y:0;list-style:none;padding:0;color:#aaa;font-size:.875rem;line-height:2;">
+          <li>&#128214; Daily verse from the KJV Bible</li>
+          <li>&#127775; Morning prayer &amp; reflection</li>
+          <li>&#128170; Motivational encouragement</li>
+          <li>&#128218; Optional weekly devotional</li>
+          <li>&#128150; 100% free &mdash; God's Word is free</li>
+        </ul>
+
+        <!-- Free spiritual consultation -->
+        <div style="margin-top:1.75rem;padding:1.25rem;background:rgba(255,196,81,.05);border:1px solid rgba(255,196,81,.15);border-radius:1rem;">
+          <p style="color:#ffc451;font-size:.8125rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.5rem;">🤝 Free Spiritual Consultation</p>
+          <p style="color:#aaa;font-size:.875rem;line-height:1.6;margin-bottom:.875rem;">Want to discuss a passage? Seeking spiritual guidance? Schedule a free, no-pressure conversation about God's Word.</p>
+          <a href="#book-consultation" onclick="scrollToConsult()" style="background:#ffc451;color:#000;font-weight:700;font-size:.875rem;padding:.625rem 1.25rem;border-radius:.75rem;text-decoration:none;display:inline-block;transition:opacity .2s;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+            Book a Free Talk &#8594;
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: Subscribe card -->
+      <div class="subscribe-card">
+        <div style="text-align:center;margin-bottom:1.5rem;">
+          <div style="width:3rem;height:3rem;background:rgba(255,196,81,.1);border:1.5px solid rgba(255,196,81,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto .875rem;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffc451" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </div>
+          <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.125rem;color:#fff;margin-bottom:.375rem;">&#128204; Receive Daily Scripture</h3>
+          <p style="color:#888;font-size:.8125rem;line-height:1.6;">Subscribe to receive God's Word, daily motivation, and spiritual encouragement delivered to your inbox every morning.</p>
+        </div>
+
+        <form id="subscribe-form" onsubmit="handleSubscribe(event)">
+          <div style="margin-bottom:.875rem;">
+            <label style="color:#aaa;font-size:.8125rem;display:block;margin-bottom:.375rem;">Your Name <span style="color:#555;">(optional)</span></label>
+            <input id="sub-name" type="text" class="subscribe-input" placeholder="Beloved">
+          </div>
+          <div style="margin-bottom:1rem;">
+            <label style="color:#aaa;font-size:.8125rem;display:block;margin-bottom:.375rem;">Email Address <span style="color:#ef4444;">*</span></label>
+            <input id="sub-email" type="email" class="subscribe-input" placeholder="your@email.com" required>
+          </div>
+          <div style="margin-bottom:1.25rem;">
+            <p style="color:#aaa;font-size:.8125rem;margin-bottom:.75rem;">What would you like to receive?</p>
+            <div class="space-y-2.5">
+              <label class="checkbox-row">
+                <input type="checkbox" id="cb-verse" checked>
+                <div>
+                  <div style="color:#ddd;font-size:.875rem;font-weight:500;">&#128214; Daily Verse</div>
+                  <div style="color:#666;font-size:.75rem;">A new scripture every morning</div>
+                </div>
+              </label>
+              <label class="checkbox-row" style="margin-top:.625rem;">
+                <input type="checkbox" id="cb-motivation" checked>
+                <div>
+                  <div style="color:#ddd;font-size:.875rem;font-weight:500;">&#128170; Motivation</div>
+                  <div style="color:#666;font-size:.75rem;">Encouraging words for your day</div>
+                </div>
+              </label>
+              <label class="checkbox-row" style="margin-top:.625rem;">
+                <input type="checkbox" id="cb-devotional">
+                <div>
+                  <div style="color:#ddd;font-size:.875rem;font-weight:500;">&#128218; Weekly Devotional</div>
+                  <div style="color:#666;font-size:.75rem;">Deep dive every Sunday</div>
+                </div>
+              </label>
+            </div>
+          </div>
+          <button type="submit" style="width:100%;background:#ffc451;color:#000;font-weight:700;padding:1rem;border-radius:.875rem;border:none;cursor:pointer;font-family:'Inter',sans-serif;font-size:.9375rem;transition:opacity .2s;" onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">
+            &#128204; Subscribe to God's Word
+          </button>
+          <p style="text-align:center;color:#555;font-size:.75rem;margin-top:.75rem;">No spam. Unsubscribe anytime. God's Word is always free.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FREE SPIRITUAL CONSULTATION FORM ===================== -->
+<section id="book-consultation" style="background:#0a0a12;padding:3rem 0;">
+  <div class="max-w-2xl mx-auto px-4">
+    <div style="text-align:center;margin-bottom:2rem;">
+      <div style="display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,196,81,.08);border:1px solid rgba(255,196,81,.2);padding:.375rem .875rem;border-radius:999px;margin-bottom:1rem;">
+        <span style="color:#ffc451;font-size:.8rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;">&#128140; Free Consultation</span>
+      </div>
+      <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.75rem;color:#fff;margin-bottom:.625rem;">Let's Talk About God's Word</h2>
+      <p style="color:#888;font-size:.9rem;">Whether you have questions about scripture, seek spiritual guidance, or simply want to fellowship — reach out. It's always free.</p>
+    </div>
+
+    <div style="background:#111118;border:1px solid rgba(255,255,255,.08);border-radius:1.5rem;padding:2rem;">
+      <form id="spiritual-consult-form" onsubmit="handleSpiritualConsult(event)">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+          <div>
+            <label style="color:#aaa;font-size:.8125rem;display:block;margin-bottom:.375rem;">Your Name <span style="color:#ef4444;">*</span></label>
+            <input id="sc-name" type="text" class="subscribe-input" placeholder="Your name" required>
+          </div>
+          <div>
+            <label style="color:#aaa;font-size:.8125rem;display:block;margin-bottom:.375rem;">Email Address <span style="color:#ef4444;">*</span></label>
+            <input id="sc-email" type="email" class="subscribe-input" placeholder="your@email.com" required>
+          </div>
+        </div>
+        <div style="margin-bottom:1rem;">
+          <label style="color:#aaa;font-size:.8125rem;display:block;margin-bottom:.375rem;">Topic / Scripture of Interest</label>
+          <select id="sc-topic" class="subscribe-input">
+            <option value="">Select a topic (optional)</option>
+            <option>Faith & Belief</option>
+            <option>Prayer & Devotion</option>
+            <option>Healing & Hope</option>
+            <option>God's Love & Grace</option>
+            <option>Salvation & Redemption</option>
+            <option>Marriage & Family</option>
+            <option>Purpose & Direction</option>
+            <option>Grief & Comfort</option>
+            <option>General Scripture Discussion</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div style="margin-bottom:1.25rem;">
+          <label style="color:#aaa;font-size:.8125rem;display:block;margin-bottom:.375rem;">Share what's on your heart <span style="color:#ef4444;">*</span></label>
+          <textarea id="sc-message" class="subscribe-input" rows="4" placeholder="What would you like to discuss? A scripture passage, a spiritual question, or anything on your heart..." required style="resize:vertical;min-height:100px;"></textarea>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <button type="submit" style="background:#ffc451;color:#000;font-weight:700;padding:.875rem;border-radius:.875rem;border:none;cursor:pointer;font-family:'Inter',sans-serif;font-size:.9375rem;transition:opacity .2s;" onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">
+            &#128140; Send via Email
+          </button>
+          <button type="button" onclick="sendViaWhatsApp()" style="background:#25D366;color:#fff;font-weight:700;padding:.875rem;border-radius:.875rem;border:none;cursor:pointer;font-family:'Inter',sans-serif;font-size:.9375rem;transition:opacity .2s;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+            &#128172; Send via WhatsApp
+          </button>
+        </div>
+        <p style="text-align:center;color:#555;font-size:.75rem;margin-top:.875rem;">&#128150; This is always completely free. God's Word is for everyone.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer style="background:#05050a;border-top:1px solid rgba(255,255,255,.06);padding:2rem 0;">
+  <div class="max-w-3xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-2.5">
+      <div style="width:1.75rem;height:1.75rem;background:linear-gradient(135deg,#ffc451,#e6b048);border-radius:.5rem;display:flex;align-items:center;justify-content:center;">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      </div>
+      <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.875rem;"><span style="color:#ffc451;">The Word</span> <span style="color:#fff;">of God</span></span>
+    </div>
+    <p style="color:#444;font-size:.8125rem;text-align:center;">KJV Bible &middot; Public Domain &middot; 1611 Edition &mdash; God's Word is free for all.</p>
+    <div class="flex items-center gap-4">
+      <a href="/" style="color:#555;font-size:.8125rem;text-decoration:none;" onmouseover="this.style.color='#ffc451'" onmouseout="this.style.color='#555'">EOLAW Consulting</a>
+      <a href="/scripture/read.html" style="color:#555;font-size:.8125rem;text-decoration:none;" onmouseover="this.style.color='#ffc451'" onmouseout="this.style.color='#555'">Bible Reader</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== VERSE DETAIL MODAL ===================== -->
+<div id="verse-modal" style="display:none;" class="verse-modal-backdrop" onclick="if(event.target===this)closeVerseModal()">
+  <div class="verse-modal">
+    <button onclick="closeVerseModal()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:#666;cursor:pointer;font-size:1.25rem;">&times;</button>
+    <div style="margin-bottom:1rem;">
+      <span id="modal-ref" style="color:#ffc451;font-size:.8125rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;"></span>
+    </div>
+    <blockquote id="modal-text" class="verse-text" style="font-size:1.25rem;color:#f0f0f0;line-height:1.75;border-left:3px solid #ffc451;padding-left:1.25rem;margin:0 0 1.25rem;"></blockquote>
+    <div id="modal-tags" style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.25rem;"></div>
+    <div class="flex gap-3">
+      <button id="modal-share-btn" style="flex:1;background:#ffc451;color:#000;font-weight:700;padding:.75rem;border-radius:.875rem;border:none;cursor:pointer;font-family:'Inter',sans-serif;font-size:.875rem;" onclick="shareCurrentModalVerse()">Share Verse</button>
+      <a id="modal-read-btn" href="#" style="flex:1;background:rgba(255,255,255,.06);color:#ccc;font-weight:600;padding:.75rem;border-radius:.875rem;border:none;text-align:center;font-family:'Inter',sans-serif;font-size:.875rem;text-decoration:none;display:flex;align-items:center;justify-content:center;">Read Chapter &rarr;</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SCRIPTS ===================== -->
+<script src="/scripture/data/books-metadata.js"></script>
+<script src="/scripture/js/bible.js"></script>
+<script>
+/* ============================================
+   Scripture Index — Page Logic
+   ============================================ */
+
+var _currentModalVerse = null;
+var _otExpanded = false;
+var _ntExpanded = false;
+
+/* ---- Init ---- */
+window.addEventListener('DOMContentLoaded', function () {
+  // Load Bible data
+  BibleAPI.init().then(function () {
+    renderDailyVerse();
+    renderBookLists();
+  }).catch(function () {
+    document.getElementById('daily-loading').innerHTML =
+      '<div style="text-align:center;padding:2rem;color:#666;"><div style="font-size:2rem;margin-bottom:.5rem;">📖</div><p>Could not load today\'s word.</p><button onclick="BibleAPI.init().then(function(){renderDailyVerse();})" style="background:none;border:none;color:#ffc451;cursor:pointer;font-family:Inter,sans-serif;margin-top:.5rem;">↺ Try again</button></div>';
+  });
+
+  // Search
+  var searchEl = document.getElementById('hero-search');
+  var debounceTimer;
+  searchEl.addEventListener('input', function () {
+    clearTimeout(debounceTimer);
+    var q = this.value.trim();
+    document.getElementById('hero-search-clear').style.display = q ? 'block' : 'none';
+    debounceTimer = setTimeout(function () { performSearch(q); }, 350);
+  });
+  searchEl.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') clearSearch();
+  });
+});
+
+/* ---- Daily Verse ---- */
+function renderDailyVerse() {
+  var v = BibleAPI.getTodaysVerse();
+  if (!v) return;
+  document.getElementById('daily-loading').style.display = 'none';
+  document.getElementById('daily-content').style.display = 'block';
+
+  var d = new Date();
+  document.getElementById('daily-date').textContent = d.toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+  document.getElementById('daily-verse-text').textContent = '\u201c' + v.text + '\u201d';
+  document.getElementById('daily-verse-ref').textContent = '\u2014 ' + BibleAPI.formatRef(v) + ' (KJV)';
+
+  // Tags
+  var tagsEl = document.getElementById('daily-tags');
+  tagsEl.innerHTML = '';
+  (v.tags || []).slice(0, 6).forEach(function (t) {
+    var span = document.createElement('span');
+    span.textContent = t;
+    span.style.cssText = 'background:rgba(255,196,81,.08);border:1px solid rgba(255,196,81,.15);color:#aaa;font-size:.75rem;padding:.25rem .625rem;border-radius:999px;cursor:pointer;';
+    span.onclick = function () { loadTopic(t, '🔖'); };
+    tagsEl.appendChild(span);
+  });
+
+  // Hero verse
+  document.getElementById('hero-verse').innerHTML =
+    '<p class="verse-text" style="font-family:Crimson Pro,Georgia,serif;font-style:italic;font-size:1.25rem;color:#e0e0e0;max-width:540px;margin:0 auto .5rem;">&ldquo;' + v.text + '&rdquo;</p>' +
+    '<p style="color:#ffc451;font-size:.875rem;font-weight:600;">&mdash; ' + BibleAPI.formatRef(v) + '</p>';
+
+  // Store for share
+  window._dailyVerse = v;
+}
+
+function shareDailyVerse() {
+  if (window._dailyVerse) BibleAPI.shareVerse(window._dailyVerse);
+}
+
+/* ---- Motivational Section ---- */
+function showMotivational() {
+  var section = document.getElementById('motivational');
+  section.style.display = section.style.display === 'none' ? 'block' : 'none';
+  if (!section._rendered) {
+    var verses = BibleAPI.getMotivational().slice(0, 12);
+    var grid = document.getElementById('motivational-grid');
+    grid.innerHTML = '';
+    verses.forEach(function (v) {
+      grid.appendChild(makeVerseCard(v));
+    });
+    section._rendered = true;
+  }
+  if (section.style.display !== 'none') section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+/* ---- Topic Loading ---- */
+function loadTopic(tag, emoji) {
+  var verses = BibleAPI.getByTag(tag);
+  var resultsEl = document.getElementById('topic-results');
+  var titleEl = document.getElementById('topic-title');
+  var versesEl = document.getElementById('topic-verses');
+
+  titleEl.textContent = (emoji || '🔖') + '  ' + capitalizeFirst(tag) + ' (' + verses.length + ' verses)';
+  versesEl.innerHTML = '';
+  if (!verses.length) {
+    versesEl.innerHTML = '<p style="color:#666;font-size:.875rem;">No verses found for "' + tag + '".</p>';
+  } else {
+    verses.slice(0, 20).forEach(function (v) { versesEl.appendChild(makeVerseCard(v)); });
+  }
+  resultsEl.style.display = 'block';
+  setTimeout(function () { resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
+}
+
+/* ---- Bible Book Lists ---- */
+function renderBookLists() {
+  var ot = BIBLE_BOOKS.filter(function (b) { return b.testament === 'old'; });
+  var nt = BIBLE_BOOKS.filter(function (b) { return b.testament === 'new'; });
+  renderBooks('ot-books-list', ot, 10);
+  renderBooks('nt-books-list', nt, 10);
+}
+
+function renderBooks(containerId, books, limit) {
+  var el = document.getElementById(containerId);
+  el.innerHTML = '';
+  var list = limit ? books.slice(0, limit) : books;
+  list.forEach(function (b) {
+    var hasVerses = BibleAPI.loaded && BibleAPI.getBook(b.book).length > 0;
+    var a = document.createElement('a');
+    a.href = '/scripture/read.html?book=' + encodeURIComponent(b.book);
+    a.className = 'book-row';
+    a.innerHTML = '<span class="book-name">' + b.book + '</span>' +
+      (hasVerses ? '<span style="font-size:.7rem;color:#ffc451;background:rgba(255,196,81,.08);padding:.125rem .5rem;border-radius:999px;margin-right:.5rem;">verses</span>' : '') +
+      '<svg class="book-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>';
+    el.appendChild(a);
+  });
+}
+
+function toggleBooks(testament) {
+  var books = BIBLE_BOOKS.filter(function (b) { return b.testament === testament; });
+  if (testament === 'old') {
+    _otExpanded = !_otExpanded;
+    renderBooks('ot-books-list', books, _otExpanded ? null : 10);
+    document.getElementById('ot-toggle').textContent = _otExpanded ? '&#8593; Show less' : 'View all 39 books \u2192';
+  } else {
+    _ntExpanded = !_ntExpanded;
+    renderBooks('nt-books-list', books, _ntExpanded ? null : 10);
+    document.getElementById('nt-toggle').textContent = _ntExpanded ? '&#8593; Show less' : 'View all 27 books \u2192';
+  }
+}
+
+/* ---- Search ---- */
+function performSearch(q) {
+  var section = document.getElementById('search-results-section');
+  var resultsEl = document.getElementById('search-results');
+  var countEl = document.getElementById('result-count');
+
+  if (!q || q.length < 2) { section.style.display = 'none'; return; }
+  if (!BibleAPI.loaded) { section.style.display = 'none'; return; }
+
+  var results = BibleAPI.search(q);
+  countEl.textContent = '— ' + results.length + ' result' + (results.length !== 1 ? 's' : '');
+  resultsEl.innerHTML = '';
+
+  if (!results.length) {
+    resultsEl.innerHTML = '<div style="text-align:center;padding:2rem;color:#666;"><div style="font-size:2rem;margin-bottom:.5rem;">🔍</div><p>No verses found for &ldquo;' + q + '&rdquo;</p><p style="font-size:.8125rem;margin-top:.5rem;">Try a different word, book name, or reference (e.g. John 3:16)</p></div>';
+  } else {
+    results.slice(0, 20).forEach(function (v) { resultsEl.appendChild(makeVerseCard(v)); });
+    if (results.length > 20) {
+      var more = document.createElement('p');
+      more.style.cssText = 'text-align:center;color:#666;font-size:.8125rem;padding:1rem;';
+      more.textContent = '+ ' + (results.length - 20) + ' more results. Refine your search.';
+      resultsEl.appendChild(more);
+    }
+  }
+  section.style.display = 'block';
+}
+
+function clearSearch() {
+  document.getElementById('hero-search').value = '';
+  document.getElementById('hero-search-clear').style.display = 'none';
+  document.getElementById('search-results-section').style.display = 'none';
+}
+
+/* ---- Verse Card ---- */
+function makeVerseCard(v) {
+  var div = document.createElement('div');
+  div.className = 'result-card';
+  div.style.cursor = 'pointer';
+  var refStr = BibleAPI.formatRef(v);
+  var tagsHtml = (v.tags || []).slice(0, 4).map(function (t) {
+    return '<span style="background:rgba(255,196,81,.06);border:1px solid rgba(255,196,81,.12);color:#888;font-size:.7rem;padding:.125rem .5rem;border-radius:999px;">' + t + '</span>';
+  }).join('');
+  div.innerHTML =
+    '<p style="color:#ffc451;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;">' + refStr + '</p>' +
+    '<p style="font-family:Crimson Pro,Georgia,serif;font-style:italic;font-size:1.0625rem;color:#e0e0e0;line-height:1.65;margin-bottom:.625rem;">&ldquo;' + v.text + '&rdquo;</p>' +
+    '<div style="display:flex;flex-wrap:wrap;gap:.375rem;">' + tagsHtml + '</div>';
+  div.onclick = function () { openVerseModal(v); };
+  return div;
+}
+
+/* ---- Verse Modal ---- */
+function openVerseModal(v) {
+  _currentModalVerse = v;
+  document.getElementById('modal-ref').textContent = BibleAPI.formatRef(v) + ' · KJV';
+  document.getElementById('modal-text').textContent = '\u201c' + v.text + '\u201d';
+  var tagsEl = document.getElementById('modal-tags');
+  tagsEl.innerHTML = (v.tags || []).map(function (t) {
+    return '<span style="background:rgba(255,196,81,.08);border:1px solid rgba(255,196,81,.15);color:#aaa;font-size:.75rem;padding:.25rem .625rem;border-radius:999px;">' + t + '</span>';
+  }).join('');
+  document.getElementById('modal-read-btn').href = '/scripture/read.html?book=' + encodeURIComponent(v.book) + '&chapter=' + v.chapter;
+  document.getElementById('verse-modal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function closeVerseModal() {
+  document.getElementById('verse-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+function shareCurrentModalVerse() {
+  if (_currentModalVerse) BibleAPI.shareVerse(_currentModalVerse);
+}
+
+/* ---- Subscribe Form ---- */
+function handleSubscribe(e) {
+  e.preventDefault();
+  var email = document.getElementById('sub-email').value.trim();
+  var name  = document.getElementById('sub-name').value.trim() || 'Beloved';
+  var prefs = [];
+  if (document.getElementById('cb-verse').checked)      prefs.push('Daily Verse');
+  if (document.getElementById('cb-motivation').checked) prefs.push('Motivation');
+  if (document.getElementById('cb-devotional').checked) prefs.push('Weekly Devotional');
+
+  var subject = encodeURIComponent('Scripture Community Subscription — ' + name);
+  var body = encodeURIComponent(
+    'NEW SCRIPTURE SUBSCRIPTION\n\nName: ' + name + '\nEmail: ' + email +
+    '\nPreferences: ' + prefs.join(', ') + '\n\nSubmitted from The Word of God community page.'
+  );
+  window.location.href = 'mailto:emmanuel.ao@outlook.com?subject=' + subject + '&body=' + body;
+  showWordToast('Thank you! Opening your email app to complete subscription.', 'success');
+}
+
+/* ---- Spiritual Consultation Form ---- */
+function handleSpiritualConsult(e) {
+  e.preventDefault();
+  var name    = document.getElementById('sc-name').value.trim();
+  var email   = document.getElementById('sc-email').value.trim();
+  var topic   = document.getElementById('sc-topic').value;
+  var message = document.getElementById('sc-message').value.trim();
+
+  var subject = encodeURIComponent('Free Spiritual Consultation Request — ' + name);
+  var body = encodeURIComponent(
+    'FREE SPIRITUAL CONSULTATION REQUEST\n' +
+    '=====================================\n\n' +
+    'Name   : ' + name + '\n' +
+    'Email  : ' + email + '\n' +
+    'Topic  : ' + (topic || 'General') + '\n\n' +
+    'MESSAGE:\n' + message + '\n\n' +
+    '---\nSubmitted from The Word of God community page.'
+  );
+  window.location.href = 'mailto:emmanuel.ao@outlook.com?subject=' + subject + '&body=' + body;
+}
+
+function sendViaWhatsApp() {
+  var name    = document.getElementById('sc-name').value.trim() || 'A visitor';
+  var topic   = document.getElementById('sc-topic').value || 'General';
+  var message = document.getElementById('sc-message').value.trim();
+  if (!message) { showWordToast('Please share what\u2019s on your heart first.', 'error'); return; }
+  var text = encodeURIComponent(
+    'Hi Emmanuel! I\u2019d like a free spiritual consultation.\n\n' +
+    '*Name:* ' + name + '\n*Topic:* ' + topic + '\n\n*Message:* ' + message
+  );
+  window.open('https://wa.me/13463839529?text=' + text, '_blank');
+}
+
+function scrollToConsult() {
+  document.getElementById('book-consultation').scrollIntoView({ behavior: 'smooth' });
+}
+
+/* ---- Utilities ---- */
+function capitalizeFirst(str) { return str.charAt(0).toUpperCase() + str.slice(1); }
+
+function showWordToast(msg, type) {
+  type = type || 'success';
+  var existing = document.getElementById('word-toast');
+  if (existing) existing.remove();
+  var colors = { success: '#22c55e', error: '#ef4444', info: '#ffc451' };
+  var toast = document.createElement('div');
+  toast.id = 'word-toast';
+  toast.className = 'word-toast';
+  toast.innerHTML = '<div style="background:#111118;border:1.5px solid ' + (colors[type]||colors.info) + ';border-radius:.875rem;padding:.875rem 1.25rem;display:flex;align-items:center;gap:.75rem;box-shadow:0 8px 32px rgba(0,0,0,.6);min-width:260px;"><span style="font-size:1.125rem;">' + (type==='success'?'✅':type==='error'?'❌':'ℹ️') + '</span><p style="color:#fff;font-size:.875rem;margin:0;font-family:Inter,sans-serif;">' + msg + '</p></div>';
+  document.body.appendChild(toast);
+  setTimeout(function () { toast.classList.add('show'); }, 10);
+  setTimeout(function () { toast.classList.remove('show'); setTimeout(function () { toast.remove(); }, 400); }, 4500);
+}
+</script>
+</body>
+</html>
