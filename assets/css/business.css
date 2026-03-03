@@ -1,6 +1,7 @@
 /* ======================================================
-   EOLAW Consulting — Business Site Custom Styles
-   Theme: Black + #ffc451 (Gold)
+   Insightserenity — Business Site Custom Styles
+   Themes: White (default) + Night Shift (dark)
+   Accent: #ffc451 Gold
    ====================================================== */
 
 /* ---- Google Fonts ---- */
@@ -302,4 +303,31 @@ body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; }
 /* ---- Responsive tweaks ---- */
 @media (max-width: 640px) {
   .section-title { font-size: 2rem !important; }
+}
+
+/* ---- Brand logo serenity text ---- */
+.brand-serenity { color: #ffffff; }
+
+/* ======================================================
+   UNSPLASH BACKGROUND OVERLAYS
+   ====================================================== */
+.hero-unsplash-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url('https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1920&q=80');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.07;
+  pointer-events: none;
+}
+
+.cta-unsplash-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1920&q=80');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.05;
+  pointer-events: none;
 }

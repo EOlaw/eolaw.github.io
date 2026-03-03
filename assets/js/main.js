@@ -1,5 +1,5 @@
 /* ======================================================
-   EOLAW Consulting — Main JavaScript
+   Insightserenity — Main JavaScript
    ====================================================== */
 
 // ---- Lucide Icons Init ----
@@ -130,7 +130,7 @@ function startTypingEffect(el, words, opts) {
 // ---- Toast Notification ----
 function showToast(message, type) {
   type = type || 'success';
-  const existing = document.getElementById('eolaw-toast');
+  const existing = document.getElementById('is-toast');
   if (existing) existing.remove();
   const cfg = {
     success: { border: '#22c55e', color: '#4ade80', icon: 'check-circle' },
@@ -138,7 +138,7 @@ function showToast(message, type) {
     info:    { border: '#ffc451', color: '#ffc451', icon: 'info' },
   }[type] || { border: '#ffc451', color: '#ffc451', icon: 'info' };
   const toast = document.createElement('div');
-  toast.id = 'eolaw-toast';
+  toast.id = 'is-toast';
   toast.className = 'toast';
   toast.innerHTML = `<div style="background:#111;border:1.5px solid ${cfg.border};border-radius:1rem;padding:1rem 1.25rem;display:flex;align-items:center;gap:.75rem;box-shadow:0 8px 32px rgba(0,0,0,.5);"><i data-lucide="${cfg.icon}" style="width:1.25rem;height:1.25rem;color:${cfg.color};flex-shrink:0;"></i><p style="color:#fff;font-size:.9rem;margin:0;font-family:Inter,sans-serif;">${message}</p><button onclick="this.closest('#eolaw-toast').remove()" style="background:none;border:none;color:#666;cursor:pointer;margin-left:auto;padding:.25rem;"><i data-lucide="x" style="width:1rem;height:1rem;"></i></button></div>`;
   document.body.appendChild(toast);
@@ -172,4 +172,4 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-window.EOLAW = { showToast, animateCounter, startTypingEffect };
+window.Insightserenity = { showToast, animateCounter, startTypingEffect };
