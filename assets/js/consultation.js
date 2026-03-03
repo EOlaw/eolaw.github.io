@@ -1,13 +1,14 @@
 /* ======================================================
-   EOLAW Consulting — Consultation Form Handler
-   No backend required: sends via mailto + WhatsApp
+   Insightserenity — Consultation Form Handler
+   Sends via Web3Forms (automatic email) + WhatsApp fallback
    ====================================================== */
 
 /* !! UPDATE THESE WITH YOUR ACTUAL CONTACT DETAILS !! */
 var CONFIG = {
-  EMAIL:     'emmanuel.ao@outlook.com',
-  PHONE:     '+1 (346) 383-9529',
-  WHATSAPP:  '13463839529',
+  EMAIL:           'emmanuel.ao@outlook.com',
+  PHONE:           '+1 (346) 383-9529',
+  WHATSAPP:        '13463839529',
+  WEB3FORMS_KEY:   '52a49fe3-176f-40b2-a8e2-5482f1b22076',  /* ← get free key at web3forms.com */
 };
 
 /* ======================================================
@@ -169,12 +170,12 @@ function populateReview() {
 }
 
 /* ======================================================
-   SUBMISSION — mailto + WhatsApp
+   SUBMISSION — Web3Forms (automatic email) + fallback
    ====================================================== */
 function buildMailtoLink(d) {
   var subject = 'Consultation Request — ' + d.serviceType + ' | ' + d.name;
   var body = [
-    'EOLAW CONSULTING — NEW CONSULTATION REQUEST',
+    'INSIGHTSERENITY — NEW CONSULTATION REQUEST',
     '='.repeat(44),
     '',
     'SERVICE REQUESTED',
@@ -197,7 +198,7 @@ function buildMailtoLink(d) {
     '',
     '---',
     'Submitted: ' + new Date().toLocaleString(),
-    'Source: EOLAW Consulting Website',
+    'Source: Insightserenity Website',
   ].join('\n');
   return 'mailto:' + CONFIG.EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
 }
@@ -217,32 +218,88 @@ function buildWhatsAppLink(d) {
   return 'https://wa.me/' + CONFIG.WHATSAPP + '?text=' + encodeURIComponent(msg);
 }
 
+function setSubmitLoading(loading) {
+  var btn = document.getElementById('submit-btn');
+  if (!btn) return;
+  btn.disabled = loading;
+  btn.textContent = loading ? 'Sending…' : 'Request Consultation';
+}
+
 function submitConsultation() {
   if (!validateStep(currentStep)) return;
 
   var d = getFormData();
 
-  // Save to localStorage (lightweight "backend" simulation)
-  var records = JSON.parse(localStorage.getItem('eolaw_consultations') || '[]');
+  // Save to localStorage
+  var records = JSON.parse(localStorage.getItem('insightserenity_consultations') || '[]');
   records.push(Object.assign({}, d, { submitted_at: new Date().toISOString(), id: Date.now() }));
-  localStorage.setItem('eolaw_consultations', JSON.stringify(records));
+  localStorage.setItem('insightserenity_consultations', JSON.stringify(records));
 
-  // Build links
   var mailtoLink   = buildMailtoLink(d);
   var whatsappLink = buildWhatsAppLink(d);
 
-  // Show success modal with contact options
-  showSuccessModal(d.name, mailtoLink, whatsappLink);
+  var key = CONFIG.WEB3FORMS_KEY;
+  var hasKey = key && key !== 'YOUR_WEB3FORMS_ACCESS_KEY';
+
+  if (!hasKey) {
+    // No key configured — fall back to modal with mailto/WhatsApp links
+    showSuccessModal(d.name, mailtoLink, whatsappLink);
+    return;
+  }
+
+  // Send automatically via Web3Forms
+  setSubmitLoading(true);
+
+  var payload = {
+    access_key:          key,
+    subject:             'Consultation Request — ' + d.serviceType + ' | ' + d.name,
+    from_name:           d.name,
+    email:               d.email,
+    'Client Name':       d.name,
+    'Client Email':      d.email,
+    'Client Phone':      d.phone || 'Not provided',
+    'Company':           d.company || 'N/A',
+    'Service Type':      d.serviceType,
+    'Consultation Type': d.consultationType,
+    'Preferred Date':    d.preferredDate || 'Flexible',
+    'Budget Range':      d.budget || 'To discuss',
+    'Timezone':          d.timezone || 'Not specified',
+    'Preferred Contact': d.preferredContact || 'Email',
+    'How They Heard':    d.howHeard || 'N/A',
+    'Message':           d.message,
+    'Submitted At':      new Date().toLocaleString(),
+  };
+
+  fetch('https://api.web3forms.com/submit', {
+    method:  'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body:    JSON.stringify(payload),
+  })
+  .then(function (res) { return res.json(); })
+  .then(function (data) {
+    setSubmitLoading(false);
+    if (data.success) {
+      showSuccessModal(d.name, mailtoLink, whatsappLink, true);
+    } else {
+      if (window.Insightserenity) window.Insightserenity.showToast('Delivery issue — please use WhatsApp or email below.', 'error');
+      showSuccessModal(d.name, mailtoLink, whatsappLink, false);
+    }
+  })
+  .catch(function () {
+    setSubmitLoading(false);
+    if (window.Insightserenity) window.Insightserenity.showToast('Network error — please use WhatsApp or email below.', 'error');
+    showSuccessModal(d.name, mailtoLink, whatsappLink, false);
+  });
 }
 
 /* ======================================================
    SUCCESS MODAL
    ====================================================== */
-function showSuccessModal(name, mailtoLink, whatsappLink) {
+function showSuccessModal(name, mailtoLink, whatsappLink, emailSent) {
   var modal = document.getElementById('success-modal');
   if (!modal) return;
 
-  var nameEl = document.getElementById('modal-name');
+  var nameEl   = document.getElementById('modal-name');
   var emailBtn = document.getElementById('modal-email-btn');
   var waBtn    = document.getElementById('modal-whatsapp-btn');
   var phoneEl  = document.getElementById('modal-phone');
@@ -251,6 +308,10 @@ function showSuccessModal(name, mailtoLink, whatsappLink) {
   if (emailBtn) emailBtn.href = mailtoLink;
   if (waBtn)    waBtn.href = whatsappLink;
   if (phoneEl)  phoneEl.textContent = CONFIG.PHONE;
+
+  // Show auto-sent confirmation if email was delivered
+  var sentNote = document.getElementById('modal-sent-note');
+  if (sentNote) sentNote.classList.toggle('hidden', !emailSent);
 
   modal.classList.remove('hidden');
   document.body.style.overflow = 'hidden';
@@ -300,9 +361,9 @@ document.addEventListener('DOMContentLoaded', function () {
   if (waBtn)    waBtn.addEventListener('click', contactByWhatsApp);
 });
 
-window.goToStep       = goToStep;
-window.nextStep       = nextStep;
-window.prevStep       = prevStep;
+window.goToStep           = goToStep;
+window.nextStep           = nextStep;
+window.prevStep           = prevStep;
 window.submitConsultation = submitConsultation;
 window.closeSuccessModal  = closeSuccessModal;
 window.contactByPhone     = contactByPhone;

@@ -437,7 +437,11 @@
       <i data-lucide="check" style="width:2rem;height:2rem;color:#ffc451;"></i>
     </div>
     <h3 class="font-display font-bold text-2xl text-white text-center mb-2">Request Received!</h3>
-    <p class="text-gray-400 text-center text-sm mb-6">Thank you, <span id="modal-name" class="text-white font-medium"></span>! Choose how you'd like to send your request:</p>
+    <!-- Shown when Web3Forms delivered the email automatically -->
+    <div id="modal-sent-note" class="hidden text-center mb-4 px-3 py-2 rounded-xl" style="background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);">
+      <p class="text-sm" style="color:#4ade80;">&#10003; Your request was emailed to Emmanuel automatically.</p>
+    </div>
+    <p class="text-gray-400 text-center text-sm mb-6">Thank you, <span id="modal-name" class="text-white font-medium"></span>! You can also reach out directly:</p>
 
     <!-- Email option -->
     <a id="modal-email-btn" href="#" target="_blank" style="display:flex;align-items:center;gap:.75rem;background:#ffc451;color:#000;font-weight:700;padding:1rem 1.25rem;border-radius:.875rem;margin-bottom:.75rem;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
