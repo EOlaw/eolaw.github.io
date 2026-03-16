@@ -1,175 +1,333 @@
-/* ======================================================
-   Insightserenity — Main JavaScript
-   ====================================================== */
+/* ================================================================
+   InsightSerenity — Main JavaScript
+   - Auto time-based dark mode (7pm–7am = dark)
+   - Manual theme toggle (persists in localStorage, overrides time)
+   - Scroll reveal animations
+   - Navbar scroll behavior
+   - Mobile menu
+   - FAQ accordion
+   - Counter animations
+   - Active nav link
+   ================================================================ */
 
-// ---- Lucide Icons Init ----
-function initIcons() {
-  if (typeof lucide !== 'undefined') lucide.createIcons();
-}
-document.addEventListener('DOMContentLoaded', initIcons);
-
-// ---- Navbar scroll effect ----
 (function () {
-  const navbar = document.getElementById('navbar');
-  if (!navbar) return;
-  function onScroll() {
-    if (window.scrollY > 60) navbar.classList.add('nav-scrolled');
-    else navbar.classList.remove('nav-scrolled');
+  'use strict';
+
+  /* ── Theme ──────────────────────────────────────────────────────── */
+  const html = document.documentElement;
+  const THEME_KEY = 'is-theme';
+  const OVERRIDE_KEY = 'is-theme-override';
+
+  function isNightTime() {
+    const h = new Date().getHours();
+    return h >= 19 || h < 7; // 7pm–7am = dark
   }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-})();
 
-// ---- Mobile menu toggle ----
-(function () {
-  const toggle = document.getElementById('mobile-toggle');
-  const menu = document.getElementById('mobile-menu');
-  const menuIcon = document.getElementById('menu-icon');
-  if (!toggle || !menu) return;
-  toggle.addEventListener('click', () => {
-    const isOpen = !menu.classList.contains('hidden');
-    if (isOpen) {
-      menu.classList.add('hidden');
-      if (menuIcon) { menuIcon.setAttribute('data-lucide', 'menu'); initIcons(); }
+  function applyTheme(dark, updateIcon) {
+    if (dark) {
+      html.classList.add('dark');
     } else {
-      menu.classList.remove('hidden');
-      if (menuIcon) { menuIcon.setAttribute('data-lucide', 'x'); initIcons(); }
+      html.classList.remove('dark');
     }
-  });
-  document.addEventListener('click', (e) => {
-    if (!toggle.contains(e.target) && !menu.contains(e.target)) {
-      menu.classList.add('hidden');
-      if (menuIcon) { menuIcon.setAttribute('data-lucide', 'menu'); initIcons(); }
-    }
-  });
-})();
+    if (updateIcon) syncThemeIcon(dark);
+  }
 
-// ---- Active nav link ----
-(function () {
-  const path = window.location.pathname;
-  document.querySelectorAll('.nav-link').forEach(link => {
-    const href = link.getAttribute('href');
-    if (
-      (path === '/' && href === '/') ||
-      (href !== '/' && path !== '/' && path.includes(href.replace('.html', '')))
-    ) {
-      link.classList.add('nav-active');
-    }
-  });
-})();
+  function syncThemeIcon(dark) {
+    const btns = document.querySelectorAll('.theme-toggle');
+    btns.forEach(btn => {
+      btn.innerHTML = dark
+        ? `<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>`
+        : `<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+      btn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+    });
+  }
 
-// ---- Scroll Reveal ----
-(function () {
-  const els = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
-  if (!els.length) return;
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const delay = parseInt(entry.target.dataset.delay || 0, 10);
-        setTimeout(() => entry.target.classList.add('visible'), delay);
-        observer.unobserve(entry.target);
+  function initTheme() {
+    const override = localStorage.getItem(OVERRIDE_KEY);
+    if (override !== null) {
+      applyTheme(override === 'dark', true);
+    } else {
+      applyTheme(isNightTime(), true);
+    }
+  }
+
+  function toggleTheme() {
+    const isDark = html.classList.contains('dark');
+    const next = !isDark;
+    localStorage.setItem(OVERRIDE_KEY, next ? 'dark' : 'light');
+    applyTheme(next, true);
+  }
+
+  // Auto re-check every minute (handles crossing 7pm/7am boundary)
+  function scheduleAutoThemeCheck() {
+    setInterval(() => {
+      if (localStorage.getItem(OVERRIDE_KEY) === null) {
+        applyTheme(isNightTime(), true);
+      }
+    }, 60000);
+  }
+
+  /* ── Navbar ─────────────────────────────────────────────────────── */
+  function initNavbar() {
+    const nav = document.getElementById('navbar');
+    if (!nav) return;
+    function onScroll() {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  /* ── Mobile Menu ─────────────────────────────────────────────────── */
+  function initMobileMenu() {
+    const toggle = document.getElementById('mobile-toggle');
+    const menu   = document.getElementById('mobile-menu');
+    if (!toggle || !menu) return;
+    toggle.addEventListener('click', () => {
+      const open = menu.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open);
+      toggle.innerHTML = open
+        ? `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`
+        : `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>`;
+    });
+    // Close on link click
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      menu.classList.remove('open');
+      toggle.setAttribute('aria-expanded', false);
+    }));
+  }
+
+  /* ── Active Nav Link ─────────────────────────────────────────────── */
+  function initActiveNav() {
+    const page = window.location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.nav-link').forEach(link => {
+      const href = link.getAttribute('href') || '';
+      const linkPage = href.split('/').pop();
+      if (linkPage === page || (page === '' && linkPage === 'index.html')) {
+        link.classList.add('active');
       }
     });
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-  els.forEach(el => observer.observe(el));
-})();
-
-// ---- Counter Animation ----
-function animateCounter(el) {
-  const target = parseInt(el.dataset.target, 10);
-  const suffix = el.dataset.suffix || '';
-  const prefix = el.dataset.prefix || '';
-  const duration = 1800;
-  const start = performance.now();
-  function step(now) {
-    const progress = Math.min((now - start) / duration, 1);
-    const eased = 1 - Math.pow(1 - progress, 3);
-    el.textContent = prefix + Math.round(eased * target) + suffix;
-    if (progress < 1) requestAnimationFrame(step);
   }
-  requestAnimationFrame(step);
-}
-(function () {
-  const counters = document.querySelectorAll('.counter');
-  if (!counters.length) return;
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && !entry.target.dataset.counted) {
-        entry.target.dataset.counted = '1';
-        animateCounter(entry.target);
-        observer.unobserve(entry.target);
+
+  /* ── Scroll Reveal ───────────────────────────────────────────────── */
+  function initReveal() {
+    const els = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    if (!els.length) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const el = e.target;
+          const delay = parseInt(el.dataset.delay || 0, 10);
+          setTimeout(() => el.classList.add('visible'), delay);
+          io.unobserve(el);
+        }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(el => io.observe(el));
+  }
+
+  /* ── Counter Animation ───────────────────────────────────────────── */
+  function initCounters() {
+    const els = document.querySelectorAll('.counter');
+    if (!els.length) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el = e.target;
+        const target  = parseFloat(el.dataset.target);
+        const suffix  = el.dataset.suffix || '';
+        const isFloat = target % 1 !== 0;
+        const duration = 1600;
+        const start = performance.now();
+        function tick(now) {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const val = target * eased;
+          el.textContent = (isFloat ? val.toFixed(1) : Math.floor(val).toLocaleString()) + suffix;
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        io.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    els.forEach(el => io.observe(el));
+  }
+
+  /* ── FAQ Accordion ───────────────────────────────────────────────── */
+  function initFaq() {
+    document.querySelectorAll('.faq-item').forEach(item => {
+      const btn = item.querySelector('.faq-btn');
+      if (!btn) return;
+      btn.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        // Close all
+        document.querySelectorAll('.faq-item.open').forEach(o => o.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+  }
+
+  /* ── Smooth scroll for anchor links ─────────────────────────────── */
+  function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href').slice(1);
+        const target = document.getElementById(id);
+        if (target) {
+          e.preventDefault();
+          const offset = 80;
+          const top = target.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    });
+  }
+
+  /* ── Typewriter effect ───────────────────────────────────────────── */
+  function initRotatingText() {
+    const el = document.getElementById('typewriter-word');
+    if (!el) return;
+    const words = [
+      'Business Intelligence',
+      'Your Career',
+      'Your Purpose',
+      'Measurable Growth',
+      'Lasting Impact',
+    ];
+    let wordIndex = 0;
+    let charIndex = words[0].length; // start full, then delete
+    let deleting = true;
+    const TYPE_SPEED   = 75;
+    const DELETE_SPEED = 40;
+    const PAUSE_FULL   = 2400;
+    const PAUSE_EMPTY  = 380;
+
+    function tick() {
+      const current = words[wordIndex];
+      if (!deleting) {
+        charIndex++;
+        el.textContent = current.slice(0, charIndex);
+        if (charIndex === current.length) {
+          deleting = true;
+          setTimeout(tick, PAUSE_FULL);
+          return;
+        }
+        setTimeout(tick, TYPE_SPEED);
+      } else {
+        charIndex--;
+        el.textContent = current.slice(0, charIndex);
+        if (charIndex === 0) {
+          deleting = false;
+          wordIndex = (wordIndex + 1) % words.length;
+          setTimeout(tick, PAUSE_EMPTY);
+          return;
+        }
+        setTimeout(tick, DELETE_SPEED);
       }
-    });
-  }, { threshold: 0.5 });
-  counters.forEach(el => observer.observe(el));
-})();
-
-// ---- Typing Effect ----
-function startTypingEffect(el, words, opts) {
-  if (!el || !words.length) return;
-  const { typeSpeed = 90, deleteSpeed = 50, pauseAfter = 2200, pauseBefore = 400 } = opts || {};
-  let wIndex = 0, cIndex = 0, deleting = false;
-  function tick() {
-    const word = words[wIndex];
-    if (deleting) { el.textContent = word.slice(0, cIndex - 1); cIndex--; }
-    else { el.textContent = word.slice(0, cIndex + 1); cIndex++; }
-    let delay = deleting ? deleteSpeed : typeSpeed;
-    if (!deleting && cIndex === word.length) { delay = pauseAfter; deleting = true; }
-    else if (deleting && cIndex === 0) { deleting = false; wIndex = (wIndex + 1) % words.length; delay = pauseBefore; }
-    setTimeout(tick, delay);
+    }
+    setTimeout(tick, PAUSE_FULL);
   }
-  tick();
-}
-(function () {
-  const el = document.getElementById('typed-text');
-  if (!el) return;
-  const words = (el.dataset.words || '').split(',').map(w => w.trim()).filter(Boolean);
-  startTypingEffect(el, words);
-})();
 
-// ---- Toast Notification ----
-function showToast(message, type) {
-  type = type || 'success';
-  const existing = document.getElementById('is-toast');
-  if (existing) existing.remove();
-  const cfg = {
-    success: { border: '#22c55e', color: '#4ade80', icon: 'check-circle' },
-    error:   { border: '#ef4444', color: '#f87171', icon: 'x-circle' },
-    info:    { border: '#ffc451', color: '#ffc451', icon: 'info' },
-  }[type] || { border: '#ffc451', color: '#ffc451', icon: 'info' };
-  const toast = document.createElement('div');
-  toast.id = 'is-toast';
-  toast.className = 'toast';
-  toast.innerHTML = `<div style="background:#111;border:1.5px solid ${cfg.border};border-radius:1rem;padding:1rem 1.25rem;display:flex;align-items:center;gap:.75rem;box-shadow:0 8px 32px rgba(0,0,0,.5);"><i data-lucide="${cfg.icon}" style="width:1.25rem;height:1.25rem;color:${cfg.color};flex-shrink:0;"></i><p style="color:#fff;font-size:.9rem;margin:0;font-family:Inter,sans-serif;">${message}</p><button onclick="this.closest('#eolaw-toast').remove()" style="background:none;border:none;color:#666;cursor:pointer;margin-left:auto;padding:.25rem;"><i data-lucide="x" style="width:1rem;height:1rem;"></i></button></div>`;
-  document.body.appendChild(toast);
-  if (typeof lucide !== 'undefined') lucide.createIcons();
-  setTimeout(() => toast.classList.add('show'), 10);
-  setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 400); }, 5000);
-}
+  /* ── Calendly helpers ────────────────────────────────────────────── */
+  window.openCalendly = function (url) {
+    if (typeof Calendly !== 'undefined') {
+      Calendly.initPopupWidget({ url: url || 'https://calendly.com/emmanuel-ao' });
+    } else {
+      window.open(url || 'https://calendly.com/emmanuel-ao', '_blank');
+    }
+  };
 
-// ---- FAQ Accordion ----
-(function () {
-  document.querySelectorAll('.faq-toggle').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const answer = btn.nextElementSibling;
-      const chevron = btn.querySelector('.faq-chevron');
-      const isOpen = answer.classList.contains('open');
-      document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('open'));
-      document.querySelectorAll('.faq-chevron').forEach(c => c.classList.remove('rotated'));
-      if (!isOpen) { answer.classList.add('open'); if (chevron) chevron.classList.add('rotated'); }
-    });
-  });
-})();
+  /* ── Toast ───────────────────────────────────────────────────────── */
+  window.showToast = function (msg, type) {
+    const t = document.createElement('div');
+    t.style.cssText = `
+      position:fixed;bottom:1.5rem;right:1.5rem;z-index:9999;
+      background:${type === 'error' ? '#ef4444' : '#111'};
+      color:#fff;padding:.75rem 1.25rem;border-radius:.75rem;
+      font-size:.8rem;font-weight:500;
+      box-shadow:0 8px 32px rgba(0,0,0,.35);
+      transform:translateX(120%);transition:transform .35s cubic-bezier(.175,.885,.32,1.275);
+      max-width:22rem;
+    `;
+    t.textContent = msg;
+    document.body.appendChild(t);
+    requestAnimationFrame(() => { t.style.transform = 'translateX(0)'; });
+    setTimeout(() => {
+      t.style.transform = 'translateX(120%)';
+      setTimeout(() => t.remove(), 400);
+    }, 3500);
+  };
 
-// ---- Smooth anchor scroll ----
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const target = document.querySelector(a.getAttribute('href'));
-    if (target) {
+  /* ── Contact form ────────────────────────────────────────────────── */
+  function initContactForm() {
+    const form = document.getElementById('contact-form');
+    if (!form) return;
+    form.addEventListener('submit', function (e) {
       e.preventDefault();
-      window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
-    }
-  });
-});
+      const btn = form.querySelector('[type=submit]');
+      const original = btn.textContent;
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
+      // Replace with your real form endpoint (Formspree, Netlify Forms, etc.)
+      const formspreeId = form.dataset.formspree || 'YOUR_FORMSPREE_ID';
+      fetch(`https://formspree.io/f/${formspreeId}`, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' }
+      })
+        .then(r => {
+          if (r.ok) {
+            window.showToast('Message sent! I\'ll respond within 24 hours.');
+            form.reset();
+          } else {
+            window.showToast('Something went wrong. Please email me directly.', 'error');
+          }
+        })
+        .catch(() => window.showToast('Network error. Please try again.', 'error'))
+        .finally(() => { btn.textContent = original; btn.disabled = false; });
+    });
+  }
 
-window.Insightserenity = { showToast, animateCounter, startTypingEffect };
+  /* ── Floating Action Button ──────────────────────────────────────── */
+  function initFab() {
+    const btn = document.getElementById('fab-btn');
+    const actions = document.getElementById('fab-actions');
+    const container = document.getElementById('fab-container');
+    if (!btn || !actions) return;
+    btn.addEventListener('click', () => {
+      btn.classList.toggle('open');
+      actions.classList.toggle('open');
+    });
+    document.addEventListener('click', (e) => {
+      if (container && !container.contains(e.target)) {
+        btn.classList.remove('open');
+        actions.classList.remove('open');
+      }
+    });
+  }
+
+  /* ── Init ────────────────────────────────────────────────────────── */
+  document.addEventListener('DOMContentLoaded', () => {
+    initTheme();
+    scheduleAutoThemeCheck();
+    initNavbar();
+    initMobileMenu();
+    initActiveNav();
+    initReveal();
+    initCounters();
+    initFaq();
+    initSmoothScroll();
+    initRotatingText();
+    initContactForm();
+    initFab();
+
+    // Attach theme toggle buttons
+    document.querySelectorAll('.theme-toggle').forEach(btn => {
+      btn.addEventListener('click', toggleTheme);
+    });
+
+    // Lucide icons
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+  });
+
+})();

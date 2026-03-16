@@ -3,419 +3,316 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Privacy Policy | Insightserenity</title>
-  <meta name="description" content="Your privacy matters. This policy explains how Insightserenity collects, uses, and protects your information.">
+  <title>Privacy Policy | InsightSerenity</title>
+  <meta name="description" content="InsightSerenity Privacy Policy — how we collect, use, and protect your personal information.">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon_io/favicon-32x32.png">
   <link rel="apple-touch-icon" href="/assets/img/favicon_io/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/img/favicon_io/site.webmanifest">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            gold: { 500:'#ffc451', 600:'#e6b048' },
-            dark: { 950:'#050505', 900:'#0a0a0a', 800:'#111111', 700:'#1a1a1a', 600:'#222222', 500:'#2a2a2a' }
+            gold: { 300:'#ffe08a',400:'#ffd27f',500:'#ffc451',600:'#e6b048',700:'#cc9c3f' }
           },
           fontFamily: { sans:['Inter','sans-serif'], display:['Space Grotesk','sans-serif'] }
         }
       }
     }
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/business.css">
-  <style>
-    body { background-color: #111111; }
-
-    #navbar.scrolled {
-      background: rgba(10, 10, 10, 0.95);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(255, 196, 81, 0.1);
-    }
-
-    .toc-link {
-      display: block;
-      padding: 0.5rem 0.75rem;
-      border-radius: 0.5rem;
-      font-size: 0.8125rem;
-      color: #9ca3af;
-      transition: all 0.2s;
-      border-left: 2px solid transparent;
-      text-decoration: none;
-      line-height: 1.4;
-    }
-    .toc-link:hover {
-      color: #ffc451;
-      background: rgba(255, 196, 81, 0.05);
-      border-left-color: rgba(255, 196, 81, 0.4);
-    }
-    .toc-link.active {
-      color: #ffc451;
-      background: rgba(255, 196, 81, 0.08);
-      border-left-color: #ffc451;
-      font-weight: 500;
-    }
-
-    .policy-section {
-      scroll-margin-top: 6rem;
-    }
-
-    .policy-section h2 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 1.125rem;
-      color: #ffffff;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .policy-section h2::before {
-      content: '';
-      display: inline-block;
-      width: 3px;
-      height: 1.25rem;
-      background: #ffc451;
-      border-radius: 2px;
-      flex-shrink: 0;
-    }
-
-    .policy-section p,
-    .policy-section ul {
-      color: #9ca3af;
-      line-height: 1.8;
-      font-size: 0.9375rem;
-      margin-bottom: 0.75rem;
-    }
-    .policy-section ul {
-      list-style: none;
-      padding: 0;
-      margin-left: 0;
-    }
-    .policy-section ul li {
-      padding: 0.25rem 0 0.25rem 1.5rem;
-      position: relative;
-    }
-    .policy-section ul li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0.65rem;
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: #ffc451;
-      opacity: 0.7;
-    }
-
-    .policy-card {
-      background: #0a0a0a;
-      border: 1px solid #1f1f1f;
-      border-radius: 1rem;
-      padding: 1.75rem;
-      margin-bottom: 1.5rem;
-      transition: border-color 0.2s;
-    }
-    .policy-card:hover {
-      border-color: rgba(255, 196, 81, 0.15);
-    }
-
-    .section-number {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 1.75rem;
-      height: 1.75rem;
-      border-radius: 50%;
-      background: rgba(255, 196, 81, 0.12);
-      color: #ffc451;
-      font-size: 0.75rem;
-      font-weight: 700;
-      font-family: 'Space Grotesk', sans-serif;
-      flex-shrink: 0;
-    }
-  </style>
+  <link rel="stylesheet" href="/assets/css/main.css">
 </head>
-<body class="bg-dark-800 font-sans antialiased">
+<body>
 
   <!-- NAVBAR -->
-  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 py-5 transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between">
-        <a href="/" class="flex items-center gap-2.5">
-          <img src="/assets/img/favicon_io/android-chrome-192x192.png" alt="Insightserenity" class="w-9 h-9 rounded-xl">
-          <span class="font-display font-bold text-lg"><span style="color:#ffc451">Insight</span><span class="brand-serenity">serenity</span></span>
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="/index.html" class="nav-logo">
+          <img src="/assets/img/favicon_io/android-chrome-192x192.png" alt="InsightSerenity" style="width:2rem;height:2rem;border-radius:0.5rem;">
+          <span>Insight<span class="gold">Serenity</span></span>
         </a>
-        <div class="hidden md:flex items-center gap-1">
-          <a href="/" class="text-sm font-medium px-4 py-2 rounded-lg text-gray-300 hover:text-gold-500 hover:bg-dark-700 transition-all">Home</a>
-          <a href="/about.html" class="text-sm font-medium px-4 py-2 rounded-lg text-gray-300 hover:text-gold-500 hover:bg-dark-700 transition-all">About</a>
-          <a href="/services.html" class="text-sm font-medium px-4 py-2 rounded-lg text-gray-300 hover:text-gold-500 hover:bg-dark-700 transition-all">Services</a>
-          <a href="/consultation.html" class="text-sm font-medium px-4 py-2 rounded-lg text-gray-300 hover:text-gold-500 hover:bg-dark-700 transition-all">Consultation</a>
+        <div class="nav-links">
+          <a href="/index.html" class="nav-link">Home</a>
+          <a href="/about.html" class="nav-link">About</a>
+          <a href="/services.html" class="nav-link">Services</a>
+          <a href="/consultation.html" class="nav-link">Consultation</a>
+          <a href="/scripture/" class="nav-link">Scripture</a>
         </div>
-        <a href="/consultation.html" style="background:#ffc451;color:#000;font-weight:700;" class="hidden md:block px-5 py-2.5 rounded-xl text-sm">Book Consultation</a>
-        <button id="mobile-toggle" class="md:hidden p-2 rounded-lg text-gray-300 hover:bg-dark-700 transition-colors">
-          <i data-lucide="menu" class="w-5 h-5" id="menu-icon"></i>
+        <div class="nav-actions">
+          <a href="tel:+13463839529" class="nav-phone hidden lg:flex">
+            <i data-lucide="phone" style="width:14px;height:14px;"></i>
+            <span>+1 (346) 383-9529</span>
+          </a>
+          <button class="theme-toggle" aria-label="Toggle theme"></button>
+          <a href="/consultation.html" class="btn-book">Book Consultation</a>
+        </div>
+        <button class="mobile-toggle" id="mobile-toggle" aria-expanded="false">
+          <i data-lucide="menu" style="width:18px;height:18px;"></i>
         </button>
       </div>
-      <div id="mobile-menu" class="hidden md:hidden mt-4 pt-4 border-t border-dark-500 space-y-1 pb-4">
-        <a href="/" class="block text-gray-300 px-4 py-2.5 rounded-lg hover:bg-dark-700 font-medium">Home</a>
-        <a href="/about.html" class="block text-gray-300 px-4 py-2.5 rounded-lg hover:bg-dark-700 font-medium">About</a>
-        <a href="/services.html" class="block text-gray-300 px-4 py-2.5 rounded-lg hover:bg-dark-700 font-medium">Services</a>
-        <a href="/consultation.html" class="block text-gray-300 px-4 py-2.5 rounded-lg hover:bg-dark-700 font-medium">Consultation</a>
-        <a href="/consultation.html" style="background:#ffc451;color:#000;font-weight:700;" class="block px-4 py-3 rounded-xl text-center text-sm mt-3">Book Consultation</a>
+      <div class="mobile-menu" id="mobile-menu">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/about.html" class="nav-link">About</a>
+        <a href="/services.html" class="nav-link">Services</a>
+        <a href="/consultation.html" class="nav-link">Consultation</a>
+        <a href="/scripture/" class="nav-link">Scripture</a>
+        <a href="/consultation.html" class="btn btn-primary" style="margin-top:.5rem;">Book Consultation</a>
       </div>
     </div>
   </nav>
 
   <!-- PAGE HERO -->
-  <section style="background:#0a0a0a;padding-top:8rem;padding-bottom:3rem;border-bottom:1px solid #1a1a1a;">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center gap-2 mb-4">
-        <a href="/" class="text-gray-600 hover:text-gold-500 text-sm transition-colors">Home</a>
-        <span class="text-gray-700">/</span>
-        <span class="text-gray-500 text-sm">Privacy Policy</span>
+  <div class="page-hero" style="padding-bottom:2.5rem;">
+    <div class="container">
+      <div class="reveal">
+        <div class="badge" style="margin-bottom:1rem;">Legal</div>
+        <h1>Privacy Policy</h1>
+        <p>Last updated: January 1, 2025</p>
       </div>
-      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium mb-5" style="background:rgba(255,196,81,0.1);color:#ffc451;border:1px solid rgba(255,196,81,0.2);">
-        <i data-lucide="shield" class="w-3.5 h-3.5"></i>
-        Legal Document
-      </div>
-      <h1 class="font-display font-bold text-4xl sm:text-5xl text-white mb-4 leading-tight">
-        Privacy Policy
-      </h1>
-      <p class="text-gray-500 text-sm mb-4 flex items-center gap-2">
-        <i data-lucide="calendar" class="w-4 h-4"></i>
-        Last updated: January 1, 2025
-      </p>
-      <p class="text-gray-400 text-base leading-relaxed max-w-2xl">
-        Your privacy matters. This policy explains how Insightserenity collects, uses, and protects your information when you interact with our services.
-      </p>
     </div>
-  </section>
+  </div>
 
-  <!-- CONTENT SECTION -->
-  <section style="background:#111111;padding-top:3rem;padding-bottom:4rem;">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex gap-10 items-start">
+  <!-- POLICY CONTENT -->
+  <section class="section">
+    <div class="container">
+      <div style="max-width:760px;margin:0 auto;">
 
-        <!-- Table of Contents (Sticky Left) -->
-        <aside class="hidden lg:block w-64 flex-shrink-0">
-          <div class="sticky top-24 p-5 rounded-2xl" style="background:#0a0a0a;border:1px solid #1f1f1f;">
-            <p class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-4 px-1">On This Page</p>
-            <nav id="toc" class="space-y-0.5">
-              <a href="#information-we-collect" class="toc-link">1. Information We Collect</a>
-              <a href="#how-we-use" class="toc-link">2. How We Use Your Information</a>
-              <a href="#information-sharing" class="toc-link">3. Information Sharing</a>
-              <a href="#data-security" class="toc-link">4. Data Security</a>
-              <a href="#cookies-tracking" class="toc-link">5. Cookies &amp; Tracking</a>
-              <a href="#your-rights" class="toc-link">6. Your Rights</a>
-              <a href="#data-retention" class="toc-link">7. Data Retention</a>
-              <a href="#childrens-privacy" class="toc-link">8. Children's Privacy</a>
-              <a href="#policy-changes" class="toc-link">9. Changes to This Policy</a>
-              <a href="#contact-us" class="toc-link">10. Contact Us</a>
-            </nav>
-            <div class="mt-5 pt-5" style="border-top:1px solid #1f1f1f;">
-              <a href="/consultation.html"
-                 class="block text-center text-xs font-semibold py-2.5 px-3 rounded-xl transition-all hover:opacity-90"
-                 style="background:#ffc451;color:#000;">
-                Book a Consultation
-              </a>
-            </div>
-          </div>
-        </aside>
-
-        <!-- Policy Content -->
-        <div class="flex-1 min-w-0 max-w-3xl">
-
-          <!-- Section 1 -->
-          <div id="information-we-collect" class="policy-section policy-card">
-            <h2><span class="section-number">1</span> Information We Collect</h2>
-            <p>We collect information you voluntarily provide when booking consultations or contacting us. This includes:</p>
-            <ul>
-              <li>Name and contact information (email, phone)</li>
-              <li>Company or organization details</li>
-              <li>Project descriptions and requirements</li>
-              <li>Communication preferences</li>
-              <li>Technical information about your project needs</li>
-            </ul>
-            <p>We also collect non-personal data such as browser type, IP address, and pages visited through standard web analytics.</p>
-          </div>
-
-          <!-- Section 2 -->
-          <div id="how-we-use" class="policy-section policy-card">
-            <h2><span class="section-number">2</span> How We Use Your Information</h2>
-            <p>Your information is used exclusively to:</p>
-            <ul>
-              <li>Respond to consultation requests and inquiries</li>
-              <li>Schedule and conduct consultation sessions</li>
-              <li>Prepare project proposals and technical assessments</li>
-              <li>Send relevant updates about your project (if engaged)</li>
-              <li>Improve our services and client experience</li>
-            </ul>
-            <p>We do not use your information for unsolicited marketing communications.</p>
-          </div>
-
-          <!-- Section 3 -->
-          <div id="information-sharing" class="policy-section policy-card">
-            <h2><span class="section-number">3</span> Information Sharing</h2>
-            <p>Insightserenity does not sell, rent, or share your personal information with third parties except:</p>
-            <ul>
-              <li>When required by law or legal process</li>
-              <li>With service providers essential to delivering our services (e.g., email providers)</li>
-              <li>With your explicit written consent</li>
-            </ul>
-            <p>All third-party service providers are bound by confidentiality agreements.</p>
-          </div>
-
-          <!-- Section 4 -->
-          <div id="data-security" class="policy-section policy-card">
-            <h2><span class="section-number">4</span> Data Security</h2>
-            <p>We implement industry-standard security measures to protect your information:</p>
-            <ul>
-              <li>Secure, encrypted communication channels</li>
-              <li>Restricted access to personal data</li>
-              <li>Regular security assessments</li>
-              <li>Data minimization practices — we only collect what is necessary</li>
-            </ul>
-            <p>Despite these measures, no internet transmission is 100% secure. We encourage you to contact us only through secure channels.</p>
-          </div>
-
-          <!-- Section 5 -->
-          <div id="cookies-tracking" class="policy-section policy-card">
-            <h2><span class="section-number">5</span> Cookies &amp; Tracking</h2>
-            <p>This website uses minimal cookies for:</p>
-            <ul>
-              <li>Session management and functionality</li>
-              <li>Anonymous analytics to improve user experience</li>
-            </ul>
-            <p>We do not use advertising cookies or cross-site tracking. You can disable cookies in your browser settings without affecting your ability to use our core services.</p>
-          </div>
-
-          <!-- Section 6 -->
-          <div id="your-rights" class="policy-section policy-card">
-            <h2><span class="section-number">6</span> Your Rights</h2>
-            <p>You have the right to:</p>
-            <ul>
-              <li>Access the personal information we hold about you</li>
-              <li>Request correction of inaccurate information</li>
-              <li>Request deletion of your personal information</li>
-              <li>Opt out of any future communications</li>
-              <li>Request a copy of your data in a portable format</li>
-            </ul>
-            <p>To exercise any of these rights, contact us at <a href="mailto:emmanuel.ao@outlook.com" class="transition-colors" style="color:#ffc451;">emmanuel.ao@outlook.com</a>.</p>
-          </div>
-
-          <!-- Section 7 -->
-          <div id="data-retention" class="policy-section policy-card">
-            <h2><span class="section-number">7</span> Data Retention</h2>
-            <p>We retain your information only as long as necessary to fulfill the purpose for which it was collected, comply with legal obligations, or resolve disputes.</p>
-            <p>Consultation records are typically retained for 2 years unless a longer engagement requires otherwise.</p>
-          </div>
-
-          <!-- Section 8 -->
-          <div id="childrens-privacy" class="policy-section policy-card">
-            <h2><span class="section-number">8</span> Children's Privacy</h2>
-            <p>Our services are intended for business clients aged 18 and older. We do not knowingly collect personal information from individuals under 18.</p>
-            <p>If we become aware that we have inadvertently collected information from a minor, we will take immediate steps to delete that information.</p>
-          </div>
-
-          <!-- Section 9 -->
-          <div id="policy-changes" class="policy-section policy-card">
-            <h2><span class="section-number">9</span> Changes to This Policy</h2>
-            <p>We may update this policy periodically. Significant changes will be communicated via email to active clients.</p>
-            <p>Continued use of our services constitutes acceptance of the updated policy. We encourage you to review this page periodically to stay informed.</p>
-          </div>
-
-          <!-- Section 10 -->
-          <div id="contact-us" class="policy-section policy-card" style="border-color:rgba(255,196,81,0.15);">
-            <h2><span class="section-number">10</span> Contact Us</h2>
-            <p>For privacy-related questions or requests, please reach out through any of the following channels:</p>
-            <div class="mt-4 space-y-3">
-              <a href="mailto:emmanuel.ao@outlook.com" class="flex items-center gap-3 p-3 rounded-xl transition-all hover:opacity-80" style="background:rgba(255,196,81,0.06);border:1px solid rgba(255,196,81,0.12);">
-                <i data-lucide="mail" class="w-4 h-4 flex-shrink-0" style="color:#ffc451;"></i>
-                <span class="text-gray-300 text-sm">emmanuel.ao@outlook.com</span>
-              </a>
-              <a href="tel:+13463839529" class="flex items-center gap-3 p-3 rounded-xl transition-all hover:opacity-80" style="background:rgba(255,196,81,0.06);border:1px solid rgba(255,196,81,0.12);">
-                <i data-lucide="phone" class="w-4 h-4 flex-shrink-0" style="color:#ffc451;"></i>
-                <span class="text-gray-300 text-sm">+1 (346) 383-9529</span>
-              </a>
-              <a href="/consultation.html" class="flex items-center gap-3 p-3 rounded-xl transition-all hover:opacity-80" style="background:rgba(255,196,81,0.06);border:1px solid rgba(255,196,81,0.12);">
-                <i data-lucide="calendar-check" class="w-4 h-4 flex-shrink-0" style="color:#ffc451;"></i>
-                <span class="text-gray-300 text-sm">Book a consultation at /consultation.html</span>
-              </a>
-            </div>
-          </div>
-
+        <!-- Intro -->
+        <div style="background:var(--primary-dim);border:1px solid var(--primary-border);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;margin-bottom:2.5rem;" class="reveal">
+          <p style="font-size:.8rem;color:var(--text);line-height:1.75;">InsightSerenity ("we," "our," or "us") is operated by Emmanuel Oyemosu. We are committed to protecting your personal information and being transparent about how we use it. This policy applies to all visitors and clients of <strong>eolaw.github.io</strong> and related services.</p>
         </div>
+
+        <!-- Section 1: Information We Collect -->
+        <div style="margin-bottom:2.5rem;" class="reveal">
+          <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1rem;">
+            <div style="width:2.25rem;height:2.25rem;background:var(--primary-dim);border-radius:.5rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <i data-lucide="database" style="width:1rem;height:1rem;color:var(--primary);"></i>
+            </div>
+            <h2 style="font-size:1.1rem;">1. Information We Collect</h2>
+          </div>
+          <p style="margin-bottom:.875rem;font-size:.8rem;">We collect information you provide directly and information collected automatically:</p>
+          <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.5rem;">
+            <p style="font-size:.8rem;font-weight:600;color:var(--text);margin-bottom:.5rem;">Information you provide:</p>
+            <div class="check-list" style="margin-bottom:1rem;">
+              <div class="check-item"><i data-lucide="dot" style="width:1rem;height:1rem;color:var(--primary);"></i><span style="font-size:.8rem;">Name, email address, and phone number when you fill out our contact form</span></div>
+              <div class="check-item"><i data-lucide="dot" style="width:1rem;height:1rem;color:var(--primary);"></i><span style="font-size:.8rem;">Service preferences and project descriptions you provide</span></div>
+              <div class="check-item"><i data-lucide="dot" style="width:1rem;height:1rem;color:var(--primary);"></i><span style="font-size:.8rem;">Scheduling information when you book through Calendly</span></div>
+            </div>
+            <p style="font-size:.8rem;font-weight:600;color:var(--text);margin-bottom:.5rem;">Information collected automatically:</p>
+            <div class="check-list">
+              <div class="check-item"><i data-lucide="dot" style="width:1rem;height:1rem;color:var(--primary);"></i><span style="font-size:.8rem;">Browser type, operating system, and referring URL via server logs</span></div>
+              <div class="check-item"><i data-lucide="dot" style="width:1rem;height:1rem;color:var(--primary);"></i><span style="font-size:.8rem;">Pages visited and time spent (if analytics tools are enabled)</span></div>
+              <div class="check-item"><i data-lucide="dot" style="width:1rem;height:1rem;color:var(--primary);"></i><span style="font-size:.8rem;">Theme preference stored in your browser's localStorage (no server)</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: How We Use It -->
+        <div style="margin-bottom:2.5rem;" class="reveal">
+          <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1rem;">
+            <div style="width:2.25rem;height:2.25rem;background:var(--primary-dim);border-radius:.5rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <i data-lucide="settings" style="width:1rem;height:1rem;color:var(--primary);"></i>
+            </div>
+            <h2 style="font-size:1.1rem;">2. How We Use Your Information</h2>
+          </div>
+          <p style="font-size:.8rem;margin-bottom:.875rem;">We use information solely to provide and improve our services:</p>
+          <div class="check-list">
+            <div class="check-item"><i data-lucide="check-circle-2"></i><span style="font-size:.8rem;">To respond to inquiries and schedule consultations</span></div>
+            <div class="check-item"><i data-lucide="check-circle-2"></i><span style="font-size:.8rem;">To send confirmation emails and service-related communications</span></div>
+            <div class="check-item"><i data-lucide="check-circle-2"></i><span style="font-size:.8rem;">To deliver contracted consulting or coaching services</span></div>
+            <div class="check-item"><i data-lucide="check-circle-2"></i><span style="font-size:.8rem;">To improve the website and user experience</span></div>
+            <div class="check-item"><i data-lucide="check-circle-2"></i><span style="font-size:.8rem;">To comply with legal obligations</span></div>
+          </div>
+          <p style="font-size:.8rem;margin-top:.875rem;color:var(--text-muted);">We do not sell, rent, or trade your personal information. We do not use it for advertising or marketing beyond responding to your direct inquiry.</p>
+        </div>
+
+        <!-- Section 3: Cookies -->
+        <div style="margin-bottom:2.5rem;" class="reveal">
+          <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1rem;">
+            <div style="width:2.25rem;height:2.25rem;background:var(--primary-dim);border-radius:.5rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <i data-lucide="cookie" style="width:1rem;height:1rem;color:var(--primary);"></i>
+            </div>
+            <h2 style="font-size:1.1rem;">3. Cookies &amp; Local Storage</h2>
+          </div>
+          <p style="font-size:.8rem;margin-bottom:.875rem;">This website uses minimal client-side storage:</p>
+          <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.5rem;">
+            <div class="check-list">
+              <div class="check-item"><i data-lucide="dot" style="width:1rem;height:1rem;color:var(--primary);"></i><span style="font-size:.8rem;"><strong>localStorage (is-theme-override):</strong> Stores your light/dark mode preference locally in your browser. This data never leaves your device.</span></div>
+              <div class="check-item"><i data-lucide="dot" style="width:1rem;height:1rem;color:var(--primary);"></i><span style="font-size:.8rem;"><strong>Calendly cookies:</strong> The Calendly booking widget may set its own cookies to manage your scheduling session. Please see Calendly's privacy policy at calendly.com/legal/privacy-notice.</span></div>
+              <div class="check-item"><i data-lucide="dot" style="width:1rem;height:1rem;color:var(--primary);"></i><span style="font-size:.8rem;"><strong>Formspree:</strong> Our contact form is processed by Formspree, which may set cookies to prevent spam. See Formspree's privacy policy at formspree.io/legal/privacy-policy.</span></div>
+            </div>
+          </div>
+          <p style="font-size:.8rem;margin-top:.875rem;color:var(--text-muted);">We do not use tracking cookies, advertising pixels, or behavioral analytics tools on this website.</p>
+        </div>
+
+        <!-- Section 4: Third-Party Services -->
+        <div style="margin-bottom:2.5rem;" class="reveal">
+          <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1rem;">
+            <div style="width:2.25rem;height:2.25rem;background:var(--primary-dim);border-radius:.5rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <i data-lucide="link" style="width:1rem;height:1rem;color:var(--primary);"></i>
+            </div>
+            <h2 style="font-size:1.1rem;">4. Third-Party Services</h2>
+          </div>
+          <p style="font-size:.8rem;margin-bottom:.875rem;">This site integrates the following third-party services which have their own privacy policies:</p>
+          <div style="display:flex;flex-direction:column;gap:.625rem;">
+            <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:.875rem 1.125rem;display:flex;align-items:flex-start;gap:.75rem;">
+              <div style="width:1.75rem;height:1.75rem;background:var(--primary-dim);border-radius:.375rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem;">
+                <i data-lucide="calendar" style="width:.875rem;height:.875rem;color:var(--primary);"></i>
+              </div>
+              <div>
+                <p style="font-size:.8rem;font-weight:600;color:var(--text);margin-bottom:.25rem;">Calendly</p>
+                <p style="font-size:.775rem;color:var(--text-muted);">Used for scheduling consultations. When you book through Calendly, their platform collects your name, email, and scheduling preferences. Policy: calendly.com/legal/privacy-notice</p>
+              </div>
+            </div>
+            <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:.875rem 1.125rem;display:flex;align-items:flex-start;gap:.75rem;">
+              <div style="width:1.75rem;height:1.75rem;background:var(--primary-dim);border-radius:.375rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem;">
+                <i data-lucide="send" style="width:.875rem;height:.875rem;color:var(--primary);"></i>
+              </div>
+              <div>
+                <p style="font-size:.8rem;font-weight:600;color:var(--text);margin-bottom:.25rem;">Formspree</p>
+                <p style="font-size:.775rem;color:var(--text-muted);">Used to process contact form submissions. Your form data is transmitted securely to Formspree and then forwarded to our email. Policy: formspree.io/legal/privacy-policy</p>
+              </div>
+            </div>
+            <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:.875rem 1.125rem;display:flex;align-items:flex-start;gap:.75rem;">
+              <div style="width:1.75rem;height:1.75rem;background:var(--primary-dim);border-radius:.375rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem;">
+                <i data-lucide="github" style="width:.875rem;height:.875rem;color:var(--primary);"></i>
+              </div>
+              <div>
+                <p style="font-size:.8rem;font-weight:600;color:var(--text);margin-bottom:.25rem;">GitHub Pages</p>
+                <p style="font-size:.775rem;color:var(--text-muted);">This website is hosted on GitHub Pages. GitHub may log IP addresses and standard server request data. Policy: docs.github.com/en/site-policy/privacy-policies</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 5: Data Retention -->
+        <div style="margin-bottom:2.5rem;" class="reveal">
+          <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1rem;">
+            <div style="width:2.25rem;height:2.25rem;background:var(--primary-dim);border-radius:.5rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <i data-lucide="clock" style="width:1rem;height:1rem;color:var(--primary);"></i>
+            </div>
+            <h2 style="font-size:1.1rem;">5. Data Retention &amp; Your Rights</h2>
+          </div>
+          <p style="font-size:.8rem;margin-bottom:.875rem;">We retain your information only for as long as necessary to fulfill the purposes described in this policy or as required by law. Contact form submissions are kept for up to 2 years for business records.</p>
+          <p style="font-size:.8rem;margin-bottom:.875rem;">You have the right to:</p>
+          <div class="check-list">
+            <div class="check-item"><i data-lucide="check-circle-2"></i><span style="font-size:.8rem;">Request a copy of the personal data we hold about you</span></div>
+            <div class="check-item"><i data-lucide="check-circle-2"></i><span style="font-size:.8rem;">Request correction of inaccurate or incomplete data</span></div>
+            <div class="check-item"><i data-lucide="check-circle-2"></i><span style="font-size:.8rem;">Request deletion of your personal data (subject to legal obligations)</span></div>
+            <div class="check-item"><i data-lucide="check-circle-2"></i><span style="font-size:.8rem;">Withdraw consent for future communications at any time</span></div>
+          </div>
+        </div>
+
+        <!-- Section 6: Contact -->
+        <div style="margin-bottom:2.5rem;" class="reveal">
+          <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1rem;">
+            <div style="width:2.25rem;height:2.25rem;background:var(--primary-dim);border-radius:.5rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <i data-lucide="mail" style="width:1rem;height:1rem;color:var(--primary);"></i>
+            </div>
+            <h2 style="font-size:1.1rem;">6. Contact &amp; Updates</h2>
+          </div>
+          <p style="font-size:.8rem;margin-bottom:.875rem;">If you have questions, concerns, or requests regarding this Privacy Policy or your personal data, please contact us:</p>
+          <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.5rem;">
+            <p style="font-size:.8rem;"><strong style="color:var(--text);">Emmanuel Oyemosu — InsightSerenity</strong></p>
+            <p style="font-size:.8rem;">Email: <a href="mailto:emmanuel.ao@outlook.com" style="color:var(--primary);">emmanuel.ao@outlook.com</a></p>
+            <p style="font-size:.8rem;">Phone: <a href="tel:+13463839529" style="color:var(--primary);">+1 (346) 383-9529</a></p>
+          </div>
+          <p style="font-size:.775rem;color:var(--text-muted);margin-top:.875rem;">We reserve the right to update this Privacy Policy at any time. Changes will be posted on this page with a revised "Last updated" date. Your continued use of the site after any changes constitutes acceptance of the updated policy.</p>
+        </div>
+
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer style="background:#050505;border-top:1px solid #1f1f1f;">
-    <div class="max-w-7xl mx-auto px-4 py-12 flex flex-col md:flex-row items-center justify-between gap-6">
-      <a href="/" class="flex items-center gap-2.5">
-        <img src="/assets/img/favicon_io/android-chrome-192x192.png" alt="Insightserenity" class="w-8 h-8 rounded-lg">
-        <span class="font-display font-bold"><span style="color:#ffc451">Insight</span><span class="brand-serenity">serenity</span></span>
-      </a>
-      <p class="text-gray-600 text-sm">© 2025 Insightserenity. All rights reserved.</p>
-      <div class="flex items-center gap-4">
-        <a href="/" class="text-gray-600 hover:text-gold-500 text-sm transition-colors">Home</a>
-        <a href="/privacy.html" class="text-gray-600 hover:text-gold-500 text-sm transition-colors">Privacy</a>
-        <a href="/terms.html" class="text-gray-600 hover:text-gold-500 text-sm transition-colors">Terms</a>
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="/index.html" class="nav-logo" style="margin-bottom:.875rem;display:inline-flex;">
+            <img src="/assets/img/favicon_io/android-chrome-192x192.png" alt="InsightSerenity" style="width:2rem;height:2rem;border-radius:0.5rem;">
+          </a>
+          <p class="footer-brand-desc">Expert consulting in Data Science, Software Engineering, AI/ML — plus Life Literacy and Bible-Based Coaching. Transforming data, technology, and lives.</p>
+          <div class="footer-socials">
+            <a href="https://www.linkedin.com/in/emmanuel-oyemosu/" target="_blank" class="social-btn" aria-label="LinkedIn"><i data-lucide="linkedin" style="width:14px;height:14px;"></i></a>
+            <a href="https://github.com/EOlaw" target="_blank" class="social-btn" aria-label="GitHub"><i data-lucide="github" style="width:14px;height:14px;"></i></a>
+            <a href="https://www.instagram.com/e_olawalee/" target="_blank" class="social-btn" aria-label="Instagram"><i data-lucide="instagram" style="width:14px;height:14px;"></i></a>
+            <a href="mailto:emmanuel.ao@outlook.com" class="social-btn" aria-label="Email"><i data-lucide="mail" style="width:14px;height:14px;"></i></a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">Navigation</div>
+          <div class="footer-links">
+            <a href="/index.html">Home</a>
+            <a href="/about.html">About</a>
+            <a href="/services.html">Services</a>
+            <a href="/consultation.html">Book Consultation</a>
+            <a href="/privacy.html">Privacy Policy</a>
+            <a href="/terms.html">Terms of Service</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">Technical Services</div>
+          <div class="footer-links">
+            <a href="/services.html#data-science">Data Science &amp; Analytics</a>
+            <a href="/services.html#fullstack">Full-Stack Development</a>
+            <a href="/services.html#ai-ml">AI &amp; Machine Learning</a>
+            <a href="/services.html#architecture">System Architecture</a>
+            <a href="/services.html#ecommerce">eCommerce Solutions</a>
+            <a href="/services.html#consulting">Technical Consulting</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">Coaching Services</div>
+          <div class="footer-links">
+            <a href="/services.html#life-coaching">Life Literacy Coaching</a>
+            <a href="/services.html#bible-coaching">Bible-Based Coaching</a>
+          </div>
+          <div class="footer-heading" style="margin-top:1.5rem;">Contact</div>
+          <div class="footer-links">
+            <a href="mailto:emmanuel.ao@outlook.com">emmanuel.ao@outlook.com</a>
+            <a href="tel:+13463839529">+1 (346) 383-9529</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p style="color:var(--text-muted);">© 2025 InsightSerenity. All rights reserved.</p>
+        <div style="display:flex;align-items:center;gap:.375rem;font-size:.75rem;color:var(--text-muted);">
+          <i data-lucide="map-pin" style="width:12px;height:12px;color:var(--primary);"></i>
+          Available Worldwide · Remote Consulting
+        </div>
+        <div style="display:flex;gap:1rem;">
+          <a href="/privacy.html" style="font-size:.75rem;color:var(--text-muted);">Privacy</a>
+          <a href="/terms.html" style="font-size:.75rem;color:var(--text-muted);">Terms</a>
+        </div>
       </div>
     </div>
   </footer>
 
+  <!-- FLOATING ACTION BUTTON -->
+  <div class="fab-container" id="fab-container">
+    <div class="fab-actions" id="fab-actions">
+      <a href="/scripture/" class="fab-action">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        Scripture
+      </a>
+      <a href="/consultation.html" class="fab-action">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Book Call
+      </a>
+      <a href="mailto:emmanuel.ao@outlook.com" class="fab-action">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Email Me
+      </a>
+    </div>
+    <button class="fab-btn" id="fab-btn" aria-label="Quick actions">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    </button>
+  </div>
+
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <script src="/assets/js/main.js"></script>
-  <script>
-    // Initialize Lucide icons
-    if (typeof lucide !== 'undefined') lucide.createIcons();
-
-    // Navbar scroll effect
-    var navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', function () {
-      if (window.scrollY > 20) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
-      }
-    });
-
-    // Mobile menu toggle
-    var mobileToggle = document.getElementById('mobile-toggle');
-    var mobileMenu = document.getElementById('mobile-menu');
-    if (mobileToggle && mobileMenu) {
-      mobileToggle.addEventListener('click', function () {
-        mobileMenu.classList.toggle('hidden');
-      });
-    }
-
-    // Active TOC highlight on scroll
-    (function () {
-      var sections = document.querySelectorAll('.policy-section');
-      var tocLinks = document.querySelectorAll('#toc .toc-link');
-
-      function updateActiveToc() {
-        var scrollY = window.scrollY + 120;
-        var currentId = '';
-        sections.forEach(function (section) {
-          if (section.offsetTop <= scrollY) {
-            currentId = section.id;
-          }
-        });
-        tocLinks.forEach(function (link) {
-          link.classList.remove('active');
-          if (link.getAttribute('href') === '#' + currentId) {
-            link.classList.add('active');
-          }
-        });
-      }
-
-      window.addEventListener('scroll', updateActiveToc, { passive: true });
-      updateActiveToc();
-    })();
-  </script>
 </body>
 </html>

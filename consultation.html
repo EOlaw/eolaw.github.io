@@ -3,613 +3,355 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Insightserenity | Book a Consultation</title>
-  <meta name="description" content="Schedule a free 30-minute discovery call with Emmanuel Oyemosu — Data Scientist & Software Engineer. No commitment, just clarity on your project.">
+  <title>Book a Consultation | InsightSerenity</title>
+  <meta name="description" content="Book a free 30-minute consultation with Emmanuel Oyemosu. Discuss your data, software, AI, or coaching needs and get a clear plan of action.">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon_io/favicon-32x32.png">
   <link rel="apple-touch-icon" href="/assets/img/favicon_io/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/img/favicon_io/site.webmanifest">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            gold: { 300:'#ffe08a', 400:'#ffd27f', 500:'#ffc451', 600:'#e6b048', 700:'#cc9c3f' },
-            dark: { 950:'#050505', 900:'#0a0a0a', 800:'#111111', 700:'#1a1a1a', 600:'#222222', 500:'#2a2a2a', 400:'#333333' }
+            gold: { 300:'#ffe08a',400:'#ffd27f',500:'#ffc451',600:'#e6b048',700:'#cc9c3f' }
           },
           fontFamily: { sans:['Inter','sans-serif'], display:['Space Grotesk','sans-serif'] }
         }
       }
     }
   </script>
-  <link rel="stylesheet" href="/assets/css/business.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 </head>
-<body style="background:#0a0a0a;color:#fff;">
+<body>
 
-<!-- ===================== NAVBAR ===================== -->
-<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 py-5 transition-all duration-300">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between">
-      <a href="/" class="flex items-center gap-2.5">
-        <img src="/assets/img/favicon_io/android-chrome-192x192.png" alt="Insightserenity" class="w-9 h-9 rounded-xl">
-        <span class="font-display font-bold text-lg"><span style="color:#ffc451">Insight</span><span class="brand-serenity">serenity</span></span>
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="/index.html" class="nav-logo">
+          <img src="/assets/img/favicon_io/android-chrome-192x192.png" alt="InsightSerenity" style="width:2rem;height:2rem;border-radius:0.5rem;">
+          <span>Insight<span class="gold">Serenity</span></span>
+        </a>
+        <div class="nav-links">
+          <a href="/index.html" class="nav-link">Home</a>
+          <a href="/about.html" class="nav-link">About</a>
+          <a href="/services.html" class="nav-link">Services</a>
+          <a href="/consultation.html" class="nav-link">Consultation</a>
+          <a href="/scripture/" class="nav-link">Scripture</a>
+        </div>
+        <div class="nav-actions">
+          <a href="tel:+13463839529" class="nav-phone hidden lg:flex">
+            <i data-lucide="phone" style="width:14px;height:14px;"></i>
+            <span>+1 (346) 383-9529</span>
+          </a>
+          <button class="theme-toggle" aria-label="Toggle theme"></button>
+          <a href="/consultation.html" class="btn-book">Book Consultation</a>
+        </div>
+        <button class="mobile-toggle" id="mobile-toggle" aria-expanded="false">
+          <i data-lucide="menu" style="width:18px;height:18px;"></i>
+        </button>
+      </div>
+      <div class="mobile-menu" id="mobile-menu">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/about.html" class="nav-link">About</a>
+        <a href="/services.html" class="nav-link">Services</a>
+        <a href="/consultation.html" class="nav-link">Consultation</a>
+        <a href="/scripture/" class="nav-link">Scripture</a>
+        <a href="/consultation.html" class="btn btn-primary" style="margin-top:.5rem;">Book Consultation</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="container">
+      <div class="reveal">
+        <div class="avail-badge" style="margin-bottom:1rem;display:inline-flex;">
+          <span class="status-dot"></span>
+          Currently Accepting New Clients
+        </div>
+        <h1>Book a Free Consultation</h1>
+        <p>Pick a time that works for you. We'll spend 30 minutes exploring your goals and how I can help — no pitch, no pressure.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT: CALENDLY + SIDEBAR -->
+  <section class="section">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 380px;gap:2.5rem;align-items:start;" class="lg:grid md:block">
+
+        <!-- LEFT: CALENDLY EMBED -->
+        <div class="reveal-left">
+          <div style="margin-bottom:1rem;">
+            <div class="badge" style="margin-bottom:.625rem;">Schedule Online</div>
+            <h2 style="font-size:1.25rem;margin-bottom:.375rem;">Pick a Time That Works</h2>
+            <p style="font-size:.8rem;">Select a date and time below. You'll receive a confirmation email with a video call link.</p>
+          </div>
+          <!-- Calendly inline widget -->
+          <div class="calendly-inline-widget" data-url="https://calendly.com/emmanuel-ao?hide_gdpr_banner=1&primary_color=ffc451" style="min-width:320px;height:700px;"></div>
+          <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+          <p style="font-size:.7rem;color:var(--text-soft);margin-top:.625rem;text-align:center;">
+            <i data-lucide="lock" style="width:11px;height:11px;display:inline;vertical-align:middle;"></i>
+            Secure booking powered by Calendly · Your data is protected
+          </p>
+        </div>
+
+        <!-- RIGHT: SIDEBAR -->
+        <div class="reveal-right" style="display:flex;flex-direction:column;gap:1.25rem;">
+
+          <!-- Contact info cards -->
+          <div>
+            <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:.875rem;">Contact Info</div>
+            <div style="display:flex;flex-direction:column;gap:.75rem;">
+              <a href="mailto:emmanuel.ao@outlook.com" class="contact-method" style="text-decoration:none;">
+                <div class="cm-icon"><i data-lucide="mail"></i></div>
+                <h3>Email</h3>
+                <p>emmanuel.ao@outlook.com</p>
+              </a>
+              <a href="tel:+13463839529" class="contact-method" style="text-decoration:none;">
+                <div class="cm-icon"><i data-lucide="phone"></i></div>
+                <h3>Phone</h3>
+                <p>+1 (346) 383-9529</p>
+              </a>
+              <div class="contact-method" style="cursor:default;">
+                <div class="cm-icon"><i data-lucide="clock"></i></div>
+                <h3>Response Time</h3>
+                <p>Within 24 hours · Mon–Sat</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pricing table -->
+          <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.375rem;">
+            <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:.875rem;">Pricing Overview</div>
+            <div style="display:flex;flex-direction:column;gap:.5rem;">
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid var(--border);">
+                <span style="font-size:.8rem;color:var(--text);">Math/Stats Tutoring</span>
+                <span style="font-size:.8rem;font-weight:700;color:var(--primary);">$50–$75/hr</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid var(--border);">
+                <span style="font-size:.8rem;color:var(--text);">Data Analysis (one-off)</span>
+                <span style="font-size:.8rem;font-weight:700;color:var(--primary);">$150–$500</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid var(--border);">
+                <span style="font-size:.8rem;color:var(--text);">Life Coaching (1:1)</span>
+                <span style="font-size:.8rem;font-weight:700;color:var(--primary);">$75–$125/session</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid var(--border);">
+                <span style="font-size:.8rem;color:var(--text);">Bible Coaching (group)</span>
+                <span style="font-size:.8rem;font-weight:700;color:var(--primary);">$25–$40/person</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;">
+                <span style="font-size:.8rem;color:var(--text);">Business Analytics Audit</span>
+                <span style="font-size:.8rem;font-weight:700;color:var(--primary);">$300–$800</span>
+              </div>
+            </div>
+            <p style="font-size:.7rem;margin-top:.75rem;color:var(--text-soft);">Custom projects quoted individually. Free 30-min discovery call for all new clients.</p>
+          </div>
+
+          <!-- What to expect -->
+          <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.375rem;">
+            <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:.875rem;">What to Expect</div>
+            <div class="check-list">
+              <div class="check-item"><i data-lucide="check-circle-2"></i><span>Confirmation email with video call link immediately after booking</span></div>
+              <div class="check-item"><i data-lucide="check-circle-2"></i><span>30-minute focused conversation about your goals and challenges</span></div>
+              <div class="check-item"><i data-lucide="check-circle-2"></i><span>Honest assessment of how I can (or can't) help</span></div>
+              <div class="check-item"><i data-lucide="check-circle-2"></i><span>Clear outline of next steps with no pressure to commit</span></div>
+              <div class="check-item"><i data-lucide="check-circle-2"></i><span>Follow-up email with proposal within 48 hours if applicable</span></div>
+            </div>
+          </div>
+
+          <!-- Social links -->
+          <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.375rem;">
+            <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:.875rem;">Connect Online</div>
+            <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+              <a href="https://www.linkedin.com/in/emmanuel-oyemosu/" target="_blank" class="btn btn-ghost btn-sm">
+                <i data-lucide="linkedin" style="width:13px;height:13px;"></i> LinkedIn
+              </a>
+              <a href="https://github.com/EOlaw" target="_blank" class="btn btn-ghost btn-sm">
+                <i data-lucide="github" style="width:13px;height:13px;"></i> GitHub
+              </a>
+              <a href="https://www.instagram.com/e_olawalee/" target="_blank" class="btn btn-ghost btn-sm">
+                <i data-lucide="instagram" style="width:13px;height:13px;"></i> Instagram
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT FORM -->
+  <section id="contact" class="section section-alt">
+    <div class="container">
+      <div style="max-width:680px;margin:0 auto;">
+        <div class="section-header reveal" style="text-align:left;margin-bottom:2rem;">
+          <div class="badge" style="margin-bottom:.75rem;">Prefer to Write?</div>
+          <h2>Send a Message</h2>
+          <p>Not ready to schedule a call? Fill in the form below and I'll respond within 24 hours.</p>
+        </div>
+        <form id="contact-form" data-formspree="YOUR_FORMSPREE_ID" class="reveal" novalidate>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="form-group">
+              <label class="form-label" for="name">Full Name <span style="color:var(--primary);">*</span></label>
+              <input class="form-input" type="text" id="name" name="name" placeholder="Emmanuel Oyemosu" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="email">Email Address <span style="color:var(--primary);">*</span></label>
+              <input class="form-input" type="email" id="email" name="email" placeholder="you@example.com" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="phone">Phone Number <span style="color:var(--text-soft);font-weight:400;">(optional)</span></label>
+            <input class="form-input" type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="service">Service of Interest <span style="color:var(--primary);">*</span></label>
+            <select class="form-select" id="service" name="service" required>
+              <option value="" disabled selected>Select a service...</option>
+              <option value="data-science">Data Science &amp; Analytics</option>
+              <option value="fullstack">Full-Stack Development</option>
+              <option value="ai-ml">AI &amp; Machine Learning</option>
+              <option value="architecture">System Architecture</option>
+              <option value="ecommerce">eCommerce Solutions</option>
+              <option value="consulting">Technical Consulting</option>
+              <option value="life-coaching">Life Literacy Coaching</option>
+              <option value="bible-coaching">Bible-Based Coaching</option>
+              <option value="other">Other / Not Sure Yet</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="message">Your Message <span style="color:var(--primary);">*</span></label>
+            <textarea class="form-textarea" id="message" name="message" rows="5" placeholder="Tell me about your project, challenge, or what you're hoping to achieve..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg" style="width:100%;justify-content:center;">
+            <i data-lucide="send" style="width:16px;height:16px;"></i>
+            Send Message
+          </button>
+          <p style="font-size:.7rem;color:var(--text-soft);text-align:center;margin-top:.75rem;">
+            <i data-lucide="lock" style="width:11px;height:11px;display:inline;vertical-align:middle;"></i>
+            Your information is secure and will never be shared with third parties.
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner reveal">
+        <div class="cta-orb-1"></div>
+        <div class="cta-orb-2"></div>
+        <div class="badge" style="background:rgba(0,0,0,0.1);border-color:rgba(0,0,0,0.2);color:#000;margin-bottom:1rem;">Still Exploring?</div>
+        <h2>Not Sure Where to Start?</h2>
+        <p>Browse all 8 services to find the right fit, or jump straight into a free discovery call and we'll figure it out together.</p>
+        <div style="display:flex;gap:.875rem;justify-content:center;flex-wrap:wrap;">
+          <button class="btn btn-dark btn-lg" onclick="openCalendly('https://calendly.com/emmanuel-ao')">
+            <i data-lucide="calendar" style="width:16px;height:16px;"></i>
+            Book Now
+          </button>
+          <a href="/services.html" class="btn btn-clear btn-lg">
+            See All Services
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="/index.html" class="nav-logo" style="margin-bottom:.875rem;display:inline-flex;">
+            <img src="/assets/img/favicon_io/android-chrome-192x192.png" alt="InsightSerenity" style="width:2rem;height:2rem;border-radius:0.5rem;">
+          </a>
+          <p class="footer-brand-desc">Expert consulting in Data Science, Software Engineering, AI/ML — plus Life Literacy and Bible-Based Coaching. Transforming data, technology, and lives.</p>
+          <div class="footer-socials">
+            <a href="https://www.linkedin.com/in/emmanuel-oyemosu/" target="_blank" class="social-btn" aria-label="LinkedIn"><i data-lucide="linkedin" style="width:14px;height:14px;"></i></a>
+            <a href="https://github.com/EOlaw" target="_blank" class="social-btn" aria-label="GitHub"><i data-lucide="github" style="width:14px;height:14px;"></i></a>
+            <a href="https://www.instagram.com/e_olawalee/" target="_blank" class="social-btn" aria-label="Instagram"><i data-lucide="instagram" style="width:14px;height:14px;"></i></a>
+            <a href="mailto:emmanuel.ao@outlook.com" class="social-btn" aria-label="Email"><i data-lucide="mail" style="width:14px;height:14px;"></i></a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">Navigation</div>
+          <div class="footer-links">
+            <a href="/index.html">Home</a>
+            <a href="/about.html">About</a>
+            <a href="/services.html">Services</a>
+            <a href="/consultation.html">Book Consultation</a>
+            <a href="/privacy.html">Privacy Policy</a>
+            <a href="/terms.html">Terms of Service</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">Technical Services</div>
+          <div class="footer-links">
+            <a href="/services.html#data-science">Data Science &amp; Analytics</a>
+            <a href="/services.html#fullstack">Full-Stack Development</a>
+            <a href="/services.html#ai-ml">AI &amp; Machine Learning</a>
+            <a href="/services.html#architecture">System Architecture</a>
+            <a href="/services.html#ecommerce">eCommerce Solutions</a>
+            <a href="/services.html#consulting">Technical Consulting</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">Coaching Services</div>
+          <div class="footer-links">
+            <a href="/services.html#life-coaching">Life Literacy Coaching</a>
+            <a href="/services.html#bible-coaching">Bible-Based Coaching</a>
+          </div>
+          <div class="footer-heading" style="margin-top:1.5rem;">Contact</div>
+          <div class="footer-links">
+            <a href="mailto:emmanuel.ao@outlook.com">emmanuel.ao@outlook.com</a>
+            <a href="tel:+13463839529">+1 (346) 383-9529</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p style="color:var(--text-muted);">© 2025 InsightSerenity. All rights reserved.</p>
+        <div style="display:flex;align-items:center;gap:.375rem;font-size:.75rem;color:var(--text-muted);">
+          <i data-lucide="map-pin" style="width:12px;height:12px;color:var(--primary);"></i>
+          Available Worldwide · Remote Consulting
+        </div>
+        <div style="display:flex;gap:1rem;">
+          <a href="/privacy.html" style="font-size:.75rem;color:var(--text-muted);">Privacy</a>
+          <a href="/terms.html" style="font-size:.75rem;color:var(--text-muted);">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING ACTION BUTTON -->
+  <div class="fab-container" id="fab-container">
+    <div class="fab-actions" id="fab-actions">
+      <a href="/scripture/" class="fab-action">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        Scripture
       </a>
-      <div class="hidden md:flex items-center gap-1">
-        <a href="/" class="nav-link text-sm font-medium px-4 py-2 rounded-lg text-gray-300 hover:text-gold-500 hover:bg-dark-700 transition-all">Home</a>
-        <a href="/about.html" class="nav-link text-sm font-medium px-4 py-2 rounded-lg text-gray-300 hover:text-gold-500 hover:bg-dark-700 transition-all">About</a>
-        <a href="/services.html" class="nav-link text-sm font-medium px-4 py-2 rounded-lg text-gray-300 hover:text-gold-500 hover:bg-dark-700 transition-all">Services</a>
-        <a href="/consultation.html" class="nav-link text-sm font-medium px-4 py-2 rounded-lg hover:bg-dark-700 transition-all" style="color:#ffc451">Consultation</a>
-      </div>
-      <div class="hidden md:flex items-center gap-4">
-        <a href="tel:+13463839529" class="flex items-center gap-2 text-sm text-gray-400 hover:text-gold-500 transition-colors">
-          <i data-lucide="phone" class="w-4 h-4"></i><span>+1 (346) 383-9529</span>
-        </a>
-        <a href="/consultation.html" style="background:#ffc451;color:#000;font-weight:700;" class="px-5 py-2.5 rounded-xl text-sm transition-all hover:opacity-90">Book Consultation</a>
-      </div>
-      <button id="mobile-toggle" class="md:hidden p-2 rounded-lg text-gray-300 hover:bg-dark-700 transition-colors">
-        <i data-lucide="menu" class="w-5 h-5" id="menu-icon"></i>
-      </button>
+      <a href="/consultation.html" class="fab-action">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Book Call
+      </a>
+      <a href="mailto:emmanuel.ao@outlook.com" class="fab-action">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Email Me
+      </a>
     </div>
-    <div id="mobile-menu" class="hidden md:hidden mt-4 pt-4 border-t border-dark-500 space-y-1 pb-4">
-      <a href="/" class="block text-gray-300 hover:text-gold-500 px-4 py-2.5 rounded-lg hover:bg-dark-700 font-medium">Home</a>
-      <a href="/about.html" class="block text-gray-300 hover:text-gold-500 px-4 py-2.5 rounded-lg hover:bg-dark-700 font-medium">About</a>
-      <a href="/services.html" class="block text-gray-300 hover:text-gold-500 px-4 py-2.5 rounded-lg hover:bg-dark-700 font-medium">Services</a>
-      <a href="/consultation.html" class="block px-4 py-2.5 rounded-lg hover:bg-dark-700 font-medium" style="color:#ffc451">Consultation</a>
-      <div class="pt-3 mt-3 border-t border-dark-500">
-        <a href="/consultation.html" style="background:#ffc451;color:#000;font-weight:700;" class="block px-4 py-3 rounded-xl text-center text-sm">Book Consultation</a>
-      </div>
-    </div>
-  </div>
-</nav>
-
-<!-- ===================== PAGE HERO ===================== -->
-<section class="pt-36 pb-16 relative overflow-hidden" style="background:#0a0a0a;">
-  <div class="orb orb-gold" style="width:400px;height:400px;top:-150px;right:-100px;opacity:0.5;"></div>
-  <div class="orb orb-gold-dim" style="width:250px;height:250px;bottom:0;left:-80px;"></div>
-
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-    <div class="text-center max-w-2xl mx-auto">
-      <div class="reveal" data-delay="0">
-        <span class="section-badge">
-          <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
-          Book a Consultation
-        </span>
-      </div>
-      <h1 class="font-display font-bold text-5xl md:text-6xl leading-tight mt-4 reveal" data-delay="100">
-        <span class="text-white">Let's Discuss Your</span><br>
-        <span style="color:#ffc451;" class="glow-text">Project Goals</span>
-      </h1>
-      <p class="mt-6 text-gray-400 text-lg leading-relaxed reveal" data-delay="200">
-        Schedule a free 30-minute discovery call — no commitment, just clarity on what's possible
-        and whether we're the right fit for your project.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== CONTACT QUICK-ACCESS ===================== -->
-<section style="background:#111111;" class="py-8">
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <!-- Phone -->
-      <div class="contact-method reveal" data-delay="0">
-        <div style="background:rgba(255,196,81,0.1);border-radius:.875rem;width:3rem;height:3rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">
-          <i data-lucide="phone" style="width:1.5rem;height:1.5rem;color:#ffc451;"></i>
-        </div>
-        <h3 class="font-display font-bold text-white mb-1">Call Directly</h3>
-        <p class="font-semibold mb-1" style="color:#ffc451;">+1 (346) 383-9529</p>
-        <p class="text-gray-500 text-xs mb-4">Available Mon–Fri, 9AM–6PM EST</p>
-        <button id="contact-phone-btn" style="background:none;border:1.5px solid #2a2a2a;color:#ccc;padding:.625rem 1.25rem;border-radius:.75rem;cursor:pointer;font-family:Inter,sans-serif;font-size:.875rem;font-weight:600;width:100%;transition:all 0.2s;" onmouseover="this.style.borderColor='#ffc451';this.style.color='#ffc451'" onmouseout="this.style.borderColor='#2a2a2a';this.style.color='#ccc'">
-          Call Now
-        </button>
-      </div>
-
-      <!-- Email -->
-      <div class="contact-method reveal" data-delay="100">
-        <div style="background:rgba(255,196,81,0.1);border-radius:.875rem;width:3rem;height:3rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">
-          <i data-lucide="mail" style="width:1.5rem;height:1.5rem;color:#ffc451;"></i>
-        </div>
-        <h3 class="font-display font-bold text-white mb-1">Send an Email</h3>
-        <p class="font-semibold mb-1" style="color:#ffc451;font-size:.875rem;">emmanuel.ao@outlook.com</p>
-        <p class="text-gray-500 text-xs mb-4">Typically responds within 24 hours</p>
-        <button id="contact-email-btn" style="background:none;border:1.5px solid #2a2a2a;color:#ccc;padding:.625rem 1.25rem;border-radius:.75rem;cursor:pointer;font-family:Inter,sans-serif;font-size:.875rem;font-weight:600;width:100%;transition:all 0.2s;" onmouseover="this.style.borderColor='#ffc451';this.style.color='#ffc451'" onmouseout="this.style.borderColor='#2a2a2a';this.style.color='#ccc'">
-          Send Email
-        </button>
-      </div>
-
-      <!-- WhatsApp -->
-      <div class="contact-method reveal" data-delay="200">
-        <div style="background:rgba(37,211,102,0.1);border-radius:.875rem;width:3rem;height:3rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">
-          <i data-lucide="message-circle" style="width:1.5rem;height:1.5rem;color:#25D366;"></i>
-        </div>
-        <h3 class="font-display font-bold text-white mb-1">WhatsApp Message</h3>
-        <p class="font-semibold mb-1" style="color:#25D366;">Quick response via WhatsApp</p>
-        <p class="text-gray-500 text-xs mb-4">Usually responds within 2 hours</p>
-        <button id="contact-wa-btn" style="background:none;border:1.5px solid #1a4d2b;color:#25D366;padding:.625rem 1.25rem;border-radius:.75rem;cursor:pointer;font-family:Inter,sans-serif;font-size:.875rem;font-weight:600;width:100%;transition:all 0.2s;" onmouseover="this.style.background='rgba(37,211,102,0.1)'" onmouseout="this.style.background='none'">
-          Message on WhatsApp
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== BOOKING FORM ===================== -->
-<section class="py-16" style="background:#0a0a0a;">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid lg:grid-cols-5 gap-12 items-start">
-
-      <!-- LEFT: Form column -->
-      <div class="lg:col-span-3 reveal-left">
-        <div id="booking-form" style="background:#111;border:1px solid #1f1f1f;border-radius:1.5rem;padding:2rem;">
-          <h2 class="font-display font-bold text-2xl text-white mb-6">Book Your Consultation</h2>
-
-          <!-- Step progress -->
-          <div class="flex items-center mb-2">
-            <div class="step-dot active">1</div>
-            <div class="step-line"></div>
-            <div class="step-dot">2</div>
-            <div class="step-line"></div>
-            <div class="step-dot">3</div>
-          </div>
-
-          <!-- Progress bar -->
-          <div style="height:3px;background:#1a1a1a;border-radius:999px;margin-bottom:1rem;overflow:hidden;">
-            <div id="form-progress" style="height:100%;background:#ffc451;width:0%;border-radius:999px;transition:width 0.4s ease;"></div>
-          </div>
-
-          <p id="step-label" class="text-gray-500 text-sm mb-8">Step 1 of 3 — Select Service</p>
-
-          <!-- STEP 1 -->
-          <div id="step-1" class="form-step">
-            <h3 class="font-display font-semibold text-lg text-white mb-6">What do you need help with?</h3>
-            <div class="space-y-5">
-              <div>
-                <label class="block text-sm font-medium text-gray-300 mb-2">Service Type <span style="color:#ffc451">*</span></label>
-                <select id="service-type" class="form-input">
-                  <option value="">Select a service...</option>
-                  <option value="Data Science &amp; Analytics">Data Science &amp; Analytics</option>
-                  <option value="Full-Stack Development">Full-Stack Development</option>
-                  <option value="AI &amp; Machine Learning">AI &amp; Machine Learning</option>
-                  <option value="System Architecture">System Architecture</option>
-                  <option value="eCommerce Development">eCommerce Development</option>
-                  <option value="Technical Consulting">Technical Consulting</option>
-                  <option value="Other">Other</option>
-                </select>
-                <span id="service-type-error" class="field-error"></span>
-              </div>
-
-              <div>
-                <label class="block text-sm font-medium text-gray-300 mb-2">Consultation Type <span style="color:#ffc451">*</span></label>
-                <select id="consultation-type" class="form-input">
-                  <option value="">Select consultation type...</option>
-                  <option value="Free 30-min Discovery Call">Free 30-min Discovery Call</option>
-                  <option value="Paid 1-Hour Deep Dive ($150)">Paid 1-Hour Deep Dive ($150)</option>
-                  <option value="Project Scoping Session">Project Scoping Session</option>
-                  <option value="Ongoing Monthly Retainer">Ongoing Monthly Retainer</option>
-                  <option value="One-time Code Review">One-time Code Review</option>
-                  <option value="Strategy Session">Strategy Session</option>
-                </select>
-                <span id="consultation-type-error" class="field-error"></span>
-              </div>
-
-              <div>
-                <label class="block text-sm font-medium text-gray-300 mb-2">Preferred Date</label>
-                <input type="date" id="preferred-date" class="form-input" style="color-scheme:dark;">
-              </div>
-
-              <div>
-                <label class="block text-sm font-medium text-gray-300 mb-2">Budget Range</label>
-                <select id="budget" class="form-input">
-                  <option value="">Select a budget range...</option>
-                  <option value="Under $500">Under $500</option>
-                  <option value="$500 – $2,000">$500 – $2,000</option>
-                  <option value="$2,000 – $5,000">$2,000 – $5,000</option>
-                  <option value="$5,000 – $10,000">$5,000 – $10,000</option>
-                  <option value="$10,000+">$10,000+</option>
-                  <option value="Let's discuss">Let's discuss</option>
-                </select>
-              </div>
-
-              <div>
-                <label class="block text-sm font-medium text-gray-300 mb-2">Your Timezone</label>
-                <select id="timezone" class="form-input">
-                  <option value="">Select your timezone...</option>
-                  <option value="EST (UTC-5)">EST (UTC-5)</option>
-                  <option value="CST (UTC-6)">CST (UTC-6)</option>
-                  <option value="MST (UTC-7)">MST (UTC-7)</option>
-                  <option value="PST (UTC-8)">PST (UTC-8)</option>
-                  <option value="GMT (UTC+0)">GMT (UTC+0)</option>
-                  <option value="CET (UTC+1)">CET (UTC+1)</option>
-                  <option value="IST (UTC+5:30)">IST (UTC+5:30)</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <!-- STEP 2 -->
-          <div id="step-2" class="form-step hidden">
-            <h3 class="font-display font-semibold text-lg text-white mb-6">Tell me about yourself</h3>
-            <div class="space-y-5">
-              <div>
-                <label class="block text-sm font-medium text-gray-300 mb-2">Full Name <span style="color:#ffc451">*</span></label>
-                <input type="text" id="client-name" class="form-input" placeholder="John Smith" autocomplete="name">
-                <span id="name-error" class="field-error"></span>
-              </div>
-
-              <div>
-                <label class="block text-sm font-medium text-gray-300 mb-2">Email Address <span style="color:#ffc451">*</span></label>
-                <input type="email" id="client-email" class="form-input" placeholder="john@company.com" autocomplete="email">
-                <span id="email-error" class="field-error"></span>
-              </div>
-
-              <div>
-                <label class="block text-sm font-medium text-gray-300 mb-2">Phone Number</label>
-                <input type="tel" id="client-phone" class="form-input" placeholder="+1 (555) 000-0000" autocomplete="tel">
-              </div>
-
-              <div>
-                <label class="block text-sm font-medium text-gray-300 mb-2">Company / Organization</label>
-                <input type="text" id="client-company" class="form-input" placeholder="Your Company (optional)" autocomplete="organization">
-              </div>
-
-              <div>
-                <label class="block text-sm font-medium text-gray-300 mb-2">Preferred Contact Method</label>
-                <select id="preferred-contact" class="form-input">
-                  <option value="Email">Email</option>
-                  <option value="Phone">Phone</option>
-                  <option value="WhatsApp">WhatsApp</option>
-                </select>
-              </div>
-
-              <div>
-                <label class="block text-sm font-medium text-gray-300 mb-2">How did you hear about us?</label>
-                <select id="how-heard" class="form-input">
-                  <option value="">Select an option...</option>
-                  <option value="Google Search">Google Search</option>
-                  <option value="LinkedIn">LinkedIn</option>
-                  <option value="GitHub">GitHub</option>
-                  <option value="Referral from friend">Referral from friend</option>
-                  <option value="Instagram">Instagram</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
-
-              <div>
-                <label class="block text-sm font-medium text-gray-300 mb-2">Project Description <span style="color:#ffc451">*</span></label>
-                <textarea id="client-message" class="form-input" rows="5" placeholder="Describe your project, goals, current challenges, and what success looks like..."></textarea>
-                <span id="message-error" class="field-error"></span>
-              </div>
-            </div>
-          </div>
-
-          <!-- STEP 3 -->
-          <div id="step-3" class="form-step hidden">
-            <h3 class="font-display font-semibold text-lg text-white mb-6">Review Your Request</h3>
-            <div id="review-content" style="background:#0a0a0a;border:1px solid #1f1f1f;border-radius:1rem;padding:1.25rem 1.5rem;margin-bottom:1.5rem;">
-              <!-- Populated by consultation.js -->
-            </div>
-            <button onclick="goToStep(1)" style="background:none;border:none;color:#ffc451;cursor:pointer;font-family:Inter,sans-serif;font-size:.875rem;font-weight:600;padding:0;margin-bottom:1.5rem;display:inline-flex;align-items:center;gap:.375rem;">
-              <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
-              Edit Details
-            </button>
-            <div style="background:#111;border:1px solid #1f1f1f;border-radius:1rem;padding:1rem 1.25rem;display:flex;align-items:start;gap:.875rem;">
-              <i data-lucide="shield-check" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#ffc451;"></i>
-              <p class="text-gray-500 text-sm leading-relaxed">Your information is never shared with third parties. It is used solely to respond to your consultation request and schedule a call.</p>
-            </div>
-          </div>
-
-          <!-- Navigation buttons -->
-          <div class="flex items-center gap-3 mt-8">
-            <button id="prev-btn" class="hidden" style="background:none;border:1.5px solid #2a2a2a;color:#ccc;padding:.875rem 1.75rem;border-radius:.875rem;cursor:pointer;font-family:Inter,sans-serif;font-size:.9375rem;font-weight:600;transition:all 0.2s;display:inline-flex;align-items:center;gap:.5rem;" onmouseover="this.style.borderColor='#ffc451';this.style.color='#ffc451'" onmouseout="this.style.borderColor='#2a2a2a';this.style.color='#ccc'">
-              <i data-lucide="arrow-left" class="w-4 h-4"></i>
-              Previous
-            </button>
-            <button id="next-btn" style="background:#ffc451;color:#000;font-weight:700;padding:.875rem 2rem;border-radius:.875rem;cursor:pointer;font-family:Inter,sans-serif;font-size:.9375rem;border:none;transition:opacity 0.2s;display:inline-flex;align-items:center;gap:.5rem;margin-left:auto;" onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">
-              Continue
-              <i data-lucide="arrow-right" class="w-4 h-4"></i>
-            </button>
-            <button id="submit-btn" class="hidden" style="background:#ffc451;color:#000;font-weight:700;padding:.875rem 2.5rem;border-radius:.875rem;cursor:pointer;font-family:Inter,sans-serif;font-size:1rem;border:none;transition:opacity 0.2s;display:inline-flex;align-items:center;gap:.5rem;margin-left:auto;" onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">
-              <i data-lucide="send" class="w-5 h-5"></i>
-              Submit Request
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- RIGHT: Info panel (sticky) -->
-      <div class="lg:col-span-2 space-y-5 reveal-right lg:sticky lg:top-28">
-
-        <!-- What to Expect -->
-        <div style="background:#111;border:1px solid #1f1f1f;border-radius:1.25rem;padding:1.75rem;">
-          <h3 class="font-display font-bold text-white mb-5 flex items-center gap-2">
-            <i data-lucide="list-checks" class="w-5 h-5" style="color:#ffc451;"></i>
-            What to Expect
-          </h3>
-          <ul class="space-y-3.5">
-            <li class="flex items-start gap-3 text-gray-300 text-sm">
-              <i data-lucide="check-circle" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#ffc451;"></i>
-              Free 30-min discovery call included
-            </li>
-            <li class="flex items-start gap-3 text-gray-300 text-sm">
-              <i data-lucide="check-circle" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#ffc451;"></i>
-              Response within 24 hours guaranteed
-            </li>
-            <li class="flex items-start gap-3 text-gray-300 text-sm">
-              <i data-lucide="check-circle" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#ffc451;"></i>
-              No commitment until you're ready
-            </li>
-            <li class="flex items-start gap-3 text-gray-300 text-sm">
-              <i data-lucide="check-circle" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#ffc451;"></i>
-              Flexible scheduling across time zones
-            </li>
-            <li class="flex items-start gap-3 text-gray-300 text-sm">
-              <i data-lucide="check-circle" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#ffc451;"></i>
-              NDA available upon request
-            </li>
-          </ul>
-        </div>
-
-        <!-- Why EOLAW -->
-        <div style="background:#111;border:1px solid #1f1f1f;border-radius:1.25rem;padding:1.75rem;">
-          <h3 class="font-display font-bold text-white mb-5 flex items-center gap-2">
-            <i data-lucide="award" class="w-5 h-5" style="color:#ffc451;"></i>
-            Why Insightserenity?
-          </h3>
-          <ul class="space-y-3.5">
-            <li class="flex items-start gap-3 text-gray-300 text-sm">
-              <div style="background:rgba(255,196,81,0.1);border-radius:.375rem;padding:.25rem;flex-shrink:0;margin-top:.1rem;">
-                <i data-lucide="briefcase" class="w-3.5 h-3.5" style="color:#ffc451;"></i>
-              </div>
-              5+ years industry experience
-            </li>
-            <li class="flex items-start gap-3 text-gray-300 text-sm">
-              <div style="background:rgba(255,196,81,0.1);border-radius:.375rem;padding:.25rem;flex-shrink:0;margin-top:.1rem;">
-                <i data-lucide="package-check" class="w-3.5 h-3.5" style="color:#ffc451;"></i>
-              </div>
-              50+ projects successfully delivered
-            </li>
-            <li class="flex items-start gap-3 text-gray-300 text-sm">
-              <div style="background:rgba(255,196,81,0.1);border-radius:.375rem;padding:.25rem;flex-shrink:0;margin-top:.1rem;">
-                <i data-lucide="git-merge" class="w-3.5 h-3.5" style="color:#ffc451;"></i>
-              </div>
-              End-to-end technical ownership
-            </li>
-            <li class="flex items-start gap-3 text-gray-300 text-sm">
-              <div style="background:rgba(255,196,81,0.1);border-radius:.375rem;padding:.25rem;flex-shrink:0;margin-top:.1rem;">
-                <i data-lucide="message-square" class="w-3.5 h-3.5" style="color:#ffc451;"></i>
-              </div>
-              Transparent communication always
-            </li>
-          </ul>
-        </div>
-
-        <!-- Contact info -->
-        <div style="background:#111;border:1px solid #1f1f1f;border-radius:1.25rem;padding:1.75rem;">
-          <h3 class="font-display font-bold text-white mb-5 flex items-center gap-2">
-            <i data-lucide="contact" class="w-5 h-5" style="color:#ffc451;"></i>
-            Contact Info
-          </h3>
-          <div class="space-y-4">
-            <div class="flex items-center gap-3">
-              <div style="background:rgba(255,196,81,0.1);border-radius:.5rem;width:2.25rem;height:2.25rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                <i data-lucide="mail" class="w-4 h-4" style="color:#ffc451;"></i>
-              </div>
-              <div>
-                <p class="text-gray-500 text-xs mb-0.5">Email</p>
-                <a href="mailto:emmanuel.ao@outlook.com" class="text-white text-sm font-medium hover:text-gold-500 transition-colors">emmanuel.ao@outlook.com</a>
-              </div>
-            </div>
-            <div class="flex items-center gap-3">
-              <div style="background:rgba(255,196,81,0.1);border-radius:.5rem;width:2.25rem;height:2.25rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                <i data-lucide="phone" class="w-4 h-4" style="color:#ffc451;"></i>
-              </div>
-              <div>
-                <p class="text-gray-500 text-xs mb-0.5">Phone</p>
-                <a href="tel:+13463839529" class="text-white text-sm font-medium hover:text-gold-500 transition-colors">+1 (346) 383-9529</a>
-              </div>
-            </div>
-            <div class="flex items-center gap-3">
-              <div style="background:rgba(255,196,81,0.1);border-radius:.5rem;width:2.25rem;height:2.25rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                <i data-lucide="clock" class="w-4 h-4" style="color:#ffc451;"></i>
-              </div>
-              <div>
-                <p class="text-gray-500 text-xs mb-0.5">Availability</p>
-                <p class="text-white text-sm font-medium">Mon–Fri, 9AM–6PM EST</p>
-                <p class="text-gray-500 text-xs mt-0.5">Remote &amp; Worldwide</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ===================== SUCCESS MODAL ===================== -->
-<div id="success-modal" class="hidden fixed inset-0 z-[9000] flex items-center justify-center p-4" style="background:rgba(0,0,0,0.8);backdrop-filter:blur(8px);">
-  <div style="background:#111;border:1px solid #2a2a2a;border-radius:1.5rem;padding:2rem;max-width:30rem;width:100%;position:relative;">
-    <button onclick="closeSuccessModal()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:#666;cursor:pointer;">
-      <i data-lucide="x" class="w-5 h-5"></i>
-    </button>
-    <!-- Gold checkmark circle -->
-    <div style="width:4rem;height:4rem;background:rgba(255,196,81,0.1);border:2px solid #ffc451;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;">
-      <i data-lucide="check" style="width:2rem;height:2rem;color:#ffc451;"></i>
-    </div>
-    <h3 class="font-display font-bold text-2xl text-white text-center mb-2">Request Received!</h3>
-    <!-- Shown when Web3Forms delivered the email automatically -->
-    <div id="modal-sent-note" class="hidden text-center mb-4 px-3 py-2 rounded-xl" style="background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);">
-      <p class="text-sm" style="color:#4ade80;">&#10003; Your request was emailed to Emmanuel automatically.</p>
-    </div>
-    <p class="text-gray-400 text-center text-sm mb-6">Thank you, <span id="modal-name" class="text-white font-medium"></span>! You can also reach out directly:</p>
-
-    <!-- Email option -->
-    <a id="modal-email-btn" href="#" target="_blank" style="display:flex;align-items:center;gap:.75rem;background:#ffc451;color:#000;font-weight:700;padding:1rem 1.25rem;border-radius:.875rem;margin-bottom:.75rem;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
-      <i data-lucide="mail" class="w-5 h-5 flex-shrink-0"></i>
-      <div>
-        <div style="font-size:.9375rem;">Send via Email</div>
-        <div style="font-size:.8125rem;font-weight:400;opacity:.7;">Opens your email client with form pre-filled</div>
-      </div>
-    </a>
-
-    <!-- WhatsApp option -->
-    <a id="modal-whatsapp-btn" href="#" target="_blank" style="display:flex;align-items:center;gap:.75rem;background:#25D366;color:#fff;font-weight:700;padding:1rem 1.25rem;border-radius:.875rem;margin-bottom:.75rem;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
-      <i data-lucide="message-circle" class="w-5 h-5 flex-shrink-0"></i>
-      <div>
-        <div style="font-size:.9375rem;">Send via WhatsApp</div>
-        <div style="font-size:.8125rem;font-weight:400;opacity:.8;">Quick response — usually within 2 hours</div>
-      </div>
-    </a>
-
-    <!-- Phone option -->
-    <div style="display:flex;align-items:center;gap:.75rem;background:#1a1a1a;border:1px solid #2a2a2a;padding:1rem 1.25rem;border-radius:.875rem;margin-bottom:1.5rem;">
-      <i data-lucide="phone" class="w-5 h-5 flex-shrink-0" style="color:#ffc451;"></i>
-      <div>
-        <div style="color:#fff;font-weight:600;font-size:.9375rem;">Call Directly</div>
-        <div id="modal-phone" style="color:#ffc451;font-size:.9375rem;"></div>
-      </div>
-    </div>
-
-    <button onclick="closeSuccessModal()" style="width:100%;background:none;border:1px solid #2a2a2a;color:#999;padding:.75rem;border-radius:.875rem;cursor:pointer;font-family:Inter,sans-serif;font-size:.875rem;transition:border-color 0.2s;" onmouseover="this.style.borderColor='#ffc451'" onmouseout="this.style.borderColor='#2a2a2a'">
-      Done — Go to Thank You Page
+    <button class="fab-btn" id="fab-btn" aria-label="Quick actions">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
     </button>
   </div>
-</div>
 
-<!-- ===================== FAQ ===================== -->
-<section style="background:#111111;" class="py-16">
-  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-12">
-      <span class="section-badge reveal" data-delay="0">
-        <i data-lucide="help-circle" class="w-3.5 h-3.5"></i>
-        FAQ
-      </span>
-      <h2 class="font-display font-bold text-3xl md:text-4xl text-white mt-4 reveal" data-delay="100">
-        Common Questions
-      </h2>
-    </div>
-
-    <div class="space-y-3">
-      <!-- FAQ 1 -->
-      <div style="background:#0a0a0a;border:1px solid #1f1f1f;border-radius:1rem;overflow:hidden;" class="reveal" data-delay="0">
-        <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left">
-          <span class="font-semibold text-white text-sm">Is the initial consultation really free?</span>
-          <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 flex-shrink-0" style="color:#ffc451"></i>
-        </button>
-        <div class="faq-answer px-6 text-gray-400 text-sm leading-relaxed">
-          <div class="pb-5">
-            Yes. The 30-minute discovery call is completely free. It helps me understand your project and helps you understand
-            if I'm the right fit — no strings attached. You'll leave with clarity regardless of whether we move forward.
-          </div>
-        </div>
-      </div>
-
-      <!-- FAQ 2 -->
-      <div style="background:#0a0a0a;border:1px solid #1f1f1f;border-radius:1rem;overflow:hidden;" class="reveal" data-delay="100">
-        <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left">
-          <span class="font-semibold text-white text-sm">How quickly will you respond to my request?</span>
-          <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 flex-shrink-0" style="color:#ffc451"></i>
-        </button>
-        <div class="faq-answer px-6 text-gray-400 text-sm leading-relaxed">
-          <div class="pb-5">
-            I typically respond within 24 hours. If you choose WhatsApp, usually within 2 hours during business hours
-            (Mon–Fri, 9AM–6PM EST). For urgent inquiries, calling directly is always the fastest option.
-          </div>
-        </div>
-      </div>
-
-      <!-- FAQ 3 -->
-      <div style="background:#0a0a0a;border:1px solid #1f1f1f;border-radius:1rem;overflow:hidden;" class="reveal" data-delay="200">
-        <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left">
-          <span class="font-semibold text-white text-sm">What happens after I submit this form?</span>
-          <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 flex-shrink-0" style="color:#ffc451"></i>
-        </button>
-        <div class="faq-answer px-6 text-gray-400 text-sm leading-relaxed">
-          <div class="pb-5">
-            I'll review your request and reach out to schedule a discovery call. We'll discuss your project in detail and
-            I'll prepare a custom proposal with timeline, approach, and pricing — all tailored to your specific needs.
-          </div>
-        </div>
-      </div>
-
-      <!-- FAQ 4 -->
-      <div style="background:#0a0a0a;border:1px solid #1f1f1f;border-radius:1rem;overflow:hidden;" class="reveal" data-delay="300">
-        <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left">
-          <span class="font-semibold text-white text-sm">Can we have the consultation over Zoom, Google Meet, or phone?</span>
-          <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 flex-shrink-0" style="color:#ffc451"></i>
-        </button>
-        <div class="faq-answer px-6 text-gray-400 text-sm leading-relaxed">
-          <div class="pb-5">
-            Absolutely. I use Zoom, Google Meet, MS Teams, or plain phone calls — whatever works best for you.
-            Just mention your preference when we confirm the call time and I'll send the appropriate invite.
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== FOOTER ===================== -->
-<footer style="background:#050505;border-top:1px solid #1f1f1f;">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-      <div class="lg:col-span-2">
-        <a href="/" class="flex items-center gap-2.5 mb-5">
-          <img src="/assets/img/favicon_io/android-chrome-192x192.png" alt="Insightserenity" class="w-10 h-10 rounded-xl">
-          <span class="font-display font-bold text-xl"><span style="color:#ffc451">Insight</span><span class="brand-serenity">serenity</span></span>
-        </a>
-        <p class="text-gray-500 text-sm leading-relaxed max-w-sm mb-6">Expert consulting in Data Science, Software Engineering, and AI/ML solutions. Transforming complex challenges into measurable business outcomes.</p>
-        <div class="flex items-center gap-3">
-          <a href="https://www.linkedin.com/in/emmanuel-oyemosu/" target="_blank" class="w-10 h-10 rounded-lg flex items-center justify-center text-gray-500 transition-all" style="background:#1a1a1a;border:1px solid #2a2a2a;"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
-          <a href="https://github.com/EOlaw" target="_blank" class="w-10 h-10 rounded-lg flex items-center justify-center text-gray-500 transition-all" style="background:#1a1a1a;border:1px solid #2a2a2a;"><i data-lucide="github" class="w-4 h-4"></i></a>
-          <a href="https://www.instagram.com/e_olawalee/" target="_blank" class="w-10 h-10 rounded-lg flex items-center justify-center text-gray-500 transition-all" style="background:#1a1a1a;border:1px solid #2a2a2a;"><i data-lucide="instagram" class="w-4 h-4"></i></a>
-          <a href="mailto:emmanuel.ao@outlook.com" class="w-10 h-10 rounded-lg flex items-center justify-center text-gray-500 transition-all" style="background:#1a1a1a;border:1px solid #2a2a2a;"><i data-lucide="mail" class="w-4 h-4"></i></a>
-        </div>
-      </div>
-      <div>
-        <h4 class="font-display font-bold text-white mb-5 text-sm uppercase tracking-widest">Navigation</h4>
-        <ul class="space-y-3">
-          <li><a href="/" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Home</a></li>
-          <li><a href="/about.html" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">About</a></li>
-          <li><a href="/services.html" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Services</a></li>
-          <li><a href="/consultation.html" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Book Consultation</a></li>
-          <li><a href="/privacy.html" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Privacy Policy</a></li>
-          <li><a href="/terms.html" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Terms of Service</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="font-display font-bold text-white mb-5 text-sm uppercase tracking-widest">Services</h4>
-        <ul class="space-y-3">
-          <li><a href="/services.html#data-science" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Data Science &amp; Analytics</a></li>
-          <li><a href="/services.html#fullstack" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Full-Stack Development</a></li>
-          <li><a href="/services.html#ai-ml" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">AI &amp; Machine Learning</a></li>
-          <li><a href="/services.html#architecture" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">System Architecture</a></li>
-          <li><a href="/services.html#ecommerce" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">eCommerce Solutions</a></li>
-          <li><a href="/services.html#consulting" class="text-gray-500 hover:text-gold-500 text-sm transition-colors">Technical Consulting</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="mt-12 pt-8 border-t border-dark-500 flex flex-col md:flex-row items-center justify-between gap-4">
-      <p class="text-gray-600 text-sm">© 2025 Insightserenity. All rights reserved.</p>
-      <div class="flex items-center gap-2 text-gray-600 text-sm"><i data-lucide="map-pin" class="w-3.5 h-3.5" style="color:#ffc451"></i><span>Available Worldwide · Remote Consulting</span></div>
-      <div class="flex items-center gap-4">
-        <a href="/privacy.html" class="text-gray-600 hover:text-gold-500 text-sm transition-colors">Privacy</a>
-        <a href="/terms.html" class="text-gray-600 hover:text-gold-500 text-sm transition-colors">Terms</a>
-      </div>
-    </div>
-  </div>
-</footer>
-
-  <!-- SCRIPTURE FAB -->
-  <a href="/scripture/" title="The Word of God — Scripture Community" aria-label="Open Scripture Community"
-     style="position:fixed;bottom:2rem;right:2rem;z-index:9999;width:3.5rem;height:3.5rem;border-radius:50%;background:#ffc451;color:#000;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(255,196,81,.45);transition:transform .2s,box-shadow .2s;text-decoration:none;"
-     onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 32px rgba(255,196,81,.65)'"
-     onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 4px 24px rgba(255,196,81,.45)'">
-    <i data-lucide="cross" style="width:1.5rem;height:1.5rem;"></i>
-  </a>
-
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-<script src="/assets/js/main.js"></script>
-<script src="/assets/js/consultation.js"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="/assets/js/main.js"></script>
 </body>
 </html>
