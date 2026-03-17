@@ -1,0 +1,196 @@
+[
+  {
+    "id": 1,
+    "slug": "retail-analytics-platform",
+    "title": "Enterprise Analytics Platform for a Retail Chain",
+    "category": "data-science",
+    "categoryLabel": "Data Science",
+    "client": "Multi-location Retail Chain",
+    "duration": "6 weeks",
+    "year": "2025",
+    "featured": true,
+    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=600&fit=crop&auto=format&q=80",
+    "challenge": "A 200-store retail chain had sales data spread across 4 legacy systems with zero unified reporting. Executives were making decisions on week-old spreadsheets, and inventory managers had no visibility into cross-store performance trends.",
+    "solution": "Built an end-to-end ETL pipeline feeding a centralized Azure data warehouse, then designed a 12-dashboard Power BI suite covering inventory turnover, sales performance, customer segmentation, and regional benchmarking. Automated daily data refreshes and alert thresholds for anomaly detection.",
+    "results": [
+      { "value": "40%", "label": "Faster Decisions" },
+      { "value": "$1.2M", "label": "Cost Identified" },
+      { "value": "6 Wks", "label": "Delivery Time" }
+    ],
+    "metrics": [
+      { "label": "Data Sources Unified", "value": "4" },
+      { "label": "Dashboards Built", "value": "12" },
+      { "label": "Daily Data Refresh", "value": "Auto" }
+    ],
+    "tech": ["Python", "SQL", "Power BI", "Azure Data Factory", "dbt"],
+    "testimonial": {
+      "quote": "Emmanuel doesn't just deliver features — he delivers outcomes. Our data platform went from a liability to a competitive advantage in six weeks. The ROI was visible in the first board meeting after launch.",
+      "name": "Rachel Kim",
+      "role": "VP of Operations, RetailCore Inc.",
+      "initials": "RK"
+    },
+    "body": "<p>The client came to us with a common but critical problem: data trapped in silos. Four separate systems — a POS platform, an inventory management tool, an e-commerce backend, and a manual spreadsheet workflow — were producing data that nobody could aggregate into a coherent picture.</p><p>The first two weeks were spent on data archaeology: understanding the schemas, identifying join keys, and mapping data quality issues. We found significant inconsistencies in SKU coding between the e-commerce and in-store systems — a problem that had been silently corrupting inventory counts for over a year.</p><p>Week three and four were the ETL build: Azure Data Factory pipelines for ingestion, dbt for transformation and testing, and a medallion architecture (bronze/silver/gold layers) in Azure Synapse. Every transformation was documented and tested — a deliberate investment in trust, because dashboards nobody trusts don't get used.</p><p>The final two weeks were the Power BI build and stakeholder rollout. We ran three rounds of review with the executive team and regional managers, iterating on layout and drill-through logic based on their feedback. The final suite was 12 dashboards covering every level of the organization from store floor to C-suite.</p><p>Three months post-launch, the client had identified $1.2M in annualized waste through improved inventory visibility and had reduced the executive reporting cycle from weekly to daily.</p>"
+  },
+  {
+    "id": 2,
+    "slug": "ai-customer-support-chatbot",
+    "title": "AI-Powered Customer Support Chatbot",
+    "category": "ai-ml",
+    "categoryLabel": "AI & ML",
+    "client": "B2B SaaS Company",
+    "duration": "8 weeks",
+    "year": "2025",
+    "featured": false,
+    "image": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1200&h=600&fit=crop&auto=format&q=80",
+    "challenge": "A growing SaaS company was spending $40K/month on tier-1 support for questions already answered in their documentation. Response times averaged 6 hours and customer satisfaction scores were declining.",
+    "solution": "Designed and deployed a RAG-powered support agent that ingested the full documentation corpus, integrated with Zendesk, and handled tier-1 queries automatically with human escalation for edge cases. Built an evaluation pipeline to measure accuracy and flag low-confidence responses.",
+    "results": [
+      { "value": "72%", "label": "Tickets Auto-Resolved" },
+      { "value": "35%", "label": "Support Cost Reduction" },
+      { "value": "4 min", "label": "Avg Response Time" }
+    ],
+    "metrics": [
+      { "label": "Prev. Response Time", "value": "6 hrs" },
+      { "label": "CSAT Improvement", "value": "+18pts" },
+      { "label": "Escalation Rate", "value": "28%" }
+    ],
+    "tech": ["Python", "LangChain", "Pinecone", "FastAPI", "Zendesk API", "OpenAI"],
+    "testimonial": null,
+    "body": "<p>The challenge here was trust — both ours in the system, and the client's. An AI that confidently gives wrong answers to frustrated customers is worse than no AI at all. So before we wrote a single line of application code, we built the evaluation infrastructure.</p><p>We worked with the support team to create a 200-question ground-truth dataset drawn from the previous six months of tickets. Every build was measured against this dataset for retrieval precision and answer faithfulness using RAGAS. Only once we hit 90%+ on the benchmark set did we consider the system production-ready.</p><p>The RAG architecture used semantic chunking on the documentation (respecting heading hierarchy), OpenAI embeddings, and Pinecone for retrieval. We implemented a confidence scoring layer that routed low-confidence queries directly to human agents rather than risking a bad automated response.</p><p>Zendesk integration was the operational glue — the bot created and updated tickets, flagged escalations, and surfaced the retrieved documentation sources in the agent handoff notes so human agents could respond faster on escalated cases.</p><p>At launch we started with a 30% traffic split and ramped to 100% over three weeks as confidence grew. 72% auto-resolution in the first full month. The support team now handles genuinely complex issues rather than repeatedly answering the same setup questions.</p>"
+  },
+  {
+    "id": 3,
+    "slug": "multi-vendor-ecommerce-platform",
+    "title": "Multi-Vendor eCommerce Marketplace",
+    "category": "fullstack",
+    "categoryLabel": "Full-Stack",
+    "client": "Early-Stage eCommerce Startup",
+    "duration": "12 weeks",
+    "year": "2024",
+    "featured": false,
+    "image": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&h=600&fit=crop&auto=format&q=80",
+    "challenge": "A startup wanted to launch a multi-vendor marketplace connecting local artisan vendors with consumers, with each vendor needing their own branded storefront, inventory management, and payout tracking — built from scratch, production-ready, in three months.",
+    "solution": "Designed a multi-tenant Next.js marketplace with vendor-specific subdomains, unified checkout, Stripe Connect for split payouts, and a shared admin panel. Built with a service-oriented backend in Node.js and MongoDB with real-time inventory sync.",
+    "results": [
+      { "value": "50+", "label": "Vendors Onboarded" },
+      { "value": "99.9%", "label": "Uptime (First 6mo)" },
+      { "value": "12 Wks", "label": "Delivery Time" }
+    ],
+    "metrics": [
+      { "label": "Avg Page Load", "value": "< 1.2s" },
+      { "label": "Mobile Traffic", "value": "68%" },
+      { "label": "Checkout Conv.", "value": "3.8%" }
+    ],
+    "tech": ["Next.js", "Node.js", "MongoDB", "Stripe Connect", "Redis", "Vercel", "Cloudinary"],
+    "testimonial": null,
+    "body": "<p>Multi-vendor marketplaces are architecturally complex because you're building three products simultaneously: the consumer-facing storefront, the vendor portal, and the platform admin. Doing all three well in twelve weeks required ruthless prioritization and a clear technical foundation from day one.</p><p>The core architectural decision was how to handle multi-tenancy. We went with subdomain-based tenant resolution (vendor-name.marketplace.com) with Next.js middleware handling the routing, feeding into a shared React component library themed per vendor. MongoDB's flexible schema handled the variation in vendor product types — a ceramic artist and a clothing vendor have fundamentally different product attributes.</p><p>Stripe Connect was the most technically involved piece. We implemented the express onboarding flow, handled the webhook lifecycle for account verification, and built the payout management interface. The split payment logic had to account for platform fees, refunds, and partial fulfillment — edge cases that only become apparent when you're in the implementation details.</p><p>Performance was a non-negotiable requirement from the client. We implemented ISR (Incremental Static Regeneration) for product pages, Redis caching for inventory counts, and Cloudinary for image optimization. The result was sub-1.2s load times for the most trafficked pages even on mobile connections.</p>"
+  },
+  {
+    "id": 4,
+    "slug": "predictive-churn-model",
+    "title": "Predictive Churn Model for B2B SaaS",
+    "category": "data-science",
+    "categoryLabel": "Data Science",
+    "client": "Project Management SaaS",
+    "duration": "4 weeks",
+    "year": "2025",
+    "featured": false,
+    "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=600&fit=crop&auto=format&q=80",
+    "challenge": "A SaaS company was losing 8% of customers per month with no early warning system. By the time the CS team noticed disengagement, it was usually too late to save the account.",
+    "solution": "Built a churn prediction model using XGBoost trained on 18 months of behavioral data (login frequency, feature usage, support ticket volume, billing interactions). Integrated predictions into a Retool dashboard for the CS team with 30-day lookahead scores and intervention playbooks.",
+    "results": [
+      { "value": "88%", "label": "Prediction Precision" },
+      { "value": "30-day", "label": "Advance Warning" },
+      { "value": "23%", "label": "Churn Reduction" }
+    ],
+    "metrics": [
+      { "label": "Training Data", "value": "18mo" },
+      { "label": "Features Engineered", "value": "47" },
+      { "label": "Model Retrain", "value": "Weekly" }
+    ],
+    "tech": ["Python", "XGBoost", "Pandas", "scikit-learn", "PostgreSQL", "Retool", "Airflow"],
+    "testimonial": null,
+    "body": "<p>Churn models are only as good as the behavioral signal you feed them. The first three weeks of this project were almost entirely feature engineering — identifying which user behaviors were actually predictive of cancellation versus which were just correlated with it.</p><p>The most predictive features turned out to be: the rate of change in login frequency (declining engagement was more predictive than absolute low engagement), support ticket sentiment (extracted from ticket text using a simple sentiment classifier), and the ratio of features used to features enabled (accounts using only a small subset of their plan were significantly more likely to churn).</p><p>We tried several model architectures — logistic regression as a baseline, random forest, and XGBoost. XGBoost won on the validation set and was interpretable enough via SHAP values to give the CS team actionable reasons for each prediction: \"This account's engagement has dropped 60% in 30 days\" is more useful than a probability score alone.</p><p>The Retool dashboard surfaced the top 20 at-risk accounts each week with their churn probability, contributing factors, and a playbook of suggested interventions. The CS team reported that having the playbook alongside the prediction was the most valuable part — it removed the ambiguity of \"what do I do now?\"</p><p>After six months of operation, the client had reduced monthly churn from 8% to 6.2% — a 23% improvement. The model pays for itself many times over in retained ARR.</p>"
+  },
+  {
+    "id": 5,
+    "slug": "healthcare-appointment-system",
+    "title": "Healthcare Appointment Management System",
+    "category": "fullstack",
+    "categoryLabel": "Full-Stack",
+    "client": "Multi-Provider Outpatient Clinic",
+    "duration": "10 weeks",
+    "year": "2024",
+    "featured": false,
+    "image": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&h=600&fit=crop&auto=format&q=80",
+    "challenge": "A 15-provider outpatient clinic was running entirely on phone-based scheduling, paper intake forms, and a whiteboard for provider availability. No-show rates were at 31%, staff were spending 3+ hours daily on scheduling calls, and there was no way to track outcomes over time.",
+    "solution": "Built a HIPAA-compliant patient portal and scheduling system with online booking, automated SMS/email reminders, digital intake forms, and a provider dashboard. Integrated with the clinic's existing EHR for appointment sync.",
+    "results": [
+      { "value": "28%", "label": "Fewer No-Shows" },
+      { "value": "3hrs", "label": "Daily Staff Time Saved" },
+      { "value": "4.8★", "label": "Patient Satisfaction" }
+    ],
+    "metrics": [
+      { "label": "No-Show Rate Before", "value": "31%" },
+      { "label": "No-Show Rate After", "value": "22%" },
+      { "label": "Online Booking Rate", "value": "74%" }
+    ],
+    "tech": ["React", "Express", "PostgreSQL", "AWS", "Twilio", "SendGrid", "HIPAA-compliant infra"],
+    "testimonial": null,
+    "body": "<p>Healthcare software projects require a different mindset than standard web development. HIPAA compliance isn't a checkbox — it's a design constraint that shapes every architectural decision. Data encryption at rest and in transit, audit logging for every PHI access, session timeout policies, and business associate agreements with every third-party service are all requirements before you write the first user-facing feature.</p><p>We hosted on AWS with encryption enabled on RDS, S3, and EBS. CloudTrail provided the audit logging. Application-level, we implemented row-level security in PostgreSQL and a custom middleware layer that logged every PHI access event with user, timestamp, and accessed record ID.</p><p>The scheduling engine was the most complex domain logic. Provider availability was not simple — each provider had different working hours, different appointment types with different durations, blocked times for administrative work, and surge availability for urgent slots. We modeled this as a constraint satisfaction problem and built a rule engine that composed provider schedules in real time.</p><p>The no-show reduction came primarily from the reminder system — automated SMS 48 hours out, 24 hours out, and 2 hours before the appointment, with a one-tap confirmation link. Patients could also reschedule directly from the reminder without calling, which turned a potential no-show into a successful rescheduled appointment.</p>"
+  },
+  {
+    "id": 6,
+    "slug": "fintech-cloud-migration",
+    "title": "Cloud Migration Strategy for FinTech Startup",
+    "category": "consulting",
+    "categoryLabel": "Consulting",
+    "client": "Series A FinTech Startup",
+    "duration": "8 weeks",
+    "year": "2025",
+    "featured": false,
+    "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=600&fit=crop&auto=format&q=80",
+    "challenge": "A FinTech startup processing $2M/day in transactions was still running on bare-metal servers in a co-location facility. Infrastructure costs were high, deployment cycles took days, and the team had no disaster recovery plan.",
+    "solution": "Conducted a full architecture review, designed an AWS migration roadmap, implemented the migration in phases with zero downtime, and established IaC, CI/CD, and observability standards. Reduced monthly infra spend from $18K to $9.8K while improving reliability.",
+    "results": [
+      { "value": "45%", "label": "Infrastructure Cost Reduction" },
+      { "value": "3×", "label": "Faster Deploy Cycles" },
+      { "value": "99.99%", "label": "Post-Migration Uptime" }
+    ],
+    "metrics": [
+      { "label": "Monthly Infra Before", "value": "$18K" },
+      { "label": "Monthly Infra After", "value": "$9.8K" },
+      { "label": "Deploy Time Before", "value": "2 days" }
+    ],
+    "tech": ["AWS", "Terraform", "Docker", "Kubernetes (EKS)", "GitHub Actions", "Datadog", "PostgreSQL RDS"],
+    "testimonial": null,
+    "body": "<p>Cloud migrations fail most often not because of technical complexity, but because of scope creep and insufficient planning. Our first two weeks were entirely planning — a complete inventory of existing services, dependencies, data flows, and security requirements before we touched a single AWS resource.</p><p>The migration strategy was lift-and-shift first, optimize second. Trying to re-architect while migrating is a recipe for extended downtime and scope explosion. We containerized the existing applications with Docker, established the AWS network architecture (VPC, subnets, security groups), and replicated the production database to RDS using DMS with continuous replication before cutover.</p><p>Terraform managed all infrastructure as code from day one — every resource created manually in the console was a risk of configuration drift. We wrote modules for all shared infrastructure components and enforced naming conventions that made the environment self-documenting.</p><p>The CI/CD pipeline with GitHub Actions reduced deploys from a two-day manual process involving SSH and bash scripts to a 15-minute automated pipeline with automated testing, container builds, and rolling deployments. This alone changed the team's development velocity measurably.</p><p>Post-migration, we implemented Datadog for observability — metrics, logs, and traces — and established SLOs for each critical service. The team went from flying blind to having dashboards, alerts, and runbooks for every known failure mode.</p>"
+  },
+  {
+    "id": 7,
+    "slug": "nlp-document-intelligence",
+    "title": "NLP Document Intelligence Pipeline",
+    "category": "ai-ml",
+    "categoryLabel": "AI & ML",
+    "client": "Mid-Size Law Firm",
+    "duration": "6 weeks",
+    "year": "2025",
+    "featured": false,
+    "image": "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=1200&h=600&fit=crop&auto=format&q=80",
+    "challenge": "Attorneys at a mid-size law firm were spending 4+ hours reviewing each contract for key clauses, risk terms, and summarization before client discussions. The volume of NDAs, MSAs, and vendor contracts had doubled in 18 months without a corresponding headcount increase.",
+    "solution": "Built a document intelligence pipeline that extracted named entities, classified clause types, flagged risk language, and generated structured summaries. Deployed as a secure internal web app with drag-and-drop upload, instant analysis, and exportable reports.",
+    "results": [
+      { "value": "20 min", "label": "Review Time (vs 4hrs)" },
+      { "value": "94%", "label": "Clause Extraction Accuracy" },
+      { "value": "10×", "label": "Throughput Increase" }
+    ],
+    "metrics": [
+      { "label": "Avg Review Time Before", "value": "4 hrs" },
+      { "label": "Avg Review Time After", "value": "20 min" },
+      { "label": "Clause Types Detected", "value": "23" }
+    ],
+    "tech": ["Python", "HuggingFace Transformers", "spaCy", "FastAPI", "React", "PostgreSQL", "AWS"],
+    "testimonial": null,
+    "body": "<p>Legal document analysis requires high precision. A missed indemnification clause or an undetected limitation of liability carve-out has real consequences. So unlike most ML projects where 85% accuracy might be acceptable, we set a 90% minimum bar and designed the system to flag low-confidence outputs for human review rather than presenting them as definitive.</p><p>The pipeline had three stages: extraction, classification, and summarization. Extraction used a fine-tuned NER model (built on a Legal-BERT base) to identify parties, dates, defined terms, and key provisions. Classification used a multi-label classifier to tag each identified clause with its type (termination, payment terms, IP ownership, limitation of liability, etc.). Summarization used a prompted LLM call to produce the client-ready summary.</p><p>Training data was a significant challenge — the firm had no labeled dataset. We used a semi-supervised approach: starting with 50 manually annotated contracts from a public legal dataset, applying the initial model to the firm's historical contracts, having one paralegal review and correct the predictions, and iterating. After three rounds, we had 800 high-quality labeled examples and a model that hit 94% on the held-out test set.</p><p>The web application was deliberately simple — lawyers don't want tools that require training. Upload a PDF, wait 45 seconds, download a structured report. The export format (Word and PDF) matched the firm's existing document templates so the output slotted directly into their existing workflow.</p>"
+  }
+]

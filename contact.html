@@ -21,6 +21,9 @@
       }
     }
   </script>
+  <script>/* instant dark mode — prevents flash of white */
+    (function(){var o=localStorage.getItem('is-theme-override');if(o==='dark'||(o===null&&(new Date().getHours()>=19||new Date().getHours()<7)))document.documentElement.classList.add('dark');})();
+  </script>
   <link rel="stylesheet" href="/assets/css/main.css">
   <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
   <style>
@@ -225,7 +228,7 @@
             </div>
           </div>
           <a href="/contact.html" class="nav-link" data-page="contact">Contact</a>
-          <a href="/scripture/" class="nav-link" data-page="scripture">Scripture</a>
+          <a href="/scripture/" class="nav-link" data-page="scripture">✝️ Word of God</a>
         </div>
         <div class="nav-actions">
           <a href="tel:+13463839529" class="nav-phone hidden lg:flex">

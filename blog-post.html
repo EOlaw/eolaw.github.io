@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Post | InsightSerenity</title>
+  <meta name="description" content="Read the full article on InsightSerenity — insights on data science, software engineering, AI, and life coaching from Emmanuel Oyemosu.">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon_io/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="/assets/img/favicon_io/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/img/favicon_io/site.webmanifest">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: { 300:'#ffe08a',400:'#ffd27f',500:'#ffc451',600:'#e6b048',700:'#cc9c3f' }
+          },
+          fontFamily: { sans:['Inter','sans-serif'], display:['Space Grotesk','sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <script>/* instant dark mode — prevents flash of white */
+    (function(){var o=localStorage.getItem('is-theme-override');if(o==='dark'||(o===null&&(new Date().getHours()>=19||new Date().getHours()<7)))document.documentElement.classList.add('dark');})();
+  </script>
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <style>
+    /* ── Article layout ── */
+    .article-layout {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 3rem;
+      align-items: start;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ── Hero cover image ── */
+    .hero-cover {
+      width: 100%;
+      aspect-ratio: 21 / 9;
+      object-fit: cover;
+      max-height: 480px;
+      display: block;
+      border-radius: 0;
+      margin-bottom: 0;
+    }
+
+    /* ── Prose styles ── */
+    .article-prose h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 2rem;
+      margin-bottom: .5rem;
+    }
+    .article-prose p {
+      font-size: .9rem;
+      line-height: 1.85;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+    .article-prose strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+    .article-prose h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-top: 1.5rem;
+      margin-bottom: .4rem;
+    }
+    .article-prose ul, .article-prose ol {
+      padding-left: 1.4rem;
+      margin-bottom: 1rem;
+    }
+    .article-prose li {
+      font-size: .9rem;
+      line-height: 1.75;
+      color: var(--text-muted);
+      margin-bottom: .3rem;
+    }
+    .article-prose blockquote {
+      border-left: 3px solid var(--primary);
+      padding: .75rem 1.25rem;
+      margin: 1.5rem 0;
+      background: var(--primary-dim);
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+    .article-prose blockquote p {
+      margin-bottom: 0;
+      font-style: italic;
+    }
+    .article-prose code {
+      font-size: .82rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: .1em .4em;
+      border-radius: .25rem;
+      color: var(--primary);
+    }
+    .article-prose pre {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      overflow-x: auto;
+      margin-bottom: 1rem;
+    }
+    .article-prose pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      color: var(--text);
+    }
+    .article-prose a {
+      color: var(--primary);
+      text-decoration: underline;
+      text-decoration-color: var(--primary-border);
+      text-underline-offset: 3px;
+    }
+    .article-prose a:hover { text-decoration-color: var(--primary); }
+    .article-prose hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2rem 0;
+    }
+
+    /* ── Sidebar cards ── */
+    .sidebar-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+    .sidebar-card h4 {
+      font-size: .8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--text-soft);
+      margin-bottom: .875rem;
+    }
+    .sidebar-sticky {
+      position: sticky;
+      top: 5.5rem;
+    }
+
+    /* ── Tag pills ── */
+    .tag-pill {
+      display: inline-block;
+      padding: .25rem .7rem;
+      border-radius: 999px;
+      font-size: .7rem;
+      font-weight: 600;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      color: var(--text-muted);
+      margin: .2rem .2rem .2rem 0;
+      transition: border-color .2s, color .2s;
+    }
+    .tag-pill:hover {
+      border-color: var(--primary-border);
+      color: var(--primary);
+    }
+
+    /* ── Author mini card ── */
+    .author-mini {
+      display: flex;
+      align-items: center;
+      gap: .875rem;
+    }
+    .author-mini-avatar {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 2px solid var(--primary-border);
+    }
+    .author-mini-name {
+      font-size: .875rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.2;
+    }
+    .author-mini-role {
+      font-size: .72rem;
+      color: var(--text-muted);
+      margin-top: .15rem;
+    }
+    .author-mini-bio {
+      font-size: .78rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-top: .75rem;
+    }
+
+    /* ── Back button ── */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .375rem;
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 1.75rem;
+      transition: color .2s;
+      text-decoration: none;
+    }
+    .back-btn:hover { color: var(--primary); }
+
+    /* ── Post hero meta ── */
+    .post-hero-meta {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      flex-wrap: wrap;
+      margin-top: .625rem;
+      font-size: .78rem;
+      color: var(--text-soft);
+    }
+    .post-hero-meta .dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--text-soft);
+      flex-shrink: 0;
+    }
+
+    /* ── Blog card (reuse from blog.html) ── */
+    .blog-grid-related {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .blog-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: border-color .2s, box-shadow .2s, transform .2s;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+    }
+    .blog-card:hover {
+      border-color: var(--primary-border);
+      box-shadow: 0 0 0 1px var(--primary-border), var(--shadow-md);
+      transform: translateY(-2px);
+    }
+    .blog-thumb {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .blog-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .4s ease;
+    }
+    .blog-card:hover .blog-thumb img { transform: scale(1.04); }
+    .blog-body {
+      padding: 1.25rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .blog-meta {
+      display: flex;
+      align-items: center;
+      gap: .625rem;
+      margin-bottom: .75rem;
+      flex-wrap: wrap;
+    }
+    .blog-cat {
+      font-size: .68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--primary);
+      background: var(--primary-dim);
+      border: 1px solid var(--primary-border);
+      padding: .2rem .6rem;
+      border-radius: 999px;
+    }
+    .blog-date {
+      font-size: .72rem;
+      color: var(--text-soft);
+    }
+    .blog-card-title {
+      font-size: .9375rem;
+      font-weight: 700;
+      margin-bottom: .5rem;
+      color: var(--text);
+      line-height: 1.4;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .blog-card-excerpt {
+      font-size: .8rem;
+      color: var(--text-muted);
+      flex: 1;
+      line-height: 1.6;
+    }
+    .blog-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1rem;
+      padding-top: .875rem;
+      border-top: 1px solid var(--border);
+    }
+    .read-more {
+      font-size: .75rem;
+      font-weight: 600;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: .25rem;
+      transition: gap .2s;
+    }
+    .blog-card:hover .read-more { gap: .5rem; }
+
+    /* ── Skeleton ── */
+    @keyframes skeletonPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .45; }
+    }
+    .skeleton {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      animation: skeletonPulse 1.6s ease-in-out infinite;
+    }
+    .skeleton-hero-img {
+      width: 100%;
+      aspect-ratio: 21 / 9;
+      max-height: 480px;
+    }
+    .skeleton-line {
+      height: .875rem;
+      margin-bottom: .625rem;
+      border-radius: 999px;
+    }
+    .skeleton-title {
+      height: 2rem;
+      margin-bottom: .875rem;
+      border-radius: var(--radius);
+      max-width: 75%;
+    }
+    .skeleton-badge {
+      height: 1.5rem;
+      width: 6rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+    }
+
+    /* ── Error state ── */
+    .error-state {
+      text-align: center;
+      padding: 5rem 1rem;
+    }
+    .error-state .error-icon {
+      width: 4rem;
+      height: 4rem;
+      margin: 0 auto 1.5rem;
+      color: var(--text-soft);
+    }
+    .error-state h2 {
+      font-size: 1.5rem;
+      margin-bottom: .75rem;
+      color: var(--text);
+    }
+    .error-state p {
+      font-size: .9rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── CTA sidebar card ── */
+    .sidebar-cta {
+      background: linear-gradient(135deg, var(--primary-dim) 0%, transparent 70%);
+      border-color: var(--primary-border);
+    }
+    .sidebar-cta h4 { color: var(--primary); }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .article-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .sidebar-sticky { position: static; }
+      .blog-grid-related { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .blog-grid-related { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="/index.html" class="nav-logo">
+          <img src="/assets/img/favicon_io/android-chrome-192x192.png" alt="InsightSerenity" style="width:2rem;height:2rem;border-radius:0.5rem;">
+        </a>
+        <div class="nav-links">
+          <a href="/index.html" class="nav-link" data-page="home">Home</a>
+          <a href="/about.html" class="nav-link" data-page="about">About</a>
+          <a href="/services.html" class="nav-link" data-page="services">Services</a>
+          <div class="nav-dropdown">
+            <button class="nav-dropdown-trigger" id="explore-trigger">
+              Explore
+              <i data-lucide="chevron-down" style="width:13px;height:13px;"></i>
+            </button>
+            <div class="nav-dropdown-menu">
+              <a href="/blog.html" class="nav-dropdown-item" data-page="blog">
+                <div class="nav-dropdown-icon"><i data-lucide="file-text"></i></div>
+                <div><div class="nav-dd-label">Blog</div><div class="nav-dd-sub">Insights & articles</div></div>
+              </a>
+              <a href="/work.html" class="nav-dropdown-item" data-page="work">
+                <div class="nav-dropdown-icon"><i data-lucide="briefcase"></i></div>
+                <div><div class="nav-dd-label">Work</div><div class="nav-dd-sub">Case studies & portfolio</div></div>
+              </a>
+              <div class="nav-dropdown-divider"></div>
+              <a href="/consultation.html" class="nav-dropdown-item" data-page="consultation">
+                <div class="nav-dropdown-icon"><i data-lucide="calendar"></i></div>
+                <div><div class="nav-dd-label">Book a Call</div><div class="nav-dd-sub">Free consultation</div></div>
+              </a>
+            </div>
+          </div>
+          <a href="/contact.html" class="nav-link" data-page="contact">Contact</a>
+          <a href="/scripture/" class="nav-link" data-page="scripture">✝️ Word of God</a>
+        </div>
+        <div class="nav-actions">
+          <a href="tel:+13463839529" class="nav-phone hidden lg:flex">
+            <i data-lucide="phone" style="width:14px;height:14px;"></i>
+            <span>+1 (346) 383-9529</span>
+          </a>
+          <button class="theme-toggle" aria-label="Toggle theme"></button>
+          <a href="/consultation.html" class="btn-book">Book Consultation</a>
+        </div>
+        <button class="mobile-toggle" id="mobile-toggle" aria-expanded="false">
+          <i data-lucide="menu" style="width:18px;height:18px;"></i>
+        </button>
+      </div>
+      <div class="mobile-menu" id="mobile-menu">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/about.html" class="nav-link">About</a>
+        <a href="/services.html" class="nav-link">Services</a>
+        <div style="padding:.375rem .875rem .125rem;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-soft);">Explore</div>
+        <a href="/blog.html" class="nav-link" style="padding-left:1.75rem;">✍️ &nbsp;Blog</a>
+        <a href="/work.html" class="nav-link" style="padding-left:1.75rem;">💼 &nbsp;Work</a>
+        <a href="/consultation.html" class="nav-link" style="padding-left:1.75rem;">📅 &nbsp;Book a Call</a>
+        <a href="/contact.html" class="nav-link">Contact</a>
+        <a href="/scripture/" class="nav-link">Scripture</a>
+        <a href="/consultation.html" class="btn btn-primary" style="margin-top:.5rem;">Book Consultation</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO (populated by JS) -->
+  <div class="page-hero" id="page-hero">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="container" style="position:relative;z-index:1;">
+      <!-- Skeleton hero while loading -->
+      <div id="hero-skeleton">
+        <div class="skeleton skeleton-badge"></div>
+        <div class="skeleton skeleton-title"></div>
+        <div class="skeleton skeleton-line" style="max-width:40%;"></div>
+      </div>
+      <!-- Real hero content (hidden until loaded) -->
+      <div id="hero-content" style="display:none;">
+        <div id="hero-badge" class="badge" style="margin-bottom:1rem;"></div>
+        <h1 id="hero-title"></h1>
+        <div class="post-hero-meta" id="hero-meta"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO COVER IMAGE -->
+  <div id="hero-cover-wrap" style="display:none;">
+    <img id="hero-cover" class="hero-cover" src="" alt="Article cover image">
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <section class="section" style="padding-top:2.5rem;">
+    <div class="container">
+
+      <!-- LOADING STATE -->
+      <div id="loading-state">
+        <div style="max-width:1100px;margin:0 auto;">
+          <div class="skeleton" style="height:1.25rem;width:8rem;border-radius:999px;margin-bottom:2rem;"></div>
+          <div class="article-layout">
+            <div>
+              <div class="skeleton skeleton-line" style="max-width:90%;"></div>
+              <div class="skeleton skeleton-line" style="max-width:100%;"></div>
+              <div class="skeleton skeleton-line" style="max-width:80%;"></div>
+              <div class="skeleton skeleton-line" style="max-width:95%;margin-top:2rem;"></div>
+              <div class="skeleton skeleton-line" style="max-width:85%;"></div>
+              <div class="skeleton skeleton-line" style="max-width:100%;"></div>
+              <div class="skeleton skeleton-line" style="max-width:70%;"></div>
+              <div class="skeleton skeleton-line" style="max-width:90%;margin-top:2rem;"></div>
+              <div class="skeleton skeleton-line" style="max-width:100%;"></div>
+              <div class="skeleton skeleton-line" style="max-width:75%;"></div>
+              <div class="skeleton skeleton-line" style="max-width:88%;"></div>
+            </div>
+            <div>
+              <div class="skeleton" style="height:10rem;border-radius:var(--radius-lg);margin-bottom:1.25rem;"></div>
+              <div class="skeleton" style="height:8rem;border-radius:var(--radius-lg);margin-bottom:1.25rem;"></div>
+              <div class="skeleton" style="height:7rem;border-radius:var(--radius-lg);"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ERROR STATE -->
+      <div id="error-state" style="display:none;" class="error-state">
+        <div class="error-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <h2>Article Not Found</h2>
+        <p>The post you're looking for doesn't exist or may have been moved.</p>
+        <a href="/blog.html" class="btn btn-primary">
+          <i data-lucide="arrow-left" style="width:15px;height:15px;"></i>
+          Back to Blog
+        </a>
+      </div>
+
+      <!-- ARTICLE CONTENT (hidden until loaded) -->
+      <div id="article-state" style="display:none;">
+        <div style="max-width:1100px;margin:0 auto;">
+
+          <!-- BACK BUTTON -->
+          <a href="/blog.html" class="back-btn">
+            <i data-lucide="arrow-left" style="width:14px;height:14px;"></i>
+            Back to Blog
+          </a>
+
+          <!-- TWO-COLUMN LAYOUT -->
+          <div class="article-layout">
+
+            <!-- LEFT: PROSE -->
+            <div>
+              <div class="article-prose" id="article-prose"></div>
+            </div>
+
+            <!-- RIGHT: SIDEBAR -->
+            <div class="sidebar-sticky">
+
+              <!-- Tags -->
+              <div class="sidebar-card" id="sidebar-tags" style="display:none;">
+                <h4>Tags</h4>
+                <div id="sidebar-tags-list"></div>
+              </div>
+
+              <!-- Tech Stack -->
+              <div class="sidebar-card" id="sidebar-tech" style="display:none;">
+                <h4>Tech Stack</h4>
+                <div id="sidebar-tech-list"></div>
+              </div>
+
+              <!-- About the Author -->
+              <div class="sidebar-card">
+                <h4>About the Author</h4>
+                <div class="author-mini">
+                  <img src="/assets/img/emmanuel.jpeg" alt="Emmanuel Oyemosu" class="author-mini-avatar">
+                  <div>
+                    <div class="author-mini-name">Emmanuel Oyemosu</div>
+                    <div class="author-mini-role">Data Scientist &amp; Software Engineer</div>
+                  </div>
+                </div>
+                <p class="author-mini-bio">MSc MIS · 5+ years · 50+ projects delivered across AI, full-stack, and analytics. Life &amp; Bible Coach.</p>
+                <div style="display:flex;gap:.5rem;margin-top:1rem;flex-wrap:wrap;">
+                  <a href="https://www.linkedin.com/in/emmanuel-oyemosu/" target="_blank" class="tag-pill" style="display:inline-flex;align-items:center;gap:.3rem;">
+                    <i data-lucide="linkedin" style="width:11px;height:11px;"></i> LinkedIn
+                  </a>
+                  <a href="https://github.com/EOlaw" target="_blank" class="tag-pill" style="display:inline-flex;align-items:center;gap:.3rem;">
+                    <i data-lucide="github" style="width:11px;height:11px;"></i> GitHub
+                  </a>
+                </div>
+              </div>
+
+              <!-- CTA -->
+              <div class="sidebar-card sidebar-cta">
+                <h4>Enjoyed this?</h4>
+                <p style="font-size:.82rem;color:var(--text-muted);margin-bottom:1rem;line-height:1.6;">Have a project or question? Book a free 30-minute call — no commitment required.</p>
+                <a href="/consultation.html" class="btn btn-primary" style="width:100%;justify-content:center;font-size:.82rem;">
+                  <i data-lucide="calendar" style="width:14px;height:14px;"></i>
+                  Book a Free Call
+                </a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- RELATED POSTS SECTION -->
+  <section class="section section-alt" id="related-section" style="display:none;">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="badge">More Like This</div>
+        <h2>Related Articles</h2>
+        <p>Continue exploring insights from the same category.</p>
+      </div>
+      <div class="blog-grid-related" id="related-grid"></div>
+      <div style="text-align:center;margin-top:2.5rem;">
+        <a href="/blog.html" class="btn btn-ghost">
+          View All Articles
+          <i data-lucide="arrow-right" style="width:15px;height:15px;"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="/index.html" class="nav-logo" style="margin-bottom:.875rem;display:inline-flex;">
+            <img src="/assets/img/favicon_io/android-chrome-192x192.png" alt="InsightSerenity" style="width:2rem;height:2rem;border-radius:0.5rem;">
+          </a>
+          <p class="footer-brand-desc">Expert consulting in Data Science, Software Engineering, AI/ML — plus Life Literacy and Bible-Based Coaching. Transforming data, technology, and lives.</p>
+          <div class="footer-socials">
+            <a href="https://www.linkedin.com/in/emmanuel-oyemosu/" target="_blank" class="social-btn" aria-label="LinkedIn"><i data-lucide="linkedin" style="width:14px;height:14px;"></i></a>
+            <a href="https://github.com/EOlaw" target="_blank" class="social-btn" aria-label="GitHub"><i data-lucide="github" style="width:14px;height:14px;"></i></a>
+            <a href="https://www.instagram.com/e_olawalee/" target="_blank" class="social-btn" aria-label="Instagram"><i data-lucide="instagram" style="width:14px;height:14px;"></i></a>
+            <a href="mailto:emmanuel.ao@outlook.com" class="social-btn" aria-label="Email"><i data-lucide="mail" style="width:14px;height:14px;"></i></a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">Navigation</div>
+          <div class="footer-links">
+            <a href="/index.html">Home</a>
+            <a href="/about.html">About</a>
+            <a href="/services.html">Services</a>
+            <a href="/blog.html">Blog</a>
+            <a href="/work.html">Work</a>
+            <a href="/contact.html">Contact</a>
+            <a href="/consultation.html">Book Consultation</a>
+            <a href="/privacy.html">Privacy Policy</a>
+            <a href="/terms.html">Terms of Service</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">Technical Services</div>
+          <div class="footer-links">
+            <a href="/services.html#data-science">Data Science &amp; Analytics</a>
+            <a href="/services.html#fullstack">Full-Stack Development</a>
+            <a href="/services.html#ai-ml">AI &amp; Machine Learning</a>
+            <a href="/services.html#architecture">System Architecture</a>
+            <a href="/services.html#ecommerce">eCommerce Solutions</a>
+            <a href="/services.html#consulting">Technical Consulting</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">Coaching Services</div>
+          <div class="footer-links">
+            <a href="/services.html#life-coaching">Life Literacy Coaching</a>
+            <a href="/services.html#bible-coaching">Bible-Based Coaching</a>
+          </div>
+          <div class="footer-heading" style="margin-top:1.5rem;">Contact</div>
+          <div class="footer-links">
+            <a href="mailto:emmanuel.ao@outlook.com">emmanuel.ao@outlook.com</a>
+            <a href="tel:+13463839529">+1 (346) 383-9529</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p style="color:var(--text-muted);">© 2025 InsightSerenity. All rights reserved.</p>
+        <div style="display:flex;align-items:center;gap:.375rem;font-size:.75rem;color:var(--text-muted);">
+          <i data-lucide="map-pin" style="width:12px;height:12px;color:var(--primary);"></i>
+          Available Worldwide · Remote Consulting
+        </div>
+        <div style="display:flex;gap:1rem;">
+          <a href="/privacy.html" style="font-size:.75rem;color:var(--text-muted);">Privacy</a>
+          <a href="/terms.html" style="font-size:.75rem;color:var(--text-muted);">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING ACTION BUTTON -->
+  <div class="fab-container" id="fab-container">
+    <div class="fab-actions" id="fab-actions">
+      <a href="/scripture/" class="fab-action">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        Scripture
+      </a>
+      <a href="/consultation.html" class="fab-action">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Book Call
+      </a>
+      <a href="mailto:emmanuel.ao@outlook.com" class="fab-action">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Email Me
+      </a>
+    </div>
+    <button class="fab-btn" id="fab-btn" aria-label="Quick actions">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    </button>
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <script src="/assets/js/content-api.js"></script>
+  <script src="/assets/js/main.js"></script>
+
+  <script>
+    (function () {
+      'use strict';
+
+      /* ── Helpers ────────────────────────────────────────────────── */
+      function esc(str) {
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
+
+      function showState(name) {
+        ['loading-state', 'error-state', 'article-state'].forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el) el.style.display = id === name ? '' : 'none';
+        });
+      }
+
+      /* ── Render related post card ───────────────────────────────── */
+      function renderRelatedCard(post) {
+        var href = '/blog-post.html?slug=' + encodeURIComponent(post.slug);
+        return '<a href="' + href + '" class="blog-card">'
+          + '<div class="blog-thumb">'
+          + (post.image
+              ? '<img src="' + esc(post.image) + '" alt="' + esc(post.title) + '" loading="lazy">'
+              : '<div style="width:100%;height:100%;background:var(--bg-card);display:flex;align-items:center;justify-content:center;"><i data-lucide="image" style="color:var(--text-soft);width:2rem;height:2rem;"></i></div>')
+          + '</div>'
+          + '<div class="blog-body">'
+          + '<div class="blog-meta">'
+          + '<span class="blog-cat">' + esc(post.categoryLabel || post.category) + '</span>'
+          + '<span class="blog-date">' + esc(post.dateLabel || post.date || '') + '</span>'
+          + '</div>'
+          + '<div class="blog-card-title">' + esc(post.title) + '</div>'
+          + '<p class="blog-card-excerpt">' + esc((post.excerpt || '').slice(0, 120) + ((post.excerpt || '').length > 120 ? '…' : '')) + '</p>'
+          + '<div class="blog-footer">'
+          + '<span style="font-size:.72rem;color:var(--text-soft);">' + (post.readTime ? post.readTime + ' min read' : '') + '</span>'
+          + '<span class="read-more">Read more <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></span>'
+          + '</div>'
+          + '</div>'
+          + '</a>';
+      }
+
+      /* ── Main render ────────────────────────────────────────────── */
+      function renderPost(post, allPosts) {
+        /* --- document title --- */
+        document.title = esc(post.title) + ' | InsightSerenity';
+
+        /* --- update meta description if available --- */
+        var metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc && post.excerpt) metaDesc.setAttribute('content', post.excerpt.slice(0, 160));
+
+        /* --- hero --- */
+        document.getElementById('hero-skeleton').style.display = 'none';
+        var heroContent = document.getElementById('hero-content');
+        heroContent.style.display = '';
+        document.getElementById('hero-badge').textContent = post.categoryLabel || post.category || 'Article';
+
+        var titleEl = document.getElementById('hero-title');
+        titleEl.textContent = post.title;
+
+        var metaEl = document.getElementById('hero-meta');
+        var metaHTML = '';
+        if (post.dateLabel || post.date) {
+          metaHTML += '<span>' + esc(post.dateLabel || post.date) + '</span>';
+        }
+        if (post.readTime) {
+          if (metaHTML) metaHTML += '<span class="dot"></span>';
+          metaHTML += '<span>' + esc(String(post.readTime)) + ' min read</span>';
+        }
+        metaEl.innerHTML = metaHTML;
+
+        /* --- hero cover image --- */
+        if (post.image) {
+          var coverWrap = document.getElementById('hero-cover-wrap');
+          var coverImg = document.getElementById('hero-cover');
+          coverImg.src = post.image;
+          coverImg.alt = post.title + ' cover image';
+          coverWrap.style.display = '';
+        }
+
+        /* --- prose body --- */
+        var proseEl = document.getElementById('article-prose');
+        proseEl.innerHTML = post.body || '<p>No content available for this post.</p>';
+
+        /* --- sidebar tags --- */
+        if (post.tags && post.tags.length) {
+          var tagsCard = document.getElementById('sidebar-tags');
+          var tagsList = document.getElementById('sidebar-tags-list');
+          var tagsHTML = '';
+          post.tags.forEach(function (tag) {
+            tagsHTML += '<span class="tag-pill">' + esc(tag) + '</span>';
+          });
+          tagsList.innerHTML = tagsHTML;
+          tagsCard.style.display = '';
+        }
+
+        /* --- sidebar tech stack --- */
+        if (post.techStack && post.techStack.length) {
+          var techCard = document.getElementById('sidebar-tech');
+          var techList = document.getElementById('sidebar-tech-list');
+          var techHTML = '';
+          post.techStack.forEach(function (tech) {
+            techHTML += '<span class="tag-pill">' + esc(tech) + '</span>';
+          });
+          techList.innerHTML = techHTML;
+          techCard.style.display = '';
+        }
+
+        /* --- show article state --- */
+        showState('article-state');
+
+        /* --- related posts --- */
+        var related = ContentAPI.getRelatedPosts(post, 3);
+        if (related.length > 0) {
+          var relatedSection = document.getElementById('related-section');
+          var relatedGrid = document.getElementById('related-grid');
+          var relatedHTML = '';
+          related.forEach(function (rp) {
+            relatedHTML += renderRelatedCard(rp);
+          });
+          relatedGrid.innerHTML = relatedHTML;
+          relatedSection.style.display = '';
+        }
+
+        /* --- re-init lucide for dynamically added icons --- */
+        if (typeof lucide !== 'undefined') {
+          lucide.createIcons();
+        }
+      }
+
+      /* ── Bootstrap ──────────────────────────────────────────────── */
+      var slug = new URLSearchParams(window.location.search).get('slug');
+
+      if (!slug) {
+        showState('error-state');
+        /* hide hero skeleton, show nothing in hero */
+        document.getElementById('hero-skeleton').style.display = 'none';
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+        return;
+      }
+
+      showState('loading-state');
+
+      ContentAPI.loadPosts()
+        .then(function (posts) {
+          var post = ContentAPI.getPostBySlug(slug);
+          if (!post) {
+            showState('error-state');
+            document.getElementById('hero-skeleton').style.display = 'none';
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+            return;
+          }
+          renderPost(post, posts);
+        })
+        .catch(function (err) {
+          console.error('Failed to load post:', err);
+          showState('error-state');
+          document.getElementById('hero-skeleton').style.display = 'none';
+          if (typeof lucide !== 'undefined') lucide.createIcons();
+        });
+
+    })();
+
+    /* ── Active nav ─────────────────────────────────────────────── */
+    (function () {
+      var path = window.location.pathname;
+      var page = path.includes('blog') ? 'blog' : '';
+      var el = document.querySelector('[data-page="' + page + '"]');
+      if (el && el.classList.contains('nav-dropdown-item')) {
+        el.classList.add('active');
+        document.getElementById('explore-trigger').classList.add('active');
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -21,6 +21,9 @@
       }
     }
   </script>
+  <script>/* instant dark mode — prevents flash of white */
+    (function(){var o=localStorage.getItem('is-theme-override');if(o==='dark'||(o===null&&(new Date().getHours()>=19||new Date().getHours()<7)))document.documentElement.classList.add('dark');})();
+  </script>
   <link rel="stylesheet" href="/assets/css/main.css">
   <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
   <style>
@@ -280,7 +283,7 @@
             </div>
           </div>
           <a href="/contact.html" class="nav-link" data-page="contact">Contact</a>
-          <a href="/scripture/" class="nav-link" data-page="scripture">Scripture</a>
+          <a href="/scripture/" class="nav-link" data-page="scripture">✝️ Word of God</a>
         </div>
         <div class="nav-actions">
           <a href="tel:+13463839529" class="nav-phone hidden lg:flex">
@@ -355,191 +358,21 @@
         <button class="filter-btn" data-filter="consulting">Consulting</button>
       </div>
 
-      <!-- Featured Case Study -->
-      <div class="featured-case reveal" data-category="data-science">
-        <div class="featured-case-visual" style="border-right:1px solid var(--border);">
-          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop&auto=format&q=80" alt="Enterprise analytics dashboard" loading="lazy">
-        </div>
-        <div class="featured-case-body">
-          <span class="work-cat">Featured · Data Science</span>
-          <h2 style="font-size:clamp(1.1rem,2vw,1.4rem);margin-bottom:.75rem;line-height:1.3;">Enterprise Analytics Platform for a Retail Chain</h2>
-          <p style="font-size:.85rem;margin-bottom:.25rem;"><strong style="color:var(--text);">Challenge:</strong> A 200-store retail chain had sales data spread across 4 legacy systems with zero unified reporting. Executives were making decisions on week-old spreadsheets.</p>
-          <p style="font-size:.85rem;margin-bottom:.25rem;margin-top:.5rem;"><strong style="color:var(--text);">Solution:</strong> Built an end-to-end ETL pipeline feeding a centralized data warehouse, then designed a 12-dashboard Power BI suite covering inventory, sales performance, and customer segmentation.</p>
-          <div class="result-row">
-            <div class="result-item">
-              <div class="result-value">40%</div>
-              <div class="result-label">Faster Decisions</div>
-            </div>
-            <div class="result-item">
-              <div class="result-value">$1.2M</div>
-              <div class="result-label">Cost Identified</div>
-            </div>
-            <div class="result-item">
-              <div class="result-value">6 Wks</div>
-              <div class="result-label">Delivery Time</div>
-            </div>
-          </div>
-          <div style="display:flex;flex-wrap:wrap;gap:.375rem;margin-bottom:1.25rem;">
-            <span class="tech-tag">Python</span>
-            <span class="tech-tag">SQL</span>
-            <span class="tech-tag">Power BI</span>
-            <span class="tech-tag">Azure</span>
-            <span class="tech-tag">dbt</span>
-          </div>
-          <a href="/contact.html" class="btn btn-primary" style="width:fit-content;">
-            Discuss a Similar Project
-            <i data-lucide="arrow-right" style="width:14px;height:14px;"></i>
-          </a>
-        </div>
+      <!-- Featured Case Study (rendered by JS) -->
+      <div id="featured-case-slot"></div>
+
+      <!-- Skeleton -->
+      <div id="work-skeleton" class="work-grid">
+        <div class="work-card" style="opacity:.4;" aria-hidden="true"><div class="work-thumb" style="background:var(--bg-muted);"></div><div class="work-body"><div style="height:.75rem;background:var(--bg-muted);border-radius:4px;margin-bottom:.75rem;width:40%;"></div><div style="height:1rem;background:var(--bg-muted);border-radius:4px;margin-bottom:.5rem;"></div><div style="height:1rem;background:var(--bg-muted);border-radius:4px;width:70%;"></div></div></div>
+        <div class="work-card" style="opacity:.3;" aria-hidden="true"><div class="work-thumb" style="background:var(--bg-muted);"></div><div class="work-body"><div style="height:.75rem;background:var(--bg-muted);border-radius:4px;margin-bottom:.75rem;width:35%;"></div><div style="height:1rem;background:var(--bg-muted);border-radius:4px;margin-bottom:.5rem;"></div><div style="height:1rem;background:var(--bg-muted);border-radius:4px;width:60%;"></div></div></div>
+        <div class="work-card" style="opacity:.2;" aria-hidden="true"><div class="work-thumb" style="background:var(--bg-muted);"></div><div class="work-body"><div style="height:.75rem;background:var(--bg-muted);border-radius:4px;margin-bottom:.75rem;width:45%;"></div><div style="height:1rem;background:var(--bg-muted);border-radius:4px;margin-bottom:.5rem;"></div><div style="height:1rem;background:var(--bg-muted);border-radius:4px;width:80%;"></div></div></div>
       </div>
 
-      <!-- Projects Grid -->
-      <div class="work-grid">
+      <!-- Projects Grid (rendered by JS) -->
+      <div class="work-grid" id="work-grid" style="display:none;"></div>
 
-        <div class="work-card reveal" data-delay="0" data-category="ai-ml">
-          <div class="work-thumb">
-            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&h=340&fit=crop&auto=format&q=80" alt="AI chatbot" loading="lazy">
-          </div>
-          <div class="work-body">
-            <span class="work-cat">AI & ML</span>
-            <h3>AI-Powered Customer Support Chatbot</h3>
-            <p>Built an LLM-driven support agent for a SaaS company that resolved 72% of tier-1 tickets without human intervention, reducing support costs by 35%.</p>
-            <div class="work-metrics">
-              <span class="metric-pill"><span class="val">72%</span> Auto-resolved</span>
-              <span class="metric-pill"><span class="val">35%</span> Cost reduction</span>
-            </div>
-            <div class="work-footer">
-              <div class="work-tech">
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">LangChain</span>
-                <span class="tech-tag">Pinecone</span>
-                <span class="tech-tag">FastAPI</span>
-              </div>
-              <span class="view-link">Details <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="work-card reveal" data-delay="80" data-category="fullstack">
-          <div class="work-thumb">
-            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=340&fit=crop&auto=format&q=80" alt="eCommerce platform" loading="lazy">
-          </div>
-          <div class="work-body">
-            <span class="work-cat">Full-Stack</span>
-            <h3>Multi-Vendor eCommerce Platform</h3>
-            <p>Designed and built a multi-tenant marketplace from scratch, supporting 50+ vendors with separate storefronts, unified checkout, and real-time inventory sync.</p>
-            <div class="work-metrics">
-              <span class="metric-pill"><span class="val">50+</span> Vendors</span>
-              <span class="metric-pill"><span class="val">99.9%</span> Uptime</span>
-            </div>
-            <div class="work-footer">
-              <div class="work-tech">
-                <span class="tech-tag">Next.js</span>
-                <span class="tech-tag">Node.js</span>
-                <span class="tech-tag">MongoDB</span>
-                <span class="tech-tag">Stripe</span>
-              </div>
-              <span class="view-link">Details <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="work-card reveal" data-delay="160" data-category="data-science">
-          <div class="work-thumb">
-            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=340&fit=crop&auto=format&q=80" alt="Predictive analytics model" loading="lazy">
-          </div>
-          <div class="work-body">
-            <span class="work-cat">Data Science</span>
-            <h3>Predictive Churn Model for SaaS</h3>
-            <p>Built a churn prediction system that flagged at-risk customers 30 days out with 88% precision, enabling the CS team to intervene proactively.</p>
-            <div class="work-metrics">
-              <span class="metric-pill"><span class="val">88%</span> Precision</span>
-              <span class="metric-pill"><span class="val">30-day</span> Lookout</span>
-            </div>
-            <div class="work-footer">
-              <div class="work-tech">
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">XGBoost</span>
-                <span class="tech-tag">Pandas</span>
-                <span class="tech-tag">Tableau</span>
-              </div>
-              <span class="view-link">Details <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="work-card reveal" data-delay="0" data-category="fullstack">
-          <div class="work-thumb">
-            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=340&fit=crop&auto=format&q=80" alt="Healthcare management system" loading="lazy">
-          </div>
-          <div class="work-body">
-            <span class="work-cat">Full-Stack</span>
-            <h3>Healthcare Appointment Management System</h3>
-            <p>HIPAA-compliant patient portal and scheduling system for a 15-provider clinic, replacing a paper-based process and cutting no-shows by 28%.</p>
-            <div class="work-metrics">
-              <span class="metric-pill"><span class="val">28%</span> Fewer no-shows</span>
-              <span class="metric-pill">HIPAA compliant</span>
-            </div>
-            <div class="work-footer">
-              <div class="work-tech">
-                <span class="tech-tag">React</span>
-                <span class="tech-tag">Express</span>
-                <span class="tech-tag">PostgreSQL</span>
-                <span class="tech-tag">AWS</span>
-              </div>
-              <span class="view-link">Details <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="work-card reveal" data-delay="80" data-category="consulting">
-          <div class="work-thumb">
-            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=340&fit=crop&auto=format&q=80" alt="Cloud migration architecture" loading="lazy">
-          </div>
-          <div class="work-body">
-            <span class="work-cat">Consulting</span>
-            <h3>Cloud Migration Strategy for FinTech Startup</h3>
-            <p>Led the architecture review and migration plan for a FinTech moving from on-prem to AWS, reducing infrastructure costs by 45% while improving resilience.</p>
-            <div class="work-metrics">
-              <span class="metric-pill"><span class="val">45%</span> Cost savings</span>
-              <span class="metric-pill"><span class="val">3x</span> Faster deploys</span>
-            </div>
-            <div class="work-footer">
-              <div class="work-tech">
-                <span class="tech-tag">AWS</span>
-                <span class="tech-tag">Terraform</span>
-                <span class="tech-tag">Docker</span>
-                <span class="tech-tag">K8s</span>
-              </div>
-              <span class="view-link">Details <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="work-card reveal" data-delay="160" data-category="ai-ml">
-          <div class="work-thumb">
-            <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=600&h=340&fit=crop&auto=format&q=80" alt="NLP document processing" loading="lazy">
-          </div>
-          <div class="work-body">
-            <span class="work-cat">AI & ML</span>
-            <h3>NLP Document Intelligence Pipeline</h3>
-            <p>Built a document processing system for a law firm that extracted key clauses, flagged risk terms, and summarized contracts — cutting review time from 4 hours to 20 minutes.</p>
-            <div class="work-metrics">
-              <span class="metric-pill"><span class="val">4hr → 20min</span></span>
-              <span class="metric-pill"><span class="val">94%</span> Accuracy</span>
-            </div>
-            <div class="work-footer">
-              <div class="work-tech">
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">HuggingFace</span>
-                <span class="tech-tag">spaCy</span>
-                <span class="tech-tag">FastAPI</span>
-              </div>
-              <span class="view-link">Details <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></span>
-            </div>
-          </div>
-        </div>
-
+      <div id="work-empty" style="display:none;text-align:center;padding:3rem 0;">
+        <p style="color:var(--text-muted);">No projects found in this category.</p>
       </div>
     </div>
   </section>
@@ -672,21 +505,96 @@
 
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <script src="/assets/js/content-api.js"></script>
   <script src="/assets/js/main.js"></script>
   <script>
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-        const filter = this.dataset.filter;
-        document.querySelectorAll('.work-card, .featured-case').forEach(card => {
-          if (filter === 'all' || card.dataset.category === filter) {
-            card.style.display = '';
-          } else {
-            card.style.display = 'none';
-          }
+    function renderFeaturedCase(p) {
+      var resultsHtml = (p.results || []).map(function(r) {
+        return '<div class="result-item"><div class="result-value">' + r.value + '</div><div class="result-label">' + r.label + '</div></div>';
+      }).join('');
+      var techHtml = (p.tech || []).slice(0,5).map(function(t) {
+        return '<span class="tech-tag">' + t + '</span>';
+      }).join('');
+      document.getElementById('featured-case-slot').innerHTML =
+        '<a href="/case-study.html?slug=' + p.slug + '" class="featured-case" data-category="' + p.category + '">' +
+          '<div class="featured-case-visual" style="border-right:1px solid var(--border);">' +
+            '<img src="' + p.image + '" alt="' + p.title + '" loading="lazy">' +
+          '</div>' +
+          '<div class="featured-case-body">' +
+            '<span class="work-cat">Featured · ' + p.categoryLabel + '</span>' +
+            '<h2 style="font-size:clamp(1.1rem,2vw,1.4rem);margin-bottom:.75rem;line-height:1.3;">' + p.title + '</h2>' +
+            '<p style="font-size:.85rem;margin-bottom:.25rem;"><strong style="color:var(--text);">Challenge:</strong> ' + p.challenge + '</p>' +
+            '<p style="font-size:.85rem;margin-top:.5rem;margin-bottom:.25rem;"><strong style="color:var(--text);">Solution:</strong> ' + p.solution + '</p>' +
+            '<div class="result-row">' + resultsHtml + '</div>' +
+            '<div style="display:flex;flex-wrap:wrap;gap:.375rem;margin-bottom:1.25rem;">' + techHtml + '</div>' +
+            '<span class="btn btn-primary" style="width:fit-content;">View Case Study <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>' +
+          '</div>' +
+        '</a>';
+    }
+
+    function renderWorkCard(p, delay) {
+      var metricsHtml = (p.results || []).slice(0,2).map(function(r) {
+        return '<span class="metric-pill"><span class="val">' + r.value + '</span> ' + r.label + '</span>';
+      }).join('');
+      var techHtml = (p.tech || []).slice(0,4).map(function(t) {
+        return '<span class="tech-tag">' + t + '</span>';
+      }).join('');
+      return '<a href="/case-study.html?slug=' + p.slug + '" class="work-card" data-category="' + p.category + '">' +
+        '<div class="work-thumb"><img src="' + p.image + '" alt="' + p.title + '" loading="lazy"></div>' +
+        '<div class="work-body">' +
+          '<span class="work-cat">' + p.categoryLabel + '</span>' +
+          '<h3>' + p.title + '</h3>' +
+          '<p>' + p.challenge + '</p>' +
+          '<div class="work-metrics">' + metricsHtml + '</div>' +
+          '<div class="work-footer">' +
+            '<div class="work-tech">' + techHtml + '</div>' +
+            '<span class="view-link">Details <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>' +
+          '</div>' +
+        '</div>' +
+      '</a>';
+    }
+
+    function renderWorkGrid(filter) {
+      var featured = ContentAPI.getFeaturedProject();
+      var slot = document.getElementById('featured-case-slot');
+      var grid = document.getElementById('work-grid');
+      var empty = document.getElementById('work-empty');
+      var projects;
+
+      if (filter === 'all') {
+        slot.style.display = '';
+        projects = ContentAPI.getRegularProjects();
+      } else {
+        slot.style.display = 'none';
+        projects = ContentAPI.getProjectsByCategory(filter);
+      }
+
+      if (!projects.length) {
+        grid.style.display = 'none';
+        empty.style.display = 'block';
+        return;
+      }
+      empty.style.display = 'none';
+      grid.style.display = '';
+      grid.innerHTML = projects.map(function(p, i) {
+        return renderWorkCard(p, (i % 3) * 80);
+      }).join('');
+    }
+
+    ContentAPI.loadProjects().then(function() {
+      document.getElementById('work-skeleton').style.display = 'none';
+      renderFeaturedCase(ContentAPI.getFeaturedProject());
+      renderWorkGrid('all');
+
+      document.querySelectorAll('.filter-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          renderWorkGrid(btn.dataset.filter);
         });
       });
+    }).catch(function() {
+      document.getElementById('work-skeleton').innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:2rem;">Failed to load projects. Please refresh.</p>';
     });
   </script>
 

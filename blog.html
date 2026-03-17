@@ -21,6 +21,9 @@
       }
     }
   </script>
+  <script>/* instant dark mode — prevents flash of white */
+    (function(){var o=localStorage.getItem('is-theme-override');if(o==='dark'||(o===null&&(new Date().getHours()>=19||new Date().getHours()<7)))document.documentElement.classList.add('dark');})();
+  </script>
   <link rel="stylesheet" href="/assets/css/main.css">
   <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
   <style>
@@ -272,7 +275,7 @@
             </div>
           </div>
           <a href="/contact.html" class="nav-link" data-page="contact">Contact</a>
-          <a href="/scripture/" class="nav-link" data-page="scripture">Scripture</a>
+          <a href="/scripture/" class="nav-link" data-page="scripture">✝️ Word of God</a>
         </div>
         <div class="nav-actions">
           <a href="tel:+13463839529" class="nav-phone hidden lg:flex">
@@ -327,170 +330,31 @@
         <button class="filter-btn" data-filter="coaching">Coaching & Life</button>
       </div>
 
-      <!-- Featured Post -->
-      <div class="featured-post reveal" data-category="ai-ml" onclick="showComingSoon()" style="cursor:pointer;">
-        <div class="featured-thumb" style="border-right:1px solid var(--border);">
-          <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&h=480&fit=crop&auto=format&q=80" alt="AI and RAG systems" loading="lazy">
+      <!-- Featured Post (rendered by JS) -->
+      <div id="featured-post-slot"></div>
+
+      <!-- Skeleton loader -->
+      <div id="blog-skeleton" class="blog-grid">
+        <div class="blog-card" style="opacity:.4;" aria-hidden="true">
+          <div class="blog-thumb" style="background:var(--bg-muted);"></div>
+          <div class="blog-body"><div style="height:.75rem;background:var(--bg-muted);border-radius:4px;margin-bottom:.75rem;width:40%;"></div><div style="height:1rem;background:var(--bg-muted);border-radius:4px;margin-bottom:.5rem;"></div><div style="height:1rem;background:var(--bg-muted);border-radius:4px;width:75%;"></div></div>
         </div>
-        <div class="featured-body">
-          <div class="blog-meta">
-            <span class="blog-cat">AI & ML</span>
-            <span class="blog-date">March 10, 2026</span>
-            <span class="blog-read">· 8 min read</span>
-          </div>
-          <div style="background:var(--primary);color:#000;font-size:.68rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;padding:.2rem .625rem;border-radius:999px;display:inline-flex;width:fit-content;margin-bottom:.875rem;">Featured</div>
-          <h2 style="font-size:clamp(1.1rem,2vw,1.5rem);margin-bottom:.75rem;line-height:1.3;">The Practical Guide to Building Production-Ready RAG Systems in 2026</h2>
-          <p style="margin-bottom:1.25rem;">Retrieval-Augmented Generation has gone from research novelty to production staple in under two years. Here's what actually matters when you're moving beyond demos into real enterprise deployments — chunking strategies, vector store choices, evaluation pipelines, and the five failure modes nobody talks about.</p>
-          <span class="read-more">
-            Read Article
-            <i data-lucide="arrow-right" style="width:14px;height:14px;"></i>
-          </span>
+        <div class="blog-card" style="opacity:.3;" aria-hidden="true">
+          <div class="blog-thumb" style="background:var(--bg-muted);"></div>
+          <div class="blog-body"><div style="height:.75rem;background:var(--bg-muted);border-radius:4px;margin-bottom:.75rem;width:35%;"></div><div style="height:1rem;background:var(--bg-muted);border-radius:4px;margin-bottom:.5rem;"></div><div style="height:1rem;background:var(--bg-muted);border-radius:4px;width:60%;"></div></div>
+        </div>
+        <div class="blog-card" style="opacity:.2;" aria-hidden="true">
+          <div class="blog-thumb" style="background:var(--bg-muted);"></div>
+          <div class="blog-body"><div style="height:.75rem;background:var(--bg-muted);border-radius:4px;margin-bottom:.75rem;width:45%;"></div><div style="height:1rem;background:var(--bg-muted);border-radius:4px;margin-bottom:.5rem;"></div><div style="height:1rem;background:var(--bg-muted);border-radius:4px;width:80%;"></div></div>
         </div>
       </div>
 
-      <!-- Articles Grid -->
-      <div class="blog-grid">
+      <!-- Articles Grid (rendered by JS) -->
+      <div class="blog-grid" id="blog-grid" style="display:none;"></div>
 
-        <div class="blog-card reveal" data-delay="0" data-category="data-science" onclick="showComingSoon()" style="cursor:pointer;">
-          <div class="blog-thumb">
-            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=340&fit=crop&auto=format&q=80" alt="Data analytics dashboard" loading="lazy">
-          </div>
-          <div class="blog-body">
-            <div class="blog-meta">
-              <span class="blog-cat">Data Science</span>
-              <span class="blog-date">Mar 5, 2026</span>
-              <span class="blog-read">· 6 min</span>
-            </div>
-            <h3>Power BI vs. Tableau in 2026: Which Should Your Team Choose?</h3>
-            <p>After deploying both tools across 20+ client environments, here's my honest breakdown of when each wins — and when neither does.</p>
-            <div class="blog-footer">
-              <div class="blog-author">
-                <div class="author-avatar">EO</div>
-                <span class="author-name">Emmanuel Oyemosu</span>
-              </div>
-              <span class="read-more">Read <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="blog-card reveal" data-delay="80" data-category="fullstack" onclick="showComingSoon()" style="cursor:pointer;">
-          <div class="blog-thumb">
-            <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=340&fit=crop&auto=format&q=80" alt="Code on screen" loading="lazy">
-          </div>
-          <div class="blog-body">
-            <div class="blog-meta">
-              <span class="blog-cat">Full-Stack</span>
-              <span class="blog-date">Feb 28, 2026</span>
-              <span class="blog-read">· 10 min</span>
-            </div>
-            <h3>Why I Migrated My Clients From REST to tRPC (And What I Learned)</h3>
-            <p>Type safety end-to-end sounds like a buzzword until you've saved 3 hours debugging a null pointer at 2am. My honest experience across four production migrations.</p>
-            <div class="blog-footer">
-              <div class="blog-author">
-                <div class="author-avatar">EO</div>
-                <span class="author-name">Emmanuel Oyemosu</span>
-              </div>
-              <span class="read-more">Read <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="blog-card reveal" data-delay="160" data-category="coaching" onclick="showComingSoon()" style="cursor:pointer;">
-          <div class="blog-thumb">
-            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=340&fit=crop&auto=format&q=80" alt="Coaching and mentorship" loading="lazy">
-          </div>
-          <div class="blog-body">
-            <div class="blog-meta">
-              <span class="blog-cat">Coaching</span>
-              <span class="blog-date">Feb 20, 2026</span>
-              <span class="blog-read">· 5 min</span>
-            </div>
-            <h3>The Career Transition Framework That Actually Works for Tech Professionals</h3>
-            <p>After coaching 30+ professionals through pivots, I've distilled the process to five repeatable steps. No fluff — just what changes outcomes.</p>
-            <div class="blog-footer">
-              <div class="blog-author">
-                <div class="author-avatar">EO</div>
-                <span class="author-name">Emmanuel Oyemosu</span>
-              </div>
-              <span class="read-more">Read <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="blog-card reveal" data-delay="0" data-category="data-science" onclick="showComingSoon()" style="cursor:pointer;">
-          <div class="blog-thumb">
-            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=340&fit=crop&auto=format&q=80" alt="Data visualization" loading="lazy">
-          </div>
-          <div class="blog-body">
-            <div class="blog-meta">
-              <span class="blog-cat">Data Science</span>
-              <span class="blog-date">Feb 12, 2026</span>
-              <span class="blog-read">· 7 min</span>
-            </div>
-            <h3>Exploratory Data Analysis in 2026: Tools, Patterns & Pitfalls</h3>
-            <p>EDA is still where the real insight lives — and yet most teams rush through it. Here's the systematic approach I use on every project, plus the tools that actually save time.</p>
-            <div class="blog-footer">
-              <div class="blog-author">
-                <div class="author-avatar">EO</div>
-                <span class="author-name">Emmanuel Oyemosu</span>
-              </div>
-              <span class="read-more">Read <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="blog-card reveal" data-delay="80" data-category="ai-ml" onclick="showComingSoon()" style="cursor:pointer;">
-          <div class="blog-thumb">
-            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&h=340&fit=crop&auto=format&q=80" alt="AI and machine learning" loading="lazy">
-          </div>
-          <div class="blog-body">
-            <div class="blog-meta">
-              <span class="blog-cat">AI & ML</span>
-              <span class="blog-date">Jan 30, 2026</span>
-              <span class="blog-read">· 9 min</span>
-            </div>
-            <h3>Fine-Tuning vs. Prompting: When Each Strategy Actually Makes Sense</h3>
-            <p>The LLM ecosystem keeps moving fast, but the core decision between fine-tuning and prompt engineering hasn't changed. Here's a decision framework rooted in cost, latency, and use-case fit.</p>
-            <div class="blog-footer">
-              <div class="blog-author">
-                <div class="author-avatar">EO</div>
-                <span class="author-name">Emmanuel Oyemosu</span>
-              </div>
-              <span class="read-more">Read <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="blog-card reveal" data-delay="160" data-category="fullstack" onclick="showComingSoon()" style="cursor:pointer;">
-          <div class="blog-thumb">
-            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=340&fit=crop&auto=format&q=80" alt="Server architecture" loading="lazy">
-          </div>
-          <div class="blog-body">
-            <div class="blog-meta">
-              <span class="blog-cat">Full-Stack</span>
-              <span class="blog-date">Jan 18, 2026</span>
-              <span class="blog-read">· 12 min</span>
-            </div>
-            <h3>Designing a Multi-Tenant SaaS Architecture: Lessons from the Field</h3>
-            <p>Building multi-tenancy into an existing app is painful. Building it from the start with the wrong assumptions is worse. Here's the architecture pattern I now use on every SaaS project.</p>
-            <div class="blog-footer">
-              <div class="blog-author">
-                <div class="author-avatar">EO</div>
-                <span class="author-name">Emmanuel Oyemosu</span>
-              </div>
-              <span class="read-more">Read <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Load More -->
-      <div class="text-center" style="margin-top:2.5rem;">
-        <button class="btn btn-ghost">
-          <i data-lucide="refresh-cw" style="width:14px;height:14px;"></i>
-          Load More Articles
-        </button>
+      <!-- Empty state -->
+      <div id="blog-empty" style="display:none;text-align:center;padding:3rem 0;">
+        <p style="color:var(--text-muted);">No articles found in this category yet.</p>
       </div>
     </div>
   </section>
@@ -622,46 +486,106 @@
 
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <script src="/assets/js/content-api.js"></script>
   <script src="/assets/js/main.js"></script>
   <script>
-    // Coming soon toast
-    function showComingSoon() {
-      const existing = document.getElementById('blog-toast');
-      if (existing) existing.remove();
-      const toast = document.createElement('div');
-      toast.id = 'blog-toast';
-      toast.style.cssText = 'position:fixed;bottom:5.5rem;left:50%;transform:translateX(-50%);background:#1a1a1a;color:#f0f0f0;border:1px solid rgba(255,196,81,.3);padding:.625rem 1.25rem;border-radius:999px;font-size:.8rem;font-weight:600;z-index:9999;display:flex;align-items:center;gap:.5rem;box-shadow:0 4px 20px rgba(0,0,0,.4);white-space:nowrap;';
-      toast.innerHTML = '<span style="color:#ffc451;font-size:.9rem;">✍️</span> Full article coming soon!';
-      document.body.appendChild(toast);
-      setTimeout(() => { toast.style.opacity='0'; toast.style.transition='opacity .4s'; }, 2200);
-      setTimeout(() => toast.remove(), 2700);
+    var _activeFilter = 'all';
+
+    function renderFeatured(post) {
+      var slot = document.getElementById('featured-post-slot');
+      slot.innerHTML = '<a href="/blog-post.html?slug=' + post.slug + '" class="featured-post" data-category="' + post.category + '">' +
+        '<div class="featured-thumb" style="border-right:1px solid var(--border);">' +
+          '<img src="' + post.image + '" alt="' + post.title + '" loading="lazy">' +
+        '</div>' +
+        '<div class="featured-body">' +
+          '<div class="blog-meta">' +
+            '<span class="blog-cat">' + post.categoryLabel + '</span>' +
+            '<span class="blog-date">' + post.dateLabel + '</span>' +
+            '<span class="blog-read">· ' + post.readTime + ' min read</span>' +
+          '</div>' +
+          '<div style="background:var(--primary);color:#000;font-size:.68rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;padding:.2rem .625rem;border-radius:999px;display:inline-flex;width:fit-content;margin-bottom:.875rem;">Featured</div>' +
+          '<h2 style="font-size:clamp(1.1rem,2vw,1.5rem);margin-bottom:.75rem;line-height:1.3;">' + post.title + '</h2>' +
+          '<p style="margin-bottom:1.25rem;">' + post.excerpt + '</p>' +
+          '<span class="read-more">Read Article <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>' +
+        '</div>' +
+      '</a>';
     }
 
-    // Filter logic
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-        const filter = this.dataset.filter;
-        document.querySelectorAll('.blog-card, .featured-post').forEach(card => {
-          if (filter === 'all' || card.dataset.category === filter) {
-            card.style.display = '';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      });
-    });
+    function renderCard(post, delay) {
+      return '<a href="/blog-post.html?slug=' + post.slug + '" class="blog-card" data-category="' + post.category + '">' +
+        '<div class="blog-thumb"><img src="' + post.image + '" alt="' + post.title + '" loading="lazy"></div>' +
+        '<div class="blog-body">' +
+          '<div class="blog-meta">' +
+            '<span class="blog-cat">' + post.categoryLabel + '</span>' +
+            '<span class="blog-date">' + post.dateLabel + '</span>' +
+            '<span class="blog-read">· ' + post.readTime + ' min</span>' +
+          '</div>' +
+          '<h3>' + post.title + '</h3>' +
+          '<p>' + post.excerpt + '</p>' +
+          '<div class="blog-footer">' +
+            '<div class="blog-author"><div class="author-avatar">EO</div><span class="author-name">Emmanuel Oyemosu</span></div>' +
+            '<span class="read-more">Read <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>' +
+          '</div>' +
+        '</div>' +
+      '</a>';
+    }
+
+    function renderGrid(filter) {
+      var posts = ContentAPI.getPostsByCategory(filter);
+      var featured = ContentAPI.getFeaturedPost();
+      var grid = document.getElementById('blog-grid');
+      var empty = document.getElementById('blog-empty');
+      var slot = document.getElementById('featured-post-slot');
+
+      // show/hide featured based on filter
+      if (filter === 'all') {
+        slot.style.display = '';
+        posts = ContentAPI.getRegularPosts();
+      } else {
+        slot.style.display = 'none';
+      }
+
+      if (!posts.length) {
+        grid.style.display = 'none';
+        empty.style.display = 'block';
+        return;
+      }
+
+      empty.style.display = 'none';
+      grid.style.display = '';
+      grid.innerHTML = posts.map(function(p, i) {
+        return renderCard(p, (i % 3) * 80);
+      }).join('');
+
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
 
     function handleNewsletter(e) {
       e.preventDefault();
-      const input = e.target.querySelector('input');
-      const btn = e.target.querySelector('button');
+      var btn = e.target.querySelector('button');
       btn.textContent = 'Subscribed!';
       btn.style.opacity = '.7';
       btn.disabled = true;
-      input.value = '';
+      e.target.querySelector('input').value = '';
     }
+
+    // Boot
+    ContentAPI.loadPosts().then(function() {
+      document.getElementById('blog-skeleton').style.display = 'none';
+      renderFeatured(ContentAPI.getFeaturedPost());
+      renderGrid('all');
+
+      document.querySelectorAll('.filter-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          _activeFilter = btn.dataset.filter;
+          renderGrid(_activeFilter);
+        });
+      });
+    }).catch(function() {
+      document.getElementById('blog-skeleton').innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:2rem;">Failed to load articles. Please refresh.</p>';
+    });
   </script>
 
   <script>
