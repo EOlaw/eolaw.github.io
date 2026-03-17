@@ -847,7 +847,7 @@ footer {
   .footer-grid { grid-template-columns: 1fr; gap: 1.5rem; }
 }
 
-/* ── Scripture Preview Section ───────────────────────────────────── */
+/* ── ✝️ Word of God Preview Section ───────────────────────────────────── */
 .scripture-preview-section { background: var(--bg); }
 .scripture-preview-card {
   background: #0a0a12;
