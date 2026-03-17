@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Insights & Articles | InsightSerenity</title>
+  <meta name="description" content="Data science insights, AI trends, software engineering tips, and life coaching perspectives from Emmanuel Oyemosu.">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon_io/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="/assets/img/favicon_io/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/img/favicon_io/site.webmanifest">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: { 300:'#ffe08a',400:'#ffd27f',500:'#ffc451',600:'#e6b048',700:'#cc9c3f' }
+          },
+          fontFamily: { sans:['Inter','sans-serif'], display:['Space Grotesk','sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <style>
+    /* ── Blog-specific styles ── */
+    .blog-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+    }
+    .filter-btn {
+      padding: .4rem 1rem;
+      border-radius: 999px;
+      font-size: .75rem;
+      font-weight: 600;
+      border: 1.5px solid var(--border);
+      color: var(--text-muted);
+      background: var(--bg-card);
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: var(--primary-dim);
+    }
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .blog-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: border-color .2s, box-shadow .2s, transform .2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .blog-card:hover {
+      border-color: var(--primary-border);
+      box-shadow: 0 0 0 1px var(--primary-border), var(--shadow-md);
+      transform: translateY(-2px);
+    }
+    .blog-thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .blog-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .4s ease;
+    }
+    .blog-card:hover .blog-thumb img { transform: scale(1.04); }
+    .blog-body {
+      padding: 1.25rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .blog-meta {
+      display: flex;
+      align-items: center;
+      gap: .625rem;
+      margin-bottom: .75rem;
+      flex-wrap: wrap;
+    }
+    .blog-cat {
+      font-size: .68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--primary);
+      background: var(--primary-dim);
+      border: 1px solid var(--primary-border);
+      padding: .2rem .6rem;
+      border-radius: 999px;
+    }
+    .blog-date {
+      font-size: .72rem;
+      color: var(--text-soft);
+    }
+    .blog-read {
+      font-size: .72rem;
+      color: var(--text-soft);
+    }
+    .blog-card h3 {
+      font-size: .9375rem;
+      margin-bottom: .5rem;
+      color: var(--text);
+      line-height: 1.4;
+    }
+    .blog-card p {
+      font-size: .8rem;
+      color: var(--text-muted);
+      flex: 1;
+    }
+    .blog-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1rem;
+      padding-top: .875rem;
+      border-top: 1px solid var(--border);
+    }
+    .blog-author {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .author-avatar {
+      width: 1.75rem;
+      height: 1.75rem;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #000;
+      font-size: .65rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .author-name {
+      font-size: .72rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .read-more {
+      font-size: .75rem;
+      font-weight: 600;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: .25rem;
+      transition: gap .2s;
+    }
+    .blog-card:hover .read-more { gap: .5rem; }
+    .featured-post {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin-bottom: 2.5rem;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .featured-post:hover {
+      border-color: var(--primary-border);
+      box-shadow: var(--shadow-lg);
+    }
+    .featured-thumb {
+      aspect-ratio: unset;
+      min-height: 280px;
+      overflow: hidden;
+    }
+    .featured-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .5s ease;
+    }
+    .featured-post:hover .featured-thumb img { transform: scale(1.04); }
+    .featured-body {
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .newsletter-card {
+      background: linear-gradient(135deg, var(--primary-dim) 0%, transparent 60%);
+      border: 1px solid var(--primary-border);
+      border-radius: var(--radius-xl);
+      padding: 3rem;
+      text-align: center;
+    }
+    .newsletter-form {
+      display: flex;
+      gap: .625rem;
+      max-width: 440px;
+      margin: 1.5rem auto 0;
+    }
+    .newsletter-form input {
+      flex: 1;
+      padding: .625rem 1rem;
+      border-radius: var(--radius);
+      border: 1.5px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-size: .8rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .newsletter-form input:focus { border-color: var(--primary); }
+    .newsletter-form input::placeholder { color: var(--text-soft); }
+    @media (max-width: 900px) {
+      .blog-grid { grid-template-columns: repeat(2, 1fr); }
+      .featured-post { grid-template-columns: 1fr; }
+      .featured-thumb { min-height: 200px; }
+    }
+    @media (max-width: 600px) {
+      .blog-grid { grid-template-columns: 1fr; }
+      .newsletter-form { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="/index.html" class="nav-logo">
+          <img src="/assets/img/favicon_io/android-chrome-192x192.png" alt="InsightSerenity" style="width:2rem;height:2rem;border-radius:0.5rem;">
+        </a>
+        <div class="nav-links">
+          <a href="/index.html" class="nav-link" data-page="home">Home</a>
+          <a href="/about.html" class="nav-link" data-page="about">About</a>
+          <a href="/services.html" class="nav-link" data-page="services">Services</a>
+          <div class="nav-dropdown">
+            <button class="nav-dropdown-trigger" id="explore-trigger">
+              Explore
+              <i data-lucide="chevron-down" style="width:13px;height:13px;"></i>
+            </button>
+            <div class="nav-dropdown-menu">
+              <a href="/blog.html" class="nav-dropdown-item" data-page="blog">
+                <div class="nav-dropdown-icon"><i data-lucide="file-text"></i></div>
+                <div><div class="nav-dd-label">Blog</div><div class="nav-dd-sub">Insights & articles</div></div>
+              </a>
+              <a href="/work.html" class="nav-dropdown-item" data-page="work">
+                <div class="nav-dropdown-icon"><i data-lucide="briefcase"></i></div>
+                <div><div class="nav-dd-label">Work</div><div class="nav-dd-sub">Case studies & portfolio</div></div>
+              </a>
+              <div class="nav-dropdown-divider"></div>
+              <a href="/consultation.html" class="nav-dropdown-item" data-page="consultation">
+                <div class="nav-dropdown-icon"><i data-lucide="calendar"></i></div>
+                <div><div class="nav-dd-label">Book a Call</div><div class="nav-dd-sub">Free consultation</div></div>
+              </a>
+            </div>
+          </div>
+          <a href="/contact.html" class="nav-link" data-page="contact">Contact</a>
+          <a href="/scripture/" class="nav-link" data-page="scripture">Scripture</a>
+        </div>
+        <div class="nav-actions">
+          <a href="tel:+13463839529" class="nav-phone hidden lg:flex">
+            <i data-lucide="phone" style="width:14px;height:14px;"></i>
+            <span>+1 (346) 383-9529</span>
+          </a>
+          <button class="theme-toggle" aria-label="Toggle theme"></button>
+          <a href="/consultation.html" class="btn-book">Book Consultation</a>
+        </div>
+        <button class="mobile-toggle" id="mobile-toggle" aria-expanded="false">
+          <i data-lucide="menu" style="width:18px;height:18px;"></i>
+        </button>
+      </div>
+      <div class="mobile-menu" id="mobile-menu">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/about.html" class="nav-link">About</a>
+        <a href="/services.html" class="nav-link">Services</a>
+        <div style="padding:.375rem .875rem .125rem;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-soft);">Explore</div>
+        <a href="/blog.html" class="nav-link" style="padding-left:1.75rem;">✍️ &nbsp;Blog</a>
+        <a href="/work.html" class="nav-link" style="padding-left:1.75rem;">💼 &nbsp;Work</a>
+        <a href="/consultation.html" class="nav-link" style="padding-left:1.75rem;">📅 &nbsp;Book a Call</a>
+        <a href="/contact.html" class="nav-link">Contact</a>
+        <a href="/scripture/" class="nav-link">Scripture</a>
+        <a href="/consultation.html" class="btn btn-primary" style="margin-top:.5rem;">Book Consultation</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="container" style="position:relative;z-index:1;">
+      <div class="reveal">
+        <div class="badge" style="margin-bottom:1rem;">Blog & Insights</div>
+        <h1>Ideas That Move Things Forward</h1>
+        <p style="max-width:560px;margin:.75rem auto 0;">Perspectives on data science, AI trends, software engineering, and human development — written from the trenches of real projects.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ARTICLES -->
+  <section class="section">
+    <div class="container">
+
+      <!-- Filter Tabs -->
+      <div class="blog-filters reveal">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="data-science">Data Science</button>
+        <button class="filter-btn" data-filter="ai-ml">AI & Machine Learning</button>
+        <button class="filter-btn" data-filter="fullstack">Full-Stack Dev</button>
+        <button class="filter-btn" data-filter="coaching">Coaching & Life</button>
+      </div>
+
+      <!-- Featured Post -->
+      <div class="featured-post reveal" data-category="ai-ml" onclick="showComingSoon()" style="cursor:pointer;">
+        <div class="featured-thumb" style="border-right:1px solid var(--border);">
+          <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&h=480&fit=crop&auto=format&q=80" alt="AI and RAG systems" loading="lazy">
+        </div>
+        <div class="featured-body">
+          <div class="blog-meta">
+            <span class="blog-cat">AI & ML</span>
+            <span class="blog-date">March 10, 2026</span>
+            <span class="blog-read">· 8 min read</span>
+          </div>
+          <div style="background:var(--primary);color:#000;font-size:.68rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;padding:.2rem .625rem;border-radius:999px;display:inline-flex;width:fit-content;margin-bottom:.875rem;">Featured</div>
+          <h2 style="font-size:clamp(1.1rem,2vw,1.5rem);margin-bottom:.75rem;line-height:1.3;">The Practical Guide to Building Production-Ready RAG Systems in 2026</h2>
+          <p style="margin-bottom:1.25rem;">Retrieval-Augmented Generation has gone from research novelty to production staple in under two years. Here's what actually matters when you're moving beyond demos into real enterprise deployments — chunking strategies, vector store choices, evaluation pipelines, and the five failure modes nobody talks about.</p>
+          <span class="read-more">
+            Read Article
+            <i data-lucide="arrow-right" style="width:14px;height:14px;"></i>
+          </span>
+        </div>
+      </div>
+
+      <!-- Articles Grid -->
+      <div class="blog-grid">
+
+        <div class="blog-card reveal" data-delay="0" data-category="data-science" onclick="showComingSoon()" style="cursor:pointer;">
+          <div class="blog-thumb">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=340&fit=crop&auto=format&q=80" alt="Data analytics dashboard" loading="lazy">
+          </div>
+          <div class="blog-body">
+            <div class="blog-meta">
+              <span class="blog-cat">Data Science</span>
+              <span class="blog-date">Mar 5, 2026</span>
+              <span class="blog-read">· 6 min</span>
+            </div>
+            <h3>Power BI vs. Tableau in 2026: Which Should Your Team Choose?</h3>
+            <p>After deploying both tools across 20+ client environments, here's my honest breakdown of when each wins — and when neither does.</p>
+            <div class="blog-footer">
+              <div class="blog-author">
+                <div class="author-avatar">EO</div>
+                <span class="author-name">Emmanuel Oyemosu</span>
+              </div>
+              <span class="read-more">Read <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="blog-card reveal" data-delay="80" data-category="fullstack" onclick="showComingSoon()" style="cursor:pointer;">
+          <div class="blog-thumb">
+            <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=340&fit=crop&auto=format&q=80" alt="Code on screen" loading="lazy">
+          </div>
+          <div class="blog-body">
+            <div class="blog-meta">
+              <span class="blog-cat">Full-Stack</span>
+              <span class="blog-date">Feb 28, 2026</span>
+              <span class="blog-read">· 10 min</span>
+            </div>
+            <h3>Why I Migrated My Clients From REST to tRPC (And What I Learned)</h3>
+            <p>Type safety end-to-end sounds like a buzzword until you've saved 3 hours debugging a null pointer at 2am. My honest experience across four production migrations.</p>
+            <div class="blog-footer">
+              <div class="blog-author">
+                <div class="author-avatar">EO</div>
+                <span class="author-name">Emmanuel Oyemosu</span>
+              </div>
+              <span class="read-more">Read <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="blog-card reveal" data-delay="160" data-category="coaching" onclick="showComingSoon()" style="cursor:pointer;">
+          <div class="blog-thumb">
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=340&fit=crop&auto=format&q=80" alt="Coaching and mentorship" loading="lazy">
+          </div>
+          <div class="blog-body">
+            <div class="blog-meta">
+              <span class="blog-cat">Coaching</span>
+              <span class="blog-date">Feb 20, 2026</span>
+              <span class="blog-read">· 5 min</span>
+            </div>
+            <h3>The Career Transition Framework That Actually Works for Tech Professionals</h3>
+            <p>After coaching 30+ professionals through pivots, I've distilled the process to five repeatable steps. No fluff — just what changes outcomes.</p>
+            <div class="blog-footer">
+              <div class="blog-author">
+                <div class="author-avatar">EO</div>
+                <span class="author-name">Emmanuel Oyemosu</span>
+              </div>
+              <span class="read-more">Read <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="blog-card reveal" data-delay="0" data-category="data-science" onclick="showComingSoon()" style="cursor:pointer;">
+          <div class="blog-thumb">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=340&fit=crop&auto=format&q=80" alt="Data visualization" loading="lazy">
+          </div>
+          <div class="blog-body">
+            <div class="blog-meta">
+              <span class="blog-cat">Data Science</span>
+              <span class="blog-date">Feb 12, 2026</span>
+              <span class="blog-read">· 7 min</span>
+            </div>
+            <h3>Exploratory Data Analysis in 2026: Tools, Patterns & Pitfalls</h3>
+            <p>EDA is still where the real insight lives — and yet most teams rush through it. Here's the systematic approach I use on every project, plus the tools that actually save time.</p>
+            <div class="blog-footer">
+              <div class="blog-author">
+                <div class="author-avatar">EO</div>
+                <span class="author-name">Emmanuel Oyemosu</span>
+              </div>
+              <span class="read-more">Read <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="blog-card reveal" data-delay="80" data-category="ai-ml" onclick="showComingSoon()" style="cursor:pointer;">
+          <div class="blog-thumb">
+            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&h=340&fit=crop&auto=format&q=80" alt="AI and machine learning" loading="lazy">
+          </div>
+          <div class="blog-body">
+            <div class="blog-meta">
+              <span class="blog-cat">AI & ML</span>
+              <span class="blog-date">Jan 30, 2026</span>
+              <span class="blog-read">· 9 min</span>
+            </div>
+            <h3>Fine-Tuning vs. Prompting: When Each Strategy Actually Makes Sense</h3>
+            <p>The LLM ecosystem keeps moving fast, but the core decision between fine-tuning and prompt engineering hasn't changed. Here's a decision framework rooted in cost, latency, and use-case fit.</p>
+            <div class="blog-footer">
+              <div class="blog-author">
+                <div class="author-avatar">EO</div>
+                <span class="author-name">Emmanuel Oyemosu</span>
+              </div>
+              <span class="read-more">Read <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="blog-card reveal" data-delay="160" data-category="fullstack" onclick="showComingSoon()" style="cursor:pointer;">
+          <div class="blog-thumb">
+            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=340&fit=crop&auto=format&q=80" alt="Server architecture" loading="lazy">
+          </div>
+          <div class="blog-body">
+            <div class="blog-meta">
+              <span class="blog-cat">Full-Stack</span>
+              <span class="blog-date">Jan 18, 2026</span>
+              <span class="blog-read">· 12 min</span>
+            </div>
+            <h3>Designing a Multi-Tenant SaaS Architecture: Lessons from the Field</h3>
+            <p>Building multi-tenancy into an existing app is painful. Building it from the start with the wrong assumptions is worse. Here's the architecture pattern I now use on every SaaS project.</p>
+            <div class="blog-footer">
+              <div class="blog-author">
+                <div class="author-avatar">EO</div>
+                <span class="author-name">Emmanuel Oyemosu</span>
+              </div>
+              <span class="read-more">Read <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Load More -->
+      <div class="text-center" style="margin-top:2.5rem;">
+        <button class="btn btn-ghost">
+          <i data-lucide="refresh-cw" style="width:14px;height:14px;"></i>
+          Load More Articles
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="newsletter-card reveal">
+        <div class="badge" style="margin-bottom:1rem;">Stay Sharp</div>
+        <h2>Get Insights Delivered to Your Inbox</h2>
+        <p style="max-width:460px;margin:.5rem auto 0;">No spam. One email per week — practical insights on data, AI, software, and personal growth.</p>
+        <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+          <input type="email" placeholder="your@email.com" required>
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+        <p style="font-size:.72rem;margin-top:.875rem;color:var(--text-soft);">Join 200+ professionals. Unsubscribe anytime.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner reveal">
+        <div class="cta-orb-1"></div>
+        <div class="cta-orb-2"></div>
+        <div class="badge" style="background:rgba(0,0,0,0.1);border-color:rgba(0,0,0,0.2);color:#000;margin-bottom:1rem;">Let's Work Together</div>
+        <h2>Want Tailored Advice for Your Project?</h2>
+        <p>Skip the reading and get personalized guidance in a free 30-minute strategy call.</p>
+        <div style="display:flex;gap:.875rem;justify-content:center;flex-wrap:wrap;">
+          <button class="btn btn-dark btn-lg" onclick="openCalendly('https://calendly.com/emmanuel-ao')">
+            <i data-lucide="calendar" style="width:16px;height:16px;"></i>
+            Book Free Call
+          </button>
+          <a href="/work.html" class="btn btn-clear btn-lg">See My Work</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="/index.html" class="nav-logo" style="margin-bottom:.875rem;display:inline-flex;">
+            <img src="/assets/img/favicon_io/android-chrome-192x192.png" alt="InsightSerenity" style="width:2rem;height:2rem;border-radius:0.5rem;">
+          </a>
+          <p class="footer-brand-desc">Expert consulting in Data Science, Software Engineering, AI/ML — plus Life Literacy and Bible-Based Coaching. Transforming data, technology, and lives.</p>
+          <div class="footer-socials">
+            <a href="https://www.linkedin.com/in/emmanuel-oyemosu/" target="_blank" class="social-btn" aria-label="LinkedIn"><i data-lucide="linkedin" style="width:14px;height:14px;"></i></a>
+            <a href="https://github.com/EOlaw" target="_blank" class="social-btn" aria-label="GitHub"><i data-lucide="github" style="width:14px;height:14px;"></i></a>
+            <a href="https://www.instagram.com/e_olawalee/" target="_blank" class="social-btn" aria-label="Instagram"><i data-lucide="instagram" style="width:14px;height:14px;"></i></a>
+            <a href="mailto:emmanuel.ao@outlook.com" class="social-btn" aria-label="Email"><i data-lucide="mail" style="width:14px;height:14px;"></i></a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">Navigation</div>
+          <div class="footer-links">
+            <a href="/index.html">Home</a>
+            <a href="/about.html">About</a>
+            <a href="/services.html">Services</a>
+            <a href="/blog.html">Blog</a>
+            <a href="/work.html">Work</a>
+            <a href="/contact.html">Contact</a>
+            <a href="/consultation.html">Book Consultation</a>
+            <a href="/privacy.html">Privacy Policy</a>
+            <a href="/terms.html">Terms of Service</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">Technical Services</div>
+          <div class="footer-links">
+            <a href="/services.html#data-science">Data Science &amp; Analytics</a>
+            <a href="/services.html#fullstack">Full-Stack Development</a>
+            <a href="/services.html#ai-ml">AI &amp; Machine Learning</a>
+            <a href="/services.html#architecture">System Architecture</a>
+            <a href="/services.html#ecommerce">eCommerce Solutions</a>
+            <a href="/services.html#consulting">Technical Consulting</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">Coaching Services</div>
+          <div class="footer-links">
+            <a href="/services.html#life-coaching">Life Literacy Coaching</a>
+            <a href="/services.html#bible-coaching">Bible-Based Coaching</a>
+          </div>
+          <div class="footer-heading" style="margin-top:1.5rem;">Contact</div>
+          <div class="footer-links">
+            <a href="mailto:emmanuel.ao@outlook.com">emmanuel.ao@outlook.com</a>
+            <a href="tel:+13463839529">+1 (346) 383-9529</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p style="color:var(--text-muted);">© 2025 InsightSerenity. All rights reserved.</p>
+        <div style="display:flex;align-items:center;gap:.375rem;font-size:.75rem;color:var(--text-muted);">
+          <i data-lucide="map-pin" style="width:12px;height:12px;color:var(--primary);"></i>
+          Available Worldwide · Remote Consulting
+        </div>
+        <div style="display:flex;gap:1rem;">
+          <a href="/privacy.html" style="font-size:.75rem;color:var(--text-muted);">Privacy</a>
+          <a href="/terms.html" style="font-size:.75rem;color:var(--text-muted);">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING ACTION BUTTON -->
+  <div class="fab-container" id="fab-container">
+    <div class="fab-actions" id="fab-actions">
+      <a href="/scripture/" class="fab-action">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        Scripture
+      </a>
+      <a href="/consultation.html" class="fab-action">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Book Call
+      </a>
+      <a href="mailto:emmanuel.ao@outlook.com" class="fab-action">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Email Me
+      </a>
+    </div>
+    <button class="fab-btn" id="fab-btn" aria-label="Quick actions">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    </button>
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <script src="/assets/js/main.js"></script>
+  <script>
+    // Coming soon toast
+    function showComingSoon() {
+      const existing = document.getElementById('blog-toast');
+      if (existing) existing.remove();
+      const toast = document.createElement('div');
+      toast.id = 'blog-toast';
+      toast.style.cssText = 'position:fixed;bottom:5.5rem;left:50%;transform:translateX(-50%);background:#1a1a1a;color:#f0f0f0;border:1px solid rgba(255,196,81,.3);padding:.625rem 1.25rem;border-radius:999px;font-size:.8rem;font-weight:600;z-index:9999;display:flex;align-items:center;gap:.5rem;box-shadow:0 4px 20px rgba(0,0,0,.4);white-space:nowrap;';
+      toast.innerHTML = '<span style="color:#ffc451;font-size:.9rem;">✍️</span> Full article coming soon!';
+      document.body.appendChild(toast);
+      setTimeout(() => { toast.style.opacity='0'; toast.style.transition='opacity .4s'; }, 2200);
+      setTimeout(() => toast.remove(), 2700);
+    }
+
+    // Filter logic
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        const filter = this.dataset.filter;
+        document.querySelectorAll('.blog-card, .featured-post').forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    function handleNewsletter(e) {
+      e.preventDefault();
+      const input = e.target.querySelector('input');
+      const btn = e.target.querySelector('button');
+      btn.textContent = 'Subscribed!';
+      btn.style.opacity = '.7';
+      btn.disabled = true;
+      input.value = '';
+    }
+  </script>
+
+  <script>
+    // Mark active nav item based on current page
+    (function(){
+      var path = window.location.pathname;
+      var page = path === '/' || path.includes('index') ? 'home'
+               : path.includes('about') ? 'about'
+               : path.includes('services') ? 'services'
+               : path.includes('blog') ? 'blog'
+               : path.includes('work') ? 'work'
+               : path.includes('consultation') ? 'consultation'
+               : path.includes('contact') ? 'contact'
+               : path.includes('scripture') ? 'scripture' : '';
+      var el = document.querySelector('[data-page="'+page+'"]');
+      if (el) {
+        if (el.classList.contains('nav-link')) el.classList.add('active');
+        if (el.classList.contains('nav-dropdown-item')) {
+          el.classList.add('active');
+          document.getElementById('explore-trigger').classList.add('active');
+        }
+      }
+    })();
+  </script>
+</body>
+</html>

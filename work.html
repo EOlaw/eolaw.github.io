@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Work & Case Studies | InsightSerenity</title>
+  <meta name="description" content="Real projects, real results. Explore case studies across data science, AI, full-stack development, and coaching by Emmanuel Oyemosu.">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon_io/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="/assets/img/favicon_io/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/img/favicon_io/site.webmanifest">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: { 300:'#ffe08a',400:'#ffd27f',500:'#ffc451',600:'#e6b048',700:'#cc9c3f' }
+          },
+          fontFamily: { sans:['Inter','sans-serif'], display:['Space Grotesk','sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <style>
+    .work-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+    }
+    .filter-btn {
+      padding: .4rem 1rem;
+      border-radius: 999px;
+      font-size: .75rem;
+      font-weight: 600;
+      border: 1.5px solid var(--border);
+      color: var(--text-muted);
+      background: var(--bg-card);
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: var(--primary-dim);
+    }
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .work-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: border-color .2s, box-shadow .2s, transform .2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .work-card:hover {
+      border-color: var(--primary-border);
+      box-shadow: 0 0 0 1px var(--primary-border), var(--shadow-md);
+      transform: translateY(-2px);
+    }
+    .work-thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .work-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .4s ease;
+    }
+    .work-card:hover .work-thumb img { transform: scale(1.04); }
+    .work-body { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; }
+    .work-cat {
+      font-size: .68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--primary);
+      background: var(--primary-dim);
+      border: 1px solid var(--primary-border);
+      padding: .2rem .6rem;
+      border-radius: 999px;
+      display: inline-flex;
+      margin-bottom: .75rem;
+      width: fit-content;
+    }
+    .work-card h3 {
+      font-size: .9375rem;
+      margin-bottom: .5rem;
+      color: var(--text);
+    }
+    .work-card > .work-body > p {
+      font-size: .8rem;
+      color: var(--text-muted);
+    }
+    .work-metrics {
+      display: flex;
+      gap: .625rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+    .metric-pill {
+      background: var(--bg-muted);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: .25rem .7rem;
+      font-size: .7rem;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: .25rem;
+    }
+    .metric-pill .val { color: var(--primary); }
+    .work-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1rem;
+      padding-top: .875rem;
+      border-top: 1px solid var(--border);
+    }
+    .work-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .375rem;
+    }
+    .tech-tag {
+      font-size: .65rem;
+      font-weight: 600;
+      color: var(--text-soft);
+      background: var(--bg-muted);
+      border: 1px solid var(--border);
+      padding: .15rem .5rem;
+      border-radius: .375rem;
+    }
+    .view-link {
+      font-size: .75rem;
+      font-weight: 600;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: .25rem;
+      white-space: nowrap;
+      transition: gap .2s;
+    }
+    .work-card:hover .view-link { gap: .5rem; }
+
+    /* Featured Case Study */
+    .featured-case {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin-bottom: 2.5rem;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .featured-case:hover {
+      border-color: var(--primary-border);
+      box-shadow: var(--shadow-lg);
+    }
+    .featured-case-visual {
+      min-height: 320px;
+      overflow: hidden;
+    }
+    .featured-case-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .5s ease;
+    }
+    .featured-case:hover .featured-case-visual img { transform: scale(1.04); }
+    .featured-case-body {
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .result-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: .875rem;
+      margin: 1.5rem 0;
+    }
+    .result-item {
+      text-align: center;
+      background: var(--bg-muted);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: .875rem .5rem;
+    }
+    .result-value {
+      font-size: 1.375rem;
+      font-weight: 800;
+      color: var(--primary);
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .result-label {
+      font-size: .68rem;
+      color: var(--text-muted);
+      margin-top: .25rem;
+    }
+    /* Stats bar */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+      padding: 2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      margin-bottom: 3rem;
+    }
+    .stats-bar-item { text-align: center; }
+    .stats-bar-value {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--primary);
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .stats-bar-label { font-size: .75rem; color: var(--text-muted); margin-top: .25rem; }
+    @media (max-width: 900px) {
+      .work-grid { grid-template-columns: repeat(2, 1fr); }
+      .featured-case { grid-template-columns: 1fr; }
+      .featured-case-visual { min-height: 180px; }
+      .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .work-grid { grid-template-columns: 1fr; }
+      .result-row { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="/index.html" class="nav-logo">
+          <img src="/assets/img/favicon_io/android-chrome-192x192.png" alt="InsightSerenity" style="width:2rem;height:2rem;border-radius:0.5rem;">
+        </a>
+        <div class="nav-links">
+          <a href="/index.html" class="nav-link" data-page="home">Home</a>
+          <a href="/about.html" class="nav-link" data-page="about">About</a>
+          <a href="/services.html" class="nav-link" data-page="services">Services</a>
+          <div class="nav-dropdown">
+            <button class="nav-dropdown-trigger" id="explore-trigger">
+              Explore
+              <i data-lucide="chevron-down" style="width:13px;height:13px;"></i>
+            </button>
+            <div class="nav-dropdown-menu">
+              <a href="/blog.html" class="nav-dropdown-item" data-page="blog">
+                <div class="nav-dropdown-icon"><i data-lucide="file-text"></i></div>
+                <div><div class="nav-dd-label">Blog</div><div class="nav-dd-sub">Insights & articles</div></div>
+              </a>
+              <a href="/work.html" class="nav-dropdown-item" data-page="work">
+                <div class="nav-dropdown-icon"><i data-lucide="briefcase"></i></div>
+                <div><div class="nav-dd-label">Work</div><div class="nav-dd-sub">Case studies & portfolio</div></div>
+              </a>
+              <div class="nav-dropdown-divider"></div>
+              <a href="/consultation.html" class="nav-dropdown-item" data-page="consultation">
+                <div class="nav-dropdown-icon"><i data-lucide="calendar"></i></div>
+                <div><div class="nav-dd-label">Book a Call</div><div class="nav-dd-sub">Free consultation</div></div>
+              </a>
+            </div>
+          </div>
+          <a href="/contact.html" class="nav-link" data-page="contact">Contact</a>
+          <a href="/scripture/" class="nav-link" data-page="scripture">Scripture</a>
+        </div>
+        <div class="nav-actions">
+          <a href="tel:+13463839529" class="nav-phone hidden lg:flex">
+            <i data-lucide="phone" style="width:14px;height:14px;"></i>
+            <span>+1 (346) 383-9529</span>
+          </a>
+          <button class="theme-toggle" aria-label="Toggle theme"></button>
+          <a href="/consultation.html" class="btn-book">Book Consultation</a>
+        </div>
+        <button class="mobile-toggle" id="mobile-toggle" aria-expanded="false">
+          <i data-lucide="menu" style="width:18px;height:18px;"></i>
+        </button>
+      </div>
+      <div class="mobile-menu" id="mobile-menu">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/about.html" class="nav-link">About</a>
+        <a href="/services.html" class="nav-link">Services</a>
+        <div style="padding:.375rem .875rem .125rem;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-soft);">Explore</div>
+        <a href="/blog.html" class="nav-link" style="padding-left:1.75rem;">✍️ &nbsp;Blog</a>
+        <a href="/work.html" class="nav-link" style="padding-left:1.75rem;">💼 &nbsp;Work</a>
+        <a href="/consultation.html" class="nav-link" style="padding-left:1.75rem;">📅 &nbsp;Book a Call</a>
+        <a href="/contact.html" class="nav-link">Contact</a>
+        <a href="/scripture/" class="nav-link">Scripture</a>
+        <a href="/consultation.html" class="btn btn-primary" style="margin-top:.5rem;">Book Consultation</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="container" style="position:relative;z-index:1;">
+      <div class="reveal">
+        <div class="badge" style="margin-bottom:1rem;">Case Studies & Portfolio</div>
+        <h1>Work That Speaks for Itself</h1>
+        <p style="max-width:560px;margin:.75rem auto 0;">Real projects, measurable outcomes. A selection of engagements across data science, AI/ML, full-stack development, and consulting.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CASE STUDIES -->
+  <section class="section">
+    <div class="container">
+
+      <!-- Stats Bar -->
+      <div class="stats-bar reveal">
+        <div class="stats-bar-item">
+          <div class="stats-bar-value">50+</div>
+          <div class="stats-bar-label">Projects Delivered</div>
+        </div>
+        <div class="stats-bar-item">
+          <div class="stats-bar-value">12+</div>
+          <div class="stats-bar-label">Industries Served</div>
+        </div>
+        <div class="stats-bar-item">
+          <div class="stats-bar-value">100%</div>
+          <div class="stats-bar-label">On-Time Delivery</div>
+        </div>
+        <div class="stats-bar-item">
+          <div class="stats-bar-value">5+</div>
+          <div class="stats-bar-label">Years Experience</div>
+        </div>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="work-filters reveal">
+        <button class="filter-btn active" data-filter="all">All Projects</button>
+        <button class="filter-btn" data-filter="data-science">Data Science</button>
+        <button class="filter-btn" data-filter="ai-ml">AI & ML</button>
+        <button class="filter-btn" data-filter="fullstack">Full-Stack</button>
+        <button class="filter-btn" data-filter="consulting">Consulting</button>
+      </div>
+
+      <!-- Featured Case Study -->
+      <div class="featured-case reveal" data-category="data-science">
+        <div class="featured-case-visual" style="border-right:1px solid var(--border);">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop&auto=format&q=80" alt="Enterprise analytics dashboard" loading="lazy">
+        </div>
+        <div class="featured-case-body">
+          <span class="work-cat">Featured · Data Science</span>
+          <h2 style="font-size:clamp(1.1rem,2vw,1.4rem);margin-bottom:.75rem;line-height:1.3;">Enterprise Analytics Platform for a Retail Chain</h2>
+          <p style="font-size:.85rem;margin-bottom:.25rem;"><strong style="color:var(--text);">Challenge:</strong> A 200-store retail chain had sales data spread across 4 legacy systems with zero unified reporting. Executives were making decisions on week-old spreadsheets.</p>
+          <p style="font-size:.85rem;margin-bottom:.25rem;margin-top:.5rem;"><strong style="color:var(--text);">Solution:</strong> Built an end-to-end ETL pipeline feeding a centralized data warehouse, then designed a 12-dashboard Power BI suite covering inventory, sales performance, and customer segmentation.</p>
+          <div class="result-row">
+            <div class="result-item">
+              <div class="result-value">40%</div>
+              <div class="result-label">Faster Decisions</div>
+            </div>
+            <div class="result-item">
+              <div class="result-value">$1.2M</div>
+              <div class="result-label">Cost Identified</div>
+            </div>
+            <div class="result-item">
+              <div class="result-value">6 Wks</div>
+              <div class="result-label">Delivery Time</div>
+            </div>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:.375rem;margin-bottom:1.25rem;">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">SQL</span>
+            <span class="tech-tag">Power BI</span>
+            <span class="tech-tag">Azure</span>
+            <span class="tech-tag">dbt</span>
+          </div>
+          <a href="/contact.html" class="btn btn-primary" style="width:fit-content;">
+            Discuss a Similar Project
+            <i data-lucide="arrow-right" style="width:14px;height:14px;"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="work-grid">
+
+        <div class="work-card reveal" data-delay="0" data-category="ai-ml">
+          <div class="work-thumb">
+            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&h=340&fit=crop&auto=format&q=80" alt="AI chatbot" loading="lazy">
+          </div>
+          <div class="work-body">
+            <span class="work-cat">AI & ML</span>
+            <h3>AI-Powered Customer Support Chatbot</h3>
+            <p>Built an LLM-driven support agent for a SaaS company that resolved 72% of tier-1 tickets without human intervention, reducing support costs by 35%.</p>
+            <div class="work-metrics">
+              <span class="metric-pill"><span class="val">72%</span> Auto-resolved</span>
+              <span class="metric-pill"><span class="val">35%</span> Cost reduction</span>
+            </div>
+            <div class="work-footer">
+              <div class="work-tech">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">LangChain</span>
+                <span class="tech-tag">Pinecone</span>
+                <span class="tech-tag">FastAPI</span>
+              </div>
+              <span class="view-link">Details <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="work-card reveal" data-delay="80" data-category="fullstack">
+          <div class="work-thumb">
+            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=340&fit=crop&auto=format&q=80" alt="eCommerce platform" loading="lazy">
+          </div>
+          <div class="work-body">
+            <span class="work-cat">Full-Stack</span>
+            <h3>Multi-Vendor eCommerce Platform</h3>
+            <p>Designed and built a multi-tenant marketplace from scratch, supporting 50+ vendors with separate storefronts, unified checkout, and real-time inventory sync.</p>
+            <div class="work-metrics">
+              <span class="metric-pill"><span class="val">50+</span> Vendors</span>
+              <span class="metric-pill"><span class="val">99.9%</span> Uptime</span>
+            </div>
+            <div class="work-footer">
+              <div class="work-tech">
+                <span class="tech-tag">Next.js</span>
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">MongoDB</span>
+                <span class="tech-tag">Stripe</span>
+              </div>
+              <span class="view-link">Details <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="work-card reveal" data-delay="160" data-category="data-science">
+          <div class="work-thumb">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=340&fit=crop&auto=format&q=80" alt="Predictive analytics model" loading="lazy">
+          </div>
+          <div class="work-body">
+            <span class="work-cat">Data Science</span>
+            <h3>Predictive Churn Model for SaaS</h3>
+            <p>Built a churn prediction system that flagged at-risk customers 30 days out with 88% precision, enabling the CS team to intervene proactively.</p>
+            <div class="work-metrics">
+              <span class="metric-pill"><span class="val">88%</span> Precision</span>
+              <span class="metric-pill"><span class="val">30-day</span> Lookout</span>
+            </div>
+            <div class="work-footer">
+              <div class="work-tech">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">XGBoost</span>
+                <span class="tech-tag">Pandas</span>
+                <span class="tech-tag">Tableau</span>
+              </div>
+              <span class="view-link">Details <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="work-card reveal" data-delay="0" data-category="fullstack">
+          <div class="work-thumb">
+            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=340&fit=crop&auto=format&q=80" alt="Healthcare management system" loading="lazy">
+          </div>
+          <div class="work-body">
+            <span class="work-cat">Full-Stack</span>
+            <h3>Healthcare Appointment Management System</h3>
+            <p>HIPAA-compliant patient portal and scheduling system for a 15-provider clinic, replacing a paper-based process and cutting no-shows by 28%.</p>
+            <div class="work-metrics">
+              <span class="metric-pill"><span class="val">28%</span> Fewer no-shows</span>
+              <span class="metric-pill">HIPAA compliant</span>
+            </div>
+            <div class="work-footer">
+              <div class="work-tech">
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">Express</span>
+                <span class="tech-tag">PostgreSQL</span>
+                <span class="tech-tag">AWS</span>
+              </div>
+              <span class="view-link">Details <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="work-card reveal" data-delay="80" data-category="consulting">
+          <div class="work-thumb">
+            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=340&fit=crop&auto=format&q=80" alt="Cloud migration architecture" loading="lazy">
+          </div>
+          <div class="work-body">
+            <span class="work-cat">Consulting</span>
+            <h3>Cloud Migration Strategy for FinTech Startup</h3>
+            <p>Led the architecture review and migration plan for a FinTech moving from on-prem to AWS, reducing infrastructure costs by 45% while improving resilience.</p>
+            <div class="work-metrics">
+              <span class="metric-pill"><span class="val">45%</span> Cost savings</span>
+              <span class="metric-pill"><span class="val">3x</span> Faster deploys</span>
+            </div>
+            <div class="work-footer">
+              <div class="work-tech">
+                <span class="tech-tag">AWS</span>
+                <span class="tech-tag">Terraform</span>
+                <span class="tech-tag">Docker</span>
+                <span class="tech-tag">K8s</span>
+              </div>
+              <span class="view-link">Details <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="work-card reveal" data-delay="160" data-category="ai-ml">
+          <div class="work-thumb">
+            <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=600&h=340&fit=crop&auto=format&q=80" alt="NLP document processing" loading="lazy">
+          </div>
+          <div class="work-body">
+            <span class="work-cat">AI & ML</span>
+            <h3>NLP Document Intelligence Pipeline</h3>
+            <p>Built a document processing system for a law firm that extracted key clauses, flagged risk terms, and summarized contracts — cutting review time from 4 hours to 20 minutes.</p>
+            <div class="work-metrics">
+              <span class="metric-pill"><span class="val">4hr → 20min</span></span>
+              <span class="metric-pill"><span class="val">94%</span> Accuracy</span>
+            </div>
+            <div class="work-footer">
+              <div class="work-tech">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">HuggingFace</span>
+                <span class="tech-tag">spaCy</span>
+                <span class="tech-tag">FastAPI</span>
+              </div>
+              <span class="view-link">Details <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL PULL-QUOTE -->
+  <section class="section section-alt">
+    <div class="container">
+      <div style="max-width:760px;margin:0 auto;text-align:center;" class="reveal">
+        <div style="font-size:3.5rem;color:var(--primary);font-family:'Georgia',serif;line-height:1;margin-bottom:1rem;">"</div>
+        <p style="font-size:1.125rem;font-style:italic;color:var(--text);line-height:1.8;margin-bottom:1.5rem;">Emmanuel doesn't just deliver features — he delivers outcomes. Our data platform went from a liability to a competitive advantage in six weeks. The ROI was visible in the first board meeting after launch.</p>
+        <div style="display:flex;align-items:center;justify-content:center;gap:.875rem;">
+          <div style="width:2.5rem;height:2.5rem;border-radius:50%;background:var(--primary-dim);border:2px solid var(--primary-border);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:800;color:var(--primary);">RK</div>
+          <div style="text-align:left;">
+            <div style="font-weight:700;font-size:.875rem;color:var(--text);">Rachel Kim</div>
+            <div style="font-size:.75rem;color:var(--text-muted);">VP of Operations, RetailCore Inc.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner reveal">
+        <div class="cta-orb-1"></div>
+        <div class="cta-orb-2"></div>
+        <div class="badge" style="background:rgba(0,0,0,0.1);border-color:rgba(0,0,0,0.2);color:#000;margin-bottom:1rem;">Start Your Project</div>
+        <h2>Ready to Build Something That Matters?</h2>
+        <p>Every project starts with a conversation. Let's figure out exactly what you need in 30 minutes — no pressure, no commitment.</p>
+        <div style="display:flex;gap:.875rem;justify-content:center;flex-wrap:wrap;">
+          <button class="btn btn-dark btn-lg" onclick="openCalendly('https://calendly.com/emmanuel-ao')">
+            <i data-lucide="calendar" style="width:16px;height:16px;"></i>
+            Book Free Consultation
+          </button>
+          <a href="/contact.html" class="btn btn-clear btn-lg">Send a Message</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="/index.html" class="nav-logo" style="margin-bottom:.875rem;display:inline-flex;">
+            <img src="/assets/img/favicon_io/android-chrome-192x192.png" alt="InsightSerenity" style="width:2rem;height:2rem;border-radius:0.5rem;">
+          </a>
+          <p class="footer-brand-desc">Expert consulting in Data Science, Software Engineering, AI/ML — plus Life Literacy and Bible-Based Coaching. Transforming data, technology, and lives.</p>
+          <div class="footer-socials">
+            <a href="https://www.linkedin.com/in/emmanuel-oyemosu/" target="_blank" class="social-btn" aria-label="LinkedIn"><i data-lucide="linkedin" style="width:14px;height:14px;"></i></a>
+            <a href="https://github.com/EOlaw" target="_blank" class="social-btn" aria-label="GitHub"><i data-lucide="github" style="width:14px;height:14px;"></i></a>
+            <a href="https://www.instagram.com/e_olawalee/" target="_blank" class="social-btn" aria-label="Instagram"><i data-lucide="instagram" style="width:14px;height:14px;"></i></a>
+            <a href="mailto:emmanuel.ao@outlook.com" class="social-btn" aria-label="Email"><i data-lucide="mail" style="width:14px;height:14px;"></i></a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">Navigation</div>
+          <div class="footer-links">
+            <a href="/index.html">Home</a>
+            <a href="/about.html">About</a>
+            <a href="/services.html">Services</a>
+            <a href="/blog.html">Blog</a>
+            <a href="/work.html">Work</a>
+            <a href="/contact.html">Contact</a>
+            <a href="/consultation.html">Book Consultation</a>
+            <a href="/privacy.html">Privacy Policy</a>
+            <a href="/terms.html">Terms of Service</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">Technical Services</div>
+          <div class="footer-links">
+            <a href="/services.html#data-science">Data Science &amp; Analytics</a>
+            <a href="/services.html#fullstack">Full-Stack Development</a>
+            <a href="/services.html#ai-ml">AI &amp; Machine Learning</a>
+            <a href="/services.html#architecture">System Architecture</a>
+            <a href="/services.html#ecommerce">eCommerce Solutions</a>
+            <a href="/services.html#consulting">Technical Consulting</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">Coaching Services</div>
+          <div class="footer-links">
+            <a href="/services.html#life-coaching">Life Literacy Coaching</a>
+            <a href="/services.html#bible-coaching">Bible-Based Coaching</a>
+          </div>
+          <div class="footer-heading" style="margin-top:1.5rem;">Contact</div>
+          <div class="footer-links">
+            <a href="mailto:emmanuel.ao@outlook.com">emmanuel.ao@outlook.com</a>
+            <a href="tel:+13463839529">+1 (346) 383-9529</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p style="color:var(--text-muted);">© 2025 InsightSerenity. All rights reserved.</p>
+        <div style="display:flex;align-items:center;gap:.375rem;font-size:.75rem;color:var(--text-muted);">
+          <i data-lucide="map-pin" style="width:12px;height:12px;color:var(--primary);"></i>
+          Available Worldwide · Remote Consulting
+        </div>
+        <div style="display:flex;gap:1rem;">
+          <a href="/privacy.html" style="font-size:.75rem;color:var(--text-muted);">Privacy</a>
+          <a href="/terms.html" style="font-size:.75rem;color:var(--text-muted);">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING ACTION BUTTON -->
+  <div class="fab-container" id="fab-container">
+    <div class="fab-actions" id="fab-actions">
+      <a href="/scripture/" class="fab-action">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        Scripture
+      </a>
+      <a href="/consultation.html" class="fab-action">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Book Call
+      </a>
+      <a href="mailto:emmanuel.ao@outlook.com" class="fab-action">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Email Me
+      </a>
+    </div>
+    <button class="fab-btn" id="fab-btn" aria-label="Quick actions">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    </button>
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <script src="/assets/js/main.js"></script>
+  <script>
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        const filter = this.dataset.filter;
+        document.querySelectorAll('.work-card, .featured-case').forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+
+  <script>
+    // Mark active nav item based on current page
+    (function(){
+      var path = window.location.pathname;
+      var page = path === '/' || path.includes('index') ? 'home'
+               : path.includes('about') ? 'about'
+               : path.includes('services') ? 'services'
+               : path.includes('blog') ? 'blog'
+               : path.includes('work') ? 'work'
+               : path.includes('consultation') ? 'consultation'
+               : path.includes('contact') ? 'contact'
+               : path.includes('scripture') ? 'scripture' : '';
+      var el = document.querySelector('[data-page="'+page+'"]');
+      if (el) {
+        if (el.classList.contains('nav-link')) el.classList.add('active');
+        if (el.classList.contains('nav-dropdown-item')) {
+          el.classList.add('active');
+          document.getElementById('explore-trigger').classList.add('active');
+        }
+      }
+    })();
+  </script>
+</body>
+</html>

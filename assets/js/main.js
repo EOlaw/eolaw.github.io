@@ -97,6 +97,35 @@
     }));
   }
 
+  /* ── Nav Dropdown (click + hover fallback) ───────────────────────── */
+  function initNavDropdown() {
+    const dropdown = document.querySelector('.nav-dropdown');
+    if (!dropdown) return;
+    const trigger = dropdown.querySelector('.nav-dropdown-trigger');
+    let closeTimer;
+
+    // Click toggles open/closed
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dropdown.classList.toggle('open');
+    });
+
+    // Keep open while mouse is inside dropdown
+    dropdown.addEventListener('mouseenter', () => {
+      clearTimeout(closeTimer);
+      dropdown.classList.add('open');
+    });
+
+    dropdown.addEventListener('mouseleave', () => {
+      closeTimer = setTimeout(() => {
+        dropdown.classList.remove('open');
+      }, 120);
+    });
+
+    // Close when clicking outside
+    document.addEventListener('click', () => dropdown.classList.remove('open'));
+  }
+
   /* ── Active Nav Link ─────────────────────────────────────────────── */
   function initActiveNav() {
     const page = window.location.pathname.split('/').pop() || 'index.html';
@@ -312,6 +341,7 @@
     scheduleAutoThemeCheck();
     initNavbar();
     initMobileMenu();
+    initNavDropdown();
     initActiveNav();
     initReveal();
     initCounters();

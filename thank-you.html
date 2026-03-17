@@ -34,11 +34,32 @@
           <!-- <span>Insight<span class="gold">Serenity</span></span> -->
         </a>
         <div class="nav-links">
-          <a href="/index.html" class="nav-link">Home</a>
-          <a href="/about.html" class="nav-link">About</a>
-          <a href="/services.html" class="nav-link">Services</a>
-          <a href="/consultation.html" class="nav-link">Consultation</a>
-          <a href="/scripture/" class="nav-link">Scripture</a>
+          <a href="/index.html" class="nav-link" data-page="home">Home</a>
+          <a href="/about.html" class="nav-link" data-page="about">About</a>
+          <a href="/services.html" class="nav-link" data-page="services">Services</a>
+          <div class="nav-dropdown">
+            <button class="nav-dropdown-trigger" id="explore-trigger">
+              Explore
+              <i data-lucide="chevron-down" style="width:13px;height:13px;"></i>
+            </button>
+            <div class="nav-dropdown-menu">
+              <a href="/blog.html" class="nav-dropdown-item" data-page="blog">
+                <div class="nav-dropdown-icon"><i data-lucide="file-text"></i></div>
+                <div><div class="nav-dd-label">Blog</div><div class="nav-dd-sub">Insights & articles</div></div>
+              </a>
+              <a href="/work.html" class="nav-dropdown-item" data-page="work">
+                <div class="nav-dropdown-icon"><i data-lucide="briefcase"></i></div>
+                <div><div class="nav-dd-label">Work</div><div class="nav-dd-sub">Case studies & portfolio</div></div>
+              </a>
+              <div class="nav-dropdown-divider"></div>
+              <a href="/consultation.html" class="nav-dropdown-item" data-page="consultation">
+                <div class="nav-dropdown-icon"><i data-lucide="calendar"></i></div>
+                <div><div class="nav-dd-label">Book a Call</div><div class="nav-dd-sub">Free consultation</div></div>
+              </a>
+            </div>
+          </div>
+          <a href="/contact.html" class="nav-link" data-page="contact">Contact</a>
+          <a href="/scripture/" class="nav-link" data-page="scripture">Scripture</a>
         </div>
         <div class="nav-actions">
           <a href="tel:+13463839529" class="nav-phone hidden lg:flex">
@@ -56,7 +77,11 @@
         <a href="/index.html" class="nav-link">Home</a>
         <a href="/about.html" class="nav-link">About</a>
         <a href="/services.html" class="nav-link">Services</a>
-        <a href="/consultation.html" class="nav-link">Consultation</a>
+        <div style="padding:.375rem .875rem .125rem;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-soft);">Explore</div>
+        <a href="/blog.html" class="nav-link" style="padding-left:1.75rem;">✍️ &nbsp;Blog</a>
+        <a href="/work.html" class="nav-link" style="padding-left:1.75rem;">💼 &nbsp;Work</a>
+        <a href="/consultation.html" class="nav-link" style="padding-left:1.75rem;">📅 &nbsp;Book a Call</a>
+        <a href="/contact.html" class="nav-link">Contact</a>
         <a href="/scripture/" class="nav-link">Scripture</a>
         <a href="/consultation.html" class="btn btn-primary" style="margin-top:.5rem;">Book Consultation</a>
       </div>
@@ -149,6 +174,9 @@
             <a href="/index.html">Home</a>
             <a href="/about.html">About</a>
             <a href="/services.html">Services</a>
+            <a href="/blog.html">Blog</a>
+            <a href="/work.html">Work</a>
+            <a href="/contact.html">Contact</a>
             <a href="/consultation.html">Book Consultation</a>
             <a href="/privacy.html">Privacy Policy</a>
             <a href="/terms.html">Terms of Service</a>
@@ -215,5 +243,28 @@
 
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <script src="/assets/js/main.js"></script>
+
+  <script>
+    // Mark active nav item based on current page
+    (function(){
+      var path = window.location.pathname;
+      var page = path === '/' || path.includes('index') ? 'home'
+               : path.includes('about') ? 'about'
+               : path.includes('services') ? 'services'
+               : path.includes('blog') ? 'blog'
+               : path.includes('work') ? 'work'
+               : path.includes('consultation') ? 'consultation'
+               : path.includes('contact') ? 'contact'
+               : path.includes('scripture') ? 'scripture' : '';
+      var el = document.querySelector('[data-page="'+page+'"]');
+      if (el) {
+        if (el.classList.contains('nav-link')) el.classList.add('active');
+        if (el.classList.contains('nav-dropdown-item')) {
+          el.classList.add('active');
+          document.getElementById('explore-trigger').classList.add('active');
+        }
+      }
+    })();
+  </script>
 </body>
 </html>
