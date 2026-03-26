@@ -82,16 +82,38 @@
     <!-- Topbar -->
     <div class="topbar">
       <div class="topbar-left">
-        <h1>Sales Overview</h1>
-        <p>Track your performance metrics and trends</p>
+        <div>
+          <h1>Sales Overview</h1>
+          <p>Track your performance metrics and trends</p>
+        </div>
       </div>
       <div class="topbar-right">
+        <span class="live-clock" id="liveClock"></span>
         <div class="period-btns">
-          <button class="period-btn" data-period="7D">7D</button>
-          <button class="period-btn active" data-period="30D">30D</button>
-          <button class="period-btn" data-period="90D">90D</button>
-          <button class="period-btn" data-period="1Y">1Y</button>
+          <button class="period-btn" data-period="7d">7D</button>
+          <button class="period-btn active" data-period="30d">30D</button>
+          <button class="period-btn" data-period="90d">90D</button>
+          <button class="period-btn" data-period="1y">1Y</button>
         </div>
+        <button class="icon-btn" id="themeToggle" title="Toggle theme">
+          <!-- filled by app.js -->
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+        </button>
+        <div class="notification-bell" id="notifBell">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+          </svg>
+          <span class="notification-dot"></span>
+          <div class="notification-dropdown" id="notifDropdown"></div>
+        </div>
+        <a href="/index.html" class="back-to-main">← InsightSerenity</a>
       </div>
     </div>
 
@@ -170,7 +192,7 @@
         <div class="chart-header">
           <div>
             <div class="chart-title">Revenue Trend</div>
-            <div class="chart-subtitle">Monthly revenue for current year</div>
+            <div class="chart-subtitle">Detailed view for selected period</div>
           </div>
         </div>
         <canvas id="revenueChart" height="200"></canvas>
@@ -203,55 +225,37 @@
       <div class="chart-card">
         <div class="chart-header">
           <div class="chart-title">Top Products</div>
+          <div class="table-controls">
+            <input
+              type="text"
+              id="productSearch"
+              class="search-input-dark"
+              placeholder="Search products..."
+              aria-label="Search products"
+            />
+            <button class="btn-export" id="exportCsvBtn">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              Export CSV
+            </button>
+          </div>
         </div>
         <div class="table-wrap">
           <table>
             <thead>
               <tr>
                 <th>#</th>
-                <th>Product</th>
-                <th>Revenue</th>
-                <th>Orders</th>
-                <th>Status</th>
+                <th data-sort="name">Product <span class="sort-icon">⇅</span></th>
+                <th data-sort="revenue">Revenue <span class="sort-icon">⇅</span></th>
+                <th data-sort="orders">Orders <span class="sort-icon">⇅</span></th>
+                <th data-sort="status">Status <span class="sort-icon">⇅</span></th>
+                <th>Trend</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td><span class="rank-num">1</span></td>
-                <td>Analytics Pro</td>
-                <td>$48,200</td>
-                <td>312</td>
-                <td><span class="badge badge-green">Active</span></td>
-              </tr>
-              <tr>
-                <td><span class="rank-num">2</span></td>
-                <td>Data Pipeline Kit</td>
-                <td>$41,800</td>
-                <td>287</td>
-                <td><span class="badge badge-green">Active</span></td>
-              </tr>
-              <tr>
-                <td><span class="rank-num">3</span></td>
-                <td>ML Starter Pack</td>
-                <td>$39,100</td>
-                <td>256</td>
-                <td><span class="badge badge-green">Active</span></td>
-              </tr>
-              <tr>
-                <td><span class="rank-num">4</span></td>
-                <td>Dashboard Builder</td>
-                <td>$35,400</td>
-                <td>231</td>
-                <td><span class="badge badge-yellow">Active</span></td>
-              </tr>
-              <tr>
-                <td><span class="rank-num">5</span></td>
-                <td>Coach Platform</td>
-                <td>$28,900</td>
-                <td>198</td>
-                <td><span class="badge badge-green">Active</span></td>
-              </tr>
-            </tbody>
+            <tbody id="productsBody"></tbody>
           </table>
         </div>
       </div>
@@ -259,195 +263,8 @@
   </main>
 </div>
 
-<script>
-  // ── Chart.js global defaults ──────────────────────────────────────────────
-  Chart.defaults.color = '#9ca3af';
-  Chart.defaults.borderColor = '#2a2d3e';
-  Chart.defaults.font.family = "'Inter', sans-serif";
-
-  const PRIMARY = '#ffc451';
-
-  const BASE_REVENUE  = [18200,21400,19800,24600,22900,28400,31200,29800,33500,31900,36200,38500];
-  const BASE_TRAFFIC  = [38, 24, 18, 12, 8];
-  const BASE_CATEGORY = [92400, 78200, 64800, 31200, 18350];
-
-  let currentPeriod = '30D';
-  let revenueChart, trafficChart, categoryChart;
-
-  function randomFactor() {
-    return 0.7 + Math.random() * 0.6;
-  }
-
-  function varyData(base) {
-    return base.map(v => Math.round(v * randomFactor()));
-  }
-
-  // ── Revenue Line Chart ────────────────────────────────────────────────────
-  function buildRevenueChart(data) {
-    const ctx = document.getElementById('revenueChart').getContext('2d');
-    const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-    gradient.addColorStop(0, 'rgba(255,196,81,0.3)');
-    gradient.addColorStop(1, 'rgba(255,196,81,0)');
-
-    if (revenueChart) revenueChart.destroy();
-    revenueChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-        datasets: [{
-          label: 'Revenue',
-          data: data,
-          borderColor: PRIMARY,
-          backgroundColor: gradient,
-          tension: 0.4,
-          fill: true,
-          pointBackgroundColor: PRIMARY,
-          pointBorderColor: '#1a1d27',
-          pointBorderWidth: 2,
-          pointRadius: 4,
-          pointHoverRadius: 6,
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            backgroundColor: '#1a1d27',
-            borderColor: '#2a2d3e',
-            borderWidth: 1,
-            titleColor: '#f1f1f1',
-            bodyColor: '#9ca3af',
-            callbacks: {
-              label: ctx => ' $' + ctx.parsed.y.toLocaleString()
-            }
-          }
-        },
-        scales: {
-          x: { grid: { color: 'rgba(42,45,62,0.5)' } },
-          y: {
-            grid: { color: 'rgba(42,45,62,0.5)' },
-            ticks: {
-              callback: v => '$' + (v/1000).toFixed(0) + 'k'
-            }
-          }
-        }
-      }
-    });
-  }
-
-  // ── Traffic Donut Chart ───────────────────────────────────────────────────
-  function buildTrafficChart(data) {
-    const ctx = document.getElementById('trafficChart').getContext('2d');
-    const labels = ['Organic','Direct','Referral','Social','Paid'];
-    const colors = ['#ffc451','#34d399','#60a5fa','#a78bfa','#f87171'];
-
-    if (trafficChart) trafficChart.destroy();
-    trafficChart = new Chart(ctx, {
-      type: 'doughnut',
-      data: {
-        labels,
-        datasets: [{
-          data,
-          backgroundColor: colors,
-          borderColor: '#1a1d27',
-          borderWidth: 3,
-          hoverBorderWidth: 3,
-          hoverOffset: 4
-        }]
-      },
-      options: {
-        responsive: true,
-        cutout: '68%',
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            backgroundColor: '#1a1d27',
-            borderColor: '#2a2d3e',
-            borderWidth: 1,
-            callbacks: {
-              label: ctx => ' ' + ctx.label + ': ' + ctx.parsed + '%'
-            }
-          }
-        }
-      }
-    });
-
-    // Custom legend
-    const legend = document.getElementById('trafficLegend');
-    legend.innerHTML = labels.map((l, i) =>
-      `<div class="legend-item">
-        <div class="legend-dot" style="background:${colors[i]}"></div>
-        ${l} (${data[i]}%)
-      </div>`
-    ).join('');
-  }
-
-  // ── Category Bar Chart ────────────────────────────────────────────────────
-  function buildCategoryChart(data) {
-    const ctx = document.getElementById('categoryChart').getContext('2d');
-
-    if (categoryChart) categoryChart.destroy();
-    categoryChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Data Science','Full-Stack','AI/ML','Coaching','eCommerce'],
-        datasets: [{
-          label: 'Revenue',
-          data,
-          backgroundColor: 'rgba(255,196,81,0.85)',
-          borderColor: PRIMARY,
-          borderWidth: 1,
-          borderRadius: 6,
-          borderSkipped: false,
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            backgroundColor: '#1a1d27',
-            borderColor: '#2a2d3e',
-            borderWidth: 1,
-            callbacks: {
-              label: ctx => ' $' + ctx.parsed.y.toLocaleString()
-            }
-          }
-        },
-        scales: {
-          x: { grid: { display: false } },
-          y: {
-            grid: { color: 'rgba(42,45,62,0.5)' },
-            ticks: { callback: v => '$' + (v/1000).toFixed(0) + 'k' }
-          }
-        }
-      }
-    });
-  }
-
-  function renderCharts(vary = false) {
-    const rd = vary ? varyData(BASE_REVENUE)  : BASE_REVENUE;
-    const td = vary ? varyData(BASE_TRAFFIC)  : BASE_TRAFFIC;
-    const cd = vary ? varyData(BASE_CATEGORY) : BASE_CATEGORY;
-
-    buildRevenueChart(rd);
-    buildTrafficChart(td);
-    buildCategoryChart(cd);
-  }
-
-  // ── Period Buttons ────────────────────────────────────────────────────────
-  document.querySelectorAll('.period-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      currentPeriod = btn.dataset.period;
-      renderCharts(true);
-    });
-  });
-
-  // ── Init ──────────────────────────────────────────────────────────────────
-  renderCharts(false);
-</script>
+<script src="js/data.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>
