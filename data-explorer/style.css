@@ -643,23 +643,82 @@ th:not(.asc):not(.desc) .sort-icon::after { content: ' ⇅'; }
   .stats-bar {
     grid-template-columns: repeat(2, 1fr);
   }
-
   .header {
     flex-direction: column;
     gap: 0.75rem;
     align-items: flex-start;
+    padding: 0.875rem 1rem;
   }
-
+  .header-right {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .header-left h1 {
+    font-size: 1.05rem;
+  }
+  .header-left p {
+    font-size: 0.72rem;
+  }
+  .container {
+    padding: 1rem;
+  }
   .upload-zone {
-    padding: 2rem 1rem;
+    padding: 1.75rem 1rem;
   }
-
   .col-stats {
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   }
-
   .data-toolbar {
     flex-direction: column;
     align-items: flex-start;
+    gap: 0.75rem;
+  }
+  .toolbar-group {
+    width: 100%;
+  }
+  .limit-btns {
+    flex-wrap: wrap;
+  }
+  .chart-controls {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .chart-controls select {
+    width: 100%;
+  }
+  .corr-controls {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .corr-controls select {
+    width: 100%;
+  }
+  .section-card {
+    padding: 1rem;
+  }
+  .back-to-main {
+    font-size: 0.72rem;
+    padding: 0.3rem 0.625rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .stats-bar {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+  .stat-pill {
+    padding: 0.625rem;
+  }
+  .format-toggle {
+    gap: 0.375rem;
+  }
+  .parse-row {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .parse-row button {
+    width: 100%;
   }
 }
