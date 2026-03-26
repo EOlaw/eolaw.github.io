@@ -60,6 +60,7 @@ const ChartManager = (() => {
       },
       options: {
         responsive: true,
+        maintainAspectRatio: false,
         animation: { duration: 600, easing: 'easeInOutQuart' },
         plugins: {
           legend: { display: false },
@@ -78,14 +79,18 @@ const ChartManager = (() => {
           x: {
             grid: { color: colors.gridLine },
             ticks: {
-              maxRotation: 45,
+              maxRotation: 0,
               autoSkip: true,
-              maxTicksLimit: 10
+              maxTicksLimit: 7,
+              font: { size: 11 }
             }
           },
           y: {
             grid: { color: colors.gridLine },
-            ticks: { callback: v => '$' + (v / 1000).toFixed(0) + 'k' }
+            ticks: {
+              callback: v => '$' + (v / 1000).toFixed(0) + 'k',
+              font: { size: 11 }
+            }
           }
         }
       }
@@ -114,6 +119,7 @@ const ChartManager = (() => {
       },
       options: {
         responsive: true,
+        maintainAspectRatio: false,
         cutout: '68%',
         animation: { duration: 700, easing: 'easeInOutQuart' },
         plugins: {
@@ -165,6 +171,7 @@ const ChartManager = (() => {
       },
       options: {
         responsive: true,
+        maintainAspectRatio: false,
         animation: { duration: 700, easing: 'easeInOutQuart' },
         plugins: {
           legend: { display: false },
@@ -178,10 +185,16 @@ const ChartManager = (() => {
           }
         },
         scales: {
-          x: { grid: { display: false } },
+          x: {
+            grid: { display: false },
+            ticks: { font: { size: 11 }, maxRotation: 0, autoSkip: true }
+          },
           y: {
             grid: { color: colors.gridLine },
-            ticks: { callback: v => '$' + (v / 1000).toFixed(0) + 'k' }
+            ticks: {
+              callback: v => '$' + (v / 1000).toFixed(0) + 'k',
+              font: { size: 11 }
+            }
           }
         }
       }

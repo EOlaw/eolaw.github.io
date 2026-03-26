@@ -51,6 +51,7 @@ const ChartManager = (() => {
       },
       options: {
         responsive: true,
+        maintainAspectRatio: false,
         cutout: '65%',
         plugins: {
           legend: { display: false },

@@ -85,9 +85,13 @@ const CustomersApp = (() => {
       },
       options: {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: { legend: { display: false } },
         scales: {
-          x: { grid: { color: gridColor }, ticks: { color: textColor, font: { size: 11 } } },
+          x: {
+            grid: { color: gridColor },
+            ticks: { color: textColor, font: { size: 11 }, maxRotation: 0, autoSkip: true }
+          },
           y: { grid: { color: gridColor }, ticks: { color: textColor, font: { size: 11 } } }
         }
       }
@@ -113,6 +117,7 @@ const CustomersApp = (() => {
       options: {
         cutout: '68%',
         responsive: true,
+        maintainAspectRatio: false,
         plugins: { legend: { display: false } }
       }
     });

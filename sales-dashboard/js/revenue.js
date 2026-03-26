@@ -60,6 +60,7 @@ const RevenueApp = (() => {
       },
       options: {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
           legend: { display: false },
           tooltip: {
@@ -69,7 +70,10 @@ const RevenueApp = (() => {
           }
         },
         scales: {
-          x: { grid: { color: gridColor }, ticks: { color: textColor, font: { size: 11 } } },
+          x: {
+            grid: { color: gridColor },
+            ticks: { color: textColor, font: { size: 11 }, maxRotation: 0, autoSkip: true }
+          },
           y: {
             grid: { color: gridColor },
             ticks: {
@@ -102,6 +106,7 @@ const RevenueApp = (() => {
       options: {
         cutout: '68%',
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
           legend: { display: false },
           tooltip: {

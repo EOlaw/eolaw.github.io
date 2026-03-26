@@ -422,6 +422,11 @@ select:focus {
   box-shadow: var(--shadow);
 }
 
+.chart-card canvas {
+  width: 100% !important;
+  height: 220px !important;
+}
+
 .chart-card h2 {
   font-size: 0.9rem;
   font-weight: 700;
