@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CSV Data Explorer — InsightSerenity</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── Header ── -->
+  <header class="header">
+    <div class="header-left">
+      <h1>📊 <span>CSV</span> Data Explorer</h1>
+      <p>Paste, analyze, visualize — no server needed</p>
+    </div>
+    <div class="header-right">
+      <button class="btn-ghost" onclick="loadSample()">Load Sample</button>
+      <button class="btn-primary" onclick="parseAndAnalyze()">Analyze Data →</button>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- ── Error ── -->
+    <div class="error-msg" id="error-msg"></div>
+
+    <!-- ── Upload Zone ── -->
+    <div class="upload-zone" id="upload-zone">
+      <div class="upload-icon">📁</div>
+      <h3>Drop CSV file or paste below</h3>
+      <p>Supports CSV with headers. Max ~10,000 rows recommended.</p>
+      <input type="file" id="file-input" accept=".csv" style="display:none" />
+      <button class="btn-primary" onclick="document.getElementById('file-input').click()">Upload CSV File</button>
+      <div class="or-divider">or paste CSV data below</div>
+      <textarea
+        class="csv-textarea"
+        id="csv-input"
+        placeholder="Month,Revenue,Orders,Customers,Avg_Order_Value&#10;Jan,18200,145,89,125.52&#10;Feb,21500,178,112,120.79&#10;..."
+      ></textarea>
+    </div>
+
+    <div class="parse-row">
+      <button class="btn-ghost" onclick="clearAll()">Clear</button>
+      <button class="btn-primary" onclick="parseAndAnalyze()">Analyze Data →</button>
+    </div>
+
+    <!-- ── Data Section (hidden until data loaded) ── -->
+    <div class="data-section" id="data-section">
+
+      <!-- Stats Bar -->
+      <div class="stats-bar">
+        <div class="stat-pill">
+          <div class="val" id="stat-rows">—</div>
+          <div class="lbl">Rows</div>
+        </div>
+        <div class="stat-pill">
+          <div class="val" id="stat-cols">—</div>
+          <div class="lbl">Columns</div>
+        </div>
+        <div class="stat-pill">
+          <div class="val" id="stat-numeric">—</div>
+          <div class="lbl">Numeric Cols</div>
+        </div>
+        <div class="stat-pill">
+          <div class="val" id="stat-nonnull">—</div>
+          <div class="lbl">Non-null %</div>
+        </div>
+      </div>
+
+      <!-- Data Preview -->
+      <div class="section-card">
+        <h2>🔍 Data Preview <span class="badge" id="preview-badge">0 rows</span></h2>
+        <div class="table-container" id="table-container"></div>
+      </div>
+
+      <!-- Column Statistics -->
+      <div class="section-card">
+        <h2>📐 Column Statistics</h2>
+        <div class="col-stats" id="col-stats"></div>
+      </div>
+
+      <!-- Chart -->
+      <div class="section-card">
+        <h2>📈 Visualize Data</h2>
+        <div class="chart-controls">
+          <label>X Axis</label>
+          <select id="chart-x"></select>
+          <label>Y Axis</label>
+          <select id="chart-y"></select>
+          <label>Chart Type</label>
+          <select id="chart-type">
+            <option value="bar">Bar</option>
+            <option value="line">Line</option>
+          </select>
+          <button class="btn-primary" onclick="renderChart()">Generate Chart</button>
+        </div>
+        <div class="chart-container">
+          <canvas id="my-chart"></canvas>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <script>
+    // ── State ──
+    let parsedData = null;
+    let sortState = {};
+    let chartInstance = null;
+
+    // ── Sample Data ──
+    const SAMPLE_CSV = `Month,Revenue,Orders,Customers,Avg_Order_Value
+Jan,18200,145,89,125.52
+Feb,21500,178,112,120.79
+Mar,24800,203,134,122.17
+Apr,22100,187,118,118.18
+May,26700,219,145,121.92
+Jun,29300,241,158,121.58
+Jul,31200,258,167,120.93
+Aug,28900,232,151,124.57
+Sep,33400,275,180,121.45
+Oct,35100,289,188,121.45
+Nov,42800,351,225,121.94
+Dec,38500,312,198,123.40`;
+
+    function loadSample() {
+      document.getElementById('csv-input').value = SAMPLE_CSV;
+      parseAndAnalyze();
+    }
+
+    function clearAll() {
+      document.getElementById('csv-input').value = '';
+      document.getElementById('data-section').style.display = 'none';
+      showError('');
+      parsedData = null;
+    }
+
+    function showError(msg) {
+      const el = document.getElementById('error-msg');
+      el.textContent = msg;
+      el.style.display = msg ? 'block' : 'none';
+    }
+
+    // ── CSV Parser ──
+    function parseCSV(text) {
+      const lines = text.trim().split(/\r?\n/);
+      if (lines.length < 2) throw new Error('CSV must have at least a header row and one data row.');
+
+      function parseLine(line) {
+        const fields = [];
+        let current = '';
+        let inQuotes = false;
+        for (let i = 0; i < line.length; i++) {
+          const ch = line[i];
+          if (ch === '"') {
+            if (inQuotes && line[i + 1] === '"') { current += '"'; i++; }
+            else { inQuotes = !inQuotes; }
+          } else if (ch === ',' && !inQuotes) {
+            fields.push(current.trim());
+            current = '';
+          } else {
+            current += ch;
+          }
+        }
+        fields.push(current.trim());
+        return fields;
+      }
+
+      const headers = parseLine(lines[0]);
+      const rows = [];
+      for (let i = 1; i < lines.length; i++) {
+        if (!lines[i].trim()) continue;
+        const vals = parseLine(lines[i]);
+        const row = {};
+        headers.forEach((h, j) => { row[h] = vals[j] !== undefined ? vals[j] : ''; });
+        rows.push(row);
+      }
+      return { headers, rows };
+    }
+
+    // ── Analysis ──
+    function analyzeData(data) {
+      const { headers, rows } = data;
+      const stats = {};
+
+      headers.forEach(col => {
+        const vals = rows.map(r => r[col]);
+        const nonNull = vals.filter(v => v !== '' && v !== undefined && v !== null);
+        const nums = nonNull.map(v => parseFloat(v)).filter(v => !isNaN(v));
+        const isNumeric = nums.length > 0 && nums.length >= nonNull.length * 0.7;
+
+        const s = {
+          col,
+          count: vals.length,
+          nonNull: nonNull.length,
+          missing: vals.length - nonNull.length,
+          isNumeric
+        };
+
+        if (isNumeric) {
+          s.min = Math.min(...nums);
+          s.max = Math.max(...nums);
+          s.sum = nums.reduce((a, b) => a + b, 0);
+          s.mean = s.sum / nums.length;
+          const sorted = [...nums].sort((a, b) => a - b);
+          const mid = Math.floor(sorted.length / 2);
+          s.median = sorted.length % 2 === 0 ? (sorted[mid - 1] + sorted[mid]) / 2 : sorted[mid];
+        } else {
+          const unique = new Set(nonNull);
+          s.unique = unique.size;
+          const freq = {};
+          nonNull.forEach(v => { freq[v] = (freq[v] || 0) + 1; });
+          let topVal = '';
+          let topCount = 0;
+          Object.entries(freq).forEach(([k, v]) => { if (v > topCount) { topCount = v; topVal = k; } });
+          s.top = topVal;
+          s.topCount = topCount;
+        }
+
+        stats[col] = s;
+      });
+
+      return stats;
+    }
+
+    // ── Main Parse & Render ──
+    function parseAndAnalyze() {
+      showError('');
+      const text = document.getElementById('csv-input').value.trim();
+      if (!text) {
+        showError('Please paste CSV data or upload a file first.');
+        return;
+      }
+
+      try {
+        parsedData = parseCSV(text);
+        if (parsedData.headers.length === 0) throw new Error('No columns found.');
+        if (parsedData.rows.length === 0) throw new Error('No data rows found.');
+
+        const stats = analyzeData(parsedData);
+
+        // Compute overview stats
+        const numericCount = parsedData.headers.filter(h => stats[h].isNumeric).length;
+        const totalCells = parsedData.rows.length * parsedData.headers.length;
+        const nonNullCells = parsedData.headers.reduce((acc, h) => acc + stats[h].nonNull, 0);
+        const nonNullPct = Math.round((nonNullCells / totalCells) * 100);
+
+        document.getElementById('stat-rows').textContent = parsedData.rows.length.toLocaleString();
+        document.getElementById('stat-cols').textContent = parsedData.headers.length;
+        document.getElementById('stat-numeric').textContent = numericCount;
+        document.getElementById('stat-nonnull').textContent = nonNullPct + '%';
+        document.getElementById('preview-badge').textContent = parsedData.rows.length + ' rows';
+
+        renderTable(parsedData, sortState);
+        renderColStats(stats, parsedData.headers);
+        populateChartControls(parsedData.headers, stats);
+
+        document.getElementById('data-section').style.display = 'block';
+        document.getElementById('data-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        // Auto-render chart with first x and numeric y
+        renderChart();
+      } catch (e) {
+        showError('Parse error: ' + e.message);
+      }
+    }
+
+    // ── Render Table ──
+    function renderTable(data, sort = {}) {
+      const { headers, rows } = data;
+      let sortedRows = [...rows];
+
+      if (sort.col) {
+        sortedRows.sort((a, b) => {
+          const av = a[sort.col];
+          const bv = b[sort.col];
+          const an = parseFloat(av);
+          const bn = parseFloat(bv);
+          if (!isNaN(an) && !isNaN(bn)) return sort.dir === 'asc' ? an - bn : bn - an;
+          return sort.dir === 'asc' ? String(av).localeCompare(String(bv)) : String(bv).localeCompare(String(av));
+        });
+      }
+
+      const displayRows = sortedRows.slice(0, 100);
+      const container = document.getElementById('table-container');
+
+      let html = '<table><thead><tr>';
+      headers.forEach(h => {
+        const cls = sort.col === h ? sort.dir : '';
+        html += `<th class="${cls}" onclick="toggleSort('${h}')"><span>${h}</span><span class="sort-icon"></span></th>`;
+      });
+      html += '</tr></thead><tbody>';
+
+      displayRows.forEach(row => {
+        html += '<tr>';
+        headers.forEach(h => {
+          const val = row[h] !== undefined ? row[h] : '';
+          const num = parseFloat(val);
+          const display = !isNaN(num) && val !== '' ? parseFloat(num.toFixed(4)).toLocaleString() : val;
+          html += `<td>${display}</td>`;
+        });
+        html += '</tr>';
+      });
+
+      html += '</tbody></table>';
+      if (sortedRows.length > 100) {
+        html += `<div style="text-align:center;padding:0.75rem;font-size:0.75rem;color:var(--text-muted)">Showing 100 of ${sortedRows.length} rows</div>`;
+      }
+      container.innerHTML = html;
+    }
+
+    function toggleSort(col) {
+      if (sortState.col === col) {
+        sortState.dir = sortState.dir === 'asc' ? 'desc' : 'asc';
+      } else {
+        sortState = { col, dir: 'asc' };
+      }
+      renderTable(parsedData, sortState);
+    }
+
+    // ── Render Column Stats ──
+    function renderColStats(stats, headers) {
+      const container = document.getElementById('col-stats');
+      let html = '';
+
+      headers.forEach(h => {
+        const s = stats[h];
+        html += `<div class="col-stat-card">
+          <div class="col-stat-name" title="${h}">${h}</div>
+          <div class="col-stat-type">${s.isNumeric ? '# Numeric' : 'Abc Text'}</div>`;
+
+        if (s.isNumeric) {
+          html += `
+            <div class="col-stat-row"><span class="label">Min</span><span class="value">${fmtNum(s.min)}</span></div>
+            <div class="col-stat-row"><span class="label">Max</span><span class="value">${fmtNum(s.max)}</span></div>
+            <div class="col-stat-row"><span class="label">Mean</span><span class="value">${fmtNum(s.mean)}</span></div>
+            <div class="col-stat-row"><span class="label">Median</span><span class="value">${fmtNum(s.median)}</span></div>
+            <div class="col-stat-row"><span class="label">Sum</span><span class="value">${fmtNum(s.sum)}</span></div>`;
+        } else {
+          html += `
+            <div class="col-stat-row"><span class="label">Unique</span><span class="value">${s.unique}</span></div>
+            <div class="col-stat-row"><span class="label">Top Value</span><span class="value" title="${s.top}">${s.top.length > 12 ? s.top.slice(0, 12) + '…' : s.top}</span></div>
+            <div class="col-stat-row"><span class="label">Top Count</span><span class="value">${s.topCount}</span></div>`;
+        }
+
+        html += `
+            <div class="col-stat-row"><span class="label">Non-null</span><span class="value">${s.nonNull}</span></div>
+            <div class="col-stat-row"><span class="label">Missing</span><span class="value" style="color:${s.missing > 0 ? 'var(--danger)' : 'var(--success)'}">${s.missing}</span></div>
+          </div>`;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function fmtNum(n) {
+      if (n === undefined || n === null) return '—';
+      if (Math.abs(n) >= 1000) return n.toLocaleString(undefined, { maximumFractionDigits: 2 });
+      return parseFloat(n.toFixed(4)).toString();
+    }
+
+    // ── Chart ──
+    function populateChartControls(headers, stats) {
+      const xSel = document.getElementById('chart-x');
+      const ySel = document.getElementById('chart-y');
+      xSel.innerHTML = '';
+      ySel.innerHTML = '';
+      headers.forEach(h => {
+        xSel.innerHTML += `<option value="${h}">${h}</option>`;
+        if (stats[h].isNumeric) ySel.innerHTML += `<option value="${h}">${h}</option>`;
+      });
+      // Default: first col as X, first numeric as Y
+      xSel.value = headers[0];
+      const firstNumeric = headers.find(h => stats[h].isNumeric);
+      if (firstNumeric) ySel.value = firstNumeric;
+    }
+
+    function renderChart() {
+      if (!parsedData) return;
+      const xCol = document.getElementById('chart-x').value;
+      const yCol = document.getElementById('chart-y').value;
+      const type = document.getElementById('chart-type').value;
+
+      const labels = parsedData.rows.map(r => r[xCol]);
+      const values = parsedData.rows.map(r => parseFloat(r[yCol]) || 0);
+
+      const ctx = document.getElementById('my-chart').getContext('2d');
+
+      if (chartInstance) chartInstance.destroy();
+
+      const goldColor = '#ffc451';
+      const goldLight = 'rgba(255,196,81,0.15)';
+
+      chartInstance = new Chart(ctx, {
+        type,
+        data: {
+          labels,
+          datasets: [{
+            label: yCol,
+            data: values,
+            backgroundColor: type === 'bar' ? goldColor : goldLight,
+            borderColor: goldColor,
+            borderWidth: type === 'line' ? 2.5 : 1,
+            borderRadius: type === 'bar' ? 6 : 0,
+            tension: 0.4,
+            pointBackgroundColor: goldColor,
+            pointRadius: type === 'line' ? 4 : 0,
+            fill: type === 'line',
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              labels: { color: '#9ca3af', font: { family: 'Inter', size: 12 } }
+            },
+            tooltip: {
+              backgroundColor: '#1a1d27',
+              borderColor: '#2a2d3e',
+              borderWidth: 1,
+              titleColor: '#ffc451',
+              bodyColor: '#f1f1f1',
+              padding: 10,
+            }
+          },
+          scales: {
+            x: {
+              ticks: { color: '#9ca3af', font: { family: 'Inter', size: 11 } },
+              grid: { color: 'rgba(42,45,62,0.8)' }
+            },
+            y: {
+              ticks: { color: '#9ca3af', font: { family: 'Inter', size: 11 } },
+              grid: { color: 'rgba(42,45,62,0.8)' }
+            }
+          }
+        }
+      });
+    }
+
+    // ── File Upload ──
+    document.getElementById('file-input').addEventListener('change', function (e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function (ev) {
+        document.getElementById('csv-input').value = ev.target.result;
+        parseAndAnalyze();
+      };
+      reader.readAsText(file);
+    });
+
+    // ── Drag & Drop ──
+    const zone = document.getElementById('upload-zone');
+
+    zone.addEventListener('dragover', e => {
+      e.preventDefault();
+      zone.classList.add('dragover');
+    });
+
+    zone.addEventListener('dragleave', () => {
+      zone.classList.remove('dragover');
+    });
+
+    zone.addEventListener('drop', e => {
+      e.preventDefault();
+      zone.classList.remove('dragover');
+      const file = e.dataTransfer.files[0];
+      if (!file || !file.name.endsWith('.csv')) {
+        showError('Please drop a .csv file.');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = ev => {
+        document.getElementById('csv-input').value = ev.target.result;
+        parseAndAnalyze();
+      };
+      reader.readAsText(file);
+    });
+
+    // ── Auto-load sample on page load ──
+    window.addEventListener('DOMContentLoaded', () => {
+      loadSample();
+    });
+  </script>
+</body>
+</html>

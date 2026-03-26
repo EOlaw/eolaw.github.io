@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InsightSerenity AI Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── Sidebar ── -->
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <div class="sidebar-logo">
+        <span class="logo-icon">✦</span> InsightSerenity AI
+      </div>
+      <button class="new-chat-btn" onclick="newChat()">+ New Conversation</button>
+    </div>
+
+    <div class="sidebar-section">Suggested Topics</div>
+
+    <button class="suggestion-btn" onclick="fillSuggestion('Analyze my data')">
+      <span class="icon">📊</span> Analyze my data
+    </button>
+    <button class="suggestion-btn" onclick="fillSuggestion('Code review help')">
+      <span class="icon">💻</span> Code review help
+    </button>
+    <button class="suggestion-btn" onclick="fillSuggestion('Career advice')">
+      <span class="icon">🎯</span> Career advice
+    </button>
+    <button class="suggestion-btn" onclick="fillSuggestion('Bible wisdom')">
+      <span class="icon">✝️</span> Bible wisdom
+    </button>
+    <button class="suggestion-btn" onclick="fillSuggestion('Business strategy')">
+      <span class="icon">📈</span> Business strategy
+    </button>
+    <button class="suggestion-btn" onclick="fillSuggestion('ML/AI question')">
+      <span class="icon">🤖</span> ML/AI question
+    </button>
+    <button class="suggestion-btn" onclick="fillSuggestion('Budget planning')">
+      <span class="icon">💰</span> Budget planning
+    </button>
+    <button class="suggestion-btn" onclick="fillSuggestion('Learning path')">
+      <span class="icon">📚</span> Learning path
+    </button>
+
+    <div class="sidebar-footer">
+      Powered by <a href="/" target="_blank">InsightSerenity</a>
+    </div>
+  </aside>
+
+  <!-- ── Chat Area ── -->
+  <main class="chat-area">
+    <header class="chat-header">
+      <div class="ai-avatar">IS</div>
+      <div class="chat-header-info">
+        <h2>InsightSerenity Assistant</h2>
+        <p><span class="status-dot"></span> Online — Ready to help</p>
+      </div>
+    </header>
+
+    <!-- Messages -->
+    <div class="messages" id="messages">
+      <!-- Pre-loaded conversation -->
+
+      <!-- AI: greeting -->
+      <div class="message ai">
+        <div class="msg-avatar ai">IS</div>
+        <div class="msg-content">
+          <div class="msg-bubble">
+            Hello! I'm the InsightSerenity AI Assistant — powered by Emmanuel's expertise in data science, software engineering, AI/ML, and life coaching. What can I help you with today?
+          </div>
+          <div class="msg-time">Today, 9:00 AM</div>
+        </div>
+      </div>
+
+      <!-- User -->
+      <div class="message user">
+        <div class="msg-avatar user">You</div>
+        <div class="msg-content">
+          <div class="msg-bubble">I need help analyzing sales data for my business</div>
+          <div class="msg-time">Today, 9:01 AM</div>
+        </div>
+      </div>
+
+      <!-- AI: detailed response -->
+      <div class="message ai">
+        <div class="msg-avatar ai">IS</div>
+        <div class="msg-content">
+          <div class="msg-bubble" id="ai-long-response"></div>
+          <div class="msg-time">Today, 9:01 AM</div>
+        </div>
+      </div>
+
+      <!-- User -->
+      <div class="message user">
+        <div class="msg-avatar user">You</div>
+        <div class="msg-content">
+          <div class="msg-bubble">Yes, I'm in retail — 5 locations</div>
+          <div class="msg-time">Today, 9:02 AM</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Input Area -->
+    <div class="input-area">
+      <div class="quick-chips">
+        <button class="chip" onclick="chipSend('📊 Data Analysis')">📊 Data Analysis</button>
+        <button class="chip" onclick="chipSend('💻 Coding Help')">💻 Coding Help</button>
+        <button class="chip" onclick="chipSend('🎯 Career')">🎯 Career</button>
+        <button class="chip" onclick="chipSend('✝️ Bible Wisdom')">✝️ Bible Wisdom</button>
+      </div>
+      <div class="input-row">
+        <textarea
+          class="chat-input"
+          id="chat-input"
+          rows="1"
+          placeholder="Ask me anything..."
+        ></textarea>
+        <button class="send-btn" onclick="sendMessage()" id="send-btn">
+          Send
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </div>
+      <p class="disclaimer">AI responses are for informational purposes only.</p>
+    </div>
+  </main>
+
+  <script>
+    // ── Pre-load formatted AI response ──
+    document.getElementById('ai-long-response').innerHTML = `
+      Great! Sales data analysis is one of my specialties. Here's how I'd approach this:<br><br>
+      <strong>1. Data Collection &amp; Cleaning</strong><br>
+      First, consolidate all your data sources — POS systems, e-commerce, CRM — into a single dataset. Remove duplicates and handle missing values.<br><br>
+      <strong>2. Key Metrics to Analyze</strong><br>
+      • Revenue trends (daily, weekly, monthly)<br>
+      • Conversion rates by channel<br>
+      • Customer lifetime value (CLV)<br>
+      • Average order value (AOV)<br><br>
+      <strong>3. Visualization</strong><br>
+      I recommend Power BI or Tableau for executive dashboards, or a custom Chart.js solution for web-based reporting.<br><br>
+      Would you like me to help you define the specific metrics for your industry?
+    `;
+
+    // ── Response Library ──
+    const responses = {
+      data: `<strong>Sales &amp; Data Analysis for 5 Retail Locations</strong><br><br>
+For a multi-location retail operation, here's a focused framework:<br><br>
+<strong>Location-Level KPIs</strong><br>
+• Revenue per sq ft, foot traffic conversion rate<br>
+• Inventory turnover ratio per location<br>
+• Staff-to-revenue efficiency index<br><br>
+<strong>Recommended Tech Stack</strong><br>
+• <strong>ETL:</strong> Python (Pandas + SQLAlchemy) to centralize POS data<br>
+• <strong>Storage:</strong> PostgreSQL or Google BigQuery<br>
+• <strong>Dashboards:</strong> Power BI embedded or Chart.js custom app<br><br>
+<strong>Quick Win</strong><br>
+Start with a weekly automated report comparing same-store sales growth across all 5 locations. This surfaces underperformers fast.<br><br>
+Would you like a Python script template to get started?`,
+
+      code: `<strong>Code Review Best Practices</strong><br><br>
+Here's how I approach code reviews for maximum impact:<br><br>
+<strong>What to Look For</strong><br>
+• Readability — can a new developer understand this in 5 minutes?<br>
+• Logic errors and edge cases (null checks, boundary values)<br>
+• Security vulnerabilities (SQL injection, XSS, auth checks)<br>
+• Performance bottlenecks (N+1 queries, unnecessary loops)<br><br>
+<strong>Tools I Recommend</strong><br>
+• <strong>ESLint / Prettier</strong> for JS/TS style enforcement<br>
+• <strong>SonarQube</strong> for security scanning<br>
+• <strong>GitHub PR templates</strong> for structured reviews<br><br>
+Paste your code snippet below and I'll give you a detailed review with line-by-line feedback.`,
+
+      career: `<strong>Career Transition Strategy — 5-Step Framework</strong><br><br>
+Whether you're pivoting into tech or leveling up, here's my proven approach:<br><br>
+<strong>Step 1: Audit Your Transferable Skills</strong><br>
+Map what you already know to in-demand roles. Data literacy, project management, and communication are gold.<br><br>
+<strong>Step 2: Choose a High-ROI Specialization</strong><br>
+Data Science, Full-Stack Dev, and AI/ML Engineering are the top earners in 2024-2025.<br><br>
+<strong>Step 3: Build a Portfolio in 90 Days</strong><br>
+3 projects minimum: one data project, one web app, one API integration.<br><br>
+<strong>Step 4: Network with Intention</strong><br>
+LinkedIn outreach to hiring managers (not just HR). Share your work publicly.<br><br>
+<strong>Step 5: Negotiate Confidently</strong><br>
+Research market rates on Levels.fyi and Glassdoor. Always counter-offer.<br><br>
+What industry are you currently in? I can give you a more targeted plan.`,
+
+      bible: `<strong>Biblical Wisdom for Today</strong><br><br>
+<em>"For I know the plans I have for you," declares the Lord, "plans to prosper you and not to harm you, plans to give you hope and a future."</em> — Jeremiah 29:11<br><br>
+This verse is particularly powerful for anyone navigating uncertainty in their career or business. It reminds us that:<br><br>
+• <strong>Purpose is intentional</strong> — your gifts and skills are not accidental<br>
+• <strong>Setbacks are not the end</strong> — they're often redirections toward better alignment<br>
+• <strong>Faith and action work together</strong> — trust the process while doing the work<br><br>
+<em>"Commit to the LORD whatever you do, and he will establish your plans."</em> — Proverbs 16:3<br><br>
+Is there a specific life challenge you'd like to explore through a faith-based lens?`,
+
+      python: `<strong>Python Tips for Data Science &amp; Development</strong><br><br>
+Here are my top recommendations for writing production-quality Python:<br><br>
+<strong>Data Science Essentials</strong><br>
+<code>pandas</code>, <code>numpy</code>, <code>scikit-learn</code>, <code>matplotlib</code>, <code>seaborn</code><br><br>
+<strong>Code Quality</strong><br>
+• Use type hints: <code>def process(df: pd.DataFrame) -&gt; dict:</code><br>
+• Virtual environments: always use <code>venv</code> or <code>conda</code><br>
+• Docstrings on every function<br>
+• <code>black</code> for auto-formatting<br><br>
+<strong>Performance</strong><br>
+• Vectorize with NumPy instead of loops<br>
+• Use <code>df.apply()</code> sparingly — prefer vectorized operations<br>
+• Profile with <code>cProfile</code> before optimizing<br><br>
+What specific Python challenge are you working on?`,
+
+      ml: `<strong>ML/AI Workflow — Production-Ready Approach</strong><br><br>
+Here's the full lifecycle I follow for ML projects:<br><br>
+<strong>1. Problem Framing</strong><br>
+Define success metrics before touching data. Classification? Regression? Recommendation?<br><br>
+<strong>2. Data Pipeline</strong><br>
+• Ingest → Clean → Feature Engineer → Split (70/15/15)<br>
+• Use stratified splits for imbalanced classes<br><br>
+<strong>3. Baseline Model First</strong><br>
+Always start with logistic regression or a decision tree. Beat the baseline, then go complex.<br><br>
+<strong>4. Model Selection</strong><br>
+XGBoost and LightGBM win most tabular competitions. For NLP: fine-tuned transformers (HuggingFace).<br><br>
+<strong>5. Deployment</strong><br>
+FastAPI + Docker + cloud (AWS SageMaker / GCP Vertex AI). Monitor for drift.<br><br>
+What type of ML problem are you solving?`,
+
+      budget: `<strong>Financial Literacy &amp; Budget Planning Framework</strong><br><br>
+Here's the framework I coach clients through:<br><br>
+<strong>The 50/30/20 Rule (Adapted)</strong><br>
+• <strong>50%</strong> — Needs (rent, utilities, groceries, transport)<br>
+• <strong>30%</strong> — Wants (dining, entertainment, subscriptions)<br>
+• <strong>20%</strong> — Wealth building (savings, investments, debt payoff)<br><br>
+<strong>Emergency Fund First</strong><br>
+Build 3-6 months of expenses in a high-yield savings account before investing.<br><br>
+<strong>Debt Payoff Strategy</strong><br>
+• Avalanche method: pay highest interest first (saves the most money)<br>
+• Snowball method: pay smallest balance first (builds momentum)<br><br>
+<strong>Investment Order</strong><br>
+401k match → HSA → Roth IRA → index funds (VOO/VTI)<br><br>
+What's your current financial priority — debt, saving, or investing?`,
+
+      coach: `<strong>Life Coaching Insight — Unlocking Your Potential</strong><br><br>
+The most transformational insight I've seen in coaching:<br><br>
+<em>The gap between where you are and where you want to be is almost never a knowledge gap — it's an action gap.</em><br><br>
+<strong>The Three Blockers I See Most</strong><br>
+• <strong>Fear of judgment</strong> — You delay starting because you're worried about what others think<br>
+• <strong>Perfectionism</strong> — You wait for the "right time" or "perfect conditions"<br>
+• <strong>Clarity confusion</strong> — You don't act because you're not 100% sure of the destination<br><br>
+<strong>The One Question That Changes Everything</strong><br>
+<em>What is the smallest possible action I could take TODAY that moves me 1% toward my goal?</em><br><br>
+Consistency beats intensity every time.<br><br>
+What area of your life are you looking to transform?`,
+
+      default: `That's a great question! Based on my expertise in data science, software engineering, and coaching, I'd be happy to explore this with you.<br><br>
+Could you give me a bit more context about what you're trying to achieve? The more specific you are, the more targeted my advice will be.<br><br>
+For example, are you looking for:<br>
+• <strong>Technical guidance</strong> (code, data, AI/ML)<br>
+• <strong>Career or business strategy</strong><br>
+• <strong>Personal development</strong><br>
+• <strong>Financial literacy</strong>`
+    };
+
+    function getResponse(text) {
+      const t = text.toLowerCase();
+      if (t.includes('data') || t.includes('csv') || t.includes('analyze') || t.includes('analysis') || t.includes('sales') || t.includes('excel')) return responses.data;
+      if (t.includes('code') || t.includes('review') || t.includes('bug') || t.includes('debug') || t.includes('javascript') || t.includes('html') || t.includes('css')) return responses.code;
+      if (t.includes('career') || t.includes('job') || t.includes('interview') || t.includes('resume') || t.includes('transition') || t.includes('hire')) return responses.career;
+      if (t.includes('bible') || t.includes('scripture') || t.includes('faith') || t.includes('god') || t.includes('pray') || t.includes('wisdom')) return responses.bible;
+      if (t.includes('python') || t.includes('pandas') || t.includes('numpy') || t.includes('django') || t.includes('flask')) return responses.python;
+      if (t.includes('ml') || t.includes('machine') || t.includes('ai') || t.includes('model') || t.includes('neural') || t.includes('learning') || t.includes('gpt') || t.includes('llm')) return responses.ml;
+      if (t.includes('budget') || t.includes('finance') || t.includes('money') || t.includes('invest') || t.includes('debt') || t.includes('saving')) return responses.budget;
+      if (t.includes('coach') || t.includes('life') || t.includes('motivation') || t.includes('goal') || t.includes('mindset') || t.includes('transform')) return responses.coach;
+      return responses.default;
+    }
+
+    function getTime() {
+      return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+
+    function appendMessage(role, htmlContent) {
+      const messages = document.getElementById('messages');
+      const isUser = role === 'user';
+      const div = document.createElement('div');
+      div.className = `message ${role}`;
+      div.innerHTML = `
+        <div class="msg-avatar ${role}">${isUser ? 'You' : 'IS'}</div>
+        <div class="msg-content">
+          <div class="msg-bubble">${htmlContent}</div>
+          <div class="msg-time">${getTime()}</div>
+        </div>
+      `;
+      messages.appendChild(div);
+      scrollToBottom();
+    }
+
+    function showTyping() {
+      const messages = document.getElementById('messages');
+      const wrapper = document.createElement('div');
+      wrapper.className = 'typing-wrapper';
+      wrapper.id = 'typing';
+      wrapper.innerHTML = `
+        <div class="msg-avatar ai">IS</div>
+        <div class="typing-indicator">
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+        </div>
+      `;
+      messages.appendChild(wrapper);
+      scrollToBottom();
+    }
+
+    function hideTyping() {
+      const el = document.getElementById('typing');
+      if (el) el.remove();
+    }
+
+    function scrollToBottom() {
+      const messages = document.getElementById('messages');
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function sendMessage() {
+      const input = document.getElementById('chat-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+      input.value = '';
+      input.style.height = 'auto';
+
+      appendMessage('user', escapeHtml(text).replace(/\n/g, '<br>'));
+      showTyping();
+
+      setTimeout(() => {
+        hideTyping();
+        const reply = getResponse(text);
+        appendMessage('ai', reply);
+      }, 1500);
+    }
+
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function chipSend(text) {
+      const input = document.getElementById('chat-input');
+      input.value = text;
+      sendMessage();
+    }
+
+    function fillSuggestion(text) {
+      const input = document.getElementById('chat-input');
+      input.value = text;
+      input.focus();
+    }
+
+    function newChat() {
+      const messages = document.getElementById('messages');
+      messages.innerHTML = '';
+      appendMessage('ai', 'Hello! I\'m the InsightSerenity AI Assistant — powered by Emmanuel\'s expertise in data science, software engineering, AI/ML, and life coaching. What can I help you with today?');
+    }
+
+    // ── Enter to send / Shift+Enter for newline ──
+    document.getElementById('chat-input').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    // ── Auto-resize textarea ──
+    document.getElementById('chat-input').addEventListener('input', function () {
+      this.style.height = 'auto';
+      this.style.height = Math.min(this.scrollHeight, 160) + 'px';
+    });
+
+    // ── Initial scroll ──
+    scrollToBottom();
+  </script>
+</body>
+</html>

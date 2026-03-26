@@ -127,6 +127,33 @@
             <i data-lucide="lock" style="width:11px;height:11px;display:inline;vertical-align:middle;"></i>
             Secure booking powered by Calendly · Your data is protected
           </p>
+          <!-- Fallback if Calendly doesn't load -->
+          <div id="calendly-fallback" style="display:none;margin-top:1.5rem;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;text-align:center;">
+            <i data-lucide="calendar-x" style="width:2rem;height:2rem;color:var(--text-soft);margin-bottom:1rem;display:block;margin-left:auto;margin-right:auto;"></i>
+            <h3 style="font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.5rem;">Calendar Not Loading?</h3>
+            <p style="font-size:.8rem;color:var(--text-muted);margin-bottom:1.25rem;line-height:1.6;">No worries — you can reach me directly and I'll find a time that works.</p>
+            <div style="display:flex;flex-direction:column;gap:.625rem;">
+              <a href="mailto:emmanuel.ao@outlook.com?subject=Consultation%20Request" class="btn btn-primary" style="justify-content:center;">
+                <i data-lucide="mail" style="width:14px;height:14px;"></i>
+                Email to Schedule
+              </a>
+              <a href="tel:+13463839529" class="btn btn-ghost" style="justify-content:center;">
+                <i data-lucide="phone" style="width:14px;height:14px;"></i>
+                Call +1 (346) 383-9529
+              </a>
+            </div>
+          </div>
+
+          <script>
+            // Show fallback if Calendly widget hasn't rendered after 6 seconds
+            setTimeout(function() {
+              var widget = document.querySelector('.calendly-inline-widget iframe');
+              if (!widget) {
+                var fallback = document.getElementById('calendly-fallback');
+                if (fallback) fallback.style.display = '';
+              }
+            }, 6000);
+          </script>
         </div>
 
         <!-- RIGHT: SIDEBAR -->
@@ -190,7 +217,7 @@
               <div class="check-item"><i data-lucide="check-circle-2"></i><span>30-minute focused conversation about your goals and challenges</span></div>
               <div class="check-item"><i data-lucide="check-circle-2"></i><span>Honest assessment of how I can (or can't) help</span></div>
               <div class="check-item"><i data-lucide="check-circle-2"></i><span>Clear outline of next steps with no pressure to commit</span></div>
-              <div class="check-item"><i data-lucide="check-circle-2"></i><span>Follow-up email with proposal within 48 hours if applicable</span></div>
+              <div class="check-item"><i data-lucide="check-circle-2"></i><span>Follow-up email within 48 hours — either a detailed proposal if your project is a good fit, or an honest explanation of why I may not be the right match</span></div>
             </div>
           </div>
 

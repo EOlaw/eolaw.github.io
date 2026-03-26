@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InsightSerenity Quiz Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════ -->
+  <!-- HOME SCREEN                        -->
+  <!-- ══════════════════════════════════ -->
+  <div class="screen" id="home-screen">
+    <div class="logo">
+      <h1>🧠 InsightSerenity Quiz</h1>
+      <p>Test your knowledge in Data Science, Full-Stack, AI/ML, and Tech</p>
+    </div>
+
+    <div class="category-grid" id="category-grid">
+      <div class="cat-card" data-cat="datascience" onclick="selectCategory(this)">
+        <div class="cat-check">✓</div>
+        <div class="cat-icon">📊</div>
+        <div class="cat-name">Data Science</div>
+        <div class="cat-count">10 questions</div>
+      </div>
+      <div class="cat-card" data-cat="fullstack" onclick="selectCategory(this)">
+        <div class="cat-check">✓</div>
+        <div class="cat-icon">💻</div>
+        <div class="cat-name">Full-Stack Dev</div>
+        <div class="cat-count">10 questions</div>
+      </div>
+      <div class="cat-card" data-cat="aiml" onclick="selectCategory(this)">
+        <div class="cat-check">✓</div>
+        <div class="cat-icon">🤖</div>
+        <div class="cat-name">AI &amp; Machine Learning</div>
+        <div class="cat-count">10 questions</div>
+      </div>
+      <div class="cat-card" data-cat="generaltech" onclick="selectCategory(this)">
+        <div class="cat-check">✓</div>
+        <div class="cat-icon">⚡</div>
+        <div class="cat-name">General Tech</div>
+        <div class="cat-count">10 questions</div>
+      </div>
+    </div>
+
+    <button class="start-btn" onclick="startQuiz()">Start Quiz →</button>
+  </div>
+
+  <!-- ══════════════════════════════════ -->
+  <!-- QUIZ SCREEN                        -->
+  <!-- ══════════════════════════════════ -->
+  <div class="screen hidden" id="quiz-screen">
+    <div class="quiz-header">
+      <div class="q-counter" id="q-counter">Q 1 of 10</div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar" id="progress-bar" style="width:10%"></div>
+      </div>
+      <div class="timer-wrap">
+        <div class="timer" id="timer">30</div>
+        <div class="timer-label">sec</div>
+      </div>
+    </div>
+
+    <div class="question-card" id="question-card">
+      <div class="question-meta">
+        <span class="category-badge" id="cat-badge">Data Science</span>
+        <span id="q-num-meta">Question 1</span>
+      </div>
+      <div class="question-text" id="question-text">Loading...</div>
+      <div class="options" id="options-list"></div>
+      <div class="explanation" id="explanation"></div>
+    </div>
+
+    <button class="next-btn" id="next-btn" onclick="nextQuestion()">Next Question →</button>
+  </div>
+
+  <!-- ══════════════════════════════════ -->
+  <!-- RESULT SCREEN                      -->
+  <!-- ══════════════════════════════════ -->
+  <div class="screen hidden" id="result-screen">
+    <div class="result-screen">
+      <h2 id="result-title">Quiz Complete!</h2>
+      <p id="result-subtitle">Here's how you did</p>
+
+      <div class="score-circle">
+        <div class="score-num" id="score-num">0</div>
+        <div class="score-total">/10</div>
+      </div>
+
+      <div class="grade-badge" id="grade-badge">📚 Keep Learning</div>
+
+      <div class="result-breakdown">
+        <div class="result-stat correct">
+          <div class="val" id="res-correct">0</div>
+          <div class="lbl">Correct</div>
+        </div>
+        <div class="result-stat wrong-stat">
+          <div class="val" id="res-wrong">0</div>
+          <div class="lbl">Wrong</div>
+        </div>
+        <div class="result-stat time-stat">
+          <div class="val" id="res-time">0s</div>
+          <div class="lbl">Avg Time</div>
+        </div>
+      </div>
+
+      <div class="result-actions">
+        <button class="play-again-btn" onclick="playAgain()">Play Again</button>
+        <button class="change-category-btn" onclick="changeCategory()">Change Category</button>
+      </div>
+
+      <div class="review-list">
+        <h3>Review Answers</h3>
+        <div id="review-items"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ══════════════════════════════════════════════════════════
+    // QUESTION DATA
+    // ══════════════════════════════════════════════════════════
+    const questions = {
+      datascience: [
+        {
+          q: "Which Python library is primarily used for data manipulation and analysis?",
+          options: ["NumPy", "Pandas", "Matplotlib", "Scikit-learn"],
+          correct: 1,
+          explanation: "Pandas provides DataFrame and Series structures ideal for data manipulation."
+        },
+        {
+          q: "What does EDA stand for in data science?",
+          options: ["Extended Data Analysis", "Exploratory Data Analysis", "External Data Architecture", "Enhanced Data Algorithm"],
+          correct: 1,
+          explanation: "EDA (Exploratory Data Analysis) is the process of analyzing datasets to summarize their main characteristics."
+        },
+        {
+          q: "Which measure is most resistant to outliers?",
+          options: ["Mean", "Median", "Mode", "Range"],
+          correct: 1,
+          explanation: "The median is the middle value and is not affected by extreme outliers like the mean is."
+        },
+        {
+          q: "What is the purpose of normalization in machine learning?",
+          options: ["Increase dataset size", "Scale features to similar ranges", "Remove duplicate rows", "Split data into train/test"],
+          correct: 1,
+          explanation: "Normalization scales features to a similar range (often 0–1), preventing features with large values from dominating."
+        },
+        {
+          q: "Which chart type is best for showing distribution of a single continuous variable?",
+          options: ["Bar chart", "Scatter plot", "Histogram", "Pie chart"],
+          correct: 2,
+          explanation: "Histograms display the frequency distribution of a continuous variable across ranges (bins)."
+        },
+        {
+          q: "What is the difference between supervised and unsupervised learning?",
+          options: ["Speed of training", "Presence or absence of labeled training data", "Number of features", "Size of dataset"],
+          correct: 1,
+          explanation: "Supervised learning uses labeled data; unsupervised learning finds patterns in unlabeled data."
+        },
+        {
+          q: "Which SQL clause is used to filter rows based on a condition?",
+          options: ["GROUP BY", "ORDER BY", "WHERE", "HAVING"],
+          correct: 2,
+          explanation: "WHERE filters rows before any grouping; HAVING filters after GROUP BY is applied."
+        },
+        {
+          q: "What does 'overfitting' mean in machine learning?",
+          options: ["Model is too simple", "Model performs well on training but poorly on new data", "Model has too few parameters", "Dataset is too small"],
+          correct: 1,
+          explanation: "Overfitting occurs when a model memorizes training data so well it fails to generalize to new examples."
+        },
+        {
+          q: "Which visualization tool is owned by Microsoft?",
+          options: ["Tableau", "Looker", "Power BI", "Metabase"],
+          correct: 2,
+          explanation: "Power BI is Microsoft's business intelligence and data visualization tool, deeply integrated with Azure."
+        },
+        {
+          q: "What is the Pearson correlation coefficient range?",
+          options: ["-100 to 100", "0 to 1", "-1 to 1", "0 to 100"],
+          correct: 2,
+          explanation: "Pearson correlation ranges from -1 (perfect negative) to 1 (perfect positive), with 0 indicating no linear relationship."
+        }
+      ],
+      fullstack: [
+        {
+          q: "What does REST stand for?",
+          options: ["Remote Execution State Transfer", "Representational State Transfer", "Rapid Endpoint Service Technology", "Resource Encoded State Transport"],
+          correct: 1,
+          explanation: "REST (Representational State Transfer) is an architectural style for distributed hypermedia systems."
+        },
+        {
+          q: "Which HTTP status code means 'Not Found'?",
+          options: ["200", "301", "403", "404"],
+          correct: 3,
+          explanation: "404 is returned when the server cannot find the requested resource."
+        },
+        {
+          q: "What is the primary purpose of a CDN?",
+          options: ["Compress code", "Deliver content from servers close to users", "Manage database queries", "Encrypt data in transit"],
+          correct: 1,
+          explanation: "A CDN (Content Delivery Network) distributes content from geographically distributed servers to reduce latency."
+        },
+        {
+          q: "Which of these is a NoSQL database?",
+          options: ["PostgreSQL", "MySQL", "MongoDB", "SQLite"],
+          correct: 2,
+          explanation: "MongoDB stores data as JSON-like documents, making it a popular NoSQL document database."
+        },
+        {
+          q: "What does 'async/await' solve in JavaScript?",
+          options: ["Memory leaks", "Callback hell and complex promise chains", "Variable hoisting", "Event bubbling"],
+          correct: 1,
+          explanation: "async/await is syntactic sugar over Promises that makes asynchronous code readable and easier to reason about."
+        },
+        {
+          q: "What is JWT used for?",
+          options: ["Database encryption", "Stateless authentication and authorization", "Image compression", "CSS animations"],
+          correct: 1,
+          explanation: "JWT (JSON Web Token) is a compact way to transmit authentication claims between parties."
+        },
+        {
+          q: "Which React hook manages side effects?",
+          options: ["useState", "useRef", "useEffect", "useContext"],
+          correct: 2,
+          explanation: "useEffect runs after render and handles side effects like data fetching, subscriptions, and DOM manipulation."
+        },
+        {
+          q: "What does CI/CD stand for?",
+          options: ["Code Integration/Code Delivery", "Continuous Integration/Continuous Deployment", "Computer Interface/Compiled Data", "Centralized Infrastructure/Cloud Distribution"],
+          correct: 1,
+          explanation: "CI/CD automates code integration, testing, and deployment to speed up and stabilize software delivery."
+        },
+        {
+          q: "Which is NOT a valid HTTP method?",
+          options: ["GET", "POST", "FETCH", "DELETE"],
+          correct: 2,
+          explanation: "FETCH is not an HTTP method — it's a JavaScript browser API. Standard HTTP methods include GET, POST, PUT, DELETE, PATCH."
+        },
+        {
+          q: "What is Docker primarily used for?",
+          options: ["Version control", "Containerizing applications for consistent environments", "Cloud storage", "Database management"],
+          correct: 1,
+          explanation: "Docker packages applications and their dependencies into containers that run consistently across any environment."
+        }
+      ],
+      aiml: [
+        {
+          q: "What does LLM stand for?",
+          options: ["Large Language Model", "Linear Learning Machine", "Layered Logic Module", "Long-term Learning Method"],
+          correct: 0,
+          explanation: "LLM (Large Language Model) refers to AI models like GPT that are trained on vast text datasets to understand and generate language."
+        },
+        {
+          q: "What is RAG in the context of AI?",
+          options: ["Random Assignment Generator", "Retrieval-Augmented Generation", "Recursive Algorithm Graph", "Real-time Analytics Gateway"],
+          correct: 1,
+          explanation: "RAG combines a retrieval system with an LLM, allowing the model to query external knowledge bases for more accurate answers."
+        },
+        {
+          q: "Which activation function outputs values between 0 and 1?",
+          options: ["ReLU", "Sigmoid", "Tanh", "Softmax"],
+          correct: 1,
+          explanation: "Sigmoid maps any input to a value between 0 and 1, making it useful for binary classification output layers."
+        },
+        {
+          q: "What is the purpose of a training/test split?",
+          options: ["Speed up computation", "Evaluate model on data it hasn't seen during training", "Balance class distribution", "Reduce overfitting via regularization"],
+          correct: 1,
+          explanation: "Splitting data ensures we evaluate how well the model generalizes to unseen data, not just training performance."
+        },
+        {
+          q: "Which metric is most appropriate for imbalanced classification?",
+          options: ["Accuracy", "F1 Score", "Mean Squared Error", "R-squared"],
+          correct: 1,
+          explanation: "F1 Score balances precision and recall, making it more meaningful than accuracy when classes are imbalanced."
+        },
+        {
+          q: "What does 'prompt engineering' mean?",
+          options: ["Designing fast algorithms", "Crafting inputs to guide LLM behavior", "Engineering the neural network architecture", "Writing code prompts in IDEs"],
+          correct: 1,
+          explanation: "Prompt engineering is the practice of designing and refining inputs to large language models to get desired outputs."
+        },
+        {
+          q: "Which algorithm is used in gradient boosting?",
+          options: ["Decision Trees", "k-Nearest Neighbors", "Support Vector Machines", "Naive Bayes"],
+          correct: 0,
+          explanation: "Gradient Boosting (XGBoost, LightGBM) sequentially trains weak decision trees, each correcting errors of the previous."
+        },
+        {
+          q: "What is transfer learning?",
+          options: ["Moving data between servers", "Reusing a pre-trained model on a new related task", "Transferring model weights to ONNX", "Training on multiple GPUs"],
+          correct: 1,
+          explanation: "Transfer learning applies knowledge from a model trained on one task to a different but related task, saving time and data."
+        },
+        {
+          q: "What is a vector embedding?",
+          options: ["A compressed image format", "A numerical representation of data in high-dimensional space", "A type of database index", "A GPU memory allocation"],
+          correct: 1,
+          explanation: "Vector embeddings represent semantic meaning as numerical vectors, enabling similarity comparisons in semantic search and RAG systems."
+        },
+        {
+          q: "Which company created TensorFlow?",
+          options: ["OpenAI", "Meta", "Google", "Microsoft"],
+          correct: 2,
+          explanation: "TensorFlow was developed by Google Brain and open-sourced in 2015. It remains one of the most widely used ML frameworks."
+        }
+      ],
+      generaltech: [
+        {
+          q: "What does API stand for?",
+          options: ["Application Processing Interface", "Automated Program Integration", "Application Programming Interface", "Advanced Protocol Implementation"],
+          correct: 2,
+          explanation: "API (Application Programming Interface) defines how software components communicate with each other."
+        },
+        {
+          q: "What is Git used for?",
+          options: ["Web hosting", "Version control and collaborative code management", "Database management", "Server monitoring"],
+          correct: 1,
+          explanation: "Git is a distributed version control system that tracks code changes and enables team collaboration."
+        },
+        {
+          q: "What does 'latency' measure in networking?",
+          options: ["Bandwidth capacity", "Amount of data transferred", "Time for data to travel from source to destination", "Number of active connections"],
+          correct: 2,
+          explanation: "Latency is the time delay between a request being sent and a response being received, measured in milliseconds."
+        },
+        {
+          q: "Which cloud provider offers EC2 instances?",
+          options: ["Google Cloud", "Microsoft Azure", "Amazon Web Services", "IBM Cloud"],
+          correct: 2,
+          explanation: "EC2 (Elastic Compute Cloud) is Amazon Web Services' virtual server offering."
+        },
+        {
+          q: "What is the purpose of SSL/TLS?",
+          options: ["Speed up page loads", "Encrypt data transmitted between client and server", "Compress images", "Cache web content"],
+          correct: 1,
+          explanation: "SSL/TLS (Secure Sockets Layer/Transport Layer Security) encrypts data in transit to prevent interception."
+        },
+        {
+          q: "What does 'open source' mean?",
+          options: ["Free software with no license", "Software whose source code is publicly available", "Software developed by government", "Cloud-hosted software"],
+          correct: 1,
+          explanation: "Open source software has publicly available source code that anyone can inspect, modify, and distribute."
+        },
+        {
+          q: "What is a microservices architecture?",
+          options: ["A very small web application", "An app built as a collection of small, independent services", "Serverless computing", "A type of database architecture"],
+          correct: 1,
+          explanation: "Microservices decomposes applications into small, independently deployable services that communicate over APIs."
+        },
+        {
+          q: "Which data format is most commonly used in REST APIs?",
+          options: ["XML", "CSV", "JSON", "YAML"],
+          correct: 2,
+          explanation: "JSON (JavaScript Object Notation) is lightweight, human-readable, and natively supported by JavaScript, making it the standard for REST APIs."
+        },
+        {
+          q: "What does DevOps combine?",
+          options: ["Design and operations", "Development and operations", "Data and operations", "Docker and operating systems"],
+          correct: 1,
+          explanation: "DevOps is a culture and practice combining software development (Dev) and IT operations (Ops) to shorten delivery cycles."
+        },
+        {
+          q: "What is 'Big O notation' used for?",
+          options: ["Database query optimization", "Describing algorithm time and space complexity", "Measuring network speed", "Formatting code output"],
+          correct: 1,
+          explanation: "Big O notation describes how algorithm performance scales with input size, helping developers choose efficient solutions."
+        }
+      ]
+    };
+
+    // ══════════════════════════════════════════════════════════
+    // STATE
+    // ══════════════════════════════════════════════════════════
+    let currentCategory = null;
+    let currentQuestions = [];
+    let currentIndex = 0;
+    let score = 0;
+    let timerInterval = null;
+    let timeLeft = 30;
+    let answers = [];
+    let questionTimes = [];
+    let questionStartTime = 0;
+    let answered = false;
+
+    const CATEGORY_NAMES = {
+      datascience: 'Data Science',
+      fullstack: 'Full-Stack Dev',
+      aiml: 'AI & Machine Learning',
+      generaltech: 'General Tech'
+    };
+
+    // ══════════════════════════════════════════════════════════
+    // SCREEN MANAGEMENT
+    // ══════════════════════════════════════════════════════════
+    function showScreen(id) {
+      ['home-screen', 'quiz-screen', 'result-screen'].forEach(s => {
+        document.getElementById(s).classList.toggle('hidden', s !== id);
+      });
+    }
+
+    // ══════════════════════════════════════════════════════════
+    // HOME SCREEN
+    // ══════════════════════════════════════════════════════════
+    function selectCategory(card) {
+      document.querySelectorAll('.cat-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      currentCategory = card.dataset.cat;
+    }
+
+    function startQuiz() {
+      if (!currentCategory) {
+        // Auto-select first if none chosen
+        const first = document.querySelector('.cat-card');
+        selectCategory(first);
+      }
+
+      // Shuffle questions (keep all 10)
+      currentQuestions = shuffle([...questions[currentCategory]]);
+      currentIndex = 0;
+      score = 0;
+      answers = [];
+      questionTimes = [];
+      answered = false;
+
+      showScreen('quiz-screen');
+      showQuestion(0);
+    }
+
+    function shuffle(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    // ══════════════════════════════════════════════════════════
+    // QUIZ SCREEN
+    // ══════════════════════════════════════════════════════════
+    function showQuestion(index) {
+      answered = false;
+      const q = currentQuestions[index];
+      const total = currentQuestions.length;
+
+      // Update header
+      document.getElementById('q-counter').textContent = `Q ${index + 1} of ${total}`;
+      document.getElementById('progress-bar').style.width = `${((index + 1) / total) * 100}%`;
+      document.getElementById('cat-badge').textContent = CATEGORY_NAMES[currentCategory];
+      document.getElementById('q-num-meta').textContent = `Question ${index + 1}`;
+      document.getElementById('question-text').textContent = q.q;
+
+      // Hide explanation and next button
+      const expEl = document.getElementById('explanation');
+      expEl.className = 'explanation';
+      expEl.innerHTML = '';
+      const nextBtn = document.getElementById('next-btn');
+      nextBtn.className = 'next-btn';
+      nextBtn.textContent = index === total - 1 ? 'See Results →' : 'Next Question →';
+
+      // Render options
+      const letters = ['A', 'B', 'C', 'D'];
+      const optList = document.getElementById('options-list');
+      optList.innerHTML = '';
+      q.options.forEach((opt, i) => {
+        const div = document.createElement('div');
+        div.className = 'option';
+        div.innerHTML = `<span class="option-letter">${letters[i]}</span>${escapeHtml(opt)}`;
+        div.onclick = () => selectOption(i);
+        optList.appendChild(div);
+      });
+
+      // Animate card in
+      const card = document.getElementById('question-card');
+      card.style.animation = 'none';
+      card.offsetHeight; // reflow
+      card.style.animation = '';
+
+      // Start timer
+      startTimer();
+      questionStartTime = Date.now();
+    }
+
+    function startTimer() {
+      clearInterval(timerInterval);
+      timeLeft = 30;
+      updateTimerDisplay();
+
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        updateTimerDisplay();
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          autoTimeout();
+        }
+      }, 1000);
+    }
+
+    function updateTimerDisplay() {
+      const el = document.getElementById('timer');
+      el.textContent = timeLeft;
+      el.classList.toggle('warning', timeLeft <= 10);
+    }
+
+    function autoTimeout() {
+      if (answered) return;
+      answered = true;
+
+      const elapsed = Math.round((Date.now() - questionStartTime) / 1000);
+      questionTimes.push(elapsed);
+
+      const q = currentQuestions[currentIndex];
+      const optEls = document.querySelectorAll('.option');
+
+      // Mark correct answer
+      optEls[q.correct].classList.add('correct');
+
+      answers.push({ correct: false, selected: -1, q });
+      showExplanation(q.explanation);
+      showNextBtn();
+    }
+
+    function selectOption(idx) {
+      if (answered) return;
+      answered = true;
+      clearInterval(timerInterval);
+
+      const elapsed = Math.round((Date.now() - questionStartTime) / 1000);
+      questionTimes.push(elapsed);
+
+      const q = currentQuestions[currentIndex];
+      const isCorrect = idx === q.correct;
+      const optEls = document.querySelectorAll('.option');
+
+      optEls[idx].classList.add(isCorrect ? 'correct' : 'wrong');
+      if (!isCorrect) optEls[q.correct].classList.add('correct');
+
+      if (isCorrect) score++;
+      answers.push({ correct: isCorrect, selected: idx, q });
+
+      showExplanation(q.explanation);
+      showNextBtn();
+    }
+
+    function showExplanation(text) {
+      const el = document.getElementById('explanation');
+      el.innerHTML = `<strong>Explanation:</strong> ${escapeHtml(text)}`;
+      el.classList.add('show');
+    }
+
+    function showNextBtn() {
+      document.getElementById('next-btn').classList.add('show');
+    }
+
+    function nextQuestion() {
+      currentIndex++;
+      if (currentIndex >= currentQuestions.length) {
+        showResults();
+      } else {
+        showQuestion(currentIndex);
+      }
+    }
+
+    // ══════════════════════════════════════════════════════════
+    // RESULT SCREEN
+    // ══════════════════════════════════════════════════════════
+    function showResults() {
+      clearInterval(timerInterval);
+
+      const total = currentQuestions.length;
+      const correctCount = answers.filter(a => a.correct).length;
+      const wrongCount = total - correctCount;
+      const avgTime = questionTimes.length > 0
+        ? Math.round(questionTimes.reduce((a, b) => a + b, 0) / questionTimes.length)
+        : 0;
+
+      // Grade
+      let grade;
+      if (correctCount >= 9) grade = '🏆 Expert';
+      else if (correctCount >= 7) grade = '⭐ Advanced';
+      else if (correctCount >= 5) grade = '👍 Intermediate';
+      else grade = '📚 Keep Learning';
+
+      document.getElementById('score-num').textContent = correctCount;
+      document.getElementById('grade-badge').textContent = grade;
+      document.getElementById('res-correct').textContent = correctCount;
+      document.getElementById('res-wrong').textContent = wrongCount;
+      document.getElementById('res-time').textContent = avgTime + 's';
+
+      // Title
+      const titles = {
+        '🏆 Expert': 'Outstanding!',
+        '⭐ Advanced': 'Well Done!',
+        '👍 Intermediate': 'Good Effort!',
+        '📚 Keep Learning': 'Keep Going!'
+      };
+      document.getElementById('result-title').textContent = titles[grade] || 'Quiz Complete!';
+      document.getElementById('result-subtitle').textContent =
+        `You scored ${correctCount}/${total} in ${CATEGORY_NAMES[currentCategory]}`;
+
+      // Review list
+      const reviewContainer = document.getElementById('review-items');
+      reviewContainer.innerHTML = '';
+      answers.forEach((ans, i) => {
+        const div = document.createElement('div');
+        div.className = `review-item ${ans.correct ? 'correct' : 'wrong'}`;
+
+        const selectedText = ans.selected >= 0
+          ? `Your answer: ${ans.q.options[ans.selected]}`
+          : 'Time expired — no answer';
+
+        const correctText = `Correct: ${ans.q.options[ans.q.correct]}`;
+
+        div.innerHTML = `
+          <div class="q-num">Q${i + 1}</div>
+          <div class="q">${escapeHtml(ans.q.q)}</div>
+          <div class="a">${ans.correct ? '✓ ' : '✗ '}${escapeHtml(selectedText)}</div>
+          ${!ans.correct ? `<div class="correct-ans">✓ ${escapeHtml(correctText)}</div>` : ''}
+        `;
+        reviewContainer.appendChild(div);
+      });
+
+      showScreen('result-screen');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ══════════════════════════════════════════════════════════
+    // RESULT ACTIONS
+    // ══════════════════════════════════════════════════════════
+    function playAgain() {
+      startQuiz();
+    }
+
+    function changeCategory() {
+      showScreen('home-screen');
+    }
+
+    // ══════════════════════════════════════════════════════════
+    // UTILITIES
+    // ══════════════════════════════════════════════════════════
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+  </script>
+</body>
+</html>
