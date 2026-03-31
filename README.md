@@ -299,3 +299,7 @@ Each section below links directly to live repositories so recruiters, hiring man
 **Engineered for real-world systems — not just projects.**
 
 </div>
+
+<div align="center">
+  <sub>Engineered for real-world systems — not just projects.</sub>
+</div>
