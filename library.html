@@ -1,0 +1,2076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library | InsightSerenity Books</title>
+  <meta name="description" content="Browse all books by InsightSerenity — prophetic, Scripture-anchored writing for believers ready to stand faithfully in this hour.">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon_io/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="/assets/img/favicon_io/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/img/favicon_io/site.webmanifest">
+
+  <script>/* instant dark mode */
+    (function(){var o=localStorage.getItem('is-theme-override');if(o==='dark'||(o===null&&(new Date().getHours()>=19||new Date().getHours()<7)))document.documentElement.classList.add('dark');})();
+  </script>
+  <link rel="stylesheet" href="/assets/css/main.css">
+
+  <style>
+    /* ── Layout shell ─────────────────────────────────────────────── */
+    .lib-page { background: var(--bg); min-height: 100vh; }
+
+    /* ── Breadcrumb ──────────────────────────────────────────────── */
+    .breadcrumb-bar {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      padding: 0.625rem 0;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    .breadcrumb-bar a { color: var(--text-muted); }
+    .breadcrumb-bar a:hover { color: var(--primary); }
+    .breadcrumb-bar span { margin: 0 0.375rem; }
+
+    /* ── Shop header ─────────────────────────────────────────────── */
+    .shop-hero {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      padding: 2rem 0 1.75rem;
+    }
+    .shop-hero-inner {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .shop-hero h1 {
+      font-size: 1.75rem;
+      font-weight: 800;
+      margin-bottom: 0.375rem;
+      line-height: 1.15;
+    }
+    .shop-hero p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      max-width: 520px;
+      line-height: 1.6;
+      margin: 0;
+    }
+    .shop-hero-stats {
+      display: flex;
+      gap: 1.5rem;
+      flex-shrink: 0;
+    }
+    .hero-stat {
+      text-align: center;
+    }
+    .hero-stat-num {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1;
+    }
+    .hero-stat-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 0.25rem;
+    }
+
+    /* ── Search bar ──────────────────────────────────────────────── */
+    .shop-search-bar {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      padding: 0.875rem 0;
+    }
+    .search-form {
+      display: flex;
+      gap: 0;
+      max-width: 640px;
+      width: 100%;
+    }
+    .search-category-select {
+      background: var(--bg-muted);
+      border: 1px solid var(--border);
+      border-right: none;
+      border-radius: var(--radius) 0 0 var(--radius);
+      padding: 0 0.875rem;
+      font-size: 0.775rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      font-weight: 600;
+    }
+    .search-input {
+      flex: 1;
+      border: 1px solid var(--border);
+      border-right: none;
+      background: var(--bg);
+      color: var(--text);
+      padding: 0.6rem 0.875rem;
+      font-size: 0.85rem;
+      outline: none;
+    }
+    .search-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(255,196,81,0.15);
+    }
+    .search-btn {
+      background: var(--primary);
+      border: 1px solid var(--primary);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 0 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.15s;
+    }
+    .search-btn:hover { opacity: 0.85; }
+    .search-btn svg { width: 1rem; height: 1rem; color: #000; }
+
+    /* ── Body: sidebar + results ─────────────────────────────────── */
+    .shop-body {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      padding: 2rem 0 4rem;
+    }
+
+    /* ── Sidebar ─────────────────────────────────────────────────── */
+    .lib-sidebar {
+      width: 240px;
+      flex-shrink: 0;
+      position: sticky;
+      top: 80px;
+      padding-right: 1.5rem;
+    }
+    .sidebar-section {
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+    }
+    .sidebar-section:first-child { padding-top: 0; }
+    .sidebar-heading {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+    }
+    .sidebar-heading svg { width: 0.875rem; height: 0.875rem; color: var(--text-muted); transition: transform 0.2s; }
+    .sidebar-heading.open svg { transform: rotate(180deg); }
+    .sidebar-body { display: flex; flex-direction: column; gap: 0.5rem; }
+    .sidebar-check {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 0.2rem 0;
+      transition: color 0.15s;
+    }
+    .sidebar-check:hover { color: var(--text); }
+    .sidebar-check input[type="checkbox"] {
+      accent-color: var(--primary);
+      width: 0.875rem; height: 0.875rem;
+      cursor: pointer;
+    }
+    .sidebar-check .check-count {
+      margin-left: auto;
+      font-size: 0.68rem;
+      color: var(--text-soft);
+      background: var(--bg-muted);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.05rem 0.4rem;
+    }
+    .sidebar-stars {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 0.2rem 0;
+      transition: color 0.15s;
+    }
+    .sidebar-stars:hover { color: var(--text); }
+    .sidebar-stars input[type="radio"] {
+      accent-color: var(--primary);
+      width: 0.875rem; height: 0.875rem;
+      cursor: pointer;
+    }
+    .stars-gold { color: #f59e0b; font-size: 0.85rem; }
+    .sidebar-price-range {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.775rem;
+      color: var(--text-muted);
+    }
+    .price-input {
+      width: 70px;
+      background: var(--bg-muted);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.3rem 0.5rem;
+      font-size: 0.775rem;
+      color: var(--text);
+      outline: none;
+    }
+    .price-input:focus { border-color: var(--primary); }
+    .price-go-btn {
+      background: var(--primary);
+      color: #000;
+      border: none;
+      border-radius: var(--radius);
+      padding: 0.3rem 0.75rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .clear-filters-btn {
+      font-size: 0.72rem;
+      color: #3b82f6;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      margin-top: 0.75rem;
+      display: block;
+    }
+    .clear-filters-btn:hover { text-decoration: underline; }
+
+    /* ── Results area ────────────────────────────────────────────── */
+    .lib-results { flex: 1; min-width: 0; }
+
+    /* ── Sort / result-count bar ─────────────────────────────────── */
+    .result-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.75rem 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+    .result-count {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .result-count strong { color: var(--text); font-weight: 700; }
+    .result-bar-right {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .sort-label { font-size: 0.75rem; color: var(--text-muted); white-space: nowrap; }
+    .sort-select {
+      background: var(--bg-muted);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.35rem 0.75rem;
+      font-size: 0.775rem;
+      color: var(--text);
+      cursor: pointer;
+      outline: none;
+    }
+    .sort-select:focus { border-color: var(--primary); }
+    .view-toggle {
+      display: flex;
+      gap: 0.25rem;
+    }
+    .view-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.35rem 0.6rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      transition: background 0.15s, border-color 0.15s;
+      color: var(--text-muted);
+    }
+    .view-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #000;
+    }
+    .view-btn svg { width: 0.875rem; height: 0.875rem; }
+
+    /* ── Featured banner ─────────────────────────────────────────── */
+    .featured-banner {
+      background: linear-gradient(135deg, var(--bg-card) 0%, rgba(255,196,81,0.06) 100%);
+      border: 1px solid var(--primary-border);
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .featured-badge {
+      background: var(--primary);
+      color: #000;
+      font-size: 0.6rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .featured-text {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      flex: 1;
+    }
+    .featured-text strong { color: var(--text); }
+
+    /* ── Product Grid ────────────────────────────────────────────── */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.25rem;
+    }
+
+    /* ── Product List (horizontal) ───────────────────────────────── */
+    .product-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    /* ── Product Card (grid) ─────────────────────────────────────── */
+    .product-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.22s, box-shadow 0.22s, transform 0.22s;
+      position: relative;
+      cursor: pointer;
+    }
+    .product-card:hover {
+      border-color: var(--primary-border);
+      box-shadow: 0 12px 40px rgba(255,196,81,0.12), var(--shadow-lg);
+      transform: translateY(-4px);
+    }
+    .product-badge {
+      position: absolute;
+      top: 0.75rem;
+      left: 0.75rem;
+      z-index: 2;
+      font-size: 0.6rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+    }
+    .badge-bestseller { background: #f59e0b; color: #000; }
+    .badge-new        { background: #22c55e; color: #fff; }
+    .badge-featured   { background: var(--primary); color: #000; }
+
+    /* Cover */
+    .product-cover {
+      position: relative;
+      aspect-ratio: 2/3;
+      background: var(--bg-muted);
+      overflow: hidden;
+    }
+    .product-cover img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+    }
+    .product-card:hover .product-cover img { transform: scale(1.04); }
+    .cover-quick-look {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    .product-card:hover .cover-quick-look { opacity: 1; }
+    .quick-look-btn {
+      background: rgba(255,255,255,0.95);
+      color: #000;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      transform: translateY(8px);
+      transition: transform 0.25s;
+    }
+    .product-card:hover .quick-look-btn { transform: translateY(0); }
+    .quick-look-btn svg { width: 0.75rem; height: 0.75rem; }
+
+    /* Card body */
+    .product-card-body {
+      padding: 1rem 1.125rem 0.75rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .product-category {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--primary);
+    }
+    .product-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.975rem;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.2;
+      margin: 0;
+    }
+    .product-title:hover { color: var(--primary); }
+    .product-subtitle {
+      font-size: 0.72rem;
+      font-style: italic;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin: 0;
+    }
+    .product-author {
+      font-size: 0.72rem;
+      color: var(--text-soft);
+    }
+    .product-author a { color: #3b82f6; }
+    .product-author a:hover { text-decoration: underline; }
+
+    /* Rating row */
+    .product-rating {
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+    }
+    .stars { color: #f59e0b; font-size: 0.85rem; letter-spacing: -0.04em; }
+    .rating-num { font-size: 0.72rem; font-weight: 700; color: var(--text); }
+    .rating-count { font-size: 0.68rem; color: #3b82f6; cursor: pointer; }
+    .rating-count:hover { text-decoration: underline; }
+
+    /* Format pills */
+    .product-formats {
+      display: flex;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+    }
+    .format-pill {
+      font-size: 0.62rem;
+      font-weight: 600;
+      padding: 0.18rem 0.5rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      background: var(--bg-muted);
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .format-pill.active,
+    .format-pill:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* Price */
+    .product-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .price-main {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1;
+    }
+    .price-original {
+      font-size: 0.775rem;
+      color: var(--text-muted);
+      text-decoration: line-through;
+    }
+    .price-save {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: #22c55e;
+      background: rgba(34,197,94,0.08);
+      border: 1px solid rgba(34,197,94,0.2);
+      border-radius: 999px;
+      padding: 0.1rem 0.45rem;
+    }
+    .price-free-ship {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+    }
+    .price-free-ship strong { color: #22c55e; }
+
+    /* Card actions */
+    .product-card-actions {
+      padding: 0 1.125rem 1.125rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .btn-add-cart {
+      width: 100%;
+      background: var(--primary);
+      color: #000;
+      border: none;
+      border-radius: var(--radius);
+      padding: 0.6rem;
+      font-size: 0.775rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.375rem;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+    .btn-add-cart:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-add-cart svg { width: 0.875rem; height: 0.875rem; }
+    .btn-buy-now {
+      width: 100%;
+      background: #ff9900;
+      color: #000;
+      border: none;
+      border-radius: var(--radius);
+      padding: 0.6rem;
+      font-size: 0.775rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.375rem;
+      transition: opacity 0.15s;
+    }
+    .btn-buy-now:hover { opacity: 0.88; }
+    .card-secondary-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .btn-wishlist, .btn-details {
+      flex: 1;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.45rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .btn-wishlist:hover { border-color: #ef4444; color: #ef4444; }
+    .btn-details:hover  { border-color: var(--primary); color: var(--primary); }
+    .btn-wishlist svg, .btn-details svg { width: 0.75rem; height: 0.75rem; }
+
+    /* Availability */
+    .product-avail {
+      font-size: 0.65rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .avail-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #22c55e;
+      flex-shrink: 0;
+    }
+    .avail-dot.orange { background: #f59e0b; }
+
+    /* ── Product Row (list view) ──────────────────────────────────── */
+    .product-row {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      display: flex;
+      gap: 1.5rem;
+      overflow: hidden;
+      transition: border-color 0.22s, box-shadow 0.22s;
+      cursor: pointer;
+      position: relative;
+    }
+    .product-row:hover {
+      border-color: var(--primary-border);
+      box-shadow: 0 8px 28px rgba(255,196,81,0.1);
+    }
+    .product-row .product-cover {
+      width: 140px;
+      aspect-ratio: auto;
+      height: 210px;
+      flex-shrink: 0;
+    }
+    .product-row .product-cover img {
+      height: 100%;
+    }
+    .product-row-body {
+      flex: 1;
+      padding: 1.25rem 1.25rem 1.25rem 0;
+      display: flex;
+      gap: 1.5rem;
+    }
+    .product-row-info { flex: 1; display: flex; flex-direction: column; gap: 0.625rem; }
+    .product-row-buy {
+      width: 190px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+    .product-description {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .product-tags {
+      display: flex;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+    }
+    .product-tag {
+      font-size: 0.62rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      border: 1px solid;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .tag-gold  { color: #a06800; background: rgba(255,196,81,0.1); border-color: rgba(255,196,81,0.3); }
+    .dark .tag-gold { color: var(--primary); }
+    .tag-red   { color: #b91c1c; background: rgba(185,28,28,0.08); border-color: rgba(185,28,28,0.2); }
+    .dark .tag-red { color: #f87171; border-color: rgba(248,113,113,0.3); }
+    .tag-blue  { color: #1d4ed8; background: rgba(29,78,216,0.07); border-color: rgba(29,78,216,0.2); }
+    .dark .tag-blue { color: #93c5fd; border-color: rgba(147,197,253,0.3); }
+    .product-meta-pills {
+      display: flex;
+      gap: 0.375rem;
+      flex-wrap: wrap;
+    }
+    .meta-chip {
+      font-size: 0.65rem;
+      font-weight: 600;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      background: var(--bg-muted);
+      border: 1px solid var(--border);
+      color: var(--text-soft);
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    .meta-chip svg { width: 0.6rem; height: 0.6rem; color: var(--primary); }
+
+    /* ── DETAIL DRAWER ───────────────────────────────────────────── */
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(3px);
+      z-index: 900;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .drawer-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .detail-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: min(680px, 95vw);
+      height: 100vh;
+      background: var(--bg);
+      border-left: 1px solid var(--border);
+      z-index: 901;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+      overflow: hidden;
+    }
+    .detail-drawer.open { transform: translateX(0); }
+    .drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-card);
+      flex-shrink: 0;
+    }
+    .drawer-header-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .drawer-header-left a { color: #3b82f6; font-size: 0.72rem; }
+    .drawer-header-left a:hover { text-decoration: underline; }
+    .drawer-close {
+      background: var(--bg-muted);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      width: 2rem; height: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: background 0.15s, color 0.15s;
+    }
+    .drawer-close:hover { background: var(--border); color: var(--text); }
+    .drawer-close svg { width: 1rem; height: 1rem; }
+    .drawer-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.5rem;
+    }
+    .drawer-body::-webkit-scrollbar { width: 6px; }
+    .drawer-body::-webkit-scrollbar-track { background: var(--bg-muted); }
+    .drawer-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    /* Drawer content layout */
+    .drawer-top {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .drawer-cover {
+      width: 150px;
+      flex-shrink: 0;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+      aspect-ratio: 2/3;
+    }
+    .drawer-cover img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .drawer-cover-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1rem;
+    }
+    .drawer-info { flex: 1; min-width: 0; }
+    .drawer-category {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--primary);
+      margin-bottom: 0.375rem;
+    }
+    .drawer-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.15;
+      margin-bottom: 0.375rem;
+    }
+    .drawer-subtitle {
+      font-size: 0.8rem;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
+    .drawer-author {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+    .drawer-author a { color: #3b82f6; }
+    .drawer-rating {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.875rem;
+    }
+    .rating-breakdown {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+    }
+    .rating-breakdown a { color: #3b82f6; cursor: pointer; }
+    .rating-breakdown a:hover { text-decoration: underline; }
+
+    /* Price section in drawer */
+    .drawer-price-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+    .format-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .format-tab {
+      flex: 1;
+      background: var(--bg-muted);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.625rem 0.75rem;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      text-align: center;
+    }
+    .format-tab.active {
+      border-color: var(--primary);
+      background: var(--primary-dim);
+    }
+    .format-tab-name {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text);
+      display: block;
+    }
+    .format-tab-price {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--text);
+      display: block;
+      margin-top: 0.2rem;
+    }
+    .format-tab-orig {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      text-decoration: line-through;
+    }
+    .format-tab-save {
+      font-size: 0.62rem;
+      color: #22c55e;
+      font-weight: 700;
+    }
+    .drawer-avail {
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      font-size: 0.75rem;
+      color: #22c55e;
+      font-weight: 600;
+      margin-bottom: 0.875rem;
+    }
+    .drawer-avail svg { width: 0.875rem; height: 0.875rem; }
+    .drawer-buy-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .btn-drawer-primary {
+      width: 100%;
+      background: var(--primary);
+      color: #000;
+      border: none;
+      border-radius: var(--radius);
+      padding: 0.7rem;
+      font-size: 0.825rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.375rem;
+      transition: opacity 0.15s;
+      text-decoration: none;
+    }
+    .btn-drawer-primary:hover { opacity: 0.88; }
+    .btn-drawer-secondary {
+      width: 100%;
+      background: #ff9900;
+      color: #000;
+      border: none;
+      border-radius: var(--radius);
+      padding: 0.7rem;
+      font-size: 0.825rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.375rem;
+      transition: opacity 0.15s;
+      text-decoration: none;
+    }
+    .btn-drawer-secondary:hover { opacity: 0.88; }
+    .btn-drawer-ghost {
+      width: 100%;
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.65rem;
+      font-size: 0.775rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.375rem;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .btn-drawer-ghost:hover { border-color: var(--primary); color: var(--primary); }
+    .drawer-btn-svg { width: 0.875rem; height: 0.875rem; }
+
+    /* Drawer sections */
+    .drawer-section {
+      margin-bottom: 1.5rem;
+    }
+    .drawer-section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding-bottom: 0.625rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 0.875rem;
+    }
+    .drawer-description {
+      font-size: 0.825rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+    .drawer-description p { margin-bottom: 0.75rem; }
+    .drawer-description p:last-child { margin-bottom: 0; }
+
+    /* Book details table */
+    .book-details-table {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem 1rem;
+    }
+    .detail-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+    .detail-label {
+      font-size: 0.62rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--text-soft);
+    }
+    .detail-value {
+      font-size: 0.78rem;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* TOC */
+    .toc-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .toc-part {
+      font-size: 0.68rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--primary);
+      padding: 0.625rem 0 0.375rem;
+      border-top: 1px solid var(--border);
+      margin-top: 0.25rem;
+    }
+    .toc-part:first-child { border-top: none; margin-top: 0; padding-top: 0; }
+    .toc-chapter {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      padding: 0.3rem 0 0.3rem 0.75rem;
+      font-size: 0.775rem;
+      color: var(--text-muted);
+      border-bottom: 1px dashed var(--border);
+    }
+    .toc-chapter:last-child { border-bottom: none; }
+    .toc-ch-num {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--text-soft);
+      min-width: 1.5rem;
+      flex-shrink: 0;
+    }
+    .toc-ch-title { flex: 1; line-height: 1.4; }
+    .toc-ch-sub {
+      font-size: 0.65rem;
+      font-style: italic;
+      color: var(--text-soft);
+    }
+
+    /* Reviews */
+    .rating-summary {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      margin-bottom: 1.25rem;
+    }
+    .rating-big-num {
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--text);
+      line-height: 1;
+    }
+    .rating-big-stars { color: #f59e0b; font-size: 1.25rem; margin: 0.25rem 0; }
+    .rating-big-count { font-size: 0.72rem; color: var(--text-muted); }
+    .rating-bars { flex: 1; display: flex; flex-direction: column; gap: 0.3rem; }
+    .rating-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.68rem;
+      color: var(--text-muted);
+    }
+    .rating-bar-row .stars-label { width: 1.75rem; text-align: right; white-space: nowrap; }
+    .rating-bar-track {
+      flex: 1;
+      height: 6px;
+      background: var(--bg-muted);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .rating-bar-fill {
+      height: 100%;
+      background: #f59e0b;
+      border-radius: 3px;
+    }
+    .rating-bar-pct { width: 2rem; text-align: left; }
+
+    .review-card {
+      background: var(--bg-muted);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .review-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+    .review-avatar {
+      width: 2rem; height: 2rem;
+      border-radius: 50%;
+      background: var(--primary-dim);
+      border: 1px solid var(--primary-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+    .review-name { font-size: 0.78rem; font-weight: 700; color: var(--text); }
+    .review-date { font-size: 0.65rem; color: var(--text-soft); margin-top: 0.1rem; }
+    .review-stars { color: #f59e0b; font-size: 0.78rem; margin-bottom: 0.375rem; }
+    .review-title { font-size: 0.78rem; font-weight: 700; color: var(--text); margin-bottom: 0.3rem; }
+    .review-body { font-size: 0.75rem; color: var(--text-muted); line-height: 1.65; }
+    .review-verified {
+      font-size: 0.65rem;
+      color: #22c55e;
+      margin-top: 0.375rem;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    /* ── Mobile filter toggle ─────────────────────────────────────── */
+    .mobile-filter-bar {
+      display: none;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1rem;
+    }
+    .mobile-filter-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.5rem 1rem;
+      font-size: 0.775rem;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+    }
+    .mobile-filter-btn svg { width: 0.875rem; height: 0.875rem; color: var(--primary); }
+
+    /* ── Cover placeholder fallback ──────────────────────────────── */
+    .cover-placeholder-inner {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 1rem;
+    }
+    .cp-author-text { font-size: 0.55rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.75rem; }
+    .cp-title-text { font-family: 'Space Grotesk', sans-serif; font-weight: 900; line-height: 1.1; margin-bottom: 0.5rem; }
+    .cp-rule-line { width: 2rem; height: 2px; margin: 0 auto 0.5rem; }
+    .cp-sub-text { font-size: 0.55rem; font-style: italic; line-height: 1.5; }
+
+    /* ── Responsive ──────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .lib-sidebar { display: none; }
+      .mobile-filter-bar { display: flex; }
+      .product-row .product-cover { width: 110px; height: 165px; }
+      .product-row-buy { width: 150px; }
+    }
+    @media (max-width: 640px) {
+      .shop-hero-stats { display: none; }
+      .product-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+      .product-card-body { padding: 0.75rem 0.875rem 0.5rem; }
+      .product-card-actions { padding: 0 0.875rem 0.875rem; }
+      .price-main { font-size: 1.1rem; }
+      .product-row .product-cover { width: 90px; height: 135px; }
+      .product-row-body { flex-direction: column; padding: 0.875rem; gap: 0.75rem; }
+      .product-row-buy { width: 100%; flex-direction: row; gap: 0.5rem; }
+      .result-bar { padding: 0.5rem 0.75rem; }
+      .drawer-top { flex-direction: column; }
+      .drawer-cover { width: 120px; margin: 0 auto; }
+    }
+  </style>
+</head>
+
+<body class="lib-page">
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="/index.html" class="nav-logo">
+          <img src="/assets/img/favicon_io/android-chrome-192x192.png" alt="InsightSerenity" style="width:2rem;height:2rem;border-radius:0.5rem;">
+        </a>
+        <div class="nav-links">
+          <a href="/index.html"    class="nav-link" data-page="home">Home</a>
+          <a href="/about.html"    class="nav-link" data-page="about">About</a>
+          <a href="/services.html" class="nav-link" data-page="services">Services</a>
+          <div class="nav-dropdown">
+            <button class="nav-dropdown-trigger" id="explore-trigger">
+              Explore
+              <i data-lucide="chevron-down" style="width:13px;height:13px;"></i>
+            </button>
+            <div class="nav-dropdown-menu">
+              <a href="/blog.html" class="nav-dropdown-item" data-page="blog">
+                <div class="nav-dropdown-icon"><i data-lucide="file-text"></i></div>
+                <div><div class="nav-dd-label">Blog</div><div class="nav-dd-sub">Insights &amp; articles</div></div>
+              </a>
+              <a href="/work.html" class="nav-dropdown-item" data-page="work">
+                <div class="nav-dropdown-icon"><i data-lucide="briefcase"></i></div>
+                <div><div class="nav-dd-label">Work</div><div class="nav-dd-sub">Case studies &amp; portfolio</div></div>
+              </a>
+              <a href="/books.html" class="nav-dropdown-item" data-page="books">
+                <div class="nav-dropdown-icon"><i data-lucide="book-open"></i></div>
+                <div><div class="nav-dd-label">Books</div><div class="nav-dd-sub">Detailed book pages</div></div>
+              </a>
+              <a href="/library.html" class="nav-dropdown-item" data-page="library">
+                <div class="nav-dropdown-icon"><i data-lucide="library"></i></div>
+                <div><div class="nav-dd-label">Library</div><div class="nav-dd-sub">Browse all publications</div></div>
+              </a>
+              <div class="nav-dropdown-divider"></div>
+              <a href="/consultation.html" class="nav-dropdown-item" data-page="consultation">
+                <div class="nav-dropdown-icon"><i data-lucide="calendar"></i></div>
+                <div><div class="nav-dd-label">Book a Call</div><div class="nav-dd-sub">Free consultation</div></div>
+              </a>
+            </div>
+          </div>
+          <a href="/contact.html" class="nav-link" data-page="contact">Contact</a>
+          <a href="/scripture/"   class="nav-link" data-page="scripture">✝️ Word of God</a>
+        </div>
+        <div class="nav-actions">
+          <a href="tel:+13463839529" class="nav-phone hidden lg:flex">
+            <i data-lucide="phone" style="width:14px;height:14px;"></i>
+            <span>+1 (346) 383-9529</span>
+          </a>
+          <button class="theme-toggle" aria-label="Toggle theme" title="Toggle dark/light mode"></button>
+          <a href="/consultation.html" class="btn-book">Book Consultation</a>
+        </div>
+        <button class="mobile-toggle" id="mobile-toggle" aria-expanded="false">
+          <i data-lucide="menu" style="width:18px;height:18px;"></i>
+        </button>
+      </div>
+      <div class="mobile-menu" id="mobile-menu">
+        <a href="/index.html"    class="nav-link">Home</a>
+        <a href="/about.html"    class="nav-link">About</a>
+        <a href="/services.html" class="nav-link">Services</a>
+        <div style="padding:.375rem .875rem .125rem;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-soft);">Explore</div>
+        <a href="/blog.html"          class="nav-link" style="padding-left:1.75rem;">✍️ &nbsp;Blog</a>
+        <a href="/work.html"          class="nav-link" style="padding-left:1.75rem;">💼 &nbsp;Work</a>
+        <a href="/books.html"         class="nav-link" style="padding-left:1.75rem;">📖 &nbsp;Books</a>
+        <a href="/library.html"       class="nav-link active" style="padding-left:1.75rem;">📚 &nbsp;Library</a>
+        <a href="/consultation.html"  class="nav-link" style="padding-left:1.75rem;">📅 &nbsp;Book a Call</a>
+        <a href="/contact.html"  class="nav-link">Contact</a>
+        <a href="/scripture/"    class="nav-link">✝️ Word of God</a>
+        <a href="/consultation.html" class="btn btn-primary" style="margin-top:.5rem;">Book Consultation</a>
+      </div>
+    </div>
+  </nav>
+
+  <main style="padding-top:4rem;">
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb-bar">
+      <div class="container">
+        <a href="/index.html">Home</a>
+        <span>›</span>
+        <a href="/books.html">Books</a>
+        <span>›</span>
+        Library
+      </div>
+    </div>
+
+    <!-- SHOP HERO -->
+    <div class="shop-hero">
+      <div class="container">
+        <div class="shop-hero-inner">
+          <div>
+            <div class="badge" style="margin-bottom:0.625rem;">📚 InsightSerenity Library</div>
+            <h1>Books & Publications</h1>
+            <p>Prophetic, Scripture-anchored writing for the believer who wants truth over comfort — ready to stand faithfully in this hour.</p>
+          </div>
+          <div class="shop-hero-stats">
+            <div class="hero-stat">
+              <div class="hero-stat-num">2</div>
+              <div class="hero-stat-label">Published</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-num">33</div>
+              <div class="hero-stat-label">Chapters</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-num">4.9</div>
+              <div class="hero-stat-label">Avg Rating</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEARCH BAR -->
+    <div class="shop-search-bar">
+      <div class="container">
+        <form class="search-form" onsubmit="return false;">
+          <select class="search-category-select" aria-label="Category">
+            <option>All Books</option>
+            <option>Prophetic</option>
+            <option>Men's Faith</option>
+            <option>Discipleship</option>
+          </select>
+          <input class="search-input" type="text" placeholder="Search by title, topic, or Scripture…" id="search-input" autocomplete="off">
+          <button class="search-btn" type="submit" aria-label="Search">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div class="container">
+      <div class="shop-body">
+
+        <!-- SIDEBAR -->
+        <aside class="lib-sidebar" id="lib-sidebar">
+
+          <div class="sidebar-section">
+            <div class="sidebar-heading open" onclick="toggleSection(this)">
+              Department
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </div>
+            <div class="sidebar-body">
+              <label class="sidebar-check"><input type="checkbox" checked onchange="applyFilters()"> All Books <span class="check-count">2</span></label>
+              <label class="sidebar-check"><input type="checkbox" data-cat="prophetic" onchange="applyFilters()"> Prophetic <span class="check-count">2</span></label>
+              <label class="sidebar-check"><input type="checkbox" data-cat="mens-faith" onchange="applyFilters()"> Men's Faith <span class="check-count">1</span></label>
+              <label class="sidebar-check"><input type="checkbox" data-cat="discipleship" onchange="applyFilters()"> Discipleship <span class="check-count">1</span></label>
+            </div>
+          </div>
+
+          <div class="sidebar-section">
+            <div class="sidebar-heading open" onclick="toggleSection(this)">
+              Customer Rating
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </div>
+            <div class="sidebar-body">
+              <label class="sidebar-stars"><input type="radio" name="rating" value="4"> <span class="stars-gold">★★★★☆</span> &amp; Up</label>
+              <label class="sidebar-stars"><input type="radio" name="rating" value="3"> <span class="stars-gold">★★★☆☆</span> &amp; Up</label>
+              <label class="sidebar-stars"><input type="radio" name="rating" value="all" checked> All Ratings</label>
+            </div>
+          </div>
+
+          <div class="sidebar-section">
+            <div class="sidebar-heading open" onclick="toggleSection(this)">
+              Format
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </div>
+            <div class="sidebar-body">
+              <label class="sidebar-check"><input type="checkbox"> Paperback <span class="check-count">2</span></label>
+              <label class="sidebar-check"><input type="checkbox"> eBook / PDF <span class="check-count">2</span></label>
+              <label class="sidebar-check"><input type="checkbox"> Bundle <span class="check-count">1</span></label>
+            </div>
+          </div>
+
+          <div class="sidebar-section">
+            <div class="sidebar-heading open" onclick="toggleSection(this)">
+              Price Range
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </div>
+            <div class="sidebar-body">
+              <div class="sidebar-price-range">
+                <span>$</span>
+                <input class="price-input" type="number" placeholder="Min" min="0">
+                <span>–</span>
+                <input class="price-input" type="number" placeholder="Max" min="0">
+                <button class="price-go-btn">Go</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar-section">
+            <div class="sidebar-heading open" onclick="toggleSection(this)">
+              Availability
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </div>
+            <div class="sidebar-body">
+              <label class="sidebar-check"><input type="checkbox" checked> In Stock <span class="check-count">2</span></label>
+              <label class="sidebar-check"><input type="checkbox"> Instant Download <span class="check-count">2</span></label>
+            </div>
+          </div>
+
+          <button class="clear-filters-btn" onclick="clearFilters()">✕ Clear all filters</button>
+
+        </aside><!-- /sidebar -->
+
+        <!-- RESULTS -->
+        <div class="lib-results">
+
+          <!-- Mobile filter btn -->
+          <div class="mobile-filter-bar">
+            <button class="mobile-filter-btn" onclick="document.getElementById('lib-sidebar').style.display='block'">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707L13 13.414V19a1 1 0 01-.553.894l-4 2A1 1 0 017 21v-7.586L3.293 6.707A1 1 0 013 6V4z"/></svg>
+              Filters
+            </button>
+          </div>
+
+          <!-- Featured banner -->
+          <div class="featured-banner">
+            <span class="featured-badge">⭐ Bundle Deal</span>
+            <p class="featured-text"><strong>Get Both Books Together</strong> — PDF + ePub bundle. Instant download. Save 20%.</p>
+            <a href="#" class="btn btn-primary btn-sm" style="flex-shrink:0;" target="_blank" rel="noopener">Get Bundle →</a>
+          </div>
+
+          <!-- Result bar -->
+          <div class="result-bar">
+            <p class="result-count">Showing <strong>1–<span id="visible-count">2</span></strong> of <strong>2</strong> results for <strong>"All Books"</strong></p>
+            <div class="result-bar-right">
+              <span class="sort-label">Sort by:</span>
+              <select class="sort-select" id="sort-select" onchange="sortBooks()">
+                <option value="featured">Featured</option>
+                <option value="rating">Avg. Rating</option>
+                <option value="newest">Newest First</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+              </select>
+              <div class="view-toggle">
+                <button class="view-btn active" id="grid-btn" onclick="setView('grid')" title="Grid view">
+                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+                </button>
+                <button class="view-btn" id="list-btn" onclick="setView('list')" title="List view">
+                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- PRODUCT GRID -->
+          <div class="product-grid" id="product-container">
+
+            <!-- ── BOOK 1 ── -->
+            <div class="product-card reveal" data-id="book1" data-categories="all prophetic discipleship" data-rating="4.9" data-price="7.99" data-year="2024">
+              <span class="product-badge badge-bestseller">Best Seller</span>
+
+              <div class="product-cover">
+                <img src="/assets/img/book1-cover.jpg" alt="The Hour We're In"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="cover-placeholder-inner" style="display:none; background:linear-gradient(160deg,#0d1322 0%,#0a1a3a 50%,#050d1f 100%);">
+                  <div class="cp-author-text" style="color:rgba(255,196,81,0.7);">InsightSerenity</div>
+                  <div class="cp-title-text" style="font-size:1.2rem;color:#fff;">THE HOUR<br>WE'RE IN</div>
+                  <div class="cp-rule-line" style="background:#ffc451;"></div>
+                  <div class="cp-sub-text" style="color:rgba(191,219,254,0.8);">Spiritual Clarity<br>in the Last Days</div>
+                </div>
+                <div class="cover-quick-look">
+                  <button class="quick-look-btn" onclick="openDrawer('book1'); event.stopPropagation();">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                    Quick Look
+                  </button>
+                </div>
+              </div>
+
+              <div class="product-card-body">
+                <p class="product-category">Prophetic · Discipleship</p>
+                <h3 class="product-title" onclick="openDrawer('book1')">The Hour We're In</h3>
+                <p class="product-subtitle">A Believer's Guide to Spiritual Clarity in the Last Days</p>
+                <p class="product-author">by <a href="#">InsightSerenity</a></p>
+                <div class="product-rating">
+                  <span class="stars">★★★★★</span>
+                  <span class="rating-num">4.9</span>
+                  <span class="rating-count">(24 reviews)</span>
+                </div>
+                <div class="product-formats">
+                  <span class="format-pill active">eBook</span>
+                  <span class="format-pill">Paperback</span>
+                  <span class="format-pill">PDF</span>
+                </div>
+                <div class="product-price-row">
+                  <span class="price-main">$7.99</span>
+                  <span class="price-original">$12.99</span>
+                  <span class="price-save">Save 38%</span>
+                </div>
+                <p class="price-free-ship"><strong>Free</strong> instant download</p>
+                <div class="product-avail">
+                  <span class="avail-dot"></span>
+                  In Stock — Ships within 2 days (Print)
+                </div>
+              </div>
+
+              <div class="product-card-actions">
+                <button class="btn-add-cart" onclick="addToCart('The Hour We\'re In')">
+                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                  Add to Cart
+                </button>
+                <a href="#" class="btn-buy-now" target="_blank" rel="noopener">
+                  <svg fill="currentColor" viewBox="0 0 24 24" style="width:.875rem;height:.875rem;"><path d="M13.958 10.09c0 1.232.029 2.256-.591 3.351-.502.891-1.301 1.438-2.186 1.438-1.214 0-1.922-.924-1.922-2.292 0-2.692 2.415-3.182 4.7-3.182v.685zm3.186 7.705c-.209.189-.512.201-.745.074-1.052-.872-1.238-1.276-1.814-2.106-1.734 1.767-2.962 2.297-5.209 2.297-2.66 0-4.731-1.641-4.731-4.925 0-2.565 1.391-4.309 3.37-5.164 1.715-.754 4.11-.891 5.942-1.095v-.41c0-.753.06-1.642-.384-2.294-.385-.579-1.124-.819-1.775-.819-1.207 0-2.284.62-2.548 1.903-.054.285-.261.567-.549.582l-3.061-.33c-.259-.056-.548-.266-.474-.66.704-3.716 4.06-4.838 7.066-4.838 1.537 0 3.547.41 4.758 1.574 1.538 1.436 1.392 3.352 1.392 5.438v4.923c0 1.481.616 2.13 1.192 2.929.204.287.249.63-.01.839l-2.42 2.082z"/></svg>
+                  Buy on Amazon
+                </a>
+                <div class="card-secondary-actions">
+                  <button class="btn-wishlist" title="Save for later">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                    Wishlist
+                  </button>
+                  <button class="btn-details" onclick="openDrawer('book1')">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    Details
+                  </button>
+                </div>
+              </div>
+            </div><!-- /book1 card -->
+
+
+            <!-- ── BOOK 2 ── -->
+            <div class="product-card reveal" data-id="book2" data-categories="all mens-faith prophetic" data-rating="4.8" data-price="8.99" data-year="2024" style="transition-delay:.1s;">
+              <span class="product-badge badge-new">New</span>
+
+              <div class="product-cover">
+                <img src="/assets/img/book2-cover.jpg" alt="The Abdication"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="cover-placeholder-inner" style="display:none; background:linear-gradient(160deg,#0a0a0a 0%,#1a0505 50%,#080808 100%);">
+                  <div class="cp-author-text" style="color:rgba(248,113,113,0.7);">InsightSerenity</div>
+                  <div class="cp-title-text" style="font-size:1.2rem;color:#fff;letter-spacing:-0.02em;">THE<br>ABDICATION</div>
+                  <div class="cp-rule-line" style="background:#dc2626;"></div>
+                  <div class="cp-sub-text" style="color:rgba(254,202,202,0.75);">Why Men Have Failed<br>the Universe</div>
+                </div>
+                <div class="cover-quick-look">
+                  <button class="quick-look-btn" onclick="openDrawer('book2'); event.stopPropagation();">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                    Quick Look
+                  </button>
+                </div>
+              </div>
+
+              <div class="product-card-body">
+                <p class="product-category">Men's Faith · Prophetic</p>
+                <h3 class="product-title" onclick="openDrawer('book2')">The Abdication</h3>
+                <p class="product-subtitle">Why Men Have Failed the Universe and What God Requires</p>
+                <p class="product-author">by <a href="#">InsightSerenity</a></p>
+                <div class="product-rating">
+                  <span class="stars">★★★★★</span>
+                  <span class="rating-num">4.8</span>
+                  <span class="rating-count">(18 reviews)</span>
+                </div>
+                <div class="product-formats">
+                  <span class="format-pill active">eBook</span>
+                  <span class="format-pill">Paperback</span>
+                  <span class="format-pill">PDF</span>
+                </div>
+                <div class="product-price-row">
+                  <span class="price-main">$8.99</span>
+                  <span class="price-original">$14.99</span>
+                  <span class="price-save">Save 40%</span>
+                </div>
+                <p class="price-free-ship"><strong>Free</strong> instant download</p>
+                <div class="product-avail">
+                  <span class="avail-dot"></span>
+                  In Stock — Ships within 2 days (Print)
+                </div>
+              </div>
+
+              <div class="product-card-actions">
+                <button class="btn-add-cart" onclick="addToCart('The Abdication')">
+                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                  Add to Cart
+                </button>
+                <a href="#" class="btn-buy-now" target="_blank" rel="noopener">
+                  <svg fill="currentColor" viewBox="0 0 24 24" style="width:.875rem;height:.875rem;"><path d="M13.958 10.09c0 1.232.029 2.256-.591 3.351-.502.891-1.301 1.438-2.186 1.438-1.214 0-1.922-.924-1.922-2.292 0-2.692 2.415-3.182 4.7-3.182v.685zm3.186 7.705c-.209.189-.512.201-.745.074-1.052-.872-1.238-1.276-1.814-2.106-1.734 1.767-2.962 2.297-5.209 2.297-2.66 0-4.731-1.641-4.731-4.925 0-2.565 1.391-4.309 3.37-5.164 1.715-.754 4.11-.891 5.942-1.095v-.41c0-.753.06-1.642-.384-2.294-.385-.579-1.124-.819-1.775-.819-1.207 0-2.284.62-2.548 1.903-.054.285-.261.567-.549.582l-3.061-.33c-.259-.056-.548-.266-.474-.66.704-3.716 4.06-4.838 7.066-4.838 1.537 0 3.547.41 4.758 1.574 1.538 1.436 1.392 3.352 1.392 5.438v4.923c0 1.481.616 2.13 1.192 2.929.204.287.249.63-.01.839l-2.42 2.082z"/></svg>
+                  Buy on Amazon
+                </a>
+                <div class="card-secondary-actions">
+                  <button class="btn-wishlist" title="Save for later">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                    Wishlist
+                  </button>
+                  <button class="btn-details" onclick="openDrawer('book2')">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    Details
+                  </button>
+                </div>
+              </div>
+            </div><!-- /book2 card -->
+
+          </div><!-- /product-container -->
+
+          <!-- Empty state -->
+          <div id="empty-state" style="display:none; text-align:center; padding:4rem 0;">
+            <svg style="width:3rem;height:3rem;color:var(--text-soft);margin:0 auto 1rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <p style="color:var(--text-soft);font-size:0.875rem;margin-bottom:.5rem;">No books match your filters.</p>
+            <button class="clear-filters-btn" onclick="clearFilters()" style="display:inline;">Clear filters</button>
+          </div>
+
+          <!-- CTA strip -->
+          <div style="margin-top:2.5rem;" class="reveal">
+            <div class="cta-banner">
+              <div class="cta-orb-1"></div>
+              <div class="cta-orb-2"></div>
+              <div class="badge" style="background:rgba(0,0,0,0.12);color:#000;border-color:rgba(0,0,0,0.15);margin-bottom:1rem;">📖 Complete Bundle</div>
+              <h2 style="font-size:1.35rem;">Own the Full Library</h2>
+              <p style="font-size:0.875rem;">Both books as a digital bundle — PDF + ePub, instant download.</p>
+              <div style="display:flex;justify-content:center;gap:0.875rem;flex-wrap:wrap;">
+                <a href="#" target="_blank" rel="noopener" class="btn btn-dark">
+                  <svg style="width:.9rem;height:.9rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"/></svg>
+                  Download Bundle
+                </a>
+                <a href="/consultation.html" class="btn btn-clear">Book a Call</a>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /lib-results -->
+      </div><!-- /shop-body -->
+    </div><!-- /container -->
+
+  </main>
+
+
+  <!-- ═══════════════════════════════════════════════════
+       BOOK DETAIL DRAWER
+  ═══════════════════════════════════════════════════ -->
+  <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+
+  <div class="detail-drawer" id="detail-drawer" role="dialog" aria-modal="true" aria-label="Book Details">
+    <div class="drawer-header">
+      <div class="drawer-header-left">
+        <a href="/library.html">Library</a>
+        <span>›</span>
+        <span id="drawer-breadcrumb">Book Details</span>
+      </div>
+      <button class="drawer-close" onclick="closeDrawer()" aria-label="Close">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="drawer-body" id="drawer-body">
+      <!-- Dynamically populated -->
+    </div>
+  </div>
+
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="/index.html" class="nav-logo" style="margin-bottom:.875rem;display:inline-flex;">
+            <img src="/assets/img/favicon_io/android-chrome-192x192.png" alt="InsightSerenity" style="width:2rem;height:2rem;border-radius:0.5rem;">
+          </a>
+          <p class="footer-brand-desc">Expert consulting in Data Science, Software Engineering, AI/ML — plus Life Literacy and Bible-Based Coaching.</p>
+          <div class="footer-socials">
+            <a href="https://www.linkedin.com/in/emmanuel-oyemosu/" target="_blank" class="social-btn" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+            <a href="https://github.com/EOlaw" target="_blank" class="social-btn" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">Navigation</div>
+          <div class="footer-links">
+            <a href="/index.html">Home</a>
+            <a href="/about.html">About</a>
+            <a href="/services.html">Services</a>
+            <a href="/blog.html">Blog</a>
+            <a href="/work.html">Work</a>
+            <a href="/books.html">Books</a>
+            <a href="/library.html" style="color:var(--primary);">📚 Library</a>
+            <a href="/contact.html">Contact</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">Technical Services</div>
+          <div class="footer-links">
+            <a href="/services.html#data-science">Data Science &amp; Analytics</a>
+            <a href="/services.html#fullstack">Full-Stack Development</a>
+            <a href="/services.html#ai-ml">AI &amp; Machine Learning</a>
+          </div>
+          <div class="footer-heading" style="margin-top:1.5rem;">Coaching</div>
+          <div class="footer-links">
+            <a href="/services.html#life-coaching">Life Literacy Coaching</a>
+            <a href="/services.html#bible-coaching">Bible-Based Coaching</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">Contact</div>
+          <div class="footer-links">
+            <a href="mailto:emmanuel.ao@outlook.com">emmanuel.ao@outlook.com</a>
+            <a href="tel:+13463839529">+1 (346) 383-9529</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p style="color:var(--text-muted);">© 2025 InsightSerenity. All rights reserved.</p>
+        <div style="display:flex;align-items:center;gap:.5rem;font-size:.75rem;color:var(--text-muted);">
+          <a href="/privacy.html" style="color:var(--text-muted);">Privacy</a>
+          <span>·</span>
+          <a href="/terms.html" style="color:var(--text-muted);">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="/assets/js/main.js"></script>
+
+  <script>
+  // ── Active nav ────────────────────────────────────────────────────
+  (function(){
+    var el = document.querySelector('[data-page="library"]');
+    if (el) {
+      if (el.classList.contains('nav-link')) el.classList.add('active');
+      if (el.classList.contains('nav-dropdown-item')) {
+        el.classList.add('active');
+        document.getElementById('explore-trigger').classList.add('active');
+      }
+    }
+  })();
+
+  // ── Sidebar section toggle ────────────────────────────────────────
+  function toggleSection(heading) {
+    heading.classList.toggle('open');
+    var body = heading.nextElementSibling;
+    body.style.display = body.style.display === 'none' ? '' : 'none';
+  }
+
+  // ── Filter logic ──────────────────────────────────────────────────
+  function applyFilters() {
+    var cards = document.querySelectorAll('#product-container [data-id]');
+    var checkedCats = Array.from(document.querySelectorAll('[data-cat]:checked')).map(function(cb){ return cb.dataset.cat; });
+    var search = (document.getElementById('search-input').value || '').toLowerCase();
+    var visible = 0;
+
+    cards.forEach(function(card) {
+      var cats = card.dataset.categories || '';
+      var title = card.querySelector('.product-title') ? card.querySelector('.product-title').textContent.toLowerCase() : '';
+      var subtitle = card.querySelector('.product-subtitle') ? card.querySelector('.product-subtitle').textContent.toLowerCase() : '';
+
+      var catMatch = checkedCats.length === 0 || checkedCats.some(function(cat){ return cats.split(' ').indexOf(cat) > -1; });
+      var searchMatch = !search || title.includes(search) || subtitle.includes(search);
+
+      if (catMatch && searchMatch) {
+        card.style.display = '';
+        visible++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    document.getElementById('visible-count').textContent = visible;
+    document.getElementById('empty-state').style.display = visible === 0 ? 'block' : 'none';
+  }
+
+  function clearFilters() {
+    document.querySelectorAll('[data-cat]').forEach(function(cb){ cb.checked = false; });
+    document.getElementById('search-input').value = '';
+    applyFilters();
+  }
+
+  document.getElementById('search-input').addEventListener('input', applyFilters);
+
+  // ── View toggle ───────────────────────────────────────────────────
+  function setView(mode) {
+    var container = document.getElementById('product-container');
+    var gridBtn = document.getElementById('grid-btn');
+    var listBtn = document.getElementById('list-btn');
+    var cards = container.querySelectorAll('.product-card');
+
+    if (mode === 'grid') {
+      container.className = 'product-grid';
+      cards.forEach(function(c){ c.style.flexDirection = ''; c.style.maxHeight = ''; });
+      gridBtn.classList.add('active');
+      listBtn.classList.remove('active');
+    } else {
+      container.className = 'product-list';
+      gridBtn.classList.remove('active');
+      listBtn.classList.add('active');
+      // Restructure cards to list rows
+      cards.forEach(function(card) {
+        card.style.display = 'flex';
+        card.style.flexDirection = 'row';
+        card.style.alignItems = 'stretch';
+        var cover = card.querySelector('.product-cover');
+        if (cover) { cover.style.width = '140px'; cover.style.aspectRatio = 'auto'; cover.style.height = '210px'; cover.style.flexShrink = '0'; }
+      });
+    }
+  }
+
+  // ── Sort ──────────────────────────────────────────────────────────
+  function sortBooks() {
+    var sort = document.getElementById('sort-select').value;
+    var container = document.getElementById('product-container');
+    var cards = Array.from(container.querySelectorAll('[data-id]'));
+
+    cards.sort(function(a, b) {
+      if (sort === 'rating')     return parseFloat(b.dataset.rating) - parseFloat(a.dataset.rating);
+      if (sort === 'newest')     return parseInt(b.dataset.year) - parseInt(a.dataset.year);
+      if (sort === 'price-asc')  return parseFloat(a.dataset.price) - parseFloat(b.dataset.price);
+      if (sort === 'price-desc') return parseFloat(b.dataset.price) - parseFloat(a.dataset.price);
+      return 0; // featured
+    });
+
+    cards.forEach(function(c){ container.appendChild(c); });
+  }
+
+  // ── Add to cart toast ─────────────────────────────────────────────
+  function addToCart(title) {
+    var toast = document.createElement('div');
+    toast.style.cssText = 'position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#22c55e;color:#fff;padding:.75rem 1.5rem;border-radius:999px;font-size:.825rem;font-weight:700;z-index:9999;box-shadow:0 8px 24px rgba(0,0,0,0.2);display:flex;align-items:center;gap:.5rem;white-space:nowrap;';
+    toast.innerHTML = '<svg style="width:1rem;height:1rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg> "' + title + '" added to cart!';
+    document.body.appendChild(toast);
+    setTimeout(function(){ toast.style.opacity='0'; toast.style.transition='opacity .4s'; setTimeout(function(){ toast.remove(); }, 400); }, 2500);
+  }
+
+  // ── Book data ─────────────────────────────────────────────────────
+  var bookData = {
+    book1: {
+      id: 'book1',
+      badge: 'Best Seller',
+      badgeClass: 'badge-bestseller',
+      category: 'Prophetic · Discipleship',
+      title: 'The Hour We\'re In',
+      subtitle: 'A Believer\'s Guide to Spiritual Clarity in the Last Days',
+      author: 'InsightSerenity',
+      rating: '4.9',
+      reviewCount: 24,
+      coverImg: '/assets/img/book1-cover.jpg',
+      coverFallbackBg: 'linear-gradient(160deg,#0d1322 0%,#0a1a3a 50%,#050d1f 100%)',
+      coverFallbackAuthorColor: 'rgba(255,196,81,0.7)',
+      coverFallbackTitleColor: '#fff',
+      coverFallbackTitle: 'THE HOUR<br>WE\'RE IN',
+      coverFallbackRuleColor: '#ffc451',
+      coverFallbackSubColor: 'rgba(191,219,254,0.8)',
+      coverFallbackSub: 'Spiritual Clarity<br>in the Last Days',
+      formats: [
+        { name: 'eBook / PDF', price: '$7.99', orig: '$12.99', save: 'Save 38%' },
+        { name: 'Paperback',   price: '$14.99', orig: '$19.99', save: 'Save 25%' }
+      ],
+      amazonUrl: '#',
+      downloadUrl: '#',
+      tags: ['<span class="product-tag tag-gold">Prophetic</span>', '<span class="product-tag tag-blue">Discipleship</span>'],
+      metaChips: ['16 Chapters', '4 Parts', 'Paperback · eBook', '2024'],
+      description: '<p>The signs are not coming — they are here. Wars multiplying. Nations destabilizing. Moral frameworks collapsing in real time. And yet God is not asleep. He is waiting — and He has already told us everything we need to know.</p><p><em>The Hour We\'re In</em> is a verse-anchored, spiritually unflinching look at the season the Church is living in. Not to frighten, but to equip. Not to predict dates, but to clarify the call — because the believer who understands the hour cannot be manipulated by it.</p><p>Drawing from Daniel, Revelation, Matthew 24, and the major prophets, this book traces the prophetic arc of history to the present moment — and shows you exactly where faithful disciples stand in it.</p>',
+      toc: [
+        { part: 'Part I — Reading the Signs', chapters: ['The Language of the Hour', 'What the Nations Are Saying', 'What the Church Is Missing', 'Wars, Rumors, and Spiritual Reality'] },
+        { part: 'Part II — The Prophetic Framework', chapters: ['Daniel\'s Timeline Unlocked', 'The Olivet Discourse', 'Revelation\'s Blueprint', 'End-Time Israel'] },
+        { part: 'Part III — The Believer\'s Posture', chapters: ['Not Fear, But Clarity', 'How to Stand in Shaking', 'Prayer in the Last Hour', 'The Faithful Church'] },
+        { part: 'Part IV — What God Requires Now', chapters: ['Repentance Before Revival', 'The Remnant Is Rising', 'Your Assignment in This Hour', 'A Final Word to the Watchmen'] }
+      ],
+      ratingBars: [
+        { stars: '5 ★', pct: 87 }, { stars: '4 ★', pct: 9 }, { stars: '3 ★', pct: 3 }, { stars: '2 ★', pct: 1 }, { stars: '1 ★', pct: 0 }
+      ],
+      reviews: [
+        { initials: 'MJ', name: 'Marcus J.', date: 'March 12, 2024', stars: '★★★★★', title: 'Changed how I read the news', body: 'I\'ve been a believer for 20 years but never understood how Scripture maps onto current events until I read this book. Chapters 5 and 6 alone are worth the price. Highly recommend to any serious student of Bible prophecy.' },
+        { initials: 'SL', name: 'Sarah L.', date: 'February 4, 2024', stars: '★★★★★', title: 'Scripture-rich and deeply grounding', body: 'Went through this with my small group over 8 weeks. Every single chapter had us in the Word. The author doesn\'t sensationalize — just opens the Scripture and lets it speak. Exactly what the Church needs right now.' },
+        { initials: 'DR', name: 'David R.', date: 'January 28, 2024', stars: '★★★★☆', title: 'Solid prophetic teaching', body: 'Very well researched and clearly written. The section on Daniel\'s timeline was especially helpful. Would love a follow-up volume on the book of Revelation specifically.' }
+      ],
+      details: [
+        { label: 'Publisher', value: 'InsightSerenity Press' },
+        { label: 'Year', value: '2024' },
+        { label: 'Language', value: 'English' },
+        { label: 'Chapters', value: '16' },
+        { label: 'Parts', value: '4' },
+        { label: 'Format', value: 'Paperback, eBook, PDF' },
+        { label: 'Category', value: 'Prophetic / Discipleship' },
+        { label: 'ISBN (Print)', value: '979-8XXXXXXXXX' }
+      ]
+    },
+    book2: {
+      id: 'book2',
+      badge: 'New Release',
+      badgeClass: 'badge-new',
+      category: 'Men\'s Faith · Prophetic',
+      title: 'The Abdication',
+      subtitle: 'Why Men Have Failed the Universe and What God Requires',
+      author: 'InsightSerenity',
+      rating: '4.8',
+      reviewCount: 18,
+      coverImg: '/assets/img/book2-cover.jpg',
+      coverFallbackBg: 'linear-gradient(160deg,#0a0a0a 0%,#1a0505 50%,#080808 100%)',
+      coverFallbackAuthorColor: 'rgba(248,113,113,0.7)',
+      coverFallbackTitleColor: '#fff',
+      coverFallbackTitle: 'THE<br>ABDICATION',
+      coverFallbackRuleColor: '#dc2626',
+      coverFallbackSubColor: 'rgba(254,202,202,0.75)',
+      coverFallbackSub: 'Why Men Have Failed<br>the Universe',
+      formats: [
+        { name: 'eBook / PDF', price: '$8.99', orig: '$14.99', save: 'Save 40%' },
+        { name: 'Paperback',   price: '$16.99', orig: '$21.99', save: 'Save 23%' }
+      ],
+      amazonUrl: '#',
+      downloadUrl: '#',
+      tags: ['<span class="product-tag tag-red">Men\'s Faith</span>', '<span class="product-tag tag-gold">Prophetic</span>'],
+      metaChips: ['17 Chapters', '5 Parts', 'Paperback · eBook', '2024'],
+      description: '<p>From Adam\'s silence in the garden to the absent fathers of today — the failure of men is the single most consistent thread running through the wreckage of human history. But this is not a book of condemnation. It is a summons.</p><p><em>The Abdication</em> is a prophetic call to men who know something is deeply wrong — in their homes, their churches, their culture — but haven\'t been able to name it. This book names it. And then it tells you exactly what God requires in response.</p><p>Drawing from Genesis, the Prophets, and the New Testament epistles, this book dismantles every excuse, every theology of passivity, and every cultural substitute for true masculine responsibility — and rebuilds the vision from the ground up with Scripture.</p>',
+      toc: [
+        { part: 'Part I — The Original Assignment', chapters: ['Made to Guard and Keep', 'The Weight of the Name', 'What God Meant by "Man"'] },
+        { part: 'Part II — Where It Went Wrong', chapters: ['Adam\'s Silence', 'The Passive Pastor', 'The Absent Father', 'The Compliant Husband', 'The Church That Enabled It'] },
+        { part: 'Part III — The Prophetic Indictment', chapters: ['What the Prophets Said About Men', 'The Ezekiel 22 Problem', 'A Nation Judged by Its Men'] },
+        { part: 'Part IV — The New Testament Standard', chapters: ['What Paul Actually Meant', 'The Elders Who Are Not There', 'Husbands as Christ'] },
+        { part: 'Part V — What God Requires Now', chapters: ['Repentance Is the Starting Line', 'Standing in the Gap', 'The Men God Is Looking For', 'A Final Word — Rise'] }
+      ],
+      ratingBars: [
+        { stars: '5 ★', pct: 83 }, { stars: '4 ★', pct: 11 }, { stars: '3 ★', pct: 4 }, { stars: '2 ★', pct: 2 }, { stars: '1 ★', pct: 0 }
+      ],
+      reviews: [
+        { initials: 'TW', name: 'Thomas W.', date: 'April 2, 2024', stars: '★★★★★', title: 'Every man in the Church needs this', body: 'I bought 10 copies and handed them to every man in my small group. This is the most convicting, most clarifying, and most Scripture-grounded book on masculinity I have ever read. Chapter 4 on Adam\'s silence destroyed me in the best way.' },
+        { initials: 'JP', name: 'James P.', date: 'March 18, 2024', stars: '★★★★★', title: 'Not what I expected — better', body: 'I thought this would be another "be a man" culture-war book. Instead it\'s deep theology, careful exegesis, and a prophetic call that comes from a place of genuine love. The section on Ezekiel 22 is stunning.' },
+        { initials: 'RB', name: 'Rachel B. (bought for husband)', date: 'March 5, 2024', stars: '★★★★☆', title: 'My husband read it in two days', body: 'He barely reads. He finished this in two days and then gave it to his brother. The subtitle tells you exactly what it is — and it delivers exactly that.' }
+      ],
+      details: [
+        { label: 'Publisher', value: 'InsightSerenity Press' },
+        { label: 'Year', value: '2024' },
+        { label: 'Language', value: 'English' },
+        { label: 'Chapters', value: '17' },
+        { label: 'Parts', value: '5' },
+        { label: 'Format', value: 'Paperback, eBook, PDF' },
+        { label: 'Category', value: 'Men\'s Faith / Prophetic' },
+        { label: 'ISBN (Print)', value: '979-8XXXXXXXXX' }
+      ]
+    }
+  };
+
+  // ── Drawer open/close ─────────────────────────────────────────────
+  function openDrawer(bookId) {
+    var book = bookData[bookId];
+    if (!book) return;
+
+    document.getElementById('drawer-breadcrumb').textContent = book.title;
+
+    // Active format tab state
+    var activeFormat = 0;
+
+    function buildFormatTabs() {
+      return book.formats.map(function(f, i) {
+        return '<div class="format-tab' + (i === activeFormat ? ' active' : '') + '" onclick="selectFormat(this,' + i + ',\'' + bookId + '\')">' +
+               '<span class="format-tab-name">' + f.name + '</span>' +
+               '<span class="format-tab-price">' + f.price + '</span>' +
+               '<span class="format-tab-orig">' + f.orig + '</span> ' +
+               '<span class="format-tab-save">' + f.save + '</span>' +
+               '</div>';
+      }).join('');
+    }
+
+    function buildTOC() {
+      return book.toc.map(function(part) {
+        var chapters = part.chapters.map(function(ch, i) {
+          return '<div class="toc-chapter"><span class="toc-ch-num">' + (i+1) + '.</span><span class="toc-ch-title">' + ch + '</span></div>';
+        }).join('');
+        return '<div class="toc-part">' + part.part + '</div>' + chapters;
+      }).join('');
+    }
+
+    function buildRatingBars() {
+      return book.ratingBars.map(function(b) {
+        return '<div class="rating-bar-row"><span class="stars-label">' + b.stars + '</span><div class="rating-bar-track"><div class="rating-bar-fill" style="width:' + b.pct + '%"></div></div><span class="rating-bar-pct">' + b.pct + '%</span></div>';
+      }).join('');
+    }
+
+    function buildReviews() {
+      return book.reviews.map(function(r) {
+        return '<div class="review-card">' +
+               '<div class="review-header"><div class="review-avatar">' + r.initials + '</div><div><div class="review-name">' + r.name + '</div><div class="review-date">' + r.date + '</div></div></div>' +
+               '<div class="review-stars">' + r.stars + '</div>' +
+               '<div class="review-title">' + r.title + '</div>' +
+               '<div class="review-body">' + r.body + '</div>' +
+               '<div class="review-verified"><svg style="width:.75rem;height:.75rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Verified Purchase</div>' +
+               '</div>';
+      }).join('');
+    }
+
+    function buildDetails() {
+      return book.details.map(function(d) {
+        return '<div class="detail-row"><span class="detail-label">' + d.label + '</span><span class="detail-value">' + d.value + '</span></div>';
+      }).join('');
+    }
+
+    var starCount = parseFloat(book.rating);
+    var fullStars = Math.floor(starCount);
+    var starsHtml = '★'.repeat(fullStars) + (starCount - fullStars >= 0.5 ? '½' : '') + '☆'.repeat(5 - Math.ceil(starCount - (starCount - fullStars >= 0.5 ? 0.5 : 0)));
+
+    var html = '<div class="drawer-top">' +
+      '<div class="drawer-cover">' +
+        '<img src="' + book.coverImg + '" alt="' + book.title + '"' +
+        ' onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';">' +
+        '<div class="drawer-cover-placeholder cover-placeholder-inner" style="display:none;background:' + book.coverFallbackBg + '">' +
+          '<div class="cp-author-text" style="color:' + book.coverFallbackAuthorColor + '">InsightSerenity</div>' +
+          '<div class="cp-title-text" style="font-size:1rem;color:' + book.coverFallbackTitleColor + '">' + book.coverFallbackTitle + '</div>' +
+          '<div class="cp-rule-line" style="background:' + book.coverFallbackRuleColor + '"></div>' +
+          '<div class="cp-sub-text" style="color:' + book.coverFallbackSubColor + '">' + book.coverFallbackSub + '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="drawer-info">' +
+        '<div class="drawer-category">' + book.category + '</div>' +
+        '<h2 class="drawer-title">' + book.title + '</h2>' +
+        '<p class="drawer-subtitle">' + book.subtitle + '</p>' +
+        '<p class="drawer-author">by <a href="#">' + book.author + '</a></p>' +
+        '<div class="drawer-rating">' +
+          '<span class="stars" style="font-size:1rem;">★★★★★</span>' +
+          '<span class="rating-num" style="font-size:.875rem;">' + book.rating + '</span>' +
+          '<span class="rating-count" style="font-size:.72rem;" onclick="document.getElementById(\'reviews-section\').scrollIntoView({behavior:\'smooth\'})">(' + book.reviewCount + ' reviews)</span>' +
+        '</div>' +
+        '<div class="product-tags" style="margin-bottom:.625rem;">' + book.tags.join('') + '</div>' +
+        '<div class="product-meta-pills">' +
+          book.metaChips.map(function(c){ return '<span class="meta-chip">' + c + '</span>'; }).join('') +
+        '</div>' +
+      '</div>' +
+    '</div>' +
+
+    '<div class="drawer-price-section" id="drawer-price-' + bookId + '">' +
+      '<div class="format-tabs" id="format-tabs-' + bookId + '">' + buildFormatTabs() + '</div>' +
+      '<div class="drawer-avail">' +
+        '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>' +
+        'In Stock &mdash; Instant download available' +
+      '</div>' +
+      '<div class="drawer-buy-actions">' +
+        '<a href="' + book.downloadUrl + '" class="btn-drawer-primary" target="_blank" rel="noopener">' +
+          '<svg class="drawer-btn-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"/></svg>' +
+          'Download Now (PDF + ePub)' +
+        '</a>' +
+        '<a href="' + book.amazonUrl + '" class="btn-drawer-secondary" target="_blank" rel="noopener">' +
+          '<svg class="drawer-btn-svg" fill="currentColor" viewBox="0 0 24 24"><path d="M13.958 10.09c0 1.232.029 2.256-.591 3.351-.502.891-1.301 1.438-2.186 1.438-1.214 0-1.922-.924-1.922-2.292 0-2.692 2.415-3.182 4.7-3.182v.685zm3.186 7.705c-.209.189-.512.201-.745.074-1.052-.872-1.238-1.276-1.814-2.106-1.734 1.767-2.962 2.297-5.209 2.297-2.66 0-4.731-1.641-4.731-4.925 0-2.565 1.391-4.309 3.37-5.164 1.715-.754 4.11-.891 5.942-1.095v-.41c0-.753.06-1.642-.384-2.294-.385-.579-1.124-.819-1.775-.819-1.207 0-2.284.62-2.548 1.903-.054.285-.261.567-.549.582l-3.061-.33c-.259-.056-.548-.266-.474-.66.704-3.716 4.06-4.838 7.066-4.838 1.537 0 3.547.41 4.758 1.574 1.538 1.436 1.392 3.352 1.392 5.438v4.923c0 1.481.616 2.13 1.192 2.929.204.287.249.63-.01.839l-2.42 2.082z"/></svg>' +
+          'Buy on Amazon' +
+        '</a>' +
+        '<button class="btn-drawer-ghost" onclick="addToCart(\'' + book.title.replace(/'/g, "\\'") + '\')">' +
+          '<svg class="drawer-btn-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>' +
+          'Add to Cart' +
+        '</button>' +
+      '</div>' +
+    '</div>' +
+
+    '<div class="drawer-section">' +
+      '<div class="drawer-section-title">About This Book</div>' +
+      '<div class="drawer-description">' + book.description + '</div>' +
+    '</div>' +
+
+    '<div class="drawer-section">' +
+      '<div class="drawer-section-title">Book Details</div>' +
+      '<div class="book-details-table">' + buildDetails() + '</div>' +
+    '</div>' +
+
+    '<div class="drawer-section">' +
+      '<div class="drawer-section-title">Table of Contents</div>' +
+      '<div class="toc-list">' + buildTOC() + '</div>' +
+    '</div>' +
+
+    '<div class="drawer-section" id="reviews-section">' +
+      '<div class="drawer-section-title">Customer Reviews</div>' +
+      '<div class="rating-summary">' +
+        '<div><div class="rating-big-num">' + book.rating + '</div><div class="rating-big-stars">★★★★★</div><div class="rating-big-count">' + book.reviewCount + ' global ratings</div></div>' +
+        '<div class="rating-bars">' + buildRatingBars() + '</div>' +
+      '</div>' +
+      buildReviews() +
+    '</div>';
+
+    document.getElementById('drawer-body').innerHTML = html;
+    document.getElementById('drawer-overlay').classList.add('open');
+    document.getElementById('detail-drawer').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function selectFormat(tab, idx, bookId) {
+    var tabs = document.querySelectorAll('#format-tabs-' + bookId + ' .format-tab');
+    tabs.forEach(function(t){ t.classList.remove('active'); });
+    tab.classList.add('active');
+  }
+
+  function closeDrawer() {
+    document.getElementById('drawer-overlay').classList.remove('open');
+    document.getElementById('detail-drawer').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Keyboard close
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeDrawer(); });
+  </script>
+</body>
+</html>
