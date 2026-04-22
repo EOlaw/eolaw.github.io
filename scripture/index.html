@@ -492,6 +492,112 @@
       background: var(--bg) !important;
     }
 
+    #word-search-cta {
+      background: var(--bg) !important;
+    }
+
+    .word-search-card {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 12% 10%, rgba(255, 196, 81, .16), transparent 34%),
+        linear-gradient(135deg, var(--bg-card), var(--bg-muted));
+      border: 1px solid var(--primary-border);
+      border-radius: 1.25rem;
+      padding: 1.75rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 1.25rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    .word-search-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -4rem -5rem auto;
+      width: 12rem;
+      height: 12rem;
+      border: 1px solid var(--primary-border);
+      border-radius: 50%;
+      opacity: .35;
+      pointer-events: none;
+    }
+
+    .word-search-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800;
+      color: var(--text);
+      font-size: 1.15rem;
+      margin-bottom: .35rem;
+    }
+
+    .word-search-copy {
+      color: var(--text-muted);
+      font-size: .875rem;
+      margin-bottom: .875rem;
+    }
+
+    .word-search-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+    }
+
+    .word-search-chip {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      border-radius: 999px;
+      padding: .35rem .75rem;
+      font-size: .75rem;
+      font-weight: 600;
+      transition: border-color .2s, color .2s, background .2s;
+    }
+
+    .word-search-chip:hover {
+      background: var(--primary-dim);
+      border-color: var(--primary-border);
+      color: var(--primary);
+    }
+
+    .word-search-button {
+      background: var(--primary);
+      color: #000;
+      font-weight: 800;
+      padding: .75rem 1.35rem;
+      border-radius: .875rem;
+      border: none;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: .9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      transition: transform .15s, opacity .2s, box-shadow .2s;
+      white-space: nowrap;
+      box-shadow: var(--shadow-gold);
+      position: relative;
+      z-index: 1;
+    }
+
+    .word-search-button:hover {
+      opacity: .9;
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 640px) {
+      .word-search-card {
+        grid-template-columns: 1fr;
+        padding: 1.35rem;
+      }
+
+      .word-search-button {
+        justify-content: center;
+        width: 100%;
+      }
+    }
+
     /* Inner card/div background overrides */
     [style*="background:#111118"] {
       background: var(--bg-card) !important;
@@ -1080,19 +1186,21 @@
   </section>
 
   <!-- ===================== SEARCH GOD'S WORD ===================== -->
-  <section style="background:#0a0a12;padding:2.5rem 0;">
+  <section id="word-search-cta" style="padding:2.5rem 0;">
     <div class="max-w-3xl mx-auto px-4">
-      <div
-        style="background:linear-gradient(135deg,#1a1a24,#111118);border:1px solid rgba(255,255,255,.08);border-radius:1.25rem;padding:1.75rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
-        <div>
-          <h3
-            style="font-family:'Space Grotesk',sans-serif;font-weight:700;color:#fff;font-size:1rem;margin-bottom:.25rem;">
-            Search God's Word</h3>
-          <p style="color:#666;font-size:.8125rem;">Try: "strength", "Psalm 23", "John 3:16", "love"</p>
+      <div class="word-search-card">
+        <div style="position:relative;z-index:1;">
+          <h3 class="word-search-title">Search God's Word</h3>
+          <p class="word-search-copy">Try a word, book, chapter, or exact verse reference.</p>
+          <div class="word-search-chips" aria-label="Suggested searches">
+            <button class="word-search-chip" onclick="searchSuggestion('strength')">strength</button>
+            <button class="word-search-chip" onclick="searchSuggestion('Psalm 23')">Psalm 23</button>
+            <button class="word-search-chip" onclick="searchSuggestion('John 3:16')">John 3:16</button>
+            <button class="word-search-chip" onclick="searchSuggestion('love')">love</button>
+          </div>
         </div>
         <button onclick="document.getElementById('hero-search').focus();window.scrollTo({top:0,behavior:'smooth'});"
-          style="background:#ffc451;color:#000;font-weight:700;padding:.75rem 1.5rem;border-radius:.875rem;border:none;cursor:pointer;font-family:'Inter',sans-serif;font-size:.9rem;display:inline-flex;align-items:center;gap:.5rem;transition:opacity .2s;white-space:nowrap;"
-          onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+          class="word-search-button">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
             stroke-linecap="round" stroke-linejoin="round">
             <circle cx="11" cy="11" r="8" />
@@ -1531,6 +1639,14 @@
       document.getElementById('hero-search').value = '';
       document.getElementById('hero-search-clear').style.display = 'none';
       document.getElementById('search-results-section').style.display = 'none';
+    }
+
+    function searchSuggestion(query) {
+      var searchEl = document.getElementById('hero-search');
+      searchEl.value = query;
+      document.getElementById('hero-search-clear').style.display = 'block';
+      performSearch(query);
+      document.getElementById('search-results-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     /* ---- Verse Card ---- */
