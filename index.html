@@ -8,19 +8,6 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon_io/favicon-32x32.png">
   <link rel="apple-touch-icon" href="/assets/img/favicon_io/apple-touch-icon.png">
   <link rel="manifest" href="/assets/img/favicon_io/site.webmanifest">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            gold: { 300:'#ffe08a',400:'#ffd27f',500:'#ffc451',600:'#e6b048',700:'#cc9c3f' }
-          },
-          fontFamily: { sans:['Inter','sans-serif'], display:['Space Grotesk','sans-serif'] }
-        }
-      }
-    }
-  </script>
   <script>/* instant dark mode — prevents flash of white */
     (function(){var o=localStorage.getItem('is-theme-override');if(o==='dark'||(o===null&&(new Date().getHours()>=19||new Date().getHours()<7)))document.documentElement.classList.add('dark');})();
   </script>
@@ -73,7 +60,7 @@
           <a href="/scripture/" class="nav-link" data-page="scripture">✝️ Word of God</a>
         </div>
         <div class="nav-actions">
-          <a href="tel:+13463839529" class="nav-phone hidden lg:flex">
+          <a href="tel:+13463839529" class="nav-phone">
             <i data-lucide="phone" style="width:14px;height:14px;"></i>
             <span>+1 (346) 383-9529</span>
           </a>
@@ -526,7 +513,7 @@
           <div class="footer-socials">
             <a href="https://www.linkedin.com/in/emmanuel-oyemosu/" target="_blank" class="social-btn" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
             <a href="https://github.com/EOlaw" target="_blank" class="social-btn" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
-            <a href="https://www.instagram.com/e_olawalee/" target="_blank" class="social-btn" aria-label="Instagram"><i data-lucide="instagram" style="width:14px;height:14px;"></i></a>
+            <a href="https://www.instagram.com/e_olawalee/" target="_blank" class="social-btn" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
             <a href="mailto:emmanuel.ao@outlook.com" class="social-btn" aria-label="Email"><i data-lucide="mail" style="width:14px;height:14px;"></i></a>
           </div>
         </div>
