@@ -262,6 +262,7 @@
     const modal = document.getElementById('booking-modal');
     if (modal) {
       modal.classList.remove('hidden');
+      modal.style.display = 'flex';
       document.body.style.overflow = 'hidden';
       const firstInput = modal.querySelector('input, select, textarea, button');
       if (firstInput) firstInput.focus();
@@ -282,6 +283,7 @@
     const modal = document.getElementById('booking-modal');
     if (!modal) return;
     modal.classList.add('hidden');
+    modal.style.display = 'none';
     document.body.style.overflow = '';
   };
 
@@ -389,7 +391,7 @@
         if (e.target === modal) window.closeBookingModal();
       });
       document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+        if (e.key === 'Escape' && modal.style.display !== 'none') {
           window.closeBookingModal();
         }
       });
