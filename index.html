@@ -603,6 +603,75 @@
     </button>
   </div>
 
+  <!-- BOOKING POPUP -->
+  <div id="booking-modal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="booking-modal-title" style="position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,.72);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:1rem;">
+    <div style="width:min(100%,680px);max-height:92vh;overflow:auto;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:0 24px 80px rgba(0,0,0,.45);">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;padding:1.25rem 1.25rem 0;">
+        <div>
+          <div class="badge" style="margin-bottom:.625rem;">Free Consultation</div>
+          <h2 id="booking-modal-title" style="font-size:1.25rem;margin-bottom:.375rem;">Request a Consultation</h2>
+          <p style="font-size:.8rem;color:var(--text-muted);line-height:1.6;">Tell me what you need and when you are available. I will reply within 24 hours to confirm the call.</p>
+        </div>
+        <button type="button" onclick="closeBookingModal()" aria-label="Close booking popup" style="width:2.25rem;height:2.25rem;border-radius:999px;border:1px solid var(--border);background:var(--bg-soft);color:var(--text);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <i data-lucide="x" style="width:16px;height:16px;"></i>
+        </button>
+      </div>
+
+      <form id="booking-request-form" style="padding:1.25rem;" novalidate>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <div class="form-group">
+            <label class="form-label" for="booking-name">Full Name <span style="color:var(--primary);">*</span></label>
+            <input class="form-input" type="text" id="booking-name" name="name" placeholder="Your name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="booking-email">Email Address <span style="color:var(--primary);">*</span></label>
+            <input class="form-input" type="email" id="booking-email" name="email" placeholder="you@example.com" required>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <div class="form-group">
+            <label class="form-label" for="booking-phone">Phone Number <span style="color:var(--text-soft);font-weight:400;">(optional)</span></label>
+            <input class="form-input" type="tel" id="booking-phone" name="phone" placeholder="+1 (555) 000-0000">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="booking-timezone">Timezone</label>
+            <input class="form-input" type="text" id="booking-timezone" name="timezone" placeholder="Central Time, GMT+1, etc.">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="booking-service">Service of Interest <span style="color:var(--primary);">*</span></label>
+          <select class="form-select" id="booking-service" name="service" required>
+            <option value="" disabled selected>Select a service...</option>
+            <option value="Data & Dashboards">Data &amp; Dashboards</option>
+            <option value="Website or Web App">Website or Web App</option>
+            <option value="AI Automation">AI Automation</option>
+            <option value="Online Store">Online Store</option>
+            <option value="Technical Consulting">Technical Consulting</option>
+            <option value="Life Literacy Coaching">Life Literacy Coaching</option>
+            <option value="Bible-Based Coaching">Bible-Based Coaching</option>
+            <option value="Other / Not Sure Yet">Other / Not Sure Yet</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="booking-times">Preferred Days / Times <span style="color:var(--primary);">*</span></label>
+          <textarea class="form-textarea" id="booking-times" name="preferred_times" rows="3" placeholder="Example: Tuesday after 3 PM, Thursday morning, or any weekday after 6 PM" required></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="booking-message">What would you like to discuss?</label>
+          <textarea class="form-textarea" id="booking-message" name="message" rows="4" placeholder="Briefly describe your business, goal, or challenge..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg" style="width:100%;justify-content:center;">
+          <i data-lucide="calendar-check" style="width:16px;height:16px;"></i>
+          Request Consultation
+        </button>
+        <p style="font-size:.7rem;color:var(--text-soft);text-align:center;margin-top:.75rem;">
+          <i data-lucide="mail" style="width:11px;height:11px;display:inline;vertical-align:middle;"></i>
+          This opens a prepared email to Emmanuel so your request is sent directly.
+        </p>
+      </form>
+    </div>
+  </div>
+
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <script src="/assets/js/main.js"></script>
 

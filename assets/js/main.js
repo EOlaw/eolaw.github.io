@@ -259,6 +259,16 @@
 
   /* ── Booking helpers ─────────────────────────────────────────────── */
   window.openCalendly = function (url) {
+    const modal = document.getElementById('booking-modal');
+    if (modal) {
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      const firstInput = modal.querySelector('input, select, textarea, button');
+      if (firstInput) firstInput.focus();
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+      return;
+    }
+
     const target = '/consultation.html#booking-request';
     if (window.location.pathname.includes('consultation')) {
       const form = document.getElementById('booking-request');
@@ -266,6 +276,13 @@
     } else {
       window.location.href = target;
     }
+  };
+
+  window.closeBookingModal = function () {
+    const modal = document.getElementById('booking-modal');
+    if (!modal) return;
+    modal.classList.add('hidden');
+    document.body.style.overflow = '';
   };
 
   /* ── Toast ───────────────────────────────────────────────────────── */
@@ -365,6 +382,18 @@
       window.location.href = mailto;
       window.showToast('Your email app should open with the consultation request ready to send.');
     });
+
+    const modal = document.getElementById('booking-modal');
+    if (modal) {
+      modal.addEventListener('click', function (e) {
+        if (e.target === modal) window.closeBookingModal();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+          window.closeBookingModal();
+        }
+      });
+    }
   }
 
   /* ── Floating Action Button ──────────────────────────────────────── */
