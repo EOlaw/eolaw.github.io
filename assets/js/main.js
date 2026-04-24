@@ -257,12 +257,14 @@
     setTimeout(tick, PAUSE_FULL);
   }
 
-  /* ── Calendly helpers ────────────────────────────────────────────── */
+  /* ── Booking helpers ─────────────────────────────────────────────── */
   window.openCalendly = function (url) {
-    if (typeof Calendly !== 'undefined') {
-      Calendly.initPopupWidget({ url: url || 'https://calendly.com/emmanuel-ao' });
+    const target = '/consultation.html#booking-request';
+    if (window.location.pathname.includes('consultation')) {
+      const form = document.getElementById('booking-request');
+      if (form) form.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else {
-      window.open(url || 'https://calendly.com/emmanuel-ao', '_blank');
+      window.location.href = target;
     }
   };
 
@@ -317,6 +319,54 @@
     });
   }
 
+  /* ── Booking request form ───────────────────────────────────────── */
+  function initBookingRequestForm() {
+    const form = document.getElementById('booking-request-form');
+    if (!form) return;
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const data = new FormData(form);
+      const name = (data.get('name') || '').trim();
+      const email = (data.get('email') || '').trim();
+      const service = (data.get('service') || '').trim();
+      const preferredTimes = (data.get('preferred_times') || '').trim();
+
+      if (!name || !email || !service || !preferredTimes) {
+        window.showToast('Please fill in your name, email, service, and preferred times.', 'error');
+        return;
+      }
+
+      const body = [
+        'Hi Emmanuel,',
+        '',
+        'I would like to book a free consultation.',
+        '',
+        'Name: ' + name,
+        'Email: ' + email,
+        'Phone: ' + ((data.get('phone') || '').trim() || 'Not provided'),
+        'Timezone: ' + ((data.get('timezone') || '').trim() || 'Not provided'),
+        'Service: ' + service,
+        '',
+        'Preferred days/times:',
+        preferredTimes,
+        '',
+        'What I would like to discuss:',
+        ((data.get('message') || '').trim() || 'Not provided'),
+        '',
+        'Sent from the InsightSerenity consultation page.'
+      ].join('\n');
+
+      const mailto = 'mailto:emmanuel.ao@outlook.com'
+        + '?subject=' + encodeURIComponent('Consultation request from ' + name)
+        + '&body=' + encodeURIComponent(body);
+
+      window.location.href = mailto;
+      window.showToast('Your email app should open with the consultation request ready to send.');
+    });
+  }
+
   /* ── Floating Action Button ──────────────────────────────────────── */
   function initFab() {
     const btn = document.getElementById('fab-btn');
@@ -349,6 +399,7 @@
     initSmoothScroll();
     initRotatingText();
     initContactForm();
+    initBookingRequestForm();
     initFab();
 
     // Attach theme toggle buttons

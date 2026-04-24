@@ -25,7 +25,6 @@
     (function(){var o=localStorage.getItem('is-theme-override');if(o==='dark'||(o===null&&(new Date().getHours()>=19||new Date().getHours()<7)))document.documentElement.classList.add('dark');})();
   </script>
   <link rel="stylesheet" href="/assets/css/main.css">
-  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
   <style>
     .contact-layout {
       display: grid;
@@ -430,7 +429,7 @@
           <div style="background:linear-gradient(135deg,var(--primary-dim),transparent);border:1px solid var(--primary-border);border-radius:var(--radius-lg);padding:1.5rem;">
             <div style="font-size:.8rem;font-weight:800;color:var(--text);margin-bottom:.375rem;font-family:'Space Grotesk',sans-serif;">Prefer a Live Conversation?</div>
             <p style="font-size:.75rem;margin-bottom:1rem;">Skip the back-and-forth — book a free 30-minute discovery call and let's talk directly.</p>
-            <button class="btn btn-primary btn-sm" onclick="openCalendly('https://calendly.com/emmanuel-ao')" style="width:100%;justify-content:center;">
+            <button class="btn btn-primary btn-sm" onclick="openCalendly()" style="width:100%;justify-content:center;">
               <i data-lucide="calendar" style="width:13px;height:13px;"></i>
               Book Free Call
             </button>
@@ -558,7 +557,6 @@
   </div>
 
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
   <script src="/assets/js/main.js"></script>
   <script>
     function updateCharCount(el) {

@@ -25,7 +25,6 @@
     (function(){var o=localStorage.getItem('is-theme-override');if(o==='dark'||(o===null&&(new Date().getHours()>=19||new Date().getHours()<7)))document.documentElement.classList.add('dark');})();
   </script>
   <link rel="stylesheet" href="/assets/css/main.css">
-  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
   <style>
     /* ── Blog-specific styles ── */
     .blog-filters {
@@ -395,7 +394,7 @@
         <h2>Want Tailored Advice for Your Project?</h2>
         <p>Skip the reading and get personalized guidance in a free 30-minute strategy call.</p>
         <div style="display:flex;gap:.875rem;justify-content:center;flex-wrap:wrap;">
-          <button class="btn btn-dark btn-lg" onclick="openCalendly('https://calendly.com/emmanuel-ao')">
+          <button class="btn btn-dark btn-lg" onclick="openCalendly()">
             <i data-lucide="calendar" style="width:16px;height:16px;"></i>
             Book Free Call
           </button>
@@ -495,7 +494,6 @@
   </div>
 
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
   <script src="/assets/js/content-api.js"></script>
   <script src="/assets/js/main.js"></script>
   <script>

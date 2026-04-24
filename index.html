@@ -25,7 +25,6 @@
     (function(){var o=localStorage.getItem('is-theme-override');if(o==='dark'||(o===null&&(new Date().getHours()>=19||new Date().getHours()<7)))document.documentElement.classList.add('dark');})();
   </script>
   <link rel="stylesheet" href="/assets/css/main.css">
-  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 </head>
 <body>
 
@@ -121,7 +120,7 @@
         </h1>
         <p>Expert consulting in Data Science, Software Engineering, and AI/ML Solutions. I help organizations unlock the full potential of their data and build systems that scale.</p>
         <div class="hero-actions">
-          <button class="btn btn-primary btn-lg" onclick="openCalendly('https://calendly.com/emmanuel-ao')">
+          <button class="btn btn-primary btn-lg" onclick="openCalendly()">
             <i data-lucide="calendar" style="width:16px;height:16px;"></i>
             Book a Consultation
           </button>
@@ -503,7 +502,7 @@
         <h2>Ready to Transform Your Business?</h2>
         <p>Book a free discovery call and let's map out exactly how data, technology, or coaching can move you forward.</p>
         <div style="display:flex;gap:.875rem;justify-content:center;flex-wrap:wrap;">
-          <button class="btn btn-dark btn-lg" onclick="openCalendly('https://calendly.com/emmanuel-ao')">
+          <button class="btn btn-dark btn-lg" onclick="openCalendly()">
             <i data-lucide="calendar" style="width:16px;height:16px;"></i>
             Book Free Consultation
           </button>
@@ -605,7 +604,6 @@
   </div>
 
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
   <script src="/assets/js/main.js"></script>
 
   <script>

@@ -25,7 +25,6 @@
     (function(){var o=localStorage.getItem('is-theme-override');if(o==='dark'||(o===null&&(new Date().getHours()>=19||new Date().getHours()<7)))document.documentElement.classList.add('dark');})();
   </script>
   <link rel="stylesheet" href="/assets/css/main.css">
-  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 </head>
 <body>
 
@@ -160,7 +159,7 @@
             <span class="skill-tag">Docker</span>
           </div>
           <div style="display:flex;gap:.875rem;flex-wrap:wrap;">
-            <button class="btn btn-primary" onclick="openCalendly('https://calendly.com/emmanuel-ao')">
+            <button class="btn btn-primary" onclick="openCalendly()">
               <i data-lucide="calendar" style="width:15px;height:15px;"></i>
               Book a Consultation
             </button>
@@ -380,7 +379,7 @@
         <h2>Ready to Work Together?</h2>
         <p>Whether you have a technical challenge or a life question, a 30-minute conversation is all it takes to get clarity on how I can help.</p>
         <div style="display:flex;gap:.875rem;justify-content:center;flex-wrap:wrap;">
-          <button class="btn btn-dark btn-lg" onclick="openCalendly('https://calendly.com/emmanuel-ao')">
+          <button class="btn btn-dark btn-lg" onclick="openCalendly()">
             <i data-lucide="calendar" style="width:16px;height:16px;"></i>
             Book Free Consultation
           </button>
@@ -482,7 +481,6 @@
   </div>
 
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
   <script src="/assets/js/main.js"></script>
 
   <script>
