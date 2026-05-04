@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \"const d=require\\('./assets/data/blog-posts.json'\\);console.log\\('Total:',d.length,'Featured:',d.filter\\(p=>p.featured\\).length,'Regular:',d.filter\\(p=>!p.featured\\).length,'Pages:',Math.ceil\\(d.filter\\(p=>!p.featured\\).length/6\\)\\)\")",
+      "Bash(node -e \"const d=require\\('./assets/data/blog-posts.json'\\);const c={};d.forEach\\(p=>{c[p.category]=\\(c[p.category]||0\\)+1}\\);console.log\\(JSON.stringify\\(c,null,2\\)\\)\")"
+    ]
+  }
+}

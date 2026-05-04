@@ -3,24 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Book a Consultation | InsightSerenity</title>
-  <meta name="description" content="Book a free 30-minute consultation with Emmanuel Oyemosu. Discuss your data, software, AI, or coaching needs and get a clear plan of action.">
+  <title>Book an AI Consultation | InsightSerenity</title>
+  <meta name="description" content="Book a free 30-minute AI strategy consultation with Emmanuel Oyemosu. Scope your autonomous AI system, get a build blueprint, and start the conversation before committing to anything.">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon_io/favicon-32x32.png">
   <link rel="apple-touch-icon" href="/assets/img/favicon_io/apple-touch-icon.png">
   <link rel="manifest" href="/assets/img/favicon_io/site.webmanifest">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            gold: { 300:'#ffe08a',400:'#ffd27f',500:'#ffc451',600:'#e6b048',700:'#cc9c3f' }
-          },
-          fontFamily: { sans:['Inter','sans-serif'], display:['Space Grotesk','sans-serif'] }
-        }
-      }
-    }
-  </script>
   <script>/* instant dark mode — prevents flash of white */
     (function(){var o=localStorage.getItem('is-theme-override');if(o==='dark'||(o===null&&(new Date().getHours()>=19||new Date().getHours()<7)))document.documentElement.classList.add('dark');})();
   </script>
@@ -73,7 +60,7 @@
           <a href="/scripture/" class="nav-link" data-page="scripture">✝️ Word of God</a>
         </div>
         <div class="nav-actions">
-          <a href="tel:+13463839529" class="nav-phone hidden lg:flex">
+          <a href="tel:+13463839529" class="nav-phone">
             <i data-lucide="phone" style="width:14px;height:14px;"></i>
             <span>+1 (346) 383-9529</span>
           </a>
@@ -109,10 +96,10 @@
       <div class="reveal">
         <div class="avail-badge" style="margin-bottom:1rem;display:inline-flex;">
           <span class="status-dot"></span>
-          Currently Accepting New Clients
+          Accepting AI Consulting Clients
         </div>
-        <h1>Book a Free Consultation</h1>
-        <p>Pick a time that works for you. We'll spend 30 minutes exploring your goals and how I can help — no pitch, no pressure.</p>
+        <h1>Book a Free AI Consultation</h1>
+        <p>Every autonomous AI system we build starts here. In 30 minutes, we'll scope your problem, evaluate the right AI approach, and map a clear path forward — no pitch, no pressure.</p>
       </div>
     </div>
   </div>
@@ -120,7 +107,7 @@
   <!-- MAIN CONTENT: BOOKING REQUEST + SIDEBAR -->
   <section class="section">
     <div class="container">
-      <div style="display:grid;grid-template-columns:1fr 380px;gap:2.5rem;align-items:start;" class="lg:grid md:block">
+      <div class="booking-layout">
 
         <!-- LEFT: BOOKING REQUEST FORM -->
         <div class="reveal-left" id="booking-request">
@@ -155,14 +142,12 @@
               <label class="form-label" for="booking-service">Service of Interest <span style="color:var(--primary);">*</span></label>
               <select class="form-select" id="booking-service" name="service" required>
                 <option value="" disabled selected>Select a service...</option>
-                <option value="Data Science & Analytics">Data Science &amp; Analytics</option>
-                <option value="Full-Stack Development">Full-Stack Development</option>
-                <option value="AI & Machine Learning">AI &amp; Machine Learning</option>
-                <option value="System Architecture">System Architecture</option>
-                <option value="eCommerce Solutions">eCommerce Solutions</option>
-                <option value="Technical Consulting">Technical Consulting</option>
-                <option value="Life Literacy Coaching">Life Literacy Coaching</option>
-                <option value="Bible-Based Coaching">Bible-Based Coaching</option>
+                <option value="AI Strategy Consultation">AI Strategy Consultation</option>
+                <option value="Autonomous AI Agents">Autonomous AI Agents</option>
+                <option value="AI Pipelines & Automation">AI Pipelines &amp; Automation</option>
+                <option value="AI System Architecture">AI System Architecture</option>
+                <option value="Custom AI Development">Custom AI Development</option>
+                <option value="AI-Powered Application">AI-Powered Application</option>
                 <option value="Other / Not Sure Yet">Other / Not Sure Yet</option>
               </select>
             </div>
@@ -171,8 +156,8 @@
               <textarea class="form-textarea" id="booking-times" name="preferred_times" rows="3" placeholder="Example: Tuesday after 3 PM, Thursday morning, or any weekday after 6 PM" required></textarea>
             </div>
             <div class="form-group">
-              <label class="form-label" for="booking-message">What would you like to discuss?</label>
-              <textarea class="form-textarea" id="booking-message" name="message" rows="4" placeholder="Briefly describe your project, goal, or question..."></textarea>
+              <label class="form-label" for="booking-message">Describe your AI problem or goal</label>
+              <textarea class="form-textarea" id="booking-message" name="message" rows="4" placeholder="What problem are you trying to solve? What does your data look like? What would success look like in 3 months?"></textarea>
             </div>
             <button type="submit" class="btn btn-primary btn-lg" style="width:100%;justify-content:center;">
               <i data-lucide="calendar-check" style="width:16px;height:16px;"></i>
@@ -215,38 +200,34 @@
             <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:.875rem;">Pricing Overview</div>
             <div style="display:flex;flex-direction:column;gap:.5rem;">
               <div style="display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid var(--border);">
-                <span style="font-size:.8rem;color:var(--text);">Math/Stats Tutoring</span>
-                <span style="font-size:.8rem;font-weight:700;color:var(--primary);">$50–$75/hr</span>
+                <span style="font-size:.8rem;color:var(--text);">AI Strategy Consultation</span>
+                <span style="font-size:.8rem;font-weight:700;color:var(--primary);">Free</span>
               </div>
               <div style="display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid var(--border);">
-                <span style="font-size:.8rem;color:var(--text);">Data Analysis (one-off)</span>
-                <span style="font-size:.8rem;font-weight:700;color:var(--primary);">$150–$500</span>
+                <span style="font-size:.8rem;color:var(--text);">Blueprint Phase</span>
+                <span style="font-size:.8rem;font-weight:700;color:var(--primary);">$500–$1,000</span>
               </div>
               <div style="display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid var(--border);">
-                <span style="font-size:.8rem;color:var(--text);">Life Coaching (1:1)</span>
-                <span style="font-size:.8rem;font-weight:700;color:var(--primary);">$75–$125/session</span>
-              </div>
-              <div style="display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid var(--border);">
-                <span style="font-size:.8rem;color:var(--text);">Bible Coaching (group)</span>
-                <span style="font-size:.8rem;font-weight:700;color:var(--primary);">$25–$40/person</span>
+                <span style="font-size:.8rem;color:var(--text);">Focused AI Build</span>
+                <span style="font-size:.8rem;font-weight:700;color:var(--primary);">$1,500–$5,000</span>
               </div>
               <div style="display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;">
-                <span style="font-size:.8rem;color:var(--text);">Business Analytics Audit</span>
-                <span style="font-size:.8rem;font-weight:700;color:var(--primary);">$300–$800</span>
+                <span style="font-size:.8rem;color:var(--text);">Full AI System / Platform</span>
+                <span style="font-size:.8rem;font-weight:700;color:var(--primary);">Custom Quote</span>
               </div>
             </div>
-            <p style="font-size:.7rem;margin-top:.75rem;color:var(--text-soft);">Custom projects quoted individually. Free 30-min discovery call for all new clients.</p>
+            <p style="font-size:.7rem;margin-top:.75rem;color:var(--text-soft);">All builds scoped and quoted after the blueprint phase. First call is always free.</p>
           </div>
 
           <!-- What to expect -->
           <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.375rem;">
             <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:.875rem;">What to Expect</div>
             <div class="check-list">
-              <div class="check-item"><i data-lucide="check-circle-2"></i><span>Reply within 24 hours to confirm the best time and video call link</span></div>
-              <div class="check-item"><i data-lucide="check-circle-2"></i><span>30-minute focused conversation about your goals and challenges</span></div>
-              <div class="check-item"><i data-lucide="check-circle-2"></i><span>Honest assessment of how I can (or can't) help</span></div>
-              <div class="check-item"><i data-lucide="check-circle-2"></i><span>Clear outline of next steps with no pressure to commit</span></div>
-              <div class="check-item"><i data-lucide="check-circle-2"></i><span>Follow-up email within 48 hours — either a detailed proposal if your project is a good fit, or an honest explanation of why I may not be the right match</span></div>
+              <div class="check-item"><i data-lucide="check-circle-2"></i><span>Reply within 24 hours to confirm time and send a video call link</span></div>
+              <div class="check-item"><i data-lucide="check-circle-2"></i><span>30-minute AI strategy session — problem scoping, feasibility, and approach</span></div>
+              <div class="check-item"><i data-lucide="check-circle-2"></i><span>Honest assessment: does autonomous AI actually solve your problem?</span></div>
+              <div class="check-item"><i data-lucide="check-circle-2"></i><span>High-level architecture sketch if the fit is clear</span></div>
+              <div class="check-item"><i data-lucide="check-circle-2"></i><span>Follow-up within 48 hours: either a detailed blueprint proposal or an honest recommendation to go a different direction</span></div>
             </div>
           </div>
 
@@ -261,7 +242,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg> GitHub
               </a>
               <a href="https://www.instagram.com/e_olawalee/" target="_blank" class="btn btn-ghost btn-sm">
-                <i data-lucide="instagram" style="width:13px;height:13px;"></i> Instagram
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg> Instagram
               </a>
             </div>
           </div>
@@ -299,14 +280,12 @@
             <label class="form-label" for="service">Service of Interest <span style="color:var(--primary);">*</span></label>
             <select class="form-select" id="service" name="service" required>
               <option value="" disabled selected>Select a service...</option>
-              <option value="data-science">Data Science &amp; Analytics</option>
-              <option value="fullstack">Full-Stack Development</option>
-              <option value="ai-ml">AI &amp; Machine Learning</option>
-              <option value="architecture">System Architecture</option>
-              <option value="ecommerce">eCommerce Solutions</option>
-              <option value="consulting">Technical Consulting</option>
-              <option value="life-coaching">Life Literacy Coaching</option>
-              <option value="bible-coaching">Bible-Based Coaching</option>
+              <option value="ai-consultation">AI Strategy Consultation</option>
+              <option value="autonomous-agents">Autonomous AI Agents</option>
+              <option value="ai-pipelines">AI Pipelines &amp; Automation</option>
+              <option value="ai-architecture">AI System Architecture</option>
+              <option value="custom-ai">Custom AI Development</option>
+              <option value="ai-fullstack">AI-Powered Application</option>
               <option value="other">Other / Not Sure Yet</option>
             </select>
           </div>
@@ -333,16 +312,16 @@
       <div class="cta-banner reveal">
         <div class="cta-orb-1"></div>
         <div class="cta-orb-2"></div>
-        <div class="badge" style="background:rgba(0,0,0,0.1);border-color:rgba(0,0,0,0.2);color:#000;margin-bottom:1rem;">Still Exploring?</div>
-        <h2>Not Sure Where to Start?</h2>
-        <p>Browse all 8 services to find the right fit, or jump straight into a free discovery call and we'll figure it out together.</p>
+        <div class="badge" style="background:rgba(0,0,0,0.1);border-color:rgba(0,0,0,0.2);color:#000;margin-bottom:1rem;">Not Sure?</div>
+        <h2>Not Sure If AI Is the Right Move?</h2>
+        <p>That's exactly what the consultation is for. We'll evaluate your problem, identify whether autonomous AI is the right solution, and give you an honest answer — whether that's a build roadmap or a clear "not yet."</p>
         <div style="display:flex;gap:.875rem;justify-content:center;flex-wrap:wrap;">
           <a href="#booking-request" class="btn btn-dark btn-lg">
             <i data-lucide="calendar" style="width:16px;height:16px;"></i>
-            Book Now
+            Book the Call
           </a>
           <a href="/services.html" class="btn btn-clear btn-lg">
-            See All Services
+            Explore Services
           </a>
         </div>
       </div>
@@ -357,11 +336,11 @@
           <a href="/index.html" class="nav-logo" style="margin-bottom:.875rem;display:inline-flex;">
             <img src="/assets/img/favicon_io/android-chrome-192x192.png" alt="InsightSerenity" style="width:2rem;height:2rem;border-radius:0.5rem;">
           </a>
-          <p class="footer-brand-desc">Expert consulting in Data Science, Software Engineering, AI/ML — plus Life Literacy and Bible-Based Coaching. Transforming data, technology, and lives.</p>
+          <p class="footer-brand-desc">We build autonomous AI systems from scratch. Every engagement starts with a consultation — then we design, build, and deploy the intelligent system your business needs.</p>
           <div class="footer-socials">
             <a href="https://www.linkedin.com/in/emmanuel-oyemosu/" target="_blank" class="social-btn" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
             <a href="https://github.com/EOlaw" target="_blank" class="social-btn" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
-            <a href="https://www.instagram.com/e_olawalee/" target="_blank" class="social-btn" aria-label="Instagram"><i data-lucide="instagram" style="width:14px;height:14px;"></i></a>
+            <a href="https://www.instagram.com/e_olawalee/" target="_blank" class="social-btn" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
             <a href="mailto:emmanuel.ao@outlook.com" class="social-btn" aria-label="Email"><i data-lucide="mail" style="width:14px;height:14px;"></i></a>
           </div>
         </div>
@@ -380,26 +359,22 @@
           </div>
         </div>
         <div>
-          <div class="footer-heading">Technical Services</div>
+          <div class="footer-heading">AI Services</div>
           <div class="footer-links">
-            <a href="/services.html#data-science">Data Science &amp; Analytics</a>
-            <a href="/services.html#fullstack">Full-Stack Development</a>
-            <a href="/services.html#ai-ml">AI &amp; Machine Learning</a>
-            <a href="/services.html#architecture">System Architecture</a>
-            <a href="/services.html#ecommerce">eCommerce Solutions</a>
-            <a href="/services.html#consulting">Technical Consulting</a>
+            <a href="/services.html#ai-consultation">AI Strategy Consultation</a>
+            <a href="/services.html#autonomous-agents">Autonomous AI Agents</a>
+            <a href="/services.html#ai-pipelines">AI Pipelines &amp; Automation</a>
+            <a href="/services.html#ai-architecture">AI System Architecture</a>
+            <a href="/services.html#custom-ai">Custom AI Development</a>
+            <a href="/services.html#ai-fullstack">AI-Powered Applications</a>
           </div>
         </div>
         <div>
-          <div class="footer-heading">Coaching Services</div>
-          <div class="footer-links">
-            <a href="/services.html#life-coaching">Life Literacy Coaching</a>
-            <a href="/services.html#bible-coaching">Bible-Based Coaching</a>
-          </div>
-          <div class="footer-heading" style="margin-top:1.5rem;">Contact</div>
+          <div class="footer-heading">Contact</div>
           <div class="footer-links">
             <a href="mailto:emmanuel.ao@outlook.com">emmanuel.ao@outlook.com</a>
             <a href="tel:+13463839529">+1 (346) 383-9529</a>
+            <a href="/consultation.html">Book AI Consultation</a>
           </div>
         </div>
       </div>

@@ -813,6 +813,17 @@ footer {
 }
 .dark .avail-badge { color: #4ade80; }
 
+/* ── Booking layout (consultation page) ────────────────────────── */
+.booking-layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 2.5rem;
+  align-items: start;
+}
+@media (max-width: 1024px) {
+  .booking-layout { grid-template-columns: 1fr; }
+}
+
 /* ── Responsive ──────────────────────────────────────────────────── */
 @media (max-width: 1024px) {
   .services-grid { grid-template-columns: repeat(2, 1fr); }

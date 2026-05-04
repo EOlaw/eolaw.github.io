@@ -217,11 +217,11 @@
     const el = document.getElementById('typewriter-word');
     if (!el) return;
     const words = [
-      'Business Intelligence',
-      'Your Career',
-      'Your Purpose',
-      'Measurable Growth',
-      'Lasting Impact',
+      'AI Systems',
+      'AI Agents',
+      'Intelligent Pipelines',
+      'AI From Scratch',
+      'Autonomous Workflows',
     ];
     let wordIndex = 0;
     let charIndex = words[0].length; // start full, then delete
