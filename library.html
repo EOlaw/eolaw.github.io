@@ -343,8 +343,8 @@
     /* ── Product Grid ────────────────────────────────────────────── */
     .product-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 1.25rem;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
     }
 
     /* ── Product List (horizontal) ───────────────────────────────── */
@@ -358,29 +358,29 @@
     .product-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: var(--radius-xl);
+      border-radius: 20px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: border-color 0.22s, box-shadow 0.22s, transform 0.22s;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
       position: relative;
       cursor: pointer;
     }
     .product-card:hover {
-      border-color: var(--primary-border);
-      box-shadow: 0 12px 40px rgba(255,196,81,0.12), var(--shadow-lg);
-      transform: translateY(-4px);
+      border-color: rgba(255,196,81,0.45);
+      box-shadow: 0 24px 64px rgba(255,196,81,0.14), 0 8px 28px rgba(0,0,0,0.1);
+      transform: translateY(-6px);
     }
     .product-badge {
       position: absolute;
-      top: 0.75rem;
-      left: 0.75rem;
-      z-index: 2;
+      top: 0.875rem;
+      left: 0.875rem;
+      z-index: 10;
       font-size: 0.6rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.07em;
-      padding: 0.2rem 0.55rem;
+      padding: 0.22rem 0.6rem;
       border-radius: 999px;
     }
     .badge-bestseller { background: #f59e0b; color: #000; }
@@ -1154,6 +1154,12 @@
       cursor: pointer;
     }
     .mobile-filter-btn svg { width: 0.875rem; height: 0.875rem; color: var(--primary); }
+
+    /* ── Card trimming (keep cards compact; Quick Look has full detail) ── */
+    .product-card .product-subtitle { display: none; }
+    .product-card .price-free-ship  { display: none; }
+    .product-card .product-avail    { display: none; }
+    .product-card .card-secondary-actions { display: none; }
 
     /* ── Cover placeholder fallback ──────────────────────────────── */
     .cover-placeholder-inner {
