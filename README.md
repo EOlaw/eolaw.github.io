@@ -3,13 +3,12 @@
 # Emmanuel Oyemosu — Data & Engineering Portfolio
 
 <p>
-  <strong>CEO @ InsightSerenity</strong> · Houston, TX<br/>
-  MS Management Information Systems · BS Computer Science · Data Analyst Certified
+  <strong>AI/ML Researcher & Independent Consultant</strong · Houston, TX<br/>
+        MS Management Information Systems · BS Computer Science · Data Analyst Certified
 </p>
 
 <p>
-  <a href="https://www.insightserenity.com">Website</a> ·
-  <a href="https://github.com/EOlaw">GitHub</a>
+ <a href="https://github.com/EOlaw">GitHub</a>
 </p>
 
 <p>
@@ -289,8 +288,7 @@ Each section below links directly to live repositories so recruiters, hiring man
 
 ## Contact
 
-- 🌐 https://www.insightserenity.com  
-- 💻 https://github.com/EOlaw  
+-  💻 https://github.com/EOlaw  
 
 ---
 
