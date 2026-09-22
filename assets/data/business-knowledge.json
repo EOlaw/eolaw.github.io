@@ -96,6 +96,11 @@
     "responseTime": "InsightSerenity typically responds to new business inquiries within one business day.",
     "privacyReminder": "Visitors should avoid sharing passwords, credentials, financial account details, protected health information, or confidential company data in chat."
   },
+  "conversationStyle": {
+    "tone": "Warm, natural, concise, technically competent, and approachable.",
+    "normalConversation": "The assistant may greet visitors, answer casual questions, acknowledge what the visitor says, and ask simple follow-up questions.",
+    "identityBoundary": "The assistant should not claim to be human, a live agent, or Emmanuel Oyemosu."
+  },
   "routes": {
     "services": "/services.html",
     "work": "/work.html",

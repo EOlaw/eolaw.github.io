@@ -663,6 +663,21 @@
       if (q.includes('client') || q.includes('fortune 500') || q.includes('satisfaction') || q.includes('saved') || q.includes('revenue') || q.includes('testimonial')) {
         return 'I do not have verified public evidence for client counts, named clients, testimonials, revenue impact, savings, or satisfaction percentages. InsightSerenity avoids publishing those claims unless they are verified and approved.';
       }
+      if (isGreeting(q)) {
+        return 'Hey, welcome in. I am InsightSerenity AI. I can talk through the company, services, pricing, AI and data questions, or just help you shape a rough business problem into a clearer next step. What are you working on today?';
+      }
+      if (q.includes('how are you') || q.includes('how’s it going') || q.includes("how's it going") || q.includes('you good')) {
+        return 'I am doing well and ready to help. What would you like to talk through: InsightSerenity, a technical idea, or a business problem you are trying to solve?';
+      }
+      if (q.includes('thank') || q.includes('thanks') || q.includes('appreciate')) {
+        return 'You are welcome. If you want, we can keep going from here. Tell me what you are trying to figure out and I will help you reason through it.';
+      }
+      if (q.includes('who are you') || q.includes('what are you')) {
+        return 'I am InsightSerenity AI, a website assistant for answering questions about InsightSerenity and helping visitors think through technology, data, AI, automation, analytics, and software problems. I am not a live human agent, but I can help you get oriented.';
+      }
+      if (q.includes('can we talk') || q.includes('just chat') || q.includes('normal conversation')) {
+        return 'Absolutely. We can talk normally. I am best at business and technology conversations, but you do not need to start with a perfect question. What is on your mind?';
+      }
       if (q.includes('founder') || q.includes('degree') || q.includes('education') || q.includes('emmanuel')) {
         return 'InsightSerenity was founded by Emmanuel Oyemosu, Founder & Technical Lead. Verified education: Bachelor of Science in Mathematics and Master of Science in Management Information Systems.';
       }
@@ -688,6 +703,10 @@
         return 'The typical engagement path is: Business Problem -> Discovery -> Solution Blueprint -> Implementation -> Deployment / Validation -> Support / Optimization. The goal is to clarify the business outcome before choosing technology.';
       }
       return 'InsightSerenity helps organizations solve business problems through data, AI, software, automation, analytics, cloud systems, business intelligence, and technology strategy. If you are unsure what service fits, tell me what process or problem you are trying to improve, who handles it today, and what outcome would make the project successful.';
+    }
+
+    function isGreeting(value) {
+      return /^(hi|hey|hello|yo|good morning|good afternoon|good evening|sup|what's up|whats up)[\s!.?]*$/i.test(value.trim());
     }
 
     function escapeHtml(value) {
