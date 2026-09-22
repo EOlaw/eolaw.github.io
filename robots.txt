@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /books.html
+Disallow: /library.html
+
+Sitemap: https://insightserenity.com/sitemap.xml

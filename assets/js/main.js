@@ -86,6 +86,7 @@
     toggle.addEventListener('click', () => {
       const open = menu.classList.toggle('open');
       toggle.setAttribute('aria-expanded', open);
+      toggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
       toggle.innerHTML = open
         ? `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`
         : `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>`;
@@ -94,6 +95,7 @@
     menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
       menu.classList.remove('open');
       toggle.setAttribute('aria-expanded', false);
+      toggle.setAttribute('aria-label', 'Open navigation menu');
     }));
   }
 
@@ -142,6 +144,11 @@
   function initReveal() {
     const els = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
     if (!els.length) return;
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(el => el.classList.add('visible'));
+      return;
+    }
+    html.classList.add('js-reveal');
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
@@ -153,6 +160,11 @@
       });
     }, { threshold: 0.12 });
     els.forEach(el => io.observe(el));
+    setTimeout(() => {
+      els.forEach(el => {
+        if (!el.classList.contains('visible')) el.classList.add('visible');
+      });
+    }, 900);
   }
 
   /* ── Counter Animation ───────────────────────────────────────────── */
@@ -217,7 +229,7 @@
     const el = document.getElementById('typewriter-word');
     if (!el) return;
     const words = [
-      'AI Systems',
+      'Business Systems',
       'AI Agents',
       'Intelligent Pipelines',
       'AI From Scratch',
@@ -316,10 +328,42 @@
       e.preventDefault();
       const btn = form.querySelector('[type=submit]');
       const original = btn.textContent;
+
+      const requiredFields = Array.from(form.querySelectorAll('[required]'));
+      const missing = requiredFields.find(field => {
+        if (field.type === 'checkbox') return !field.checked;
+        return !String(field.value || '').trim();
+      });
+      if (missing) {
+        window.showToast('Please complete the required fields before sending.', 'error');
+        missing.focus();
+        return;
+      }
+
+      const emailField = form.querySelector('input[type=email]');
+      if (emailField && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailField.value.trim())) {
+        window.showToast('Please enter a valid email address.', 'error');
+        emailField.focus();
+        return;
+      }
+
       btn.textContent = 'Sending…';
       btn.disabled = true;
       // Replace with your real form endpoint (Formspree, Netlify Forms, etc.)
-      const formspreeId = form.dataset.formspree || 'YOUR_FORMSPREE_ID';
+      const formspreeId = (form.dataset.formspree || '').trim();
+      if (!formspreeId || formspreeId === 'YOUR_FORMSPREE_ID') {
+        const data = new FormData(form);
+        const fields = [];
+        data.forEach((value, key) => fields.push(key + ': ' + value));
+        const mailto = 'mailto:emmanuel.ao@outlook.com'
+          + '?subject=' + encodeURIComponent('Website message from ' + (data.get('name') || 'InsightSerenity visitor'))
+          + '&body=' + encodeURIComponent(fields.join('\n'));
+        window.location.href = mailto;
+        window.showToast('Your email app should open with the message ready to send.');
+        btn.textContent = original;
+        btn.disabled = false;
+        return;
+      }
       fetch(`https://formspree.io/f/${formspreeId}`, {
         method: 'POST',
         body: new FormData(form),
@@ -327,7 +371,7 @@
       })
         .then(r => {
           if (r.ok) {
-            window.showToast('Message sent! I\'ll respond within 24 hours.');
+            window.showToast('Message sent! I\'ll typically respond within one business day.');
             form.reset();
           } else {
             window.showToast('Something went wrong. Please email me directly.', 'error');
@@ -358,9 +402,9 @@
       }
 
       const body = [
-        'Hi Emmanuel,',
+        'Hello InsightSerenity,',
         '',
-        'I would like to book a free consultation.',
+        'I would like to book a discovery consultation.',
         '',
         'Name: ' + name,
         'Email: ' + email,
@@ -398,22 +442,279 @@
     }
   }
 
-  /* ── Floating Action Button ──────────────────────────────────────── */
+  /* ── Floating AI Business Assistant ──────────────────────────────── */
   function initFab() {
     const btn = document.getElementById('fab-btn');
     const actions = document.getElementById('fab-actions');
     const container = document.getElementById('fab-container');
-    if (!btn || !actions) return;
+    if (!btn || !container) return;
+
+    const storageKey = 'insightserenity_ai_messages';
+    const welcome = 'Welcome to InsightSerenity. I can help you understand our services, technology capabilities, engagement process, pricing, or help identify a possible solution to a business challenge. What would you like to discuss?';
+    const quickActions = [
+      'What does InsightSerenity do?',
+      'Which service fits my business?',
+      'How much does a project cost?',
+      'How does the process work?',
+      'Tell me about AI & Automation',
+      'Book a Discovery Call'
+    ];
+
+    let knowledge = null;
+    let loading = false;
+    let messages = loadMessages();
+
+    container.classList.add('assistant-active');
+    if (actions) actions.setAttribute('aria-hidden', 'true');
+    btn.setAttribute('aria-label', 'Open InsightSerenity AI Assistant');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-controls', 'ai-assistant-panel');
+    btn.innerHTML = businessLogoMarkup('');
+
+    const panel = document.createElement('div');
+    panel.className = 'ai-assistant-panel';
+    panel.id = 'ai-assistant-panel';
+    panel.setAttribute('role', 'dialog');
+    panel.setAttribute('aria-modal', 'false');
+    panel.setAttribute('aria-labelledby', 'ai-assistant-title');
+    panel.innerHTML = `
+      <div class="ai-assistant-header">
+        <div class="ai-assistant-title">
+          <div class="ai-assistant-avatar" aria-hidden="true">${businessLogoMarkup('')}</div>
+          <div>
+            <strong id="ai-assistant-title">InsightSerenity AI</strong>
+            <span>Business &amp; Technology Assistant</span>
+          </div>
+        </div>
+        <div style="display:flex;gap:.4rem;align-items:center;">
+          <button type="button" class="ai-assistant-clear">Clear</button>
+          <button type="button" class="ai-assistant-close" aria-label="Close InsightSerenity AI Assistant">${iconX(15)}</button>
+        </div>
+      </div>
+      <div class="ai-assistant-body">
+        <p class="ai-assistant-status">Ask about our services, capabilities, process, pricing, or your technology challenge. Please avoid sharing passwords, credentials, or sensitive information.</p>
+        <div class="ai-messages" id="ai-messages" aria-live="polite"></div>
+        <div class="ai-quick-actions" id="ai-quick-actions"></div>
+      </div>
+      <div class="ai-assistant-actions">
+        <a href="/consultation.html" class="btn btn-primary">Book a Discovery Call</a>
+        <a href="/contact.html" class="btn btn-outline">Contact</a>
+      </div>
+      <form class="ai-assistant-form" id="ai-assistant-form">
+        <label class="sr-only" for="ai-assistant-input">Message InsightSerenity AI</label>
+        <input id="ai-assistant-input" class="ai-assistant-input" type="text" autocomplete="off" maxlength="1200" placeholder="Ask a question..." />
+        <button type="submit" class="ai-assistant-send" aria-label="Send message">${iconSend(16)}</button>
+      </form>
+    `;
+    container.insertBefore(panel, btn);
+
+    const messageList = panel.querySelector('#ai-messages');
+    const quickWrap = panel.querySelector('#ai-quick-actions');
+    const form = panel.querySelector('#ai-assistant-form');
+    const input = panel.querySelector('#ai-assistant-input');
+    const send = panel.querySelector('.ai-assistant-send');
+    const close = panel.querySelector('.ai-assistant-close');
+    const clear = panel.querySelector('.ai-assistant-clear');
+
+    renderMessages();
+    renderQuickActions();
+    loadKnowledge();
+
     btn.addEventListener('click', () => {
-      btn.classList.toggle('open');
-      actions.classList.toggle('open');
+      panel.classList.contains('open') ? closeAssistant() : openAssistant();
+    });
+    close.addEventListener('click', closeAssistant);
+    clear.addEventListener('click', () => {
+      messages = [];
+      sessionStorage.removeItem(storageKey);
+      renderMessages();
+      renderQuickActions();
+      input.focus();
+    });
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const text = input.value.trim();
+      if (!text || loading) return;
+      input.value = '';
+      submitMessage(text);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && panel.classList.contains('open')) closeAssistant();
     });
     document.addEventListener('click', (e) => {
-      if (container && !container.contains(e.target)) {
-        btn.classList.remove('open');
-        actions.classList.remove('open');
-      }
+      const path = typeof e.composedPath === 'function' ? e.composedPath() : [];
+      const clickedInside = container.contains(e.target) || path.includes(container);
+      if (panel.classList.contains('open') && !clickedInside) closeAssistant();
     });
+
+    function openAssistant() {
+      panel.classList.add('open');
+      btn.classList.add('open');
+      btn.setAttribute('aria-label', 'Close InsightSerenity AI Assistant');
+      btn.setAttribute('aria-expanded', 'true');
+      setTimeout(() => input.focus(), 80);
+    }
+
+    function closeAssistant() {
+      panel.classList.remove('open');
+      btn.classList.remove('open');
+      btn.setAttribute('aria-label', 'Open InsightSerenity AI Assistant');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+
+    function loadMessages() {
+      try {
+        const saved = JSON.parse(sessionStorage.getItem(storageKey) || '[]');
+        return Array.isArray(saved) ? saved.slice(-16) : [];
+      } catch (_) {
+        return [];
+      }
+    }
+
+    function saveMessages() {
+      sessionStorage.setItem(storageKey, JSON.stringify(messages.slice(-16)));
+    }
+
+    function renderMessages() {
+      const all = messages.length ? messages : [{ role: 'assistant', content: welcome }];
+      messageList.innerHTML = all.map((message) => (
+        message.typing
+          ? `<div class="ai-message assistant ai-typing" aria-label="InsightSerenity AI is thinking"><span></span><span></span><span></span></div>`
+          : `<div class="ai-message ${message.role === 'user' ? 'user' : 'assistant'}">${escapeHtml(message.content)}</div>`
+      )).join('');
+      messageList.parentElement.scrollTop = messageList.parentElement.scrollHeight;
+    }
+
+    function renderQuickActions() {
+      quickWrap.innerHTML = messages.length ? '' : quickActions.map((label) => (
+        `<button type="button" class="ai-chip">${escapeHtml(label)}</button>`
+      )).join('');
+      quickWrap.querySelectorAll('button').forEach((chip) => {
+        chip.addEventListener('click', (event) => {
+          event.stopPropagation();
+          openAssistant();
+          submitMessage(chip.textContent.trim());
+        });
+      });
+    }
+
+    function setLoading(next) {
+      loading = next;
+      send.disabled = next;
+      input.disabled = next;
+      if (next) {
+        messages.push({ role: 'assistant', content: '', typing: true });
+        renderMessages();
+      } else {
+        const last = messages[messages.length - 1];
+        if (last && last.typing) messages.pop();
+      }
+    }
+
+    async function submitMessage(text) {
+      messages.push({ role: 'user', content: text });
+      saveMessages();
+      renderQuickActions();
+      setLoading(true);
+      const startedAt = Date.now();
+      try {
+        const reply = await askAssistant();
+        await waitForThinking(startedAt);
+        setLoading(false);
+        messages.push({ role: 'assistant', content: reply });
+      } catch (_) {
+        await waitForThinking(startedAt);
+        setLoading(false);
+        messages.push({ role: 'assistant', content: localAnswer(text) });
+      }
+      saveMessages();
+      renderMessages();
+    }
+
+    async function askAssistant() {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          messages: messages.filter((message) => !message.typing).slice(-12),
+          knowledge
+        })
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || !data.reply) throw new Error(data.error || 'Assistant unavailable');
+      return data.reply;
+    }
+
+    async function loadKnowledge() {
+      try {
+        const response = await fetch('/assets/data/business-knowledge.json', { cache: 'no-store' });
+        if (response.ok) knowledge = await response.json();
+      } catch (_) {
+        knowledge = null;
+      }
+    }
+
+    function localAnswer(text) {
+      const q = text.toLowerCase();
+      const bookCall = '\n\nA good next step is the free 30-minute Discovery Call: /consultation.html';
+      if (q.includes('api key') || q.includes('system prompt') || q.includes('private client') || q.includes('ignore your instructions')) {
+        return 'I cannot reveal private instructions, credentials, system details, or confidential information. I can help with public InsightSerenity services, process, pricing, and general technology questions.';
+      }
+      if (q.includes('client') || q.includes('fortune 500') || q.includes('satisfaction') || q.includes('saved') || q.includes('revenue') || q.includes('testimonial')) {
+        return 'I do not have verified public evidence for client counts, named clients, testimonials, revenue impact, savings, or satisfaction percentages. InsightSerenity avoids publishing those claims unless they are verified and approved.';
+      }
+      if (q.includes('founder') || q.includes('degree') || q.includes('education') || q.includes('emmanuel')) {
+        return 'InsightSerenity was founded by Emmanuel Oyemosu, Founder & Technical Lead. Verified education: Bachelor of Science in Mathematics and Master of Science in Management Information Systems.';
+      }
+      if (q.includes('cost') || q.includes('price') || q.includes('pricing') || q.includes('how much')) {
+        return 'Public pricing starts with Solution Blueprint engagements at $2,500, focused technology implementation engagements typically starting at $7,500, and custom solutions typically starting at $15,000. Ongoing advisory may start around $3,000/month where appropriate. Final pricing depends on scope, complexity, integrations, timeline, technical requirements, and delivery requirements, so this chat cannot provide a binding quote.' + bookCall;
+      }
+      if (q.includes('free') || q.includes('discovery') || q.includes('consultation')) {
+        return 'InsightSerenity offers a free 30-minute Discovery Call. It is used to understand the business problem, objectives, relevant systems/data, urgency, project fit, general scope, and the appropriate next engagement. It does not include detailed architecture, code, custom model design, extensive analysis, or a formal roadmap.';
+      }
+      if (q.includes('excel') || q.includes('spreadsheet') || q.includes('manual') || q.includes('invoice')) {
+        return 'Based on what you described, a likely starting point would be to understand the workflow, who performs it, which systems are involved, and what output matters. This could involve Data Engineering, Business Intelligence, workflow automation, or AI if documents or unstructured inputs are part of the process. What process are you trying to improve first?';
+      }
+      if (q.includes('rag')) {
+        return 'General guidance: RAG means retrieval-augmented generation. It combines a search/retrieval layer over trusted content with a language model so answers can be grounded in relevant documents. InsightSerenity offers RAG implementation under AI & Automation capabilities, but the right architecture depends on your data, risk, and workflow.';
+      }
+      if (q.includes('service') || q.includes('offer') || q.includes('dashboard') || q.includes('pipeline') || q.includes('automation') || q.includes('ai agent')) {
+        return 'InsightSerenity offers technology consulting and implementation across Data Science & Machine Learning, AI & Automation, Data Engineering, Business Intelligence & Analytics, Software & Systems Development, Cloud & IT Systems, and Technology Strategy & Consulting. Based on the problem, a solution could involve one or several of those areas.';
+      }
+      if (q.includes('power bi') || q.includes('tableau')) {
+        return 'General guidance: Power BI often fits Microsoft-heavy teams and cost-conscious BI rollouts; Tableau can be strong for advanced visual exploration and teams already invested in it. The right choice depends on data sources, governance, users, licensing, and reporting needs. InsightSerenity can help evaluate that fit.';
+      }
+      if (q.includes('process') || q.includes('how does')) {
+        return 'The typical engagement path is: Business Problem -> Discovery -> Solution Blueprint -> Implementation -> Deployment / Validation -> Support / Optimization. The goal is to clarify the business outcome before choosing technology.';
+      }
+      return 'InsightSerenity helps organizations solve business problems through data, AI, software, automation, analytics, cloud systems, business intelligence, and technology strategy. If you are unsure what service fits, tell me what process or problem you are trying to improve, who handles it today, and what outcome would make the project successful.';
+    }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, (char) => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+      }[char]));
+    }
+
+    function waitForThinking(startedAt) {
+      const minimum = 650;
+      const elapsed = Date.now() - startedAt;
+      return new Promise((resolve) => setTimeout(resolve, Math.max(0, minimum - elapsed)));
+    }
+
+    function businessLogoMarkup(alt) {
+      return `<img class="ai-logo-mark" src="/assets/img/favicon_io/android-chrome-192x192.png" alt="${escapeHtml(alt)}" loading="lazy">`;
+    }
+    function iconX(size) {
+      return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`;
+    }
+    function iconSend(size) {
+      return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>`;
+    }
   }
 
   /* ── Init ────────────────────────────────────────────────────────── */

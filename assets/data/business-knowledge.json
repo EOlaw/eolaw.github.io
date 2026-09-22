@@ -1,0 +1,112 @@
+{
+  "company": {
+    "name": "InsightSerenity",
+    "positioning": "InsightSerenity is a technology consulting and solutions company that helps organizations solve measurable business problems using appropriate technology.",
+    "capabilities": [
+      "data",
+      "AI",
+      "software",
+      "automation",
+      "analytics",
+      "cloud systems",
+      "business intelligence",
+      "technology strategy"
+    ],
+    "guidance": "AI is an important specialization, but not every problem requires AI. The right solution may be a dashboard, workflow tool, data pipeline, cloud improvement, integration, or custom application."
+  },
+  "services": [
+    {
+      "name": "Data Science & Machine Learning",
+      "summary": "Modeling, forecasting, experimentation, machine learning pilots, and data-driven decision support."
+    },
+    {
+      "name": "Artificial Intelligence & Automation",
+      "summary": "AI agents, LLM applications, RAG systems, document intelligence, workflow automation, and practical AI integrations."
+    },
+    {
+      "name": "Data Engineering",
+      "summary": "Data pipelines, integrations, warehousing patterns, data quality improvements, and reliable movement of business data."
+    },
+    {
+      "name": "Business Intelligence & Analytics",
+      "summary": "Dashboards, reporting systems, KPI design, analytics workflows, and business visibility improvements."
+    },
+    {
+      "name": "Software & Systems Development",
+      "summary": "Internal applications, custom tools, systems integrations, and software that supports operational workflows."
+    },
+    {
+      "name": "Cloud & IT Systems",
+      "summary": "Cloud/data implementations, system modernization, deployment planning, and technology infrastructure support."
+    },
+    {
+      "name": "Technology Strategy & Consulting",
+      "summary": "Discovery, requirements clarification, architecture planning, technology recommendations, and implementation roadmaps."
+    }
+  ],
+  "process": [
+    "Business Problem",
+    "Discovery",
+    "Solution Blueprint",
+    "Implementation",
+    "Deployment / Validation",
+    "Support / Optimization"
+  ],
+  "discovery": {
+    "name": "Free 30-minute Discovery Call",
+    "summary": "The initial Discovery Call is free and typically lasts 30 minutes.",
+    "purpose": [
+      "Understand the business problem",
+      "Understand business objectives",
+      "Identify relevant systems and data",
+      "Determine urgency",
+      "Determine project fit",
+      "Discuss general scope",
+      "Determine the appropriate next engagement"
+    ],
+    "exclusions": [
+      "detailed technical architecture",
+      "written implementation roadmap",
+      "custom model design",
+      "detailed system design",
+      "code",
+      "technical blueprint",
+      "extensive data analysis",
+      "formal recommendations document"
+    ]
+  },
+  "pricing": {
+    "solutionBlueprint": "Solution Blueprint engagements start at $2,500.",
+    "implementation": "Focused Technology Implementation engagements typically start at $7,500.",
+    "customSolutions": "Custom solutions typically start at $15,000.",
+    "ongoingAdvisory": "Ongoing advisory may start around $3,000/month where appropriate.",
+    "importantNote": "Final pricing depends on scope, complexity, integrations, timeline, technical requirements, and delivery requirements. The assistant cannot provide binding final quotes or negotiate contracts."
+  },
+  "founder": {
+    "name": "Emmanuel Oyemosu",
+    "title": "Founder & Technical Lead",
+    "education": [
+      "Bachelor of Science in Mathematics",
+      "Master of Science in Management Information Systems"
+    ],
+    "credentialNote": "Do not publish generic certification wording unless the exact credential name and issuer are verified."
+  },
+  "policies": {
+    "geography": "InsightSerenity is U.S.-based and available for remote engagements with clients across the United States and select international markets.",
+    "responseTime": "InsightSerenity typically responds to new business inquiries within one business day.",
+    "privacyReminder": "Visitors should avoid sharing passwords, credentials, financial account details, protected health information, or confidential company data in chat."
+  },
+  "routes": {
+    "services": "/services.html",
+    "work": "/work.html",
+    "consultation": "/consultation.html",
+    "contact": "/contact.html",
+    "scripture": "/scripture/"
+  },
+  "guardrails": [
+    "Never invent clients, testimonials, revenue, outcomes, employees, certifications, partnerships, project counts, guarantees, prices, support SLAs, or legal commitments.",
+    "Distinguish general technical guidance from verified InsightSerenity claims.",
+    "For final pricing, contracts, custom architecture, legal commitments, or confidential details, direct visitors to the InsightSerenity team.",
+    "Internal R&D, demos, and capability briefs must not be described as paying client engagements."
+  ]
+}
